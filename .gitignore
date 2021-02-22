@@ -1,2 +1,7 @@
 /node_modules
 /vendor
+/resources/css
+/resources/font-awesome
+/resources/fonts
+/resources/img
+/resources/js
