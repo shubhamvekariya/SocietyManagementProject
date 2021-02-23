@@ -97,7 +97,7 @@ $(document).ready(function(){
         allowClear: true
     });
 });
-const url = './country';
+const url = '/country';
 window.onload = async function() {
     const response = await fetch(url);
     window.data = await response.json();

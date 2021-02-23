@@ -1,5 +1,9 @@
 @extends('auth.default')
 
+@section('title')
+    Registration
+@endsection
+
 @section('css')
     <link href="{{ mix('/css/custom.css') }}" rel="stylesheet">
     <link href="{{ mix('/css/select2.min.css') }}" rel="stylesheet">
@@ -21,16 +25,27 @@
                         <p>
                           Create account to see it in action.
                         </p>
-
-                        <form id="form" action="#" method="POST" class="wizard-big">
+                        @if ($errors->any())
+                        <div class="alert alert-danger alert-dismissable">
+                            <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+                            <strong>Error!</strong>
+                            <ul class="text-left">
+                                @foreach ($errors->all() as $error)
+                                    <li>{{$error}}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                        @endif
+                        <form id="form" action="{{route('register.society')}}" method="POST" class="wizard-big">
+                            @csrf
                             <h1>Society</h1>
                             <fieldset style="height:500px">
-                                <h2>Society Information</h2>
+                                <h2>Society <b>/</b> Apartment Information</h2>
                                 <div class="row">
                                     <div class="col-lg-8">
                                         <div class="form-group">
-                                            <label>Society Name*</label>
-                                            <input id="society_name" name="society_name" type="text" class="form-control required">
+                                            <label>Society <b>/</b> Apartment Name*</label>
+                                            <input id="society_name" name="society_name" type="text" class="form-control required" value={{ old('society_name') }}>
                                         </div>
                                         <div class="form-group">
                                             <label>Address</label>
@@ -75,13 +90,13 @@
                                     <div class="col-lg-6">
                                         <div class="form-group">
                                             <label>First name*</label>
-                                            <input id="name" name="name" type="text" class="form-control required">
+                                            <input id="fname" name="fname" type="text" class="form-control required" value={{ old('fname') }}>
                                         </div>
                                     </div>
                                     <div class="col-lg-6">
                                         <div class="form-group">
                                             <label>Last name*</label>
-                                            <input id="surname" name="surname" type="text" class="form-control required">
+                                            <input id="lname" name="lname" type="text" class="form-control required" value={{ old('lname') }}>
                                         </div>
                                     </div>
                                 </div>
@@ -89,7 +104,7 @@
                                     <div class="col-lg-12">
                                         <div class="form-group">
                                             <label>Email*</label>
-                                            <input id="email" name="email" type="email" class="form-control required email">
+                                            <input id="email" name="email" type="email" class="form-control required email" value={{ old('email') }}>
                                         </div>
                                     </div>
                                 </div>
@@ -97,7 +112,7 @@
                                     <div class="col-lg-12">
                                         <div class="form-group">
                                             <label>Phone Number*</label>
-                                            <input id="pnumber" name="pnumber" type="number" min="0" class="form-control required">
+                                            <input id="pnumber" name="phoneno" type="number" min="0" class="form-control required" value={{ old('phoneno') }}>
                                         </div>
                                     </div>
                                 </div>
@@ -110,7 +125,7 @@
                                     <div class="col-lg-8 mx-auto">
                                         <div class="form-group">
                                             <label>Password*</label>
-                                            <input id="password" name="password" type="password" class="form-control required">
+                                            <input id="password" name="password" type="password" class="form-control required" >
                                         </div>
                                     </div>
                                 </div>
@@ -118,7 +133,7 @@
                                     <div class="col-lg-8 mx-auto">
                                         <div class="form-group">
                                             <label>Confirm Password*</label>
-                                            <input id="cpassword" name="cpassword" type="password" class="form-control required">
+                                            <input id="password_confirmation" name="password_confirmation" type="password" class="form-control required" >
                                         </div>
                                     </div>
                                 </div>
@@ -132,7 +147,7 @@
                         </form>
                     </div>
             <p class="text-muted text-center mt-2 mb-0"><small>Already have an account?</small></p>
-            <a class="btn btn-sm btn-white w-50 mx-auto btn-block" href="login.html">Login</a>
+            <a class="btn btn-sm btn-white w-50 mx-auto btn-block" href="{{ route('login.society') }}">Login</a>
         <p class="m-t"> <small>Work with appartment manangement &copy; 2021</small> </p>
     </div>
 </div>

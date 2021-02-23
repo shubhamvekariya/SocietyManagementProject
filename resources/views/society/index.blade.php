@@ -1,19 +1,19 @@
 @extends('layouts.app')
 @section('title')
-Empty Page
+Society Page
 @endsection
 
 @section('content')
 
 <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-sm-4">
-        <h2>Welcome</h2>
+        <h2>This is main title</h2>
         <ol class="breadcrumb">
             <li class="breadcrumb-item">
-                <a href="index.html">This is</a>
+                <a href="{{ route('society.home') }}">This is</a>
             </li>
             <li class="breadcrumb-item active">
-                <strong>Society / Apartment</strong>
+                <strong>Breadcrumb</strong>
             </li>
         </ol>
     </div>
@@ -25,11 +25,11 @@ Empty Page
 </div>
 <div class="wrapper wrapper-content">
     <div class="middle-box text-center animated fadeInRightBig">
-        <h3 class="font-bold">Society management</h3>
+        <h3 class="font-bold">Society Page</h3>
         <div class="error-desc">
             You can create here any grid layout you want. And any variation layout you imagine:) Check out
             main dashboard and other site. It use many different layout.
-            <br/><a href="{{ route('society.home') }}" class="btn btn-primary m-t">Society Home</a>
+            <br/><a href="{{ route('Home') }}" class="btn btn-primary m-t">Dashboard</a>
         </div>
     </div>
 </div>
