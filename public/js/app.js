@@ -19065,6 +19065,45 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/css/plugins/iCheck/custom.css":
+/*!*************************************************!*\
+  !*** ./resources/css/plugins/iCheck/custom.css ***!
+  \*************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ }),
+
+/***/ "./resources/css/plugins/steps/jquery.steps.css":
+/*!******************************************************!*\
+  !*** ./resources/css/plugins/steps/jquery.steps.css ***!
+  \******************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ }),
+
+/***/ "./resources/css/plugins/select2/select2.min.css":
+/*!*******************************************************!*\
+  !*** ./resources/css/plugins/select2/select2.min.css ***!
+  \*******************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ }),
+
 /***/ "./node_modules/process/browser.js":
 /*!*****************************************!*\
   !*** ./node_modules/process/browser.js ***!
@@ -19345,7 +19384,10 @@ process.umask = function() { return 0; };
 /******/ 		var deferredModules = [
 /******/ 			["./resources/js/app.js"],
 /******/ 			["./resources/css/app.css"],
-/******/ 			["./resources/css/plugins/dataTables/datatables.min.css"]
+/******/ 			["./resources/css/plugins/dataTables/datatables.min.css"],
+/******/ 			["./resources/css/plugins/iCheck/custom.css"],
+/******/ 			["./resources/css/plugins/steps/jquery.steps.css"],
+/******/ 			["./resources/css/plugins/select2/select2.min.css"]
 /******/ 		];
 /******/ 		// no chunk on demand loading
 /******/ 		

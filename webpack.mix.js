@@ -13,4 +13,7 @@ const mix = require('laravel-mix');
 
 mix.js('resources/js/app.js', 'public/js')
     .postCss('resources/css/app.css', 'public/css')
-    .postCss('resources/css/plugins/dataTables/datatables.min.css', 'public/css');
+    .postCss('resources/css/plugins/dataTables/datatables.min.css', 'public/css')
+    .postCss('resources/css/plugins/iCheck/custom.css', 'public/css')
+    .postCss('resources/css/plugins/steps/jquery.steps.css', 'public/css')
+    .postCss('resources/css/plugins/select2/select2.min.css', 'public/css');
