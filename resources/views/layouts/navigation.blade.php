@@ -3,10 +3,18 @@
         <ul class="nav metismenu" id="side-menu">
             <li class="nav-header">
                 <div class="dropdown profile-element">
-                    <img alt="image" class="rounded-circle" src="img/profile_small.jpg"/>
+                    <img alt="image" class="rounded-circle" width="70px" height="70px" src="{!! asset('images/undraw_profile.svg') !!}"/>
                     <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                        <span class="block m-t-xs font-bold">David Williams</span>
-                        <span class="text-muted text-xs block">Art Director <b class="caret"></b></span>
+                        <span class="block m-t-xs font-bold text-uppercase">
+                            @if(Auth::guard('society')->check())
+                                {{Auth::guard('society')->user()->society_name}}
+                            @endif
+                        </span>
+                        <span class="text-muted text-xs block text-uppercase"> 
+                            @if(Auth::guard('society')->check())
+                                {{Auth::guard('society')->user()->secretary_name}}
+                            @endif
+                        <b class="caret"></b></span>
                     </a>
                     <ul class="dropdown-menu animated fadeInRight m-t-xs">
                         <li><a class="dropdown-item" href="profile.html">Profile</a></li>
@@ -17,7 +25,7 @@
                     </ul>
                 </div>
                 <div class="logo-element">
-                    IN+
+                    AP+
                 </div>
             </li>
             <li>
@@ -98,7 +106,7 @@
                     <li><a href="pin_board.html">Pin board</a></li>
                 </ul>
             </li>
-            <li class="active">
+            <li>
                 <a href="#"><i class="fa fa-files-o"></i> <span class="nav-label">Other Pages</span><span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level">
                     <li><a href="search_results.html">Search results</a></li>

@@ -15,6 +15,15 @@ class CreateSocietiesTable extends Migration
     {
         Schema::create('societies', function (Blueprint $table) {
             $table->id();
+            $table->string('society_name');
+            $table->longText('address')->nullable($value = true);
+            $table->string('country');
+            $table->string('state')->nullable($value = true);
+            $table->string('city')->nullable($value = true);
+            $table->string('secretary_name');
+            $table->string('email')->unique();
+            $table->bigInteger('phoneno');
+            $table->string('password');
             $table->timestamps();
         });
     }
