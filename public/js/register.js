@@ -102,7 +102,6 @@ window.onload = async function() {
     const response = await fetch(url);
     window.data = await response.json();
     conData = data;
-    alert(url);
     //Initialize Country
     for (var i = 0; i < conData.length; i++) {
         var newOption = new Option(conData[i]['name'],conData[i]['name']+"("+i+")", false, false);
