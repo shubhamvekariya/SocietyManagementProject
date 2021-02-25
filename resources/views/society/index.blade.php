@@ -7,13 +7,17 @@ Society Page
 
 <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-sm-4">
-        <h2>This is main title</h2>
+        <h2>Home Page</h2>
         <ol class="breadcrumb">
             <li class="breadcrumb-item">
-                <a href="{{ route('society.home') }}">This is</a>
+                <a href="{{ route('society.home') }}">Home</a>
             </li>
             <li class="breadcrumb-item active">
-                <strong>Breadcrumb</strong>
+                <strong>@role('secretary','society')
+                    I'm a writer!
+                @else
+                    I'm not a writer...
+                @endrole</strong>
             </li>
         </ol>
     </div>
