@@ -14,9 +14,9 @@ Society Page
             </li>
             <li class="breadcrumb-item active">
                 <strong>@role('secretary','society')
-                    I'm a writer!
+                    I'm a secretary!
                 @else
-                    I'm not a writer...
+                    I'm not a secretary...
                 @endrole</strong>
             </li>
         </ol>
