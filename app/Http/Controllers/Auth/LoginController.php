@@ -29,6 +29,8 @@ class LoginController extends Controller
             'password' => 'required'
         ]);
         if (Auth::guard('society')->attempt($request->only('email', 'password'),$request->filled('rememberme'))) {
+            $user = Auth::guard('society')->user();
+            $user->assignRole('secretary');
             $request->session()->regenerate();
             return redirect()->route('society.home');
         }else{
@@ -50,7 +52,7 @@ class LoginController extends Controller
             'password' => 'required_with:password_confirmation|confirmed|min:8|max:16',
             'phoneno' => 'required',
         ]);
-    
+
         $society = Society::create([
             'society_name' => $request->society_name,
             'address' => $request->address,
@@ -69,7 +71,7 @@ class LoginController extends Controller
     {
         if(Auth::guard('society')->check())
             $url = 'login.society';
-        else 
+        else
             $url = 'Home';
         Auth::logout();
         $request->session()->invalidate();

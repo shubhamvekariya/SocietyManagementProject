@@ -6,7 +6,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="author" content="shubhamvekariya">
-    
+
     <title>@yield('title')</title>
 
     <link href="{{ mix('/css/app.css') }}" rel="stylesheet">
@@ -30,9 +30,9 @@
     </div>
 
     <!-- Mainly scripts -->
-    <script src="{!! asset('/js/jquery-3.1.1.min.js') !!}"></script>
-    <script src="{!! asset('/js/popper.min.js') !!}"></script>
-    <script src="{!! asset('/js/bootstrap.js') !!}"></script>
+    <script src="{!! asset('js/jquery-3.1.1.min.js') !!}"></script>
+    <script src="{!! asset('js/popper.min.js') !!}"></script>
+    <script src="{!! asset('js/bootstrap.js') !!}"></script>
     <script src="{!! asset('js/jquery.metisMenu.js') !!}"></script>
     <script src="{!! asset('js/jquery.slimscroll.min.js') !!}"></script>
 
