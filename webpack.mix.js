@@ -16,4 +16,6 @@ mix.js('resources/js/app.js', 'public/js')
     .postCss('resources/css/plugins/dataTables/datatables.min.css', 'public/css')
     .postCss('resources/css/plugins/iCheck/custom.css', 'public/css')
     .postCss('resources/css/plugins/steps/jquery.steps.css', 'public/css')
-    .postCss('resources/css/plugins/select2/select2.min.css', 'public/css');
+    .postCss('resources/css/plugins/select2/select2.min.css', 'public/css')
+    .postCss('resources/css/templatemo-style.css', 'public/css')
+    .postCss('resources/font-awesome/css/font-awesome.css', 'public/css');
