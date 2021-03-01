@@ -19039,6 +19039,32 @@ var __WEBPACK_AMD_DEFINE_RESULT__;/**
 
 /***/ }),
 
+/***/ "./resources/css/templatemo-style.css":
+/*!********************************************!*\
+  !*** ./resources/css/templatemo-style.css ***!
+  \********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ }),
+
+/***/ "./resources/font-awesome/css/font-awesome.css":
+/*!*****************************************************!*\
+  !*** ./resources/font-awesome/css/font-awesome.css ***!
+  \*****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ }),
+
 /***/ "./resources/css/app.css":
 /*!*******************************!*\
   !*** ./resources/css/app.css ***!
@@ -19387,7 +19413,9 @@ process.umask = function() { return 0; };
 /******/ 			["./resources/css/plugins/dataTables/datatables.min.css"],
 /******/ 			["./resources/css/plugins/iCheck/custom.css"],
 /******/ 			["./resources/css/plugins/steps/jquery.steps.css"],
-/******/ 			["./resources/css/plugins/select2/select2.min.css"]
+/******/ 			["./resources/css/plugins/select2/select2.min.css"],
+/******/ 			["./resources/css/templatemo-style.css"],
+/******/ 			["./resources/font-awesome/css/font-awesome.css"]
 /******/ 		];
 /******/ 		// no chunk on demand loading
 /******/ 		
