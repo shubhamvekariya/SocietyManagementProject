@@ -10,9 +10,12 @@
                                 {{Auth::guard('society')->user()->society_name}}
                             @endif
                         </span>
-                        <span class="text-muted text-xs block text-uppercase"> 
+                        <span class="text-muted text-xs block text-uppercase">
                             @if(Auth::guard('society')->check())
                                 {{Auth::guard('society')->user()->secretary_name}}
+                            @endif
+                            @if(Auth::check())
+                                {{Auth::user()->name}}
                             @endif
                         <b class="caret"></b></span>
                     </a>

@@ -25,10 +25,22 @@ Route::group(['middleware' => ['auth:society'] ], function(){
     })->name('society.home');
 });
 
+Route::group(['middleware' => ['auth'] ], function(){
+    Route::get('/member',  function () {
+        return view('member.index');
+    })->name('member.home');
+});
+
 Route::get('/login/society',[LoginController::class,'show_login'])->name('login.society');
 Route::post('/login/society',[LoginController::class,'check_login'])->name('login.society');
 Route::get('/register/society',[LoginController::class,'show_register'])->name('register.society');
 Route::post('/register/society',[LoginController::class,'create_society'])->name('register.society');
+
+Route::get('/login/member',[LoginController::class,'show_login'])->name('login.member');
+Route::post('/login/member',[LoginController::class,'check_login'])->name('login.member');
+Route::get('/register/member',[LoginController::class,'show_register'])->name('register.member');
+Route::post('/register/member',[LoginController::class,'create_member'])->name('register.member');
+
 Route::get('/logout',[LoginController::class,'destroy'])->name('logout');
 
 Route::get('/country', function () {

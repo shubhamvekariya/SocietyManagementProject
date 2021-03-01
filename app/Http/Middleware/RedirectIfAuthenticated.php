@@ -24,7 +24,9 @@ class RedirectIfAuthenticated
         foreach ($guards as $guard) {
             if (Auth::guard($guard)->check()) {
                 if($guard == "society")
-                    return redirect()->route('society.home'); 
+                    return redirect()->route('society.home');
+                if(Auth::user()->hasRole('member'))
+                    return redirect()->route('member.home');
                 return redirect(RouteServiceProvider::HOME);
             }
         }

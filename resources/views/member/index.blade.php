@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('title')
-Society Page
+member Page
 @endsection
 
 @section('content')
@@ -10,14 +10,14 @@ Society Page
         <h2>Home Page</h2>
         <ol class="breadcrumb">
             <li class="breadcrumb-item">
-                <a href="{{ route('society.home') }}">Home</a>
+                <a href="{{ route('member.home') }}">Home</a>
             </li>
             <li class="breadcrumb-item active">
                 <strong>
-                    @role('secretary','society')
-                        I'm a secretary!
+                    @role('member')
+                        I'm a member!
                     @else
-                        I'm not a secretary...
+                        I'm not a member...
                     @endrole
                 </strong>
             </li>
@@ -31,7 +31,7 @@ Society Page
 </div>
 <div class="wrapper wrapper-content">
     <div class="middle-box text-center animated fadeInRightBig">
-        <h3 class="font-bold">Society Page</h3>
+        <h3 class="font-bold">member Page</h3>
         <div class="error-desc">
             You can create here any grid layout you want. And any variation layout you imagine:) Check out
             main dashboard and other site. It use many different layout.
