@@ -230,7 +230,7 @@
 									<li>Easy registration </li>
 									<li>Simple and Fast</li>
 								</ul>
-							<a href="about.html" class="tm-btn tm-btn-default tm-right btn">Register</a>
+							<a href="{{ route('register.society') }}" class="tm-btn tm-btn-default tm-right btn">Register</a>
 						</div>
 					</div>
 				</div>
