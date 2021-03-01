@@ -149,6 +149,7 @@
                         @endif
 
                         @if (Request::segment(2) == 'member')
+                        {{ $societies}}
                             <form id="form" action="{{route('register.member')}}" method="POST" class="wizard-big">
                                 @csrf
                                 <h1>Secretary</h1>

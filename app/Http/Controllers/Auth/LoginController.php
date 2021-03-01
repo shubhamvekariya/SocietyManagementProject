@@ -57,8 +57,13 @@ class LoginController extends Controller
         return redirect()->back()->with('danger','Invalid credentials');
     }
 
-    public function show_register()
+    public function show_register(Request $request)
     {
+        if($request->segment(2) == 'member')
+        {
+            $societies = Society::all();
+            return view('auth.register',)->with('societies',$societies);
+        }
         return view('auth.register');
     }
 
