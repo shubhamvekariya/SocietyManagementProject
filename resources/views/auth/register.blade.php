@@ -41,7 +41,7 @@
                                 @csrf
                                 <h1>Society</h1>
                                 <fieldset style="height:500px">
-                                    <h2>Society <b>/</b> Apartment Information</h2>
+                                    <h2>Society <b>/</b> Flat Information</h2>
                                     <div class="row">
                                         <div class="col-lg-8">
                                             <div class="form-group">
@@ -149,21 +149,11 @@
                         @endif
 
                         @if (Request::segment(2) == 'member')
-                        {{ $societies}}
                             <form id="form" action="{{route('register.member')}}" method="POST" class="wizard-big">
                                 @csrf
-                                <h1>Secretary</h1>
+                                <h1>Member</h1>
                                 <fieldset>
                                     <h2>Profile Information</h2>
-                                    <div class="row">
-                                        <div class="col-lg-12">
-                                            <div class="form-group">
-                                                <label>Name*</label>
-                                                <input id="name" name="name" type="text" class="form-control required" value={{ old('name') }}>
-                                            </div>
-                                        </div>
-
-                                    </div>
                                     <div class="row">
                                         <div class="col-lg-12">
                                             <div class="form-group">
@@ -172,8 +162,84 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label>Name*</label>
+                                                <input id="name" name="name" type="text" class="form-control required" value={{ old('name') }}>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label>Phone Number*</label>
+                                                <input id="pnumber" name="phoneno" type="number" min="0" class="form-control required" value={{ old('phoneno') }}>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label>Age*</label>
+                                                <input id="number" name="age" type="age" class="form-control required" value={{ old('age') }}>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label>Gender</label>
+                                                <select class="form-control" id="gender" name="gender">
+                                                    <option></option>
+                                                    <option value="male">Male</option>
+                                                    <option value="female">Female</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </fieldset>
-
+                                <h1>Apartment<b>/</b>Flat</h1>
+                                <fieldset style="height:500px">
+                                    <h2>Apartment <b>/</b> Flat Information</h2>
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label>Name<b>/</b>Number*</label>
+                                                <input id="name_or_number" name="name_or_number" type="text" class="form-control required" value={{ old('name_or_number') }}>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label>BHK</label>
+                                                <input id="BHK" name="BHK" type="number" class="form-control" value={{ old('BHK') }}>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label>Floor Number</label>
+                                                <input id="floor_no" name="floor_no" type="number" class="form-control" value={{ old('floor_no') }}>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label>Price</label>
+                                                <input id="price" name="price" type="number" step="0.01" class="form-control" value={{ old('price') }}>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <div class="form-group">
+                                                <label>Society</label>
+                                                <select class="form-control" id="society_id" name="society_id" required>
+                                                    <option></option>
+                                                    @foreach($societies as $society)
+                                                        <option value="{{ $society->id }}">{{ $society->society_name }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </fieldset>
                                 <h1>Password</h1>
                                 <fieldset>
                                     <h2>Set Password</h2>
@@ -205,7 +271,7 @@
 
                     </div>
             <p class="text-muted text-center mt-2 mb-0"><small>Already have an account?</small></p>
-            <a class="btn btn-sm btn-white w-50 mx-auto btn-block" href="{{ route('login.society') }}">Login</a>
+            <a class="btn btn-sm btn-white w-50 mx-auto btn-block" href="{{ route('login.member') }}">Login</a>
         <p class="m-t"> <small>Work with appartment manangement &copy; 2021</small> </p>
     </div>
 </div>

@@ -17,8 +17,8 @@ class CreateApartmentTable extends Migration
             $table->id();
             $table->string('name_or_number');
             $table->integer('BHK')->nullable();
-            $table->integer('floor_no');
-            $table->float('price');
+            $table->integer('floor_no')->nullable();;
+            $table->float('price')->nullable();
             $table->timestamps();
             $table->foreignId('user_id')->constrained('users')->onUpdate('cascade')->onDelete('cascade');
             $table->foreignId('society_id')->constrained('societies')->onUpdate('cascade')->onDelete('cascade');

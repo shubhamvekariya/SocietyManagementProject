@@ -7,7 +7,7 @@ $(document).ready(function(){
         bodyTag: "fieldset",
         transitionEffect: "slideLeft",
         autoFocus: true,
-        labels: 
+        labels:
         {
             finish: "Register",
         },
@@ -96,6 +96,14 @@ $(document).ready(function(){
         placeholder: "Select a city",
         allowClear: true
     });
+    $("#society").select2({
+        placeholder: "Select a society",
+        allowClear: true
+    });
+    $("#gender").select2({
+        placeholder: "Select a gender",
+        allowClear: true
+    });
 });
 const url = '/country';
 window.onload = async function() {
@@ -109,7 +117,7 @@ window.onload = async function() {
     }
     $('#country').trigger('change');
     //Country change function
-    $('#country').on("change", function (e) { 
+    $('#country').on("change", function (e) {
         var cname = $('#country').find(':selected').val();
         cname = cname.substring(cname.indexOf('(') + 1);
         var cvalue = parseInt(cname.substring(0,cname.indexOf(')')));
@@ -125,25 +133,25 @@ window.onload = async function() {
         }
         $('#state').trigger('change');
         });
-    
+
     //State change function
-    $('#state').on("change", function (e) { 
+    $('#state').on("change", function (e) {
         var cname = $('#country').find(':selected').val();
         cname = cname.substring(cname.indexOf('(') + 1);
         var cvalue = parseInt(cname.substring(0,cname.indexOf(')')));
         var sname = $('#state').find(':selected').val();
         sname = sname.substring(sname.indexOf('(') + 1);
-        var svalue = parseInt(sname.substring(0,sname.indexOf(')'))); 
+        var svalue = parseInt(sname.substring(0,sname.indexOf(')')));
         $('#city').empty();
         $('#city').append(new Option('','', false, false));
         if(!isNaN(svalue))
-        {	
+        {
             for(var city in conData[cvalue]['states'][svalue]["cities"]) {
                 var cityname = conData[cvalue]['states'][svalue]["cities"][city]['name'];
                 var newOption = new Option( cityname,cityname+"("+city+")", false, false);
                 $('#city').append(newOption);
             }
-            
+
         }
         $('#city').trigger('change');
     });

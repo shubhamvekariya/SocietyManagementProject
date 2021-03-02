@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Models\Society;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Apartment;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -95,15 +96,28 @@ class LoginController extends Controller
     {
         $request->validate([
             'name' => 'required',
-            'email' => 'required|unique:societies|email',
+            'email' => 'required|unique:users|email',
             'password' => 'required_with:password_confirmation|confirmed|min:8|max:16',
-
+            'phoneno' => 'required',
+            'age' => 'required|numeric|gt:18',
+            'name_or_number' => 'required',
+            'society_id' => 'required'
         ]);
-
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
-            'password' => Hash::make($request->password)
+            'age' => $request->age,
+            'phoneno' => $request->phoneno,
+            'gender' => $request->gender,
+            'password' => Hash::make($request->password),
+        ]);
+        $apartment = Apartment::create([
+            'name_or_number' => $request->name_or_number,
+            'BHK' => $request->BHK,
+            'floor_no' => $request->floor_no,
+            'price' => $request->price,
+            'society_id' => $request->society_id,
+            'user_id' => $user->id
         ]);
         return redirect()->route('login.member');
     }

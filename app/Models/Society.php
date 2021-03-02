@@ -30,4 +30,8 @@ class Society extends Authenticatable
         'remember_token',
     ];
 
+    public function apartment()
+    {
+        return $this->hasMany(Apartment::class);
+    }
 }
