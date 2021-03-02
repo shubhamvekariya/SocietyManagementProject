@@ -9,7 +9,6 @@
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:400" rel="stylesheet" />
 	<link href="{{ mix('/css/app.css') }}" rel="stylesheet">
 	<link href="{{ mix('/css/templatemo-style.css') }}" rel="stylesheet" />
-	<link href="{{ mix('/css/font-awesome.css') }}" rel="stylesheet" />
 </head>
 
 <body>

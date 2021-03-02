@@ -19052,10 +19052,10 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/font-awesome/css/font-awesome.css":
-/*!*****************************************************!*\
-  !*** ./resources/font-awesome/css/font-awesome.css ***!
-  \*****************************************************/
+/***/ "./resources/font-awesome/css/fontawesome.css":
+/*!****************************************************!*\
+  !*** ./resources/font-awesome/css/fontawesome.css ***!
+  \****************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -19415,7 +19415,7 @@ process.umask = function() { return 0; };
 /******/ 			["./resources/css/plugins/steps/jquery.steps.css"],
 /******/ 			["./resources/css/plugins/select2/select2.min.css"],
 /******/ 			["./resources/css/templatemo-style.css"],
-/******/ 			["./resources/font-awesome/css/font-awesome.css"]
+/******/ 			["./resources/font-awesome/css/fontawesome.css"]
 /******/ 		];
 /******/ 		// no chunk on demand loading
 /******/ 		
