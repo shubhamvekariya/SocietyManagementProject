@@ -120,8 +120,6 @@
                     <li><a href="#">ManageCommittee Member</a></li>
                     <li><a href="#">Add Rules</a></li>
                     <li><a href="#">Manage Rules</a></li>
-                    
-                    
                 </ul>
             </li>
            
