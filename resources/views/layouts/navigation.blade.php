@@ -58,7 +58,7 @@
             </li>
 
             <li>
-                <a href="#"><i class="fa fa-receipt"></i><span class="nav-label">Bills</span><span class="fa arrow"></span></a>
+                <a href="#"><i class="fa fa-sticky-note"></i><span class="nav-label">Bills</span><span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level collapse">
                     <li><a href="#">Add Bills</a></li>
                     <li><a href="#">Manage Bills</a></li>
@@ -67,7 +67,7 @@
             </li>
 
             <li>
-                <a href="#"><i class="fa fa-globe"></i><span class="nav-label">Complaints</span><span class="fa arrow"></span></a>
+                <a href="#"><i class="fa fa-book"></i><span class="nav-label">Complaints</span><span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level collapse">
                     <li><a href="#">All Complaints</a></li>
                     <li><a href="#">Resolved</a></li>
@@ -87,7 +87,7 @@
             </li>
 
             <li>
-                <a href="#"><i class="fa fa-globe"></i><span class="nav-label">Security & Staff</span><span class="fa arrow"></span></a>
+                <a href="#"><i class="fa fa-shield"></i><span class="nav-label">Security & Staff</span><span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level collapse">
                     <li><a href="#">Add Staff</a></li>
                     <li><a href="#">Manage Staff</a></li>
@@ -97,7 +97,7 @@
             </li>
 
             <li>
-                <a href="#"><i class="fa fa-globe"></i><span class="nav-label">Event/Assets</span><span class="fa arrow"></span></a>
+                <a href="#"><i class="fa fa-calendar"></i><span class="nav-label">Event/Assets</span><span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level collapse">
                     <li><a href="#">Book Assets</a></li>
                     <li><a href="#">View Assets</a></li>
@@ -117,19 +117,12 @@
 
 
             <li>
-                <a href="#"><i class="fa fa-fire-extinguisher"></i><span class="nav-label">Emergency Button</span></a>
-                
-            </li>
-
-            <li>
                 <a href="#"><i class="fa fa-user-circle-o"></i><span class="nav-label">Secretary</span><span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level collapse">
                     <li><a href="#">Add Committee Member</a></li>
                     <li><a href="#">ManageCommittee Member</a></li>
                     <li><a href="#">Add Rules</a></li>
                     <li><a href="#">Manage Rules</a></li>
-                    
-                    
                 </ul>
             </li>
            
@@ -150,7 +143,7 @@
            
            
             <li>
-                <a href="#"><i class="fa fa-globe"></i><span class="nav-label">Reports</span><span class="fa arrow"></span></a>
+                <a href="#"><i class="fa fa-address-book-o"></i><span class="nav-label">Reports</span><span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level collapse">
                     <li><a href="#"></a></li>
                     <li><a href="#"></a></li>
@@ -158,6 +151,13 @@
                     
                 </ul>
             </li>
+
+
+            <li>
+                <a href="#"><i class="fa fa-fire-extinguisher"></i><span class="nav-label">Emergency Button</span></a>
+                
+            </li>
+
            
            
            
