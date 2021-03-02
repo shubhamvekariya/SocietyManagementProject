@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\MemberController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
 
@@ -26,9 +27,11 @@ Route::group(['middleware' => ['auth:society'] ], function(){
 });
 
 Route::group(['middleware' => ['auth'] ], function(){
-    Route::get('/member',  function () {
-        return view('member.index');
-    })->name('member.home');
+
+    Route::get('/member/approval',[MemberController::class,'approve'])->name('member.approval');
+    Route::middleware(['approved'])->group(function () {
+        Route::get('/member',[MemberController::class,'index'])->name('member.home');
+    });
 });
 
 Route::get('/login/society',[LoginController::class,'show_login'])->name('login.society');

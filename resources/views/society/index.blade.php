@@ -40,3 +40,22 @@ Society Page
     </div>
 </div>
 @endsection
+
+@section('script')
+    <script src="https://js.pusher.com/7.0/pusher.min.js"></script>
+    <script>
+
+    // Enable pusher logging - don't include this in production
+    Pusher.logToConsole = true;
+
+    var pusher = new Pusher('6b723375502146131d40', {
+        cluster: 'ap2'
+    });
+
+    var channel = pusher.subscribe('my-channel');
+    channel.bind('my-event', function(data) {
+        console.log('adad');
+        alert(JSON.stringify(data));
+    });
+    </script>
+@endsection

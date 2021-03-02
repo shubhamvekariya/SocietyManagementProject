@@ -35,7 +35,7 @@
 								<li class="tm-nav-li"><a href="index.html" class="tm-nav-link active">Home</a></li>
 								<li class="tm-nav-li"><a href="about.html" class="tm-nav-link">About</a></li>
 								<li class="tm-nav-li"><a href="contact.html" class="tm-nav-link">Contact</a></li>
-								<li class="tm-nav-li"><a href="contact.html" class="tm-nav-link">Login</a></li>
+								<li class="tm-nav-li"><a href="{{ route('login.member') }}" class="tm-nav-link">Login</a></li>
 							</ul>
 						</nav>
 					</div>
