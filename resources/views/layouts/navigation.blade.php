@@ -40,6 +40,7 @@
                 <ul class="nav nav-second-level collapse">
                     <li><a href="#">Add Member</a></li>
                     <li><a href="#">Manage Member</a></li>
+                   
                     
                 </ul>
             </li>
@@ -96,7 +97,7 @@
                 <a href="#"><i class="fa fa-globe"></i><span class="nav-label">Event/Assets</span><span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level collapse">
                     <li><a href="#">Book Assets</a></li>
-                    <li><a href="#">View Assets Temporary</a></li>
+                    <li><a href="#">View Assets</a></li>
                     
                     
                 </ul>
@@ -107,7 +108,6 @@
                 <ul class="nav nav-second-level collapse">
                     <li><a href="#">View Parking Details</a></li>
                     <li><a href="#">Manage Parking</a></li>
-                    
                     
                 </ul>
             </li>
