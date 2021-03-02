@@ -37,7 +37,10 @@ return [
             'app_id' => env('1164693'),
             'options' => [
                 'cluster' => env('ap2'),
-                'useTLS' => true,
+                'encrypted' => true,
+                'host' => '127.0.0.1',
+                'port' => 6001,
+                'scheme' => 'http'
             ],
         ],
 

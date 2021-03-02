@@ -15,7 +15,7 @@ class MemberController extends Controller
 
     public function approve()
     {
-        event(new Approveuser('hello world'));
+        event(new Approveuser('hello'));
         return view('member.approve');
     }
 }
