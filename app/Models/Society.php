@@ -29,5 +29,5 @@ class Society extends Authenticatable
         'password',
         'remember_token',
     ];
-
+    
 }

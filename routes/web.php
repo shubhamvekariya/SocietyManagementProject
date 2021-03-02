@@ -1,5 +1,7 @@
 <?php
 
+
+use App\Http\Controllers\secretaryController;
 use App\Http\Controllers\Auth\LoginController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
@@ -35,3 +37,6 @@ Route::get('/country', function () {
     $country = Storage::get('public/country.json');
     return json_decode($country, true);
 });
+
+Route::get('/rule', [secretaryController::class,'add_rule']);
+Route::post('/rule', [secretaryController::class,'add_rule']);
