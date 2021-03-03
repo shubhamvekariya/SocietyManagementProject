@@ -24,6 +24,8 @@ class CreateSocietiesTable extends Migration
             $table->string('email')->unique();
             $table->bigInteger('phoneno');
             $table->string('password');
+
+            $table->softDeletes();
             $table->timestamps();
         });
     }
@@ -35,6 +37,10 @@ class CreateSocietiesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('societies');
+        //Schema::dropIfExists('societies');
+        Schema::create('societies', function (Blueprint $table) {
+            $table->dropSoftDeletes();
+
+        });
     }
 }

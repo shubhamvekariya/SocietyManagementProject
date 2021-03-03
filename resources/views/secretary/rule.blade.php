@@ -6,7 +6,7 @@ Rules
 
 @section('content')
 <div class="ibox-content">
-    <form  action="{{url('/add_rule')}}" method="post">
+    <form  action="{{route('society.rule')}}" method="POST">
         @csrf
         <div class="form-group  row"><label class="col-sm-2 col-form-label">Add Rule</label>
 

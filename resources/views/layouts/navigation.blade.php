@@ -25,7 +25,7 @@
                     </ul>
                 </div>
                 <div class="logo-element">
-                    AP+
+                    SC+
                 </div>
             </li>
 

@@ -11,9 +11,9 @@ class Staff extends Model
     use HasFactory,SoftDeletes;
 
     protected $fillable = [
-        'title',
-        'description',
-        'date',
+        'name',
+        'position',
+        'work',
         'society_id',
     ];
 }

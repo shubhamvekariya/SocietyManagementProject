@@ -25,6 +25,12 @@ Route::group(['middleware' => ['auth:society'] ], function(){
     Route::get('/society',  function () {
         return view('society.index');
     })->name('society.home');
+
+    Route::get('/society/rule', function (){
+        return view('secretary.rule');
+    })->name('society.rule');
+
+    Route::post('/society/rule', [secretaryController::class,'add_rule'])->name('society.rule');
 });
 
 Route::get('/login/society',[LoginController::class,'show_login'])->name('login.society');
@@ -37,6 +43,3 @@ Route::get('/country', function () {
     $country = Storage::get('public/country.json');
     return json_decode($country, true);
 });
-
-Route::get('/rule', [secretaryController::class,'add_rule']);
-Route::post('/rule', [secretaryController::class,'add_rule']);
