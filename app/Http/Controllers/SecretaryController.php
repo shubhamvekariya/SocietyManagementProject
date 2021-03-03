@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
-use Illuminate\Http\Request;
 use App\Models\Rule;
 use Illuminate\Support\Facades\Auth;
 
@@ -51,7 +50,7 @@ class SecretaryController extends Controller
             'description' =>  $request->description,
             'society_id' => Auth::user()->id,
         ]);
-        
+
         echo "<script>alert('Rule Added');</script>";
         return view('society.rule');
     }
