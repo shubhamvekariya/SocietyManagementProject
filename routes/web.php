@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\MemberController;
-use App\Http\Controllers\secretaryController;
+use App\Http\Controllers\SecretaryController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
 use Pusher\Pusher;
@@ -26,8 +26,9 @@ Route::group(['middleware' => ['auth:society'] ], function(){
     Route::get('/society',  function () {
         return view('society.index');
     })->name('society.home');
-    Route::get('/society/approvemember/{user_id}', [secretaryController::class,'approve'])->name('society.approvemember');
-    Route::get('/society/rejectmember/{user_id}', [MemberController::class,'approve'])->name('society.rejectmember');
+    Route::get('/society/approvemember/{user_id}', [SecretaryController::class,'approve'])->name('society.approvemember');
+    Route::get('/society/rejectmember/{user_id}', [SecretaryController::class,'reject'])->name('society.rejectmember');
+    Route::get('/society/needapprove', [SecretaryController::class,'needapprovemembers'])->name('society.needapprove');
 });
 
 Route::group(['middleware' => ['auth'] ], function(){
