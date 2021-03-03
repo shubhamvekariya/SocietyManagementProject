@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Auth;
 use App\Models\Society;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Apartment;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
@@ -12,9 +14,16 @@ use Illuminate\Support\Str;
 class LoginController extends Controller
 {
     //
-    public function __construct()
+    public function __construct(Request $request)
     {
-        $this->middleware('guest:society')->except('destroy');;
+        if($request->segment(2) == 'society')
+        {
+            $this->middleware('guest:society')->except('destroy');
+        }
+        elseif($request->segment(2) == 'member')
+        {
+            $this->middleware('guest')->except('destroy');
+        }
     }
 
     public function show_login()
@@ -28,18 +37,34 @@ class LoginController extends Controller
             'email' => 'required|email',
             'password' => 'required'
         ]);
-        if (Auth::guard('society')->attempt($request->only('email', 'password'),$request->filled('rememberme'))) {
-            $user = Auth::guard('society')->user();
-            $user->assignRole('secretary');
-            $request->session()->regenerate();
-            return redirect()->route('society.home');
-        }else{
-            return redirect()->back()->with('danger','Invalid credentials');
+        if($request->segment(2) == 'society')
+        {
+            if (Auth::guard('society')->attempt($request->only('email', 'password'),$request->filled('rememberme'))) {
+                $user = Auth::guard('society')->user();
+                $user->assignRole('secretary');
+                $request->session()->regenerate();
+                return redirect()->route('society.home');
+            }
         }
+        if($request->segment(2) == 'member')
+        {
+            if (Auth::attempt($request->only('email', 'password'),$request->filled('rememberme'))) {
+                $user = Auth::user();
+                $user->assignRole('member');
+                $request->session()->regenerate();
+                return redirect()->route('member.home');
+            }
+        }
+        return redirect()->back()->with('danger','Invalid credentials');
     }
 
-    public function show_register()
+    public function show_register(Request $request)
     {
+        if($request->segment(2) == 'member')
+        {
+            $societies = Society::all();
+            return view('auth.register',)->with('societies',$societies);
+        }
         return view('auth.register');
     }
 
@@ -65,6 +90,36 @@ class LoginController extends Controller
             'phoneno' => $request->phoneno
         ]);
         return redirect()->route('login.society');
+    }
+
+    public function create_member(Request $request)
+    {
+        $request->validate([
+            'name' => 'required',
+            'email' => 'required|unique:users|email',
+            'password' => 'required_with:password_confirmation|confirmed|min:8|max:16',
+            'phoneno' => 'required',
+            'age' => 'required|numeric|gt:18',
+            'name_or_number' => 'required',
+            'society_id' => 'required'
+        ]);
+        $user = User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'age' => $request->age,
+            'phoneno' => $request->phoneno,
+            'gender' => $request->gender,
+            'password' => Hash::make($request->password),
+        ]);
+        $apartment = Apartment::create([
+            'name_or_number' => $request->name_or_number,
+            'BHK' => $request->BHK,
+            'floor_no' => $request->floor_no,
+            'price' => $request->price,
+            'society_id' => $request->society_id,
+            'user_id' => $user->id
+        ]);
+        return redirect()->route('login.member');
     }
 
     public function destroy(Request $request)

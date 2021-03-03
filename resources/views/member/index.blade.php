@@ -1,14 +1,12 @@
 @extends('layouts.app')
 @section('title')
-Society Page
+member Page
 @endsection
-@section('css')
-    <link href="{{ mix('/css/toastr.min.css') }}" rel="stylesheet">
-@endsection
+
 @section('content')
 
 @section('breadcrumb-title')
-    Welcome secretary
+    Welcome member
 @endsection
 @section('breadcrumb-item')
     <li class="breadcrumb-item active">
@@ -18,7 +16,7 @@ Society Page
 
 <div class="wrapper wrapper-content">
     <div class="middle-box text-center animated fadeInRightBig">
-        <h3 class="font-bold">Society Page</h3>
+        <h3 class="font-bold">member Page</h3>
         <div class="error-desc">
             You can create here any grid layout you want. And any variation layout you imagine:) Check out
             main dashboard and other site. It use many different layout.
@@ -27,4 +25,3 @@ Society Page
     </div>
 </div>
 @endsection
-

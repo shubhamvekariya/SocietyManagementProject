@@ -20,7 +20,7 @@
                 <strong>{{ $error }}</strong>
             </div>
         @endif
-        <form class="m-t" role="form" action="{{ route('login.society') }}" method="POST">
+        <form class="m-t" role="form" action="@if (Request::segment(2) == 'society') {{ route('login.society') }} @else {{ route('login.member') }} @endif" method="POST">
             @csrf
             <div class="form-group">
                 <input type="email" name="email" class="form-control" placeholder="Email" required="">
@@ -32,7 +32,7 @@
 
             <a href="#"><small>Forgot password?</small></a>
             <p class="text-muted text-center"><small>Do not have an account?</small></p>
-            <a class="btn btn-sm btn-white btn-block" href="{{ route('register.society') }}">Create an account</a>
+            <a class="btn btn-sm btn-white btn-block" href="@if (Request::segment(2) == 'society') {{ route('register.society') }} @else {{ route('register.member') }} @endif" >Create an account</a>
         </form>
         <p class="m-t"> <small>Work with appartment manangement &copy; 2021</small> </p>
     </div>

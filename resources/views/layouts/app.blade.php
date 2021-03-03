@@ -11,7 +11,9 @@
 
     <link href="{{ mix('/css/app.css') }}" rel="stylesheet">
     @yield('css')
-
+    @role('secretary','society')
+    <link href="{{ mix('/css/toastr.min.css') }}" rel="stylesheet">
+    @endrole
 </head>
 
 <body>
@@ -22,7 +24,7 @@
 
         <div id="page-wrapper" class="gray-bg">
             @include('layouts.topnavbar')
-
+            @include('layouts.breadcrumb')
             @yield('content')
 
             @include('layouts.footer')
@@ -41,6 +43,42 @@
     <script src="{!! asset('js/pace.min.js') !!}"></script>
     @yield('script')
 
+    @role('secretary','society')
+        <script src="https://js.pusher.com/7.0/pusher.min.js"></script>
+
+        <!-- Toastr script -->
+        <script src="{!! asset('js/toastr.min.js') !!}"></script>
+        <script>
+        data = {!! str_replace("'", "\'", json_encode(Auth::user()->id)) !!};
+        // Enable pusher logging - don't include this in production
+        Pusher.logToConsole = true;
+
+        var pusher = new Pusher('6b723375502146131d40', {
+            cluster: 'ap2',
+            encrypted: true
+        });
+
+        var channel = pusher.subscribe('approve-channel-'+data);
+        channel.bind('approve-event', function(data) {
+            toastr.options = {
+                "closeButton": true,
+                "debug": false,
+                "progressBar": true,
+                "preventDuplicates": true,
+                "positionClass": "toast-top-center",
+                "showDuration": "1000",
+                "hideDuration": "1000",
+                "timeOut": "70000",
+                "extendedTimeOut": "10000",
+                "showEasing": "swing",
+                "hideEasing": "linear",
+                "showMethod": "fadeIn",
+                "hideMethod": "fadeOut"
+            }
+            toastr.success(data['message']+" <br/> <br/> <div class='row'> <div class='col-6'> <a class='btn btn-success btn-rounded' href='"+data['approvelink']+"'> Approve</a> </div> <div class='col-6'> <a class='btn btn-danger btn-rounded' href='"+data['rejectlink']+"'>Reject</a></div></div>", "<h1>Approve user</h1>")
+        });
+        </script>
+    @endrole
 </body>
 
 </html>
