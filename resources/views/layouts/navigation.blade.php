@@ -118,8 +118,8 @@
                 <ul class="nav nav-second-level collapse">
                     <li><a href="#">Add Committee Member</a></li>
                     <li><a href="#">ManageCommittee Member</a></li>
-                    <li><a href="#">Add Rules</a></li>
-                    <li><a href="#">Manage Rules</a></li>
+                    <li><a href="{{route('society.rule')}}">Add Rules</a></li>
+                    <li><a href="{{route('society.all_rule')}}">Manage Rules</a></li>
                 </ul>
             </li>
            

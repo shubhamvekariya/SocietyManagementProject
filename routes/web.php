@@ -1,7 +1,7 @@
 <?php
 
 
-use App\Http\Controllers\secretaryController;
+use App\Http\Controllers\SecretaryController;
 use App\Http\Controllers\Auth\LoginController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
@@ -27,10 +27,11 @@ Route::group(['middleware' => ['auth:society'] ], function(){
     })->name('society.home');
 
     Route::get('/society/rule', function (){
-        return view('secretary.rule');
+        return view('society.rule');
     })->name('society.rule');
 
-    Route::post('/society/rule', [secretaryController::class,'add_rule'])->name('society.rule');
+    Route::post('/society/rule', [SecretaryController::class,'add_rule'])->name('society.rule');
+    Route::get('/society/all_rule', [SecretaryController::class,'show_rule'])->name('society.all_rule');
 });
 
 Route::get('/login/society',[LoginController::class,'show_login'])->name('login.society');
