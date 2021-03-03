@@ -9,7 +9,7 @@ Need Approve user
 @section('content')
 
 @section('breadcrumb-title')
-    Welcome member
+    Approve member
 @endsection
 @section('breadcrumb-item')
     <li class="breadcrumb-item">

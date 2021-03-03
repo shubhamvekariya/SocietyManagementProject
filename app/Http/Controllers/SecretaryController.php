@@ -17,10 +17,12 @@ class SecretaryController extends Controller
         return redirect()->back()->with('approvesuccess','User approved successfully');
     }
 
-    public function destroy($user_id)
+    public function reject($user_id)
     {
-        $user = User::destroy($user_id);
-        return redirect()->back()->withMessage('User rejected');
+        $user = User::findOrFail($user_id);
+        $user->apartment->delete();
+        $user->delete();
+        return redirect()->back()->with('approvesuccess','User rejected');
     }
 
     public function needapprovemembers(Request $request)
