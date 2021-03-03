@@ -1,5 +1,7 @@
 <?php
 
+
+use App\Http\Controllers\SecretaryController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\MemberController;
 use App\Http\Controllers\SecretaryController;
@@ -26,9 +28,16 @@ Route::group(['middleware' => ['auth:society'] ], function(){
     Route::get('/society',  function () {
         return view('society.index');
     })->name('society.home');
+  
     Route::get('/society/approvemember/{user_id}', [SecretaryController::class,'approve'])->name('society.approvemember');
     Route::get('/society/rejectmember/{user_id}', [SecretaryController::class,'reject'])->name('society.rejectmember');
     Route::get('/society/needapprove', [SecretaryController::class,'needapprovemembers'])->name('society.needapprove');
+    Route::get('/society/rule', function (){
+        return view('society.rule');
+    })->name('society.rule');
+
+    Route::post('/society/rule', [SecretaryController::class,'add_rule'])->name('society.rule');
+    Route::get('/society/all_rule', [SecretaryController::class,'show_rule'])->name('society.all_rule');
 });
 
 Route::group(['middleware' => ['auth'] ], function(){
