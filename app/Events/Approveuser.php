@@ -9,24 +9,20 @@ use Illuminate\Broadcasting\PrivateChannel;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\Auth;
 
-class Approveuser implements ShouldBroadcast
+class Approveuser
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    public $username;
-
-    public $message;
 
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct($username)
+    public function __construct()
     {
-        $this->username = $username;
-        $this->message  = "{$username} liked your status";
     }
 
     /**
@@ -36,11 +32,11 @@ class Approveuser implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return ['my-channel'];
+        return new PrivateChannel('approve-channel-'.Auth::user()->apartment->society->id);
     }
 
     public function broadcastAs()
     {
-        return 'my-event';
+        return 'approve-event';
     }
 }

@@ -4,6 +4,7 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\MemberController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
+use Pusher\Pusher;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,6 +25,7 @@ Route::group(['middleware' => ['auth:society'] ], function(){
     Route::get('/society',  function () {
         return view('society.index');
     })->name('society.home');
+    Route::get('/society/approvemember/{user_id}', '@approve')->name('society.approvemember');
 });
 
 Route::group(['middleware' => ['auth'] ], function(){

@@ -44,7 +44,7 @@ Society Page
 @section('script')
     <script src="https://js.pusher.com/7.0/pusher.min.js"></script>
     <script>
-
+    data = {!! str_replace("'", "\'", json_encode(Auth::user()->id)) !!};
     // Enable pusher logging - don't include this in production
     Pusher.logToConsole = true;
 
@@ -53,8 +53,8 @@ Society Page
         encrypted: true
     });
 
-    var channel = pusher.subscribe('my-channel');
-    channel.bind('my-event', function(data) {
+    var channel = pusher.subscribe('approve-channel-'+data);
+    channel.bind('approve-event', function(data) {
         alert(JSON.stringify(data));
     });
     </script>
