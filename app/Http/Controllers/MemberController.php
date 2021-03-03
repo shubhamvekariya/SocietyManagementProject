@@ -29,7 +29,8 @@ class MemberController extends Controller
                 );
         $member =Auth::user();
         $data['message'] = 'New member has registered with email '.$member->email;
-        $data['link'] = route('society.approvemember',$member->id);
+        $data['approvelink'] = route('society.approvemember',$member->id);
+        $data['rejectlink'] = route('society.rejectmember',$member->id);
         $pusher->trigger('approve-channel-'.$member->apartment->society->id, 'approve-event', $data);
         return view('member.approve');
     }

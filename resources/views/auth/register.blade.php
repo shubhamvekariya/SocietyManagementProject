@@ -271,7 +271,7 @@
 
                     </div>
             <p class="text-muted text-center mt-2 mb-0"><small>Already have an account?</small></p>
-            <a class="btn btn-sm btn-white w-50 mx-auto btn-block" href="{{ route('login.member') }}">Login</a>
+            <a class="btn btn-sm btn-white w-50 mx-auto btn-block" href="@if (Request::segment(2) == 'society') {{ route('login.society') }} @else {{ route('login.member') }} @endif">Login</a>
         <p class="m-t"> <small>Work with appartment manangement &copy; 2021</small> </p>
     </div>
 </div>
