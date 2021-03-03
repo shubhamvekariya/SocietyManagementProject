@@ -14,7 +14,7 @@ class CreateVisitorsDetailsTable extends Migration
     public function up()
     {
         Schema::create('visitors_details', function (Blueprint $table) {
-            $table->increments('visitor_id');
+            $table->id();
             $table->string('name');
             $table->string('phone_no');
             $table->longText('address')->nullable();

@@ -14,11 +14,11 @@ class CreateMeetingDetailsTable extends Migration
     public function up()
     {
         Schema::create('meeting_details', function (Blueprint $table) {
-            $table->increments('meet_id');
+            $table->id();
             $table->string('title');
             $table->string('date');
             $table->string('start_time');
-            $table->string('end_time');
+            $table->string('end_time')->nullable();
             $table->longText('place');
 
             $table->foreignId('society_id')->constrained('societies')->onUpdate('cascade')->onDelete('cascade');

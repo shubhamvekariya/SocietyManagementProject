@@ -14,7 +14,7 @@ class CreateStaffSecurityTable extends Migration
     public function up()
     {
         Schema::create('staff_security', function (Blueprint $table) {
-            $table->increments('s_id');
+            $table->id();
             $table->string('name');
             $table->string('position');
             $table->string('work');

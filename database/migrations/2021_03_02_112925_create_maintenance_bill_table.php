@@ -14,7 +14,7 @@ class CreateMaintenanceBillTable extends Migration
     public function up()
     {
         Schema::create('maintenance_bill', function (Blueprint $table) {
-            $table->increments('bill_id');
+            $table->id();
             $table->string('bill_date');
             $table->string('charges');
             $table->string('category');
@@ -38,7 +38,7 @@ class CreateMaintenanceBillTable extends Migration
     {
         //Schema::dropIfExists('maintenance_bill');
 
-        Schema::create('family_members', function (Blueprint $table) {
+        Schema::create('maintenance_bill', function (Blueprint $table) {
             $table->dropSoftDeletes();
 
         });

@@ -15,13 +15,13 @@ class CreateAssetsTable extends Migration
     {
         Schema::create('assets', function (Blueprint $table) {
             
-            $table->increments('booking_id');
+            $table->id();
             $table->string('date_of_booking');
             $table->string('start_time');
             $table->string('end_time');
             $table->string('assets');
-            $table->longText('func_details');
-            $table->string('charges');
+            $table->longText('func_details')->nullable();
+            $table->string('charges')->nullable();
 
             $table->foreignId('user_id')->constrained('users')->onUpdate('cascade')->onDelete('cascade');
             $table->softDeletes();
@@ -41,7 +41,7 @@ class CreateAssetsTable extends Migration
     {
         //Schema::dropIfExists('assets');
 
-        Schema::create('family_members', function (Blueprint $table) {
+        Schema::create('assets', function (Blueprint $table) {
             $table->dropSoftDeletes();
 
         });

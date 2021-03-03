@@ -14,12 +14,12 @@ class CreateFamilyMembersTable extends Migration
     public function up()
     {
         Schema::create('family_members', function (Blueprint $table) {
-            $table->increments('family_id');
+            $table->id();
             $table->string('name');
             $table->string('contact_no');
             $table->string('email');
             $table->string('age');
-            $table->string('name');
+            $table->string('gender');
             $table->foreignId('user_id')->constrained('users')->onUpdate('cascade')->onDelete('cascade');
             $table->softDeletes();
 

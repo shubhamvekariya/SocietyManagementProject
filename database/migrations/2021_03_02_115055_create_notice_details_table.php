@@ -14,9 +14,9 @@ class CreateNoticeDetailsTable extends Migration
     public function up()
     {
         Schema::create('notice_details', function (Blueprint $table) {
-            $table->increments('notice_id');
+            $table->id();
             $table->string('title');
-            $table->longText('description');
+            $table->longText('description')->nullable();
             $table->string('date');
             
             

@@ -14,7 +14,7 @@ class CreateParkingDetailsTable extends Migration
     public function up()
     {
         Schema::create('parking_details', function (Blueprint $table) {
-            $table->increments('p_id');
+            $table->id();
             $table->string('name');
             $table->string('vehicle_no');
             $table->string('entry_time');

@@ -14,12 +14,13 @@ class CreateComplaintDetailsTable extends Migration
     public function up()
     {
         Schema::create('complaint_details', function (Blueprint $table) {
-            $table->increments('complaint_no');
-            $table->string('category');
+            $table->id();
+            $table->string('complaint_no');
+            $table->string('category')->nullable();
             $table->string('complaint_title');
-            $table->string('reg_date');
+            $table->string('reg_date')->nullable();
             $table->string('status');
-            $table->longText('remarks');
+            $table->longText('remarks')->nullable();
 
             $table->foreignId('user_id')->constrained('users')->onUpdate('cascade')->onDelete('cascade');
             $table->softDeletes();
