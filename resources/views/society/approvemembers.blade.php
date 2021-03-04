@@ -2,9 +2,9 @@
 @section('title')
 Need Approve user
 @endsection
-@push('css')
+@section('css')
 <link href="{{ mix('/css/datatables.min.css') }}" rel="stylesheet">
-@endpush
+@endsection
 
 @section('content')
 
@@ -43,7 +43,7 @@ Need Approve user
 </div>
 @endsection
 
-@push('script')
+@section('script')
     <script src="{{ asset('js/datatables.min.js') }}"></script>
     <script src="{{ asset('js/dataTables.bootstrap4.min.js') }}"></script>
     <script>
@@ -62,4 +62,4 @@ Need Approve user
 
         });
     </script>
-@endpush
+@endsection
