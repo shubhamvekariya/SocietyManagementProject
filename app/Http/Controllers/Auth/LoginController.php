@@ -5,23 +5,26 @@ namespace App\Http\Controllers\Auth;
 use App\Models\Society;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\Apartment;
-use App\Models\User;
+use App\Interfaces\MemberInterface;
+use App\Interfaces\SocietyInterface;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Str;
+
 
 class LoginController extends Controller
 {
+    protected $memberInterface;
+    protected $societyInterface;
     //
-    public function __construct(Request $request)
+    public function __construct(Request $request, MemberInterface $memberInterface,SocietyInterface $societyInterface)
     {
         if($request->segment(2) == 'society')
         {
+            $this->societyInterface = $societyInterface;
             $this->middleware('guest:society')->except('destroy');
         }
         elseif($request->segment(2) == 'member')
         {
+            $this->memberInterface = $memberInterface;
             $this->middleware('guest')->except('destroy');
         }
     }
@@ -39,18 +42,18 @@ class LoginController extends Controller
         ]);
         if($request->segment(2) == 'society')
         {
-            if (Auth::guard('society')->attempt($request->only('email', 'password'),$request->filled('rememberme'))) {
-                $user = Auth::guard('society')->user();
-                $user->assignRole('secretary');
+            $login = $this->societyInterface->checkLogin($request->email, $request->password, $request->rememberme);
+            if($login)
+            {
                 $request->session()->regenerate();
                 return redirect()->route('society.home');
             }
         }
         if($request->segment(2) == 'member')
         {
-            if (Auth::attempt($request->only('email', 'password'),$request->filled('rememberme'))) {
-                $user = Auth::user();
-                $user->assignRole('member');
+            $login = $this->memberInterface->checkLogin($request->email, $request->password, $request->rememberme);
+            if($login)
+            {
                 $request->session()->regenerate();
                 return redirect()->route('member.home');
             }
@@ -77,19 +80,9 @@ class LoginController extends Controller
             'password' => 'required_with:password_confirmation|confirmed|min:8|max:16',
             'phoneno' => 'required',
         ]);
-
-        $society = Society::create([
-            'society_name' => $request->society_name,
-            'address' => $request->address,
-            'country' => explode("(", $request->country, 2)[0],
-            'state' => explode("(", $request->state, 2)[0],
-            'city' => explode("(", $request->city, 2)[0],
-            'secretary_name' => $request->fname." ".$request->lname,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-            'phoneno' => $request->phoneno
-        ]);
-        return redirect()->route('login.society');
+        $status = $this->societyInterface->addSociety($request);
+        if($status)
+            return redirect()->route('login.society')->with('success','Society registration done');
     }
 
     public function create_member(Request $request)
@@ -103,23 +96,9 @@ class LoginController extends Controller
             'name_or_number' => 'required',
             'society_id' => 'required'
         ]);
-        $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'age' => $request->age,
-            'phoneno' => $request->phoneno,
-            'gender' => $request->gender,
-            'password' => Hash::make($request->password),
-        ]);
-        $apartment = Apartment::create([
-            'name_or_number' => $request->name_or_number,
-            'BHK' => $request->BHK,
-            'floor_no' => $request->floor_no,
-            'price' => $request->price,
-            'society_id' => $request->society_id,
-            'user_id' => $user->id
-        ]);
-        return redirect()->route('login.member');
+        $status = $this->memberInterface->addMember($request);
+        if($status)
+            return redirect()->route('login.member')->with('success','Member registration done');
     }
 
     public function destroy(Request $request)

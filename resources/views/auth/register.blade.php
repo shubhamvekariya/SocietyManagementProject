@@ -4,11 +4,11 @@
     Registration
 @endsection
 
-@section('css')
+@push('css')
     <link href="{{ mix('/css/custom.css') }}" rel="stylesheet">
     <link href="{{ mix('/css/select2.min.css') }}" rel="stylesheet">
     <link href="{{ mix('/css/jquery.steps.css') }}" rel="stylesheet">
-@endsection
+@endpush
 
 @section('content')
 <div class="middle-box text-center loginscreen  animated fadeInDown" style="max-width:700px;width:700px;padding-top:0">
@@ -276,7 +276,7 @@
     </div>
 </div>
 @endsection
-@section('script')
+@push('script')
     <!-- iCheck -->
     <script src="{!! asset('/js/icheck.min.js') !!}"></script>
 	 <!-- Steps -->
@@ -288,4 +288,4 @@
 
     <script src="{!! asset('/js/register.js') !!}"></script>
 
-@endsection
+@endpush

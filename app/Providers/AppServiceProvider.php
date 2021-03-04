@@ -2,6 +2,10 @@
 
 namespace App\Providers;
 
+use App\Interfaces\MemberInterface;
+use App\Interfaces\SocietyInterface;
+use App\Repository\MemberRepository;
+use App\Repository\SocietyRepository;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Schema;
 
@@ -25,5 +29,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Schema::defaultStringLength(191);
+        $this->app->bind(MemberInterface::class,MemberRepository::class);
+        $this->app->bind(SocietyInterface::class,SocietyRepository::class);
     }
 }

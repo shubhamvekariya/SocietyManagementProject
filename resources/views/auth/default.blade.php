@@ -9,7 +9,7 @@
     <title>@yield('title')</title>
 
     <link href="{{ mix('/css/app.css') }}" rel="stylesheet">
-    @yield('css')
+    @stack('css')
 
 </head>
 <body class="gray-bg">
@@ -21,7 +21,7 @@
     <script src="{!! asset('/js/bootstrap.js') !!}"></script>
 
 
-    @yield('script')
+    @stack('script')
 
 </body>
 

@@ -10,7 +10,7 @@
     <title>@yield('title')</title>
 
     <link href="{{ mix('/css/app.css') }}" rel="stylesheet">
-    @yield('css')
+    @stack('css')
     @role('secretary','society')
     <link href="{{ mix('/css/toastr.min.css') }}" rel="stylesheet">
     @endrole
@@ -41,7 +41,7 @@
     <!-- Custom and plugin javascript -->
     <script src="{!! asset('js/inspinia.js') !!}"></script>
     <script src="{!! asset('js/pace.min.js') !!}"></script>
-    @yield('script')
+    @stack('script')
 
     @role('secretary','society')
         <script src="https://js.pusher.com/7.0/pusher.min.js"></script>
