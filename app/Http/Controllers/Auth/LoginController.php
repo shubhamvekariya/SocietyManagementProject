@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Models\Society;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\AuthRequest;
 use App\Interfaces\MemberInterface;
 use App\Interfaces\SocietyInterface;
 use Illuminate\Support\Facades\Auth;
@@ -34,12 +35,9 @@ class LoginController extends Controller
         return view('auth.login');
     }
 
-    public function check_login(Request $request)
+    public function check_login(AuthRequest $request)
     {
-        $request->validate([
-            'email' => 'required|email',
-            'password' => 'required'
-        ]);
+        $request->validated();
         if($request->segment(2) == 'society')
         {
             $login = $this->societyInterface->checkLogin($request->email, $request->password, $request->rememberme);
@@ -71,31 +69,17 @@ class LoginController extends Controller
         return view('auth.register');
     }
 
-    public function create_society(Request $request)
+    public function create_society(AuthRequest $request)
     {
-        $request->validate([
-            'society_name' => 'required',
-            'country' => 'required',
-            'email' => 'required|unique:societies|email',
-            'password' => 'required_with:password_confirmation|confirmed|min:8|max:16',
-            'phoneno' => 'required',
-        ]);
+        $request->validated();
         $status = $this->societyInterface->addSociety($request);
         if($status)
             return redirect()->route('login.society')->with('success','Society registration done');
     }
 
-    public function create_member(Request $request)
+    public function create_member(AuthRequest $request)
     {
-        $request->validate([
-            'name' => 'required',
-            'email' => 'required|unique:users|email',
-            'password' => 'required_with:password_confirmation|confirmed|min:8|max:16',
-            'phoneno' => 'required',
-            'age' => 'required|numeric|gt:18',
-            'name_or_number' => 'required',
-            'society_id' => 'required'
-        ]);
+        $request->validated();
         $status = $this->memberInterface->addMember($request);
         if($status)
             return redirect()->route('login.member')->with('success','Member registration done');

@@ -4,7 +4,7 @@ Society Page
 @endsection
 @push('css')
     <link href="{{ mix('/css/toastr.min.css') }}" rel="stylesheet">
-@push
+@endpush
 @section('content')
 
 @section('breadcrumb-title')

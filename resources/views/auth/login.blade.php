@@ -14,6 +14,18 @@
         </div>
         <h3>Welcome to AP+</h3>
         <h2 class="font-weight-bold">Login in</h2>
+        @if ($errors->any())
+            <div class="alert alert-danger alert-dismissable">
+                <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+                <strong class="float-left">Error!</strong>
+                <br>
+                <ul class="text-left">
+                    @foreach ($errors->all() as $error)
+                        <li>{{$error}}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
         @if ($error = Session::get('danger'))
             <div class="alert alert-danger alert-dismissable">
                 <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Interfaces\ApproveInterface;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
@@ -10,36 +11,35 @@ use Illuminate\Support\Facades\Auth;
 
 class SecretaryController extends Controller
 {
+    protected $approveInterface;
+    public function __construct(ApproveInterface $approveInterface)
+    {
+        $this->approveInterface = $approveInterface;
+    }
     //
     public function approve($user_id)
     {
-        $user = User::findOrFail($user_id);
-        $user->approved_at = now();
-        $user->save();
-        return redirect()->back()->with('approvesuccess','User approved successfully');
+        $status = $this->approveInterface->approve($user_id);
+        if($status)
+            return redirect()->back()->with('approvesuccess','User approved successfully');
+        else
+            return redirect()->back()->with('approveerror','Something went wrong');
     }
 
     public function reject($user_id)
     {
-        $user = User::findOrFail($user_id);
-        $user->apartment->delete();
-        $user->delete();
+        $status = $this->approveInterface->reject($user_id);
+        if($status)
+            return redirect()->back()->with('approvesuccess','User rejected');
+        else
+            return redirect()->back()->with('approveerror','Something went wrong');
         return redirect()->back()->with('approvesuccess','User rejected');
     }
 
-    public function needapprovemembers(Request $request)
+    public function disapprovemembers(Request $request)
     {
         if ($request->ajax()) {
-            $data = User::where('approved_at',null);
-            return DataTables::of($data)
-                    ->addIndexColumn()
-                    ->addColumn('action', function($row){
-                            $btn = '<a href="'.route('society.approvemember',$row['id']).'" class="edit btn btn-primary btn-rounded mx-4" style="width:78px;">Approve</a>';
-                            $btn .= '<a href="'.route('society.rejectmember',$row['id']).'" class="edit btn btn-danger btn-rounded mx-3" style="width:78px;">Reject</a>';
-                            return $btn;
-                    })
-                    ->rawColumns(['action'])
-                    ->make(true);
+            return $this->approveInterface->disapprovemembers();
         }
 
         return view('society.approvemembers');
