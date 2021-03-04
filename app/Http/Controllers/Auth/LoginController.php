@@ -90,7 +90,7 @@ class LoginController extends Controller
         if(Auth::guard('society')->check())
             $url = 'login.society';
         else
-            $url = 'Home';
+            $url = 'login.member';
         Auth::logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();

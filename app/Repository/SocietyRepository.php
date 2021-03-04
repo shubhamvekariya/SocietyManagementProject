@@ -33,13 +33,12 @@ class SocietyRepository implements SocietyInterface
         ]);
         if(!$society)
             return back()->withError('Something went wrong. please try again!!')->withInput();
+        $society->assignRole('secretary');
         return true;
     }
     public function checkLogin($email, $password, $rememberme)
     {
         if (Auth::guard('society')->attempt(['email' => $email, 'password' => $password],$rememberme)) {
-            $user = Auth::guard('society')->user();
-            $user->assignRole('secretary');
             return true;
         }
         return false;

@@ -44,6 +44,9 @@
                     <li><a href="{{ route('society.needapprove') }}">Approve Member</a></li>
                 </ul>
             </li>
+            <li>
+                <a href="{{ route('society.cmembers') }}"><i class="fa fa-user-circle-o"></i><span class="nav-label">Committee Member</span></a>
+            </li>
             @endrole
             <li>
                 <a href="#"><i class="fa fa-building"></i><span class="nav-label">Apartment</span><span class="fa arrow"></span></a>
@@ -112,15 +115,6 @@
                 </ul>
             </li>
 
-
-            <li>
-                <a href="#"><i class="fa fa-user-circle-o"></i><span class="nav-label">Committee Member</span><span class="fa arrow"></span></a>
-                <ul class="nav nav-second-level collapse">
-                    <li><a href="#">Add Committee Member</a></li>
-                    <li><a href="#">ManageCommittee Member</a></li>
-
-                </ul>
-            </li>
 
             <li>
                 <a href="#"><i class="fa fa-user-circle-o"></i><span class="nav-label">Rules</span><span class="fa arrow"></span></a>

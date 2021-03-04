@@ -6,7 +6,6 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\MemberController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
-use Pusher\Pusher;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,30 +22,33 @@ Route::get('/', function () {
     return view('welcome');
 })->name('Home');
 
-Route::group(['middleware' => ['auth:society'] ], function(){
+Route::group(['middleware' => ['auth:society','role:secretary,society'] ], function(){
     Route::get('/society',  function () {
         return view('society.index');
     })->name('society.home');
 
-    Route::get('/society/approvemember/{user_id}', [SecretaryController::class,'approve'])->name('society.approvemember');
-    Route::get('/society/rejectmember/{user_id}', [SecretaryController::class,'reject'])->name('society.rejectmember');
-    Route::get('/society/disapprovemembers', [SecretaryController::class,'disapprovemembers'])->name('society.needapprove');
+    Route::get('/approvemember/{user_id}', [SecretaryController::class,'approve'])->name('society.approvemember');
+    Route::get('/rejectmember/{user_id}', [SecretaryController::class,'reject'])->name('society.rejectmember');
+    Route::get('/disapprovemembers', [SecretaryController::class,'disapprovemembers'])->name('society.needapprove');
+    Route::get('/committeemembers', [SecretaryController::class,'get_members'])->name('society.cmembers');
+    Route::get('/addcommitteemember/{user_id}', [SecretaryController::class,'add_committee_members'])->name('society.addcmember');
+    Route::get('/removecommitteemember/{user_id}', [SecretaryController::class,'remove_committee_members'])->name('society.removecmember');
 
-    Route::get('/society/rule', function (){
+    Route::get('/rule', function (){
         return view('society.add_rule');
     })->name('society.rule');
-    Route::post('/society/rule', [SecretaryController::class,'add_rule'])->name('society.rule');
-    Route::get('/society/all_rule', [SecretaryController::class,'show_rule'])->name('society.all_rule');
-    Route::get('/society/delete_rule/{id}', [SecretaryController::class,'delete_rule'])->name('society.delete_rule');
-    Route::get('/society/edit_rule/{id}', [SecretaryController::class,'edit_rule'])->name('society.edit_rule');
-    Route::put('/society/update_rule', [SecretaryController::class,'update_rule'])->name('society.update_rule');
+    Route::post('/rule', [SecretaryController::class,'add_rule'])->name('society.rule');
+    Route::get('/all_rule', [SecretaryController::class,'show_rule'])->name('society.all_rule');
+    Route::get('/delete_rule/{id}', [SecretaryController::class,'delete_rule'])->name('society.delete_rule');
+    Route::get('/edit_rule/{id}', [SecretaryController::class,'edit_rule'])->name('society.edit_rule');
+    Route::put('/update_rule', [SecretaryController::class,'update_rule'])->name('society.update_rule');
 });
 
-Route::group(['middleware' => ['auth'] ], function(){
+Route::group(['middleware' => ['auth','role:member'] ], function(){
 
     Route::middleware(['approved'])->group(function () {
         Route::get('/member',[MemberController::class,'index'])->name('member.home');
-        Route::get('/member/approval',[MemberController::class,'approve'])->name('member.approval');
+        Route::get('/approval',[MemberController::class,'approve'])->name('member.approval');
     });
 });
 
