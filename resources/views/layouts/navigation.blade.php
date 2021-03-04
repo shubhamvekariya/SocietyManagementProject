@@ -42,9 +42,18 @@
                 <a href="#"><i class="fa fa-users"></i><span class="nav-label">Member</span><span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level collapse">
                     <li><a href="{{ route('society.needapprove') }}">Approve Member</a></li>
+
                 </ul>
             </li>
             @endrole
+
+            <li>
+                <a href="#"><i class="fa fa-users"></i><span class="nav-label">Member</span><span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level collapse">
+                    <li><a href="{{route('member.addfamilymem')}}">Add Family Mem</a></li>
+                    <li><a href="#">Manage Family Mem</a></li>
+                </ul>
+            </li>
             <li>
                 <a href="#"><i class="fa fa-building"></i><span class="nav-label">Apartment</span><span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level collapse">

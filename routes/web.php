@@ -48,6 +48,10 @@ Route::group(['middleware' => ['auth'] ], function(){
         Route::get('/member',[MemberController::class,'index'])->name('member.home');
         Route::get('/member/approval',[MemberController::class,'approve'])->name('member.approval');
     });
+
+
+
+
 });
 
 Route::get('/login/society',[LoginController::class,'show_login'])->name('login.society');
@@ -66,3 +70,15 @@ Route::get('/country', function () {
     $country = Storage::get('public/country.json');
     return json_decode($country, true);
 });
+
+
+//for family mem
+Route::get('/member/addfamilymem', function (){
+    return view('member.addfamilymem');
+})->name('member.addfamilymem');
+
+    Route::post('/member/addfamilymem', [MemberController::class,'add_familymem'])->name('member.addfamilymem');
+    Route::get('/member/allfamilymem', [MemberController::class,'show_familymem'])->name('member.allfamilymem');
+    Route::get('/member/deletefamilymem/{id}', [MemberController::class,'delete_familymem'])->name('member.deletefamilymem');
+    Route::get('/member/editfamilymem/{id}', [MemberController::class,'edit_familymem'])->name('member.editfamilymem');
+    Route::put('/member/updatefamilymem', [MemberController::class,'update_familymem'])->name('member.updatefamilymem');
