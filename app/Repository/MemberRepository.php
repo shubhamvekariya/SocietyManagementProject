@@ -62,7 +62,9 @@ class MemberRepository implements MemberInterface
             return DataTables::of($disapprovemembers)
                     ->addIndexColumn()
                     ->addColumn('committeemember', function($row){
-                        if(!$row->hasRole('committeemember'))
+                        if($row['approved_at']==null)
+                            $btn = 'Member Not Approved';
+                        elseif(!$row->hasRole('committeemember'))
                             $btn = '<a href="'.route('society.addcmember',$row['id']).'" class="edit btn btn-primary btn-rounded mx-5" style="width:78px;">Add</a>';
                         else
                             $btn = '<a href="'.route('society.removecmember',$row['id']).'" class="edit btn btn-danger btn-rounded mx-5" style="width:78px;">Remove</a>';
