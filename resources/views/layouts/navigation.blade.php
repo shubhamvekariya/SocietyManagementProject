@@ -48,10 +48,10 @@
             @endrole
 
             <li>
-                <a href="#"><i class="fa fa-users"></i><span class="nav-label">Member</span><span class="fa arrow"></span></a>
+                <a href="#"><i class="fa fa-users"></i><span class="nav-label">Family Member</span><span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level collapse">
                     <li><a href="{{route('member.addfamilymem')}}">Add Family Mem</a></li>
-                    <li><a href="#">Manage Family Mem</a></li>
+                    <li><a href="{{route('member.allfamilymem')}}">Manage Family Mem</a></li>
                 </ul>
             </li>
             <li>

@@ -9,6 +9,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Family extends Model
 {
     use HasFactory,SoftDeletes;
+
+    protected $table = 'family_members';
     protected $fillable = [
         'name',
         'contact_no',
