@@ -1,11 +1,11 @@
 @extends('layouts.app')
-@section('title');
+@section('title')
 All Rules
 @endsection
 
-@section('css')
+@push('css')
 <link href="{{ mix('/css/datatables.min.css') }}" rel="stylesheet">
-@endsection
+@endpush
 
 @section('content')
 @section('breadcrumb-title')
@@ -22,8 +22,9 @@ All Rules
 @endsection
 
 @if(session()->has('success'))
-    <div class="alert alert-success">
-        {{ session()->get('success') }}
+<div class="alert alert-success alert-dismissable">
+    <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+        <strong>{{ session()->get('success') }}</strong>
     </div>
 @endif
 
@@ -49,7 +50,7 @@ All Rules
 @endsection
 
 
-@section('script')
+@push('script')
     <script src="{{ asset('js/datatables.min.js') }}"></script>
     <script src="{{ asset('js/dataTables.bootstrap4.min.js') }}"></script>
     <script>
@@ -67,4 +68,4 @@ All Rules
 
         });
     </script>
-@endsection
+@endpush

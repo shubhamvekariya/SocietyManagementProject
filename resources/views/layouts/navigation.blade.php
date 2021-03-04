@@ -114,16 +114,22 @@
 
 
             <li>
-                <a href="#"><i class="fa fa-user-circle-o"></i><span class="nav-label">Secretary</span><span class="fa arrow"></span></a>
+                <a href="#"><i class="fa fa-user-circle-o"></i><span class="nav-label">Committee Member</span><span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level collapse">
                     <li><a href="#">Add Committee Member</a></li>
                     <li><a href="#">ManageCommittee Member</a></li>
-                    <li><a href="{{route('society.rule')}}">Add Rules</a></li>
-                    <li><a href="{{route('society.all_rule')}}">Manage Rules</a></li>
+
                 </ul>
             </li>
 
+            <li>
+                <a href="#"><i class="fa fa-user-circle-o"></i><span class="nav-label">Rules</span><span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level collapse">
+                    <li><a href="{{route('society.rule')}}">Add Rules</a></li>
+                    <li><a href="{{route('society.all_rule')}}">Manage Rules</a></li>
 
+                </ul>
+            </li>
 
 
 

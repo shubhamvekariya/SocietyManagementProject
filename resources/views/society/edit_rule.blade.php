@@ -18,15 +18,13 @@ Edit Rules
 @endsection
 
 @section('content')
-<div class="ibox-content">
+<div class="ibox-content w-75 my-5 p-5 mx-auto border">
     <form  action="{{ url('/society/update_rule') }}" method="POST">
         @csrf
         @method('put')
 
-        <input type="hidden" value="{{$rule_data['id']}}" name="rid">
-        @include('society.form_rule');
-
-
+        <input type="hidden" value="{{$rules['id']}}" name="rid">
+        @include('society.form_rule')
     </form>
 </div>
 @endsection

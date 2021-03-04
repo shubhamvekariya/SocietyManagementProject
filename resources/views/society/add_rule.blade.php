@@ -18,10 +18,10 @@ Add Rules
 @endsection
 
 @section('content')
-<div class="ibox-content">
+<div class="ibox-content w-75 my-5 p-5 mx-auto border">
     <form  action="{{route('society.rule')}}" method="POST">
         @csrf
-        @include('society.form_rule');
+        @include('society.form_rule')
 
     </form>
 </div>

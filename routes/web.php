@@ -32,7 +32,7 @@ Route::group(['middleware' => ['auth:society'] ], function(){
     Route::get('/society/rejectmember/{user_id}', [SecretaryController::class,'reject'])->name('society.rejectmember');
     Route::get('/society/needapprove', [SecretaryController::class,'needapprovemembers'])->name('society.needapprove');
     Route::get('/society/rule', function (){
-        return view('society.rule');
+        return view('society.add_rule');
     })->name('society.rule');
 
     Route::post('/society/rule', [SecretaryController::class,'add_rule'])->name('society.rule');

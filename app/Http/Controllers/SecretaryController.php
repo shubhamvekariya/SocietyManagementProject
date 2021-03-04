@@ -51,10 +51,8 @@ class SecretaryController extends Controller
             'description' =>  $request->description,
             'society_id' => Auth::user()->id,
         ]);
-
-        echo "<script>alert('Rule Added');</script>";
-        return view('society.add_rule');
-    }
+        return redirect()->route('society.all_rule')->with('success','Rule added successfully');
+        }
 
     public function show_rule(Request $request)
     {
@@ -77,24 +75,24 @@ class SecretaryController extends Controller
 
     public function delete_rule($id)
     {
-        $rule_data = Rule::findOrFail($id);
-        $rule_data->delete();
+        $rules = Rule::findOrFail($id);
+        $rules->delete();
 
         return redirect()->back()->with('success','Rule Deleted successfully');
     }
 
     public function edit_rule($id)
     {
-        $rule_data = Rule::findOrFail($id);
-        return view('society.edit_rule',compact('rule_data'));
+        $rules = Rule::findOrFail($id);
+        return view('society.edit_rule',compact('rules'));
     }
 
     public function update_rule(Request $request)
     {
-        $rule_data=Rule::find($request->rid);
-        $rule_data->description = $request->description;
-        $rule_data->save();
+        $rules=Rule::find($request->rid);
+        $rules->description = $request->description;
+        $rules->save();
 
-        return redirect()->back()->with('success','Rule Updated');
-    }
+        return redirect()->route('society.all_rule')->with('success','Rule edited successfully');
+     }
 }
