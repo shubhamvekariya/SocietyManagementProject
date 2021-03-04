@@ -2,8 +2,10 @@
 
 namespace App\Providers;
 
+use App\Interfaces\ApproveInterface;
 use App\Interfaces\MemberInterface;
 use App\Interfaces\SocietyInterface;
+use App\Repository\ApproveRepository;
 use App\Repository\MemberRepository;
 use App\Repository\SocietyRepository;
 use Illuminate\Support\ServiceProvider;
@@ -31,5 +33,6 @@ class AppServiceProvider extends ServiceProvider
         Schema::defaultStringLength(191);
         $this->app->bind(MemberInterface::class,MemberRepository::class);
         $this->app->bind(SocietyInterface::class,SocietyRepository::class);
+        $this->app->bind(ApproveInterface::class,ApproveRepository::class);
     }
 }
