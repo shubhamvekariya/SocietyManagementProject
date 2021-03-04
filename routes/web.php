@@ -30,14 +30,22 @@ Route::group(['middleware' => ['auth:society'] ], function(){
 
 
     Route::get('/society/rule', function (){
-        return view('society.rule');
+        return view('society.add_rule');
     })->name('society.rule');
 
-    Route::post('/society/rule', [SecretaryController::class,'add_rule'])->name('society.rule');
+    Route::post('/society/rule', [SecretaryController::class,'add_rule'])->name('society.add_rule');
     Route::get('/society/all_rule', [SecretaryController::class,'show_rule'])->name('society.all_rule');
+<<<<<<< Updated upstream
     Route::get('/society/approvemember/{user_id}', [SecretaryController::class,'approve'])->name('society.approvemember');
     Route::get('/society/rejectmember/{user_id}', [SecretaryController::class,'reject'])->name('society.rejectmember');
     Route::get('/society/needapprove', [SecretaryController::class,'needapprovemembers'])->name('society.needapprove');
+=======
+
+    Route::get('/society/delete_rule/{id}', [SecretaryController::class,'delete_rule'])->name('society.delete_rule');
+    Route::get('/society/edit_rule/{id}', [SecretaryController::class,'edit_rule'])->name('society.edit_rule');
+    Route::put('/society/update_rule', [SecretaryController::class,'update_rule'])->name('society.update_rule');
+
+>>>>>>> Stashed changes
 });
 
 Route::group(['middleware' => ['auth'] ], function(){

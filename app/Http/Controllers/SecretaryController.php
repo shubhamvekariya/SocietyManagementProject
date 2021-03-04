@@ -59,4 +59,60 @@ class SecretaryController extends Controller
 
         return view('society.approvemembers');
     }
+<<<<<<< Updated upstream
+=======
+
+    public function add_rule(Request $request)
+    {
+        Rule::create([
+            'description' =>  $request->description,
+            'society_id' => Auth::user()->id,
+        ]);
+
+        echo "<script>alert('Rule Added');</script>";
+        return view('society.add_rule');
+    }
+
+    public function show_rule(Request $request)
+    {
+        if ($request->ajax()) {
+            $data = Rule::all();
+            return DataTables::of($data)
+                    ->addIndexColumn()
+                    ->addColumn('action', function($row){
+                            $btn = '<a href="'.route('society.edit_rule',$row['id']).'" class="edit btn btn-primary btn-rounded mx-4" style="width:78px;">Edit</a>';
+                            $btn .= '<a href="'.route('society.delete_rule',$row['id']).'" class="edit btn btn-danger btn-rounded mx-3" style="width:78px;">Delete</a>';
+                            return $btn;
+                    })
+                    ->rawColumns(['action'])
+                    ->make(true);
+        }
+
+        return view('society.all_rule');
+
+    }
+
+    public function delete_rule($id)
+    {
+        $rule_data = Rule::findOrFail($id);
+        $rule_data->delete();
+
+        return redirect()->back()->with('success','Rule Deleted successfully');
+    }
+
+    public function edit_rule($id)
+    {
+        $rule_data = Rule::findOrFail($id);
+        return view('society.edit_rule',compact('rule_data'));
+    }
+
+    public function update_rule(Request $request)
+    {
+        $rule_data=Rule::find($request->rid);
+        $rule_data->description = $request->description;
+        $rule_data->save();
+
+        return redirect()->back()->with('success','Rule Updated');
+    }
+>>>>>>> Stashed changes
 }
