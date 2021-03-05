@@ -7,10 +7,6 @@ use App\Interfaces\RuleInterface;
 use App\Models\User;
 use App\Interfaces\MemberInterface;
 use Illuminate\Http\Request;
-use Yajra\DataTables\DataTables;
-use App\Models\Rule;
-use App\Models\User;
-use Illuminate\Support\Facades\Auth;
 
 class SecretaryController extends Controller
 {

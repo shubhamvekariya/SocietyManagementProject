@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StaffRequest;
 use App\Interfaces\StaffInterface;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
@@ -42,9 +43,10 @@ class StaffController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StaffRequest $request)
     {
         //
+        $request->validated();
         $password = Str::random(8);
         $status = $this->staffInterface->addStaff($request,$password);
         if($status)

@@ -18,6 +18,18 @@ Add security & staff
 @endsection
 
 @section('content')
+
+@if ($errors->any())
+    <div class="alert alert-danger alert-dismissable">
+        <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+        <strong>Error!</strong>
+        <ul class="text-left">
+            @foreach ($errors->all() as $error)
+                <li>{{$error}}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
 <div class="ibox-content w-75 my-1 mx-auto border">
 
         @include('cmember.staffform')

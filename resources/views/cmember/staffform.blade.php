@@ -1,7 +1,6 @@
 @push('css')
     <link href="{{ mix('/css/select2.min.css') }}" rel="stylesheet">
 @endpush
-
 <form action="{{ route('member.staffs.store') }}" method="POST">
     @csrf
     <div class="form-group">

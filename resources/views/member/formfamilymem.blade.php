@@ -77,7 +77,12 @@
 @push('script')
     <!-- Select2 -->
     <script src="{!! asset('/js/select2.full.min.js') !!}"></script>
-
-    <script src="{!! asset('/js/register.js') !!}"></script>
-
+    <script>
+        $(document).ready(function(){
+            $("#gender").select2({
+                placeholder: "Select a gender",
+                allowClear: true
+            });
+        });
+    </script>
 @endpush
