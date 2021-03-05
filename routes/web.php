@@ -4,6 +4,7 @@
 use App\Http\Controllers\SecretaryController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\MemberController;
+use App\Http\Controllers\StaffController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
 
@@ -49,9 +50,21 @@ Route::group(['middleware' => ['auth','role:member'] ], function(){
     Route::middleware(['approved'])->group(function () {
         Route::get('/member',[MemberController::class,'index'])->name('member.home');
         Route::get('/approval',[MemberController::class,'approve'])->name('member.approval');
+
+        Route::get('/addfamilymem', function (){
+            return view('member.addfamilymem');
+        })->name('member.addfamilymem');
+        Route::post('/addfamilymem', [MemberController::class,'add_familymem'])->name('member.addfamilymem');
+        Route::get('/allfamilymem', [MemberController::class,'show_familymem'])->name('member.allfamilymem');
+        Route::get('/deletefamilymem/{id}', [MemberController::class,'delete_familymem'])->name('member.deletefamilymem');
+        Route::get('/editfamilymem/{id}', [MemberController::class,'edit_familymem'])->name('member.editfamilymem');
+        Route::put('/updatefamilymem', [MemberController::class,'update_familymem'])->name('member.updatefamilymem');
+
+        Route::resource('staffs', StaffController::class, ['as' => 'member']);
+        Route::middleware(['role:committeemember'])->group(function () {
+
+        });
     });
-
-
 
 
 });
@@ -72,15 +85,3 @@ Route::get('/country', function () {
     $country = Storage::get('public/country.json');
     return json_decode($country, true);
 });
-
-
-//for family mem
-Route::get('/member/addfamilymem', function (){
-    return view('member.addfamilymem');
-})->name('member.addfamilymem');
-
-    Route::post('/member/addfamilymem', [MemberController::class,'add_familymem'])->name('member.addfamilymem');
-    Route::get('/member/allfamilymem', [MemberController::class,'show_familymem'])->name('member.allfamilymem');
-    Route::get('/member/deletefamilymem/{id}', [MemberController::class,'delete_familymem'])->name('member.deletefamilymem');
-    Route::get('/member/editfamilymem/{id}', [MemberController::class,'edit_familymem'])->name('member.editfamilymem');
-    Route::put('/member/updatefamilymem', [MemberController::class,'update_familymem'])->name('member.updatefamilymem');

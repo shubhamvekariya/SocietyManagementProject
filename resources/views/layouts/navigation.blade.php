@@ -21,10 +21,8 @@
                     </a>
                     <ul class="dropdown-menu animated fadeInRight m-t-xs">
                         <li><a class="dropdown-item" href="#">Profile</a></li>
-                        <li><a class="dropdown-item" href="#">Contacts</a></li>
-                        <li><a class="dropdown-item" href="#">Mailbox</a></li>
                         <li class="dropdown-divider"></li>
-                        <li><a class="dropdown-item" href="#">Logout</a></li>
+                        <li><a class="dropdown-item" href="{{ route('logout') }}">Logout</a></li>
                     </ul>
                 </div>
                 <div class="logo-element">
@@ -42,14 +40,21 @@
                 <a href="#"><i class="fa fa-users"></i><span class="nav-label">Member</span><span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level collapse">
                     <li><a href="{{ route('society.needapprove') }}">Approve Member</a></li>
-
                 </ul>
             </li>
             <li>
                 <a href="{{ route('society.cmembers') }}"><i class="fa fa-user-circle-o"></i><span class="nav-label">Committee Member</span></a>
             </li>
-            @endrole
+            <li>
+                <a href="#"><i class="fa fa-user-circle-o"></i><span class="nav-label">Rules</span><span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level collapse">
+                    <li><a href="{{route('society.rule')}}">Add Rules</a></li>
+                    <li><a href="{{route('society.all_rule')}}">Manage Rules</a></li>
 
+                </ul>
+            </li>
+            @else
+            @role('member')
             <li>
                 <a href="#"><i class="fa fa-users"></i><span class="nav-label">Family Member</span><span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level collapse">
@@ -57,6 +62,7 @@
                     <li><a href="{{route('member.allfamilymem')}}">Manage Family Mem</a></li>
                 </ul>
             </li>
+            @else
             <li>
                 <a href="#"><i class="fa fa-building"></i><span class="nav-label">Apartment</span><span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level collapse">
@@ -125,14 +131,6 @@
             </li>
 
 
-            <li>
-                <a href="#"><i class="fa fa-user-circle-o"></i><span class="nav-label">Rules</span><span class="fa arrow"></span></a>
-                <ul class="nav nav-second-level collapse">
-                    <li><a href="{{route('society.rule')}}">Add Rules</a></li>
-                    <li><a href="{{route('society.all_rule')}}">Manage Rules</a></li>
-
-                </ul>
-            </li>
 
 
 
@@ -165,8 +163,8 @@
             </li>
 
 
-
-
+            @endrole
+            @endrole
         </ul>
 
     </div>
