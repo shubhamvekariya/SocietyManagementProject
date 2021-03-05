@@ -19,7 +19,7 @@ Add Family Member
 
 @section('content')
 <div class="ibox-content w-75 my-5 p-5 mx-auto border">
-    <form  action="{{url('/member/updatefamilymem')}}" method="POST">
+    <form  action="{{ route('member.updatefamilymem') }}" method="POST">
         @csrf
         @method('put')
         <input type="hidden" value="{{$family_mem['id']}}" name="fid">

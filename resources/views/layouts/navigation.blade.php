@@ -21,10 +21,8 @@
                     </a>
                     <ul class="dropdown-menu animated fadeInRight m-t-xs">
                         <li><a class="dropdown-item" href="#">Profile</a></li>
-                        <li><a class="dropdown-item" href="#">Contacts</a></li>
-                        <li><a class="dropdown-item" href="#">Mailbox</a></li>
                         <li class="dropdown-divider"></li>
-                        <li><a class="dropdown-item" href="#">Logout</a></li>
+                        <li><a class="dropdown-item" href="{{ route('logout') }}">Logout</a></li>
                     </ul>
                 </div>
                 <div class="logo-element">
@@ -42,14 +40,21 @@
                 <a href="#"><i class="fa fa-users"></i><span class="nav-label">Member</span><span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level collapse">
                     <li><a href="{{ route('society.needapprove') }}">Approve Member</a></li>
-
                 </ul>
             </li>
             <li>
                 <a href="{{ route('society.cmembers') }}"><i class="fa fa-user-circle-o"></i><span class="nav-label">Committee Member</span></a>
             </li>
-            @endrole
+            <li>
+                <a href="#"><i class="fa fa-user-circle-o"></i><span class="nav-label">Rules</span><span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level collapse">
+                    <li><a href="{{route('society.rule')}}">Add Rules</a></li>
+                    <li><a href="{{route('society.all_rule')}}">Manage Rules</a></li>
 
+                </ul>
+            </li>
+            @else
+            @role('member')
             <li>
                 <a href="#"><i class="fa fa-users"></i><span class="nav-label">Family Member</span><span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level collapse">
@@ -57,6 +62,35 @@
                     <li><a href="{{route('member.allfamilymem')}}">Manage Family Mem</a></li>
                 </ul>
             </li>
+            <li>
+                <a href="#"><i class="fa fa-shield"></i><span class="nav-label">Security & Staff</span><span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level collapse">
+                    <li><a href="{{route('member.staffs.create')}}">Add Staff</a></li>
+                    <li><a href="#">Manage Staff</a></li>
+                    <li><a href="#">Monthly Attendence</a></li>
+
+                </ul>
+            </li>
+            @else
+
+            @role('security')
+            <li>
+                <a href="#"><i class="fa fa-eye"></i><span class="nav-label">Visitors</span><span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level collapse">
+                    <li><a href="#">Add Visitor</a></li>
+                    <li><a href="#">Manage Visitor</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#"><i class="fa fa-car"></i><span class="nav-label">Parking</span><span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level collapse">
+                    <li><a href="#">View Parking Details</a></li>
+                    <li><a href="#">Manage Parking</a></li>
+
+                </ul>
+            </li>
+            @else
+
             <li>
                 <a href="#"><i class="fa fa-building"></i><span class="nav-label">Apartment</span><span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level collapse">
@@ -85,25 +119,7 @@
                 </ul>
             </li>
 
-            <li>
-                <a href="#"><i class="fa fa-eye"></i><span class="nav-label">Visitors</span><span class="fa arrow"></span></a>
-                <ul class="nav nav-second-level collapse">
-                    <li><a href="#">Add Visitor</a></li>
-                    <li><a href="#">Manage Visitor</a></li>
-
-
-                </ul>
-            </li>
-
-            <li>
-                <a href="#"><i class="fa fa-shield"></i><span class="nav-label">Security & Staff</span><span class="fa arrow"></span></a>
-                <ul class="nav nav-second-level collapse">
-                    <li><a href="#">Add Staff</a></li>
-                    <li><a href="#">Manage Staff</a></li>
-                    <li><a href="#">Monthly Attendence</a></li>
-
-                </ul>
-            </li>
+            
 
             <li>
                 <a href="#"><i class="fa fa-calendar"></i><span class="nav-label">Event/Assets</span><span class="fa arrow"></span></a>
@@ -114,36 +130,12 @@
 
                 </ul>
             </li>
-
-            <li>
-                <a href="#"><i class="fa fa-car"></i><span class="nav-label">Parking</span><span class="fa arrow"></span></a>
-                <ul class="nav nav-second-level collapse">
-                    <li><a href="#">View Parking Details</a></li>
-                    <li><a href="#">Manage Parking</a></li>
-
-                </ul>
-            </li>
-
-
-            <li>
-                <a href="#"><i class="fa fa-user-circle-o"></i><span class="nav-label">Rules</span><span class="fa arrow"></span></a>
-                <ul class="nav nav-second-level collapse">
-                    <li><a href="{{route('society.rule')}}">Add Rules</a></li>
-                    <li><a href="{{route('society.all_rule')}}">Manage Rules</a></li>
-
-                </ul>
-            </li>
-
-
-
             <li>
                 <a href="#"><i class="fa fa-search"></i><span class="nav-label">Search</span><span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level collapse">
                     <li><a href="#">Search Visitor</a></li>
                     <li><a href="#">Search member</a></li>
                     <li><a href="#">Search Staff</a></li>
-
-
                 </ul>
             </li>
 
@@ -154,7 +146,6 @@
                     <li><a href="#"></a></li>
                     <li><a href="#"></a></li>
                     <li><a href="#"></a></li>
-
                 </ul>
             </li>
 
@@ -164,9 +155,9 @@
 
             </li>
 
-
-
-
+            @endrole
+            @endrole
+            @endrole
         </ul>
 
     </div>

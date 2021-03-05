@@ -4,6 +4,7 @@
 use App\Http\Controllers\SecretaryController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\MemberController;
+use App\Http\Controllers\StaffController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
 
@@ -49,11 +50,29 @@ Route::group(['middleware' => ['auth','role:member'] ], function(){
     Route::middleware(['approved'])->group(function () {
         Route::get('/member',[MemberController::class,'index'])->name('member.home');
         Route::get('/approval',[MemberController::class,'approve'])->name('member.approval');
+
+        Route::get('/addfamilymem', function (){
+            return view('member.addfamilymem');
+        })->name('member.addfamilymem');
+        Route::post('/addfamilymem', [MemberController::class,'add_familymem'])->name('member.addfamilymem');
+        Route::get('/allfamilymem', [MemberController::class,'show_familymem'])->name('member.allfamilymem');
+        Route::get('/deletefamilymem/{id}', [MemberController::class,'delete_familymem'])->name('member.deletefamilymem');
+        Route::get('/editfamilymem/{id}', [MemberController::class,'edit_familymem'])->name('member.editfamilymem');
+        Route::put('/updatefamilymem', [MemberController::class,'update_familymem'])->name('member.updatefamilymem');
+
+        Route::resource('staffs', StaffController::class, ['as' => 'member']);
+        Route::middleware(['role:committeemember'])->group(function () {
+
+        });
     });
 
 
+});
 
-
+Route::group(['middleware' => ['auth:staff_security','role:staff|security,staff_security'] ], function(){
+    Route::get('/staff',  function () {
+        return view('staff_security.index');
+    })->name('staff.home');
 });
 
 Route::get('/login/society',[LoginController::class,'show_login'])->name('login.society');
@@ -66,6 +85,9 @@ Route::post('/login/member',[LoginController::class,'check_login'])->name('login
 Route::get('/register/member',[LoginController::class,'show_register'])->name('register.member');
 Route::post('/register/member',[LoginController::class,'create_member'])->name('register.member');
 
+Route::get('/login/staff',[LoginController::class,'show_login'])->name('login.staff');
+Route::post('/login/staff',[LoginController::class,'check_login'])->name('login.staff');
+
 Route::get('/logout',[LoginController::class,'destroy'])->name('logout');
 
 Route::get('/country', function () {
@@ -73,14 +95,3 @@ Route::get('/country', function () {
     return json_decode($country, true);
 });
 
-
-//for family mem
-Route::get('/member/addfamilymem', function (){
-    return view('member.addfamilymem');
-})->name('member.addfamilymem');
-
-    Route::post('/member/addfamilymem', [MemberController::class,'add_familymem'])->name('member.addfamilymem');
-    Route::get('/member/allfamilymem', [MemberController::class,'show_familymem'])->name('member.allfamilymem');
-    Route::get('/member/deletefamilymem/{id}', [MemberController::class,'delete_familymem'])->name('member.deletefamilymem');
-    Route::get('/member/editfamilymem/{id}', [MemberController::class,'edit_familymem'])->name('member.editfamilymem');
-    Route::put('/member/updatefamilymem', [MemberController::class,'update_familymem'])->name('member.updatefamilymem');

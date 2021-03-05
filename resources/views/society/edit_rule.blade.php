@@ -19,7 +19,7 @@ Edit Rules
 
 @section('content')
 <div class="ibox-content w-75 my-5 p-5 mx-auto border">
-    <form  action="{{ url('/society/update_rule') }}" method="POST">
+    <form  action="{{ route('society.update_rule') }}" method="POST">
         @csrf
         @method('put')
 

@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\AuthRequest;
 use App\Interfaces\MemberInterface;
 use App\Interfaces\SocietyInterface;
+use App\Interfaces\StaffInterface;
 use Illuminate\Support\Facades\Auth;
 
 
@@ -15,8 +16,9 @@ class LoginController extends Controller
 {
     protected $memberInterface;
     protected $societyInterface;
+    protected $staffInterface;
     //
-    public function __construct(Request $request, MemberInterface $memberInterface,SocietyInterface $societyInterface)
+    public function __construct(Request $request, MemberInterface $memberInterface,SocietyInterface $societyInterface,StaffInterface $staffInterface)
     {
         if($request->segment(2) == 'society')
         {
@@ -27,6 +29,11 @@ class LoginController extends Controller
         {
             $this->memberInterface = $memberInterface;
             $this->middleware('guest')->except('destroy');
+        }
+        elseif($request->segment(2) == 'staff')
+        {
+            $this->staffInterface = $staffInterface;
+            $this->middleware('guest:staff_security')->except('destroy');
         }
     }
 
@@ -54,6 +61,15 @@ class LoginController extends Controller
             {
                 $request->session()->regenerate();
                 return redirect()->route('member.home');
+            }
+        }
+        if($request->segment(2) == 'staff')
+        {
+            $login = $this->staffInterface->checkLogin($request->email, $request->password, $request->rememberme);
+            if($login)
+            {
+                $request->session()->regenerate();
+                return redirect()->route('staff.home');
             }
         }
         return redirect()->back()->with('danger','Invalid credentials');
@@ -89,6 +105,8 @@ class LoginController extends Controller
     {
         if(Auth::guard('society')->check())
             $url = 'login.society';
+        elseif(Auth::guard('staff_security')->check())
+            $url = 'login.staff';
         else
             $url = 'login.member';
         Auth::logout();

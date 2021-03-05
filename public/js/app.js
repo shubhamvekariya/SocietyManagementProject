@@ -20630,6 +20630,19 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/css/emails/styles.css":
+/*!*****************************************!*\
+  !*** ./resources/css/emails/styles.css ***!
+  \*****************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ }),
+
 /***/ "./resources/css/app.css":
 /*!*******************************!*\
   !*** ./resources/css/app.css ***!
@@ -25563,7 +25576,8 @@ runtime.setup(pusher_Pusher);
 /******/ 			["./resources/css/plugins/select2/select2.min.css"],
 /******/ 			["./resources/css/templatemo-style.css"],
 /******/ 			["./resources/font-awesome/css/fontawesome.css"],
-/******/ 			["./resources/css/plugins/toastr/toastr.min.css"]
+/******/ 			["./resources/css/plugins/toastr/toastr.min.css"],
+/******/ 			["./resources/css/emails/styles.css"]
 /******/ 		];
 /******/ 		// no chunk on demand loading
 /******/ 		

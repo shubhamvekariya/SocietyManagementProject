@@ -53,7 +53,7 @@ class SecretaryController extends Controller
         if ($request->ajax()) {
             return $this->memberInterface->getMembers();
         }
-        return view('society.committemembers');
+        return view('society.committeemembers');
     }
 
     public function add_committee_members($user_id)

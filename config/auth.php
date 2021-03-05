@@ -51,6 +51,10 @@ return [
             'driver' => 'session',
             'provider' => 'societies',
         ],
+        'staff_security' => [
+            'driver' => 'session',
+            'provider' => 'staff_securities',
+        ],
     ],
 
     /*
@@ -79,6 +83,10 @@ return [
         'societies' => [
             'driver' => 'eloquent',
             'model' => App\Models\Society::class,
+        ],
+        'staff_securities' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Staff::class,
         ],
         // 'users' => [
         //     'driver' => 'database',
@@ -110,6 +118,12 @@ return [
         ],
         'societies' => [
             'provider' => 'societies',
+            'table' => 'password_resets',
+            'expire' => 60,
+            'throttle' => 60,
+        ],
+        'staff_security' => [
+            'provider' => 'staff_securities',
             'table' => 'password_resets',
             'expire' => 60,
             'throttle' => 60,
