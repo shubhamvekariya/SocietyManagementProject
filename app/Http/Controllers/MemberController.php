@@ -3,19 +3,24 @@
 namespace App\Http\Controllers;
 
 use App\Interfaces\ApproveInterface;
+use App\Interfaces\FamilymemInterface;
 use App\Models\Family;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
+use App\Http\Requests\FamilymemValidation;
 
 class MemberController extends Controller
 {
     //
     protected $approveInterface;
-    public function __construct(ApproveInterface $approveInterface)
+    protected $familymemInterface;
+
+    public function __construct(ApproveInterface $approveInterface,FamilymemInterface $familymemInterface)
     {
         $this->approveInterface = $approveInterface;
+        $this->familymemInterface = $familymemInterface;
     }
 
     public function index()
@@ -29,56 +34,65 @@ class MemberController extends Controller
         return view('member.approve');
     }
 
-    public function add_familymem(Request $request)
+    public function add_familymem(FamilymemValidation $request)
     {
-        Family::create([
-            'name' =>  $request->name,
-            'age' =>  $request->age,
-            'contact_no' =>  $request->contact_no,
-            'email' =>  $request->email,
-            'gender' =>  $request->gender,
-            'user_id' => Auth::user()->id,
-        ]);
-        return redirect()->route('member.allfamilymem')->with('success','Family Member added successfully');
+        $status = $this->familymemInterface->addFamilymem($request);
+        if($status)
+        {
+            return redirect()->route('member.allfamilymem')->with('success','Family Member added successfully');
+        }
+        else
+        {
+            return redirect()->back()->with('error','Something went wrong');
+        }
+
+
     }
 
     public function show_familymem(Request $request)
     {
-        if ($request->ajax()) {
-            $data = Family::all();
-            return DataTables::of($data)
-                    ->addIndexColumn()
-                    ->addColumn('action', function($row){
-                            $btn = '<a href="'.route('member.editfamilymem',$row['id']).'" class="edit btn btn-primary btn-rounded mx-4" style="width:78px;">Edit</a>';
-                            $btn .= '<a href="'.route('member.deletefamilymem',$row['id']).'" class="edit btn btn-danger btn-rounded mx-3" style="width:78px;">Delete</a>';
-                            return $btn;
-                    })
-                    ->rawColumns(['action'])
-                    ->make(true);
+        if ($request->ajax())
+        {
+           return $this->familymemInterface->showFamilymem($request);
         }
-
         return view('member.allfamilymem');
 
     }
 
     public function delete_familymem($id)
     {
-        $family_mem = Family::findOrFail($id);
-        $family_mem->delete();
-
-        return redirect()->back()->with('success','Family Member Deleted successfully');
+        $status = $this->familymemInterface->deleteFamilymem($id);
+        if($status)
+        {
+            return redirect()->back()->with('success','Family Member Deleted successfully');
+        }
+        else
+        {
+            return redirect()->back()->with('error','Something went wrong');
+        }
     }
 
     public function edit_familymem($id)
     {
-        $family_mem = Family::findOrFail($id);
+        $family_mem = $this->familymemInterface->editFamilymem($id);
+        if(!$family_mem)
+        {
+            return redirect()->back()->with('error','Something went wrong');
+        }
+
         return view('member.editfamilymem',compact('family_mem'));
     }
 
     public function update_familymem(Request $request)
     {
-        $family_mem=Family::find($request->fid);;
-        $family_mem->update($request->all());
-        return redirect()->route('member.allfamilymem')->with('success','Family Member Edited successfully');
+        $status = $this->familymemInterface->updateFamilymem($request);
+        if($status)
+        {
+            return redirect()->route('member.allfamilymem')->with('success','Family Member Edited successfully');
+        }
+        else
+        {
+            return redirect()->back()->with('error','Something went wrong');
+        }
     }
 }
