@@ -54,7 +54,7 @@ class StaffController extends Controller
                 'position' => $request->position.$work,
                 'password' => $password
             ];
-            Mail::to('shubham.v@simformsolutions.com')->send(new \App\Mail\StaffPasswordMail($details));
+            Mail::to('shubham.v@simformsolutions.com')->send(new \App\Mail\StaffPasswordMail($details)); //$request->email for emaill
         return 'Add staff successfully';
     }
 

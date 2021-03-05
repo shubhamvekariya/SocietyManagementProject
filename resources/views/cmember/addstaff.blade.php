@@ -18,20 +18,9 @@ Add security & staff
 @endsection
 
 @section('content')
-<div class="ibox-content w-75 my-5 p-5 mx-auto border">
+<div class="ibox-content w-75 my-1 mx-auto border">
 
         @include('cmember.staffform')
 
 </div>
 @endsection
-@push('script')
-
-    <script>
-        $(document).ready(function(){
-            $("#gender").select2({
-                placeholder: "Select a gender",
-                allowClear: true
-            });
-        });
-    </script>
-@endpush

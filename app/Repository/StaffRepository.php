@@ -26,7 +26,7 @@ class StaffRepository implements StaffInterface
         if($request->usage == 'personal')
             $user_id = Auth::user()->id;
         else
-            $user_id = Auth::user()->apartment->society->id;
+            $society_id = Auth::user()->apartment->society->id;
         $staff = Staff::create([
             'name' => $request->name,
             'email' => $request->email,
@@ -41,8 +41,11 @@ class StaffRepository implements StaffInterface
         ]);
         if($staff)
         {
-
-            $staff->assignRole('staff');
+            if($request->position == 'secutiry')
+                $staff->assignRole('security');
+            else
+                $staff->assignRole('staff');
+            
             return true;
         }
         return back()->withError('Something went wrong. please try again!!')->withInput();
@@ -50,6 +53,10 @@ class StaffRepository implements StaffInterface
 
     public function checkLogin($email, $password, $rememberme)
     {
+        if (Auth::guard('staff_security')->attempt(['email' => $email, 'password' => $password],$rememberme)) {
+            return true;
+        }
+        return false;
     }
 
 }

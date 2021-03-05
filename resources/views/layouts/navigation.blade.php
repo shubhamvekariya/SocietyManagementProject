@@ -62,7 +62,35 @@
                     <li><a href="{{route('member.allfamilymem')}}">Manage Family Mem</a></li>
                 </ul>
             </li>
+            <li>
+                <a href="#"><i class="fa fa-shield"></i><span class="nav-label">Security & Staff</span><span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level collapse">
+                    <li><a href="{{route('member.staffs.create')}}">Add Staff</a></li>
+                    <li><a href="#">Manage Staff</a></li>
+                    <li><a href="#">Monthly Attendence</a></li>
+
+                </ul>
+            </li>
             @else
+
+            @role('security')
+            <li>
+                <a href="#"><i class="fa fa-eye"></i><span class="nav-label">Visitors</span><span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level collapse">
+                    <li><a href="#">Add Visitor</a></li>
+                    <li><a href="#">Manage Visitor</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#"><i class="fa fa-car"></i><span class="nav-label">Parking</span><span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level collapse">
+                    <li><a href="#">View Parking Details</a></li>
+                    <li><a href="#">Manage Parking</a></li>
+
+                </ul>
+            </li>
+            @else
+
             <li>
                 <a href="#"><i class="fa fa-building"></i><span class="nav-label">Apartment</span><span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level collapse">
@@ -91,25 +119,7 @@
                 </ul>
             </li>
 
-            <li>
-                <a href="#"><i class="fa fa-eye"></i><span class="nav-label">Visitors</span><span class="fa arrow"></span></a>
-                <ul class="nav nav-second-level collapse">
-                    <li><a href="#">Add Visitor</a></li>
-                    <li><a href="#">Manage Visitor</a></li>
-
-
-                </ul>
-            </li>
-
-            <li>
-                <a href="#"><i class="fa fa-shield"></i><span class="nav-label">Security & Staff</span><span class="fa arrow"></span></a>
-                <ul class="nav nav-second-level collapse">
-                    <li><a href="#">Add Staff</a></li>
-                    <li><a href="#">Manage Staff</a></li>
-                    <li><a href="#">Monthly Attendence</a></li>
-
-                </ul>
-            </li>
+            
 
             <li>
                 <a href="#"><i class="fa fa-calendar"></i><span class="nav-label">Event/Assets</span><span class="fa arrow"></span></a>
@@ -120,28 +130,12 @@
 
                 </ul>
             </li>
-
-            <li>
-                <a href="#"><i class="fa fa-car"></i><span class="nav-label">Parking</span><span class="fa arrow"></span></a>
-                <ul class="nav nav-second-level collapse">
-                    <li><a href="#">View Parking Details</a></li>
-                    <li><a href="#">Manage Parking</a></li>
-
-                </ul>
-            </li>
-
-
-
-
-
             <li>
                 <a href="#"><i class="fa fa-search"></i><span class="nav-label">Search</span><span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level collapse">
                     <li><a href="#">Search Visitor</a></li>
                     <li><a href="#">Search member</a></li>
                     <li><a href="#">Search Staff</a></li>
-
-
                 </ul>
             </li>
 
@@ -152,7 +146,6 @@
                     <li><a href="#"></a></li>
                     <li><a href="#"></a></li>
                     <li><a href="#"></a></li>
-
                 </ul>
             </li>
 
@@ -162,7 +155,7 @@
 
             </li>
 
-
+            @endrole
             @endrole
             @endrole
         </ul>

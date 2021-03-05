@@ -12,7 +12,7 @@ class Staff extends Authenticatable
 {
     use HasFactory,Notifiable,HasRoles,SoftDeletes;
 
-    protected $guard = 'security';
+    protected $guard = 'staff_security';
     protected $table = 'staff_security';
     protected $fillable = [
         'name',

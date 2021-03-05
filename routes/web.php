@@ -69,6 +69,12 @@ Route::group(['middleware' => ['auth','role:member'] ], function(){
 
 });
 
+Route::group(['middleware' => ['auth:staff_security','role:staff|security,staff_security'] ], function(){
+    Route::get('/staff',  function () {
+        return view('staff_security.index');
+    })->name('staff.home');
+});
+
 Route::get('/login/society',[LoginController::class,'show_login'])->name('login.society');
 Route::post('/login/society',[LoginController::class,'check_login'])->name('login.society');
 Route::get('/register/society',[LoginController::class,'show_register'])->name('register.society');
