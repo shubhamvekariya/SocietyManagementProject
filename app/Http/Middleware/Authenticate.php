@@ -23,6 +23,9 @@ class Authenticate extends Middleware
             if(Route::is('member.*') || Route::is('member.*') ){
                 return route('login.member');
             }
+            if(Route::is('staff.*') || Route::is('staff.*') ){
+                return route('login.staff');
+            }
             return route('login');
         }
     }

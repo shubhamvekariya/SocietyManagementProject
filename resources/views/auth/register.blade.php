@@ -287,5 +287,12 @@
     <script src="{!! asset('/js/select2.full.min.js') !!}"></script>
 
     <script src="{!! asset('/js/register.js') !!}"></script>
-
+    <script>
+    $(document).ready(function(){
+        gender = {!! str_replace("'", "\'", json_encode(Request::old('gender'))) !!};
+        $('#gender').val(gender).trigger('change');
+        society_id = {!! str_replace("'", "\'", json_encode(Request::old('society_id'))) !!};
+        $('#society_id').val(society_id).trigger('change');
+    });
+    </script>
 @endpush

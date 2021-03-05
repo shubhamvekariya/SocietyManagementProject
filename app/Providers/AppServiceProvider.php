@@ -12,6 +12,8 @@ use App\Repository\MemberRepository;
 use App\Repository\SocietyRepository;
 use App\Repository\RuleRepository;
 use App\Repository\FamilymemRepository;
+use App\Interfaces\StaffInterface;
+use App\Repository\StaffRepository;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Schema;
 
@@ -40,5 +42,6 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(ApproveInterface::class,ApproveRepository::class);
         $this->app->bind(RuleInterface::class,RuleRepository::class);
         $this->app->bind(FamilymemInterface::class,FamilymemRepository::class);
+        $this->app->bind(StaffInterface::class,StaffRepository::class);
     }
 }

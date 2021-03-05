@@ -16,14 +16,14 @@ class CreateFamilyMembersTable extends Migration
         Schema::create('family_members', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('contact_no');
-            $table->string('email');
-            $table->string('age');
+            $table->bigInteger('contact_no')->nullable();
+            $table->string('email')->nullable();
+            $table->integer('age');
             $table->string('gender');
             $table->foreignId('user_id')->constrained('users')->onUpdate('cascade')->onDelete('cascade');
             $table->softDeletes();
 
-            
+
 
             $table->timestamps();
         });

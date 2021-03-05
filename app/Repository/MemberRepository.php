@@ -6,6 +6,7 @@ use App\Models\Apartment;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Yajra\DataTables\Facades\DataTables;
 
 /**
  * Class UserRepository
@@ -40,18 +41,36 @@ class MemberRepository implements MemberInterface
                 'user_id' => $user->id
             ]);
             if($apartment)
+            {
+                $user->assignRole('member');
                 return true;
+            }
         }
         return back()->withError('Something went wrong. please try again!!')->withInput();
     }
     public function checkLogin($email, $password, $rememberme)
     {
         if (Auth::attempt(['email' => $email, 'password' => $password],$rememberme)) {
-            $user = Auth::user();
-            $user->assignRole('member');
             return true;
         }
         return false;
     }
 
+    public function getMembers()
+    {
+        $disapprovemembers = User::all();
+            return DataTables::of($disapprovemembers)
+                    ->addIndexColumn()
+                    ->addColumn('committeemember', function($row){
+                        if($row['approved_at']==null)
+                            $btn = 'Member Not Approved';
+                        elseif(!$row->hasRole('committeemember'))
+                            $btn = '<a href="'.route('society.addcmember',$row['id']).'" class="edit btn btn-primary btn-rounded mx-5" style="width:78px;">Add</a>';
+                        else
+                            $btn = '<a href="'.route('society.removecmember',$row['id']).'" class="edit btn btn-danger btn-rounded mx-5" style="width:78px;">Remove</a>';
+                        return $btn;
+                    })
+                    ->rawColumns(['committeemember'])
+                    ->make(true);
+    }
 }

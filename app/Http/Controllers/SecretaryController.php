@@ -5,20 +5,23 @@ namespace App\Http\Controllers;
 use App\Interfaces\ApproveInterface;
 use App\Interfaces\RuleInterface;
 use App\Models\User;
+use App\Interfaces\MemberInterface;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
 use App\Models\Rule;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
 class SecretaryController extends Controller
 {
     protected $approveInterface;
     protected $ruleInterface;
-    public function __construct(ApproveInterface $approveInterface,RuleInterface $ruleInterface)
+    protected $memberInterface;
+    public function __construct(ApproveInterface $approveInterface,RuleInterface $ruleInterface,MemberInterface $memberInterface)
     {
         $this->approveInterface = $approveInterface;
         $this->ruleInterface = $ruleInterface;
-
+        $this->memberInterface = $memberInterface;
     }
     public function approve($user_id)
     {
@@ -48,7 +51,29 @@ class SecretaryController extends Controller
         return view('society.approvemembers');
     }
 
-   public function add_rule(Request $request)
+    public function get_members(Request $request)
+    {
+        if ($request->ajax()) {
+            return $this->memberInterface->getMembers();
+        }
+        return view('society.committeemembers');
+    }
+
+    public function add_committee_members($user_id)
+    {
+        $cmember = User::findOrFail($user_id);
+        $cmember->assignRole('committeemember');
+        return redirect()->route('society.cmembers')->with('success','Now, Member('.$cmember->email.') is committee member');
+    }
+
+    public function remove_committee_members($user_id)
+    {
+        $cmember = User::findOrFail($user_id);
+        $cmember->removeRole('committeemember');
+        return redirect()->route('society.cmembers')->with('success','Committee member('.$cmember->email.') removed');
+    }
+
+    public function add_rule(Request $request)
     {
 
         $status = $this->ruleInterface->addRule($request);

@@ -45,6 +45,12 @@ class AuthRequest extends FormRequest
                     'password' => 'required',
                 ];
                 break;
+            case 'login.staff':
+                $rules = [
+                    'email' => 'required|email',
+                    'password' => 'required',
+                ];
+                break;
             case 'register.society':
                 $rules = [
                     'society_name' => 'required',

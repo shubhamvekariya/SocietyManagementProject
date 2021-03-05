@@ -2,9 +2,8 @@
 
 namespace App\Interfaces;
 
-interface MemberInterface
+interface StaffInterface
 {
-    public function addMember($request);
+    public function addStaff($request,$password);
     public function checkLogin($email, $password, $rememberme);
-    public function getMembers();
 }
