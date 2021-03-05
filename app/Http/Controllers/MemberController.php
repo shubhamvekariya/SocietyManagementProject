@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
+use App\Http\Requests\FamilymemValidation;
 
 class MemberController extends Controller
 {
@@ -33,7 +34,7 @@ class MemberController extends Controller
         return view('member.approve');
     }
 
-    public function add_familymem(Request $request)
+    public function add_familymem(FamilymemValidation $request)
     {
         $status = $this->familymemInterface->addFamilymem($request);
         if($status)
