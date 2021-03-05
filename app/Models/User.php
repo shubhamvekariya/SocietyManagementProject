@@ -50,4 +50,8 @@ class User extends Authenticatable
     {
         return $this->hasOne(Apartment::class);
     }
+    public function staff()
+    {
+        return $this->hasMany(Staff::class);
+    }
 }

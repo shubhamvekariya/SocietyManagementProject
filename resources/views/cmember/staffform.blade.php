@@ -83,13 +83,6 @@
                 placeholder: "Select a usage",
                 allowClear: true
             });
-            $('#position').on("change", function (e) {
-                var position = $('#position').find(':selected').val();
-                if(position == "staff")
-                    $('#workdiv').show();
-                else
-                    $('#workdiv').hide();
-            });
         });
     </script>
 @endpush

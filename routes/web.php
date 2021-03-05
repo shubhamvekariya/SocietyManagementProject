@@ -79,9 +79,13 @@ Route::post('/login/member',[LoginController::class,'check_login'])->name('login
 Route::get('/register/member',[LoginController::class,'show_register'])->name('register.member');
 Route::post('/register/member',[LoginController::class,'create_member'])->name('register.member');
 
+Route::get('/login/staff',[LoginController::class,'show_login'])->name('login.staff');
+Route::post('/login/staff',[LoginController::class,'check_login'])->name('login.staff');
+
 Route::get('/logout',[LoginController::class,'destroy'])->name('logout');
 
 Route::get('/country', function () {
     $country = Storage::get('public/country.json');
     return json_decode($country, true);
 });
+

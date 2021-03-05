@@ -2,10 +2,19 @@
 
 namespace App\Http\Controllers;
 
+use App\Interfaces\StaffInterface;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class StaffController extends Controller
 {
+    protected $staffInterface;
+    public function __construct(StaffInterface $staffInterface)
+    {
+        $this->staffInterface = $staffInterface;
+    }
     /**
      * Display a listing of the resource.
      *
@@ -36,6 +45,17 @@ class StaffController extends Controller
     public function store(Request $request)
     {
         //
+        $password = Str::random(8);
+        $status = $this->staffInterface->addStaff($request,$password);
+        if($status)
+            $work = '('.$request->work.')' ?? '';
+            $details = [
+                'title' => 'Mail from ISocietyClub.com',
+                'position' => $request->position.$work,
+                'password' => $password
+            ];
+            Mail::to('shubham.v@simformsolutions.com')->send(new \App\Mail\StaffPasswordMail($details));
+        return 'Add staff successfully';
     }
 
     /**
