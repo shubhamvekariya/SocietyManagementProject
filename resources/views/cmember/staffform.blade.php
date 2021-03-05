@@ -2,7 +2,7 @@
     <link href="{{ mix('/css/select2.min.css') }}" rel="stylesheet">
 @endpush
 
-<form>
+<form action="{{ route('member.staffs.store') }}" method="POST">
     @csrf
     <div class="form-group">
         <label for="email">Email</label>
@@ -33,7 +33,7 @@
             </div>
         </div>
         <div class="form-group">
-            <label>Position</label>
+            <label for="position">Position</label>
             <select class="form-control" id="position" name="position">
                 <option></option>
                 @role('committeemember')
@@ -43,10 +43,53 @@
             </select>
         </div>
         <div class="form-group">
+            <label for="work">Work</label>
+            <select class="form-control" id="work" name="work">
+                <option></option>
+                <option value="maid">Maid</option>
+                <option value="driver">Driver</option>
+            </select>
         </div>
-        <button type="submit" class="btn btn-primary">Sign in</button>
+        <div class="form-group">
+            <label for="usage">Usage</label>
+            <select class="form-control" id="usage" name="usage">
+                <option></option>
+                @role('committeemember')
+                    <option value="society">Society</option>
+                @endrole
+                <option value="personal">Personal</option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary d-block font-weight-bold mx-auto mt-4" style="width:12%;font-size:20px;">Add</button>
     </form>
 @push('script')
     <!-- Select2 -->
     <script src="{!! asset('/js/select2.full.min.js') !!}"></script>
+    <script>
+        $(document).ready(function(){
+            $("#gender").select2({
+                placeholder: "Select a gender",
+                allowClear: true
+            });
+            $("#position").select2({
+                placeholder: "Select a position",
+                allowClear: true
+            });
+            $("#work").select2({
+                placeholder: "Select a work",
+                allowClear: true
+            });
+            $("#usage").select2({
+                placeholder: "Select a usage",
+                allowClear: true
+            });
+            $('#position').on("change", function (e) {
+                var position = $('#position').find(':selected').val();
+                if(position == "staff")
+                    $('#workdiv').show();
+                else
+                    $('#workdiv').hide();
+            });
+        });
+    </script>
 @endpush
