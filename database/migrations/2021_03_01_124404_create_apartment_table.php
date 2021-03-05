@@ -22,6 +22,7 @@ class CreateApartmentTable extends Migration
             $table->timestamps();
             $table->foreignId('user_id')->constrained('users')->onUpdate('cascade')->onDelete('cascade');
             $table->foreignId('society_id')->constrained('societies')->onUpdate('cascade')->onDelete('cascade');
+            $table->softDeletes();
         });
     }
 
@@ -32,6 +33,10 @@ class CreateApartmentTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('apartment');
+        // Schema::dropIfExists('apartment');
+        Schema::create('apartments', function (Blueprint $table) {
+            $table->dropSoftDeletes();
+
+        });
     }
 }

@@ -18,4 +18,6 @@ mix.js('resources/js/app.js', 'public/js')
     .postCss('resources/css/plugins/steps/jquery.steps.css', 'public/css')
     .postCss('resources/css/plugins/select2/select2.min.css', 'public/css')
     .postCss('resources/css/templatemo-style.css', 'public/css')
-    .postCss('resources/font-awesome/css/fontawesome.css', 'public/css');
+    .postCss('resources/font-awesome/css/fontawesome.css', 'public/css')
+    .postCss('resources/css/plugins/toastr/toastr.min.css', 'public/css')
+    .postCss('resources/css/emails/styles.css', 'public/css/email');

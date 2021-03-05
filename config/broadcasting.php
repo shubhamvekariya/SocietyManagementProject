@@ -32,6 +32,7 @@ return [
 
         'pusher' => [
             'driver' => 'pusher',
+<<<<<<< HEAD
             'key' => env('6b723375502146131d40'),
             'secret' => env('958aa14555a4cafd0847'),
             'app_id' => env('1164693'),
@@ -46,6 +47,12 @@ return [
                     CURLOPT_SSL_VERIFYPEER => 0,
                 ],
             ],
+=======
+            'key' => '6b723375502146131d40',
+            'secret' => '958aa14555a4cafd0847',
+            'app_id' => '1164693'
+            // 'options' => [],
+>>>>>>> 73161591ecdf0e056719e251278f80df6c03891f
         ],
 
         'ably' => [

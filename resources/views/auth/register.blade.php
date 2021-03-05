@@ -4,11 +4,11 @@
     Registration
 @endsection
 
-@section('css')
+@push('css')
     <link href="{{ mix('/css/custom.css') }}" rel="stylesheet">
     <link href="{{ mix('/css/select2.min.css') }}" rel="stylesheet">
     <link href="{{ mix('/css/jquery.steps.css') }}" rel="stylesheet">
-@endsection
+@endpush
 
 @section('content')
 <div class="middle-box text-center loginscreen  animated fadeInDown" style="max-width:700px;width:700px;padding-top:0">
@@ -271,12 +271,12 @@
 
                     </div>
             <p class="text-muted text-center mt-2 mb-0"><small>Already have an account?</small></p>
-            <a class="btn btn-sm btn-white w-50 mx-auto btn-block" href="{{ route('login.member') }}">Login</a>
+            <a class="btn btn-sm btn-white w-50 mx-auto btn-block" href="@if (Request::segment(2) == 'society') {{ route('login.society') }} @else {{ route('login.member') }} @endif">Login</a>
         <p class="m-t"> <small>Work with appartment manangement &copy; 2021</small> </p>
     </div>
 </div>
 @endsection
-@section('script')
+@push('script')
     <!-- iCheck -->
     <script src="{!! asset('/js/icheck.min.js') !!}"></script>
 	 <!-- Steps -->
@@ -287,5 +287,12 @@
     <script src="{!! asset('/js/select2.full.min.js') !!}"></script>
 
     <script src="{!! asset('/js/register.js') !!}"></script>
-
-@endsection
+    <script>
+    $(document).ready(function(){
+        gender = {!! str_replace("'", "\'", json_encode(Request::old('gender'))) !!};
+        $('#gender').val(gender).trigger('change');
+        society_id = {!! str_replace("'", "\'", json_encode(Request::old('society_id'))) !!};
+        $('#society_id').val(society_id).trigger('change');
+    });
+    </script>
+@endpush

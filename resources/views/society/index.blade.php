@@ -2,33 +2,20 @@
 @section('title')
 Society Page
 @endsection
-
+@push('css')
+    <link href="{{ mix('/css/toastr.min.css') }}" rel="stylesheet">
+@endpush
 @section('content')
 
-<div class="row wrapper border-bottom white-bg page-heading">
-    <div class="col-sm-4">
-        <h2>Home Page</h2>
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item">
-                <a href="{{ route('society.home') }}">Home</a>
-            </li>
-            <li class="breadcrumb-item active">
-                <strong>
-                    @role('secretary','society')
-                        I'm a secretary!
-                    @else
-                        I'm not a secretary...
-                    @endrole
-                </strong>
-            </li>
-        </ol>
-    </div>
-    <div class="col-sm-8">
-        <div class="title-action">
-            <a href="" class="btn btn-primary">This is action area</a>
-        </div>
-    </div>
-</div>
+@section('breadcrumb-title')
+    Welcome secretary
+@endsection
+@section('breadcrumb-item')
+    <li class="breadcrumb-item active">
+        <strong>Home</strong>
+    </li>
+@endsection
+
 <div class="wrapper wrapper-content">
     <div class="middle-box text-center animated fadeInRightBig">
         <h3 class="font-bold">Society Page</h3>
@@ -41,21 +28,3 @@ Society Page
 </div>
 @endsection
 
-@section('script')
-    <script src="https://js.pusher.com/7.0/pusher.min.js"></script>
-    <script>
-
-    // Enable pusher logging - don't include this in production
-    Pusher.logToConsole = true;
-
-    var pusher = new Pusher('6b723375502146131d40', {
-        cluster: 'ap2',
-        encrypted: true
-    });
-
-    var channel = pusher.subscribe('my-channel');
-    channel.bind('my-event', function(data) {
-        alert(JSON.stringify(data));
-    });
-    </script>
-@endsection

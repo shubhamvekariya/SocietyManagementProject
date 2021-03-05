@@ -24,7 +24,9 @@ class RolePermissionTableSeeder extends Seeder
             Permission::create(['name' => $permission]);
         }
 
-        $role = Role::create(['guard_name' => 'society', 'name' => 'secretary']);
-        $role = Role::create(['name' => 'member']);
+        Role::create(['guard_name' => 'society', 'name' => 'secretary']);
+        Role::create(['name' => 'member']);
+        Role::create(['guard_name' => 'security', 'name' => 'staff']);
+        Role::create(['name' => 'committeemember']);
     }
 }
