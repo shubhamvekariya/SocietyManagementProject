@@ -78,14 +78,7 @@ class MemberController extends Controller
     public function update_familymem(Request $request)
     {
         $family_mem=Family::find($request->fid);;
-        $family_mem->name = $request->name;
-        $family_mem->email = $request->email;
-        $family_mem->contact_no = $request->contact_no;
-        $family_mem->age = $request->age;
-        $family_mem->gender = $request->gender;
-
-        $family_mem->save();
-
+        $family_mem->update($request->all());
         return redirect()->route('member.allfamilymem')->with('success','Family Member Edited successfully');
     }
 }
