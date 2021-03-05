@@ -17,8 +17,12 @@ class CreateStaffSecurityTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('position');
-            $table->string('work');
-            
+            $table->string('work')->nullable();
+            $table->string('email')->unique();
+            $table->integer('age');
+            $table->bigInteger('phoneno')->nullable();
+            $table->string('gender')->nullable();
+            $table->string('password');
             $table->foreignId('society_id')->constrained('societies')->onUpdate('cascade')->onDelete('cascade');
             $table->softDeletes();
             $table->timestamps();

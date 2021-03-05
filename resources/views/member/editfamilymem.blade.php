@@ -28,3 +28,10 @@ Add Family Member
     </form>
 </div>
 @endsection
+
+@push('script')
+    <script>
+        gender = {!! str_replace("'", "\'", json_encode($family_mem->gender)) !!};
+        $('#gender').val(gender).trriger();
+    </script>
+@endpush
