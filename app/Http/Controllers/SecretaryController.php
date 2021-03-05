@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Interfaces\ApproveInterface;
+use App\Interfaces\RuleInterface;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
@@ -12,11 +13,13 @@ use Illuminate\Support\Facades\Auth;
 class SecretaryController extends Controller
 {
     protected $approveInterface;
-    public function __construct(ApproveInterface $approveInterface)
+    protected $ruleInterface;
+    public function __construct(ApproveInterface $approveInterface,RuleInterface $ruleInterface)
     {
         $this->approveInterface = $approveInterface;
+        $this->ruleInterface = $ruleInterface;
+
     }
-    //
     public function approve($user_id)
     {
         $status = $this->approveInterface->approve($user_id);
@@ -45,54 +48,68 @@ class SecretaryController extends Controller
         return view('society.approvemembers');
     }
 
-    public function add_rule(Request $request)
+   public function add_rule(Request $request)
     {
-        Rule::create([
-            'description' =>  $request->description,
-            'society_id' => Auth::user()->id,
-        ]);
-        return redirect()->route('society.all_rule')->with('success','Rule added successfully');
+
+        $status = $this->ruleInterface->addRule($request);
+        if($status)
+        {
+            return redirect()->route('society.all_rule')->with('success','Rule added successfully');
         }
+        else
+        {
+            return redirect()->back()->with('error','Something went wrong');
+        }
+
+    }
 
     public function show_rule(Request $request)
     {
         if ($request->ajax()) {
-            $data = Rule::all();
-            return DataTables::of($data)
-                    ->addIndexColumn()
-                    ->addColumn('action', function($row){
-                            $btn = '<a href="'.route('society.edit_rule',$row['id']).'" class="edit btn btn-primary btn-rounded mx-4" style="width:78px;">Edit</a>';
-                            $btn .= '<a href="'.route('society.delete_rule',$row['id']).'" class="edit btn btn-danger btn-rounded mx-3" style="width:78px;">Delete</a>';
-                            return $btn;
-                    })
-                    ->rawColumns(['action'])
-                    ->make(true);
+            return $this->ruleInterface->showRule($request);
         }
-
         return view('society.all_rule');
 
     }
 
     public function delete_rule($id)
     {
-        $rules = Rule::findOrFail($id);
-        $rules->delete();
 
-        return redirect()->back()->with('success','Rule Deleted successfully');
+        $status = $this->ruleInterface->deleteRule($id);
+        if($status)
+        {
+            return redirect()->back()->with('success','Rule Deleted successfully');
+        }
+        else
+        {
+            return redirect()->back()->with('error','Something went wrong');
+        }
+
     }
 
     public function edit_rule($id)
     {
-        $rules = Rule::findOrFail($id);
+
+        $rules = $this->ruleInterface->editRule($id);
+        if(!$rules)
+        {
+            return redirect()->back()->with('error','Something went wrong');
+        }
+
         return view('society.edit_rule',compact('rules'));
     }
 
     public function update_rule(Request $request)
     {
-        $rules=Rule::find($request->rid);
-        $rules->description = $request->description;
-        $rules->save();
+        $status = $this->ruleInterface->updateRule($request);
+        if($status)
+        {
+            return redirect()->route('society.all_rule')->with('success','Rule edited successfully');
+        }
+        else
+        {
+            return redirect()->back()->with('error','Something went wrong');
+        }
 
-        return redirect()->route('society.all_rule')->with('success','Rule edited successfully');
      }
 }

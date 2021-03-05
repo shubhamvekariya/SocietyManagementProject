@@ -28,6 +28,13 @@ All Family Members
     </div>
 @endif
 
+@if(session()->has('error'))
+<div class="alert alert-danger alert-dismissable">
+    <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+        <strong>{{ session()->get('error') }}</strong>
+    </div>
+@endif
+
 <div class="wrapper wrapper-content">
     <div class="table-responsive">
         <table class="table table-striped table-bordered table-hover" id="allfamilymem" >
