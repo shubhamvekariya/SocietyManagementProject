@@ -5,6 +5,7 @@ use App\Http\Controllers\SecretaryController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\MemberController;
 use App\Http\Controllers\StaffController;
+use App\Http\Controllers\MeetingController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
 
@@ -43,6 +44,9 @@ Route::group(['middleware' => ['auth:society','role:secretary,society'] ], funct
     Route::get('/delete_rule/{id}', [SecretaryController::class,'delete_rule'])->name('society.delete_rule');
     Route::get('/edit_rule/{id}', [SecretaryController::class,'edit_rule'])->name('society.edit_rule');
     Route::put('/update_rule', [SecretaryController::class,'update_rule'])->name('society.update_rule');
+
+    Route::resource('meetings',MeetingController::class,['as' => 'society']);
+
 });
 
 Route::group(['middleware' => ['auth','role:member'] ], function(){
@@ -94,4 +98,3 @@ Route::get('/country', function () {
     $country = Storage::get('public/country.json');
     return json_decode($country, true);
 });
-

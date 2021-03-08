@@ -53,6 +53,16 @@
 
                 </ul>
             </li>
+            <li>
+                <a href="#"><i class="fa fa-user-circle-o"></i><span class="nav-label">Meeting</span><span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level collapse">
+                    <li><a href="{{route('society.meetings.create')}}">Add Meeting</a></li>
+                    <li><a href="{{route('society.meetings.index')}}">Manage Meeting</a></li>
+
+                </ul>
+            </li>
+
+
             @else
             @role('member')
             <li>
@@ -119,7 +129,7 @@
                 </ul>
             </li>
 
-            
+
 
             <li>
                 <a href="#"><i class="fa fa-calendar"></i><span class="nav-label">Event/Assets</span><span class="fa arrow"></span></a>

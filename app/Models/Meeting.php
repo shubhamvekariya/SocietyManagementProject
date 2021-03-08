@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Meeting extends Model
 {
     use HasFactory,SoftDeletes;
+    protected $table = 'meeting_details';
     protected $fillable = [
         'title',
         'date',
