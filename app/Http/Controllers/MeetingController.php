@@ -111,8 +111,7 @@ class MeetingController extends Controller
     {
         //
         $meeting->update($request->all());
-        return redirect()->route('society.allmeeting')->with('success','Meeting Edited successfully');
-        //echo "<script>alert('Meeting Updated');</script>";
+        return redirect()->route('society.meetings.index')->with('success','Meeting Edited successfully');
 
 
     }
