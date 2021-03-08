@@ -1,16 +1,15 @@
 @push('css')
     <link href="{{ mix('/css/select2.min.css') }}" rel="stylesheet">
 @endpush
-<form action="{{ route('member.staffs.store') }}" method="POST">
-    @csrf
+
     <div class="form-group">
         <label for="email">Email</label>
-        <input id="email" name="email" type="email" class="form-control" placeholder="Email">
+        <input id="email" name="email" type="email" class="form-control" placeholder="Email" value='@if(isset($staff->email)){{ $staff->email }}@endif'>
     </div>
     <div class="form-row">
         <div class="form-group col-md-6">
             <label for="name">Name</label>
-            <input id="name" name="name" type="text" class="form-control" placeholder="Name">
+            <input id="name" name="name" type="text" class="form-control" placeholder="Name" value='@if(isset($staff->name)){{ $staff->name }}@endif'>
         </div>
         <div class="form-group col-md-6">
             <label>Gender</label>
@@ -23,12 +22,12 @@
     </div>
     <div class="form-row">
         <div class="form-group col-md-6">
-        <label for="age">Age</label>
-        <input id="age" name="age" type="number" class="form-control" placeholder="Age">
+            <label for="age">Age</label>
+            <input id="age" name="age" type="number" class="form-control" placeholder="Age" value="@if(isset($staff->age)){{ $staff->age }}@endif">
         </div>
         <div class="form-group col-md-6">
-        <label for="phoneno">Phone Number</label>
-        <input id="phoneno" name="phoneno" type="text" class="form-control" placeholder="Phoneno">
+            <label for="phoneno">Phone Number</label>
+            <input id="phoneno" name="phoneno" type="text" class="form-control" placeholder="Phoneno" value="@if(isset($staff->phoneno)){{ $staff->phoneno }}@endif">
         </div>
     </div>
     <div class="form-group">
@@ -36,12 +35,12 @@
         <select class="form-control" id="position" name="position">
             <option></option>
             @role('committeemember')
-                <option value="secutiry">Security</option>
+                <option value="security">Security</option>
             @endrole
             <option value="staff">Staff</option>
         </select>
     </div>
-    <div class="form-group">
+    <div class="form-group" id="workgroup">
         <label for="work">Work</label>
         <select class="form-control" id="work" name="work">
             <option></option>
@@ -58,8 +57,6 @@
             @endrole
         </select>
     </div>
-    <button type="submit" class="btn btn-primary d-block font-weight-bold mx-auto mt-4" style="width:12%;font-size:20px;">Add</button>
-</form>
 
 @push('script')
     <!-- Select2 -->
@@ -84,6 +81,13 @@
             });
             $('#position').on("change", function (e) {
                 var position = $('#position').find(':selected').val();
+                if(position == "security")
+                {
+                    $('#usage').val('').trigger('change');
+                    $('#workgroup').hide();
+                }
+                else
+                    $('#workgroup').show();
                 if(position == "staff")
                 {
                     var newOption = new Option('Personal','personal', false, false);

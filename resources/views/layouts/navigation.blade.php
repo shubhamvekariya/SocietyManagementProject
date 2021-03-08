@@ -66,7 +66,7 @@
                 <a href="#"><i class="fa fa-shield"></i><span class="nav-label">Security & Staff</span><span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level collapse">
                     <li><a href="{{route('member.staffs.create')}}">Add Staff</a></li>
-                    <li><a href="#">Manage Staff</a></li>
+                    <li><a href="{{ route('member.staffs.index') }}">Manage Staff</a></li>
                     <li><a href="#">Monthly Attendence</a></li>
 
                 </ul>
@@ -119,7 +119,7 @@
                 </ul>
             </li>
 
-            
+
 
             <li>
                 <a href="#"><i class="fa fa-calendar"></i><span class="nav-label">Event/Assets</span><span class="fa arrow"></span></a>

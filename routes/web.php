@@ -73,6 +73,13 @@ Route::group(['middleware' => ['auth:staff_security','role:staff|security,staff_
     Route::get('/staff',  function () {
         return view('staff_security.index');
     })->name('staff.home');
+    Route::group(['middleware' => ['permission:set password,staff_security']], function () {
+        //
+        Route::get('/setpassword' , [StaffController::class , 'getpassword'])->name('staff.setpassword');
+        Route::post('/setpassword' , [StaffController::class , 'setpassword'])->name('staff.setpassword');
+    });
+
+
 });
 
 Route::get('/login/society',[LoginController::class,'show_login'])->name('login.society');

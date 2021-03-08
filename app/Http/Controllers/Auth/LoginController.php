@@ -9,6 +9,7 @@ use App\Http\Requests\AuthRequest;
 use App\Interfaces\MemberInterface;
 use App\Interfaces\SocietyInterface;
 use App\Interfaces\StaffInterface;
+use App\Models\Staff;
 use Illuminate\Support\Facades\Auth;
 
 
@@ -65,11 +66,16 @@ class LoginController extends Controller
         }
         if($request->segment(2) == 'staff')
         {
+            $staff =Staff::where('email',$request->email)->first();
             $login = $this->staffInterface->checkLogin($request->email, $request->password, $request->rememberme);
             if($login)
             {
                 $request->session()->regenerate();
-                return redirect()->route('staff.home');
+                $staff =Staff::where('email',$request->email)->first();
+                if($staff->hasPermissionTo('set password', 'staff_security'))
+                    return redirect()->route('staff.setpassword');
+                else
+                    return redirect()->route('staff.home');
             }
         }
         return redirect()->back()->with('danger','Invalid credentials');

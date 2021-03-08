@@ -58,7 +58,7 @@ class MemberRepository implements MemberInterface
 
     public function getMembers()
     {
-        $disapprovemembers = User::all();
+        $disapprovemembers = User::join('apartments', 'users.id', '=', 'apartments.user_id')->where('apartments.society_id',Auth::user()->id)->get();
             return DataTables::of($disapprovemembers)
                     ->addIndexColumn()
                     ->addColumn('committeemember', function($row){

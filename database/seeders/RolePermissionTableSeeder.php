@@ -17,11 +17,12 @@ class RolePermissionTableSeeder extends Seeder
     {
         //
         $permissions = [
+            'set password'
         ];
 
 
         foreach ($permissions as $permission) {
-            Permission::create(['name' => $permission]);
+            Permission::create(['guard_name' => 'staff_security', 'name' => $permission]);
         }
 
         Role::create(['guard_name' => 'society', 'name' => 'secretary']);
