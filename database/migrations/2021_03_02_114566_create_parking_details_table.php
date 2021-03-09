@@ -15,17 +15,11 @@ class CreateParkingDetailsTable extends Migration
     {
         Schema::create('parking_details', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
             $table->string('vehicle_no');
-            $table->string('entry_time');
-            $table->string('exit_time')->nullable();
-            $table->string('entry_date');
-            $table->string('exit_date')->nullable();
-            
-
-            $table->foreignId('user_id')->constrained('users')->onUpdate('cascade')->onDelete('cascade');
+            $table->string('type');
+            $table->string('spot');
+            $table->foreignId('visitor_id')->constrained('visitors_details')->onUpdate('cascade')->onDelete('cascade');
             $table->softDeletes();
-
             $table->timestamps();
         });
     }
