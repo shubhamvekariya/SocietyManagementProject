@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Meeting;
+use App\Interfaces\MeetingInterface;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Yajra\DataTables\DataTables;
@@ -14,11 +15,19 @@ class MeetingController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    protected $meetingInterface;
+
+    public function __construct(MeetingInterface $meetingInterface)
+    {
+
+        $this->meetingInterface = $meetingInterface;
+    }
     public function index(Request $request)
     {
+
         if($request->ajax())
         {
-            $data = Meeting::all();
+            /*$data = Meeting::all();
             return DataTables::of($data)
                     ->addIndexColumn()
                     ->addColumn('action', function($row){
@@ -34,7 +43,9 @@ class MeetingController extends Controller
                             return $btn;
                     })
                     ->rawColumns(['action'])
-                    ->make(true);
+                    ->make(true);*/
+                    return $this->meetingInterface->showMeeting($request);
+
         }
         return view('society.allmeeting');
     }
@@ -60,15 +71,23 @@ class MeetingController extends Controller
     public function store(Request $request)
     {
        // Meeting::create($request->all());
-        Meeting::create([
+        /*Meeting::create([
             'title' =>  $request->title,
             'date' =>  $request->date,
             'start_time' =>  $request->start_time,
             'end_time' =>  $request->end_time,
             'place' =>  $request->place,
             'society_id' => Auth::user()->id,
-        ]);
+        ]);*/
+        $status = $this->meetingInterface->addMeeting($request);
+        if($status)
+        {
         return redirect()->route('society.meetings.index')->with('success','Meeting created successfully');
+        }
+        else
+        {
+            return redirect()->back()->with('error','Something went wrong');
+        }
 
         //echo "<script>alert('Meeting Added');</script>";
 
@@ -83,7 +102,7 @@ class MeetingController extends Controller
      */
     public function show(Meeting $meeting)
     {
-       // return view('society.allmeeting',compact('meeting'));
+
 
     }
 
@@ -95,7 +114,6 @@ class MeetingController extends Controller
      */
     public function edit(Meeting $meeting)
     {
-        //
         return view('society.editmeeting',compact('meeting'));
 
     }
@@ -109,9 +127,18 @@ class MeetingController extends Controller
      */
     public function update(Request $request, Meeting $meeting)
     {
-        //
-        $meeting->update($request->all());
-        return redirect()->route('society.meetings.index')->with('success','Meeting Edited successfully');
+
+        //$meeting->update($request->all());
+        $status = $this->meetingInterface->updateMeeting($request,$meeting);
+        if($status)
+        {
+            return redirect()->route('society.meetings.index')->with('success','Meeting Edited successfully');
+        }
+        else
+        {
+            return redirect()->back()->with('error','Something went wrong');
+        }
+
 
 
     }
@@ -124,9 +151,18 @@ class MeetingController extends Controller
      */
     public function destroy(Meeting $meeting)
     {
-        //$m = Meeting::findOrFail($meeting->id);
-        $meeting->delete();
+
+        //$meeting->delete();
+        $status = $this->meetingInterface->deleteMeeting($meeting);
+        if($status)
+        {
         return redirect()->back()->with('success','Meeting Deleted successfully');
+        }
+        else
+        {
+            return redirect()->back()->with('error','Something went wrong');
+        }
+
 
         //echo "<script>alert('Meeting Deleted');</script>";
 
