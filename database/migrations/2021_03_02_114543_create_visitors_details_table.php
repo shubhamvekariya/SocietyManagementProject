@@ -17,15 +17,12 @@ class CreateVisitorsDetailsTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('phone_no');
-            $table->longText('address')->nullable();
             $table->string('block')->nullable();
             $table->string('reason_to_meet')->nullable();
             $table->string('entry_time');
             $table->string('exit_time')->nullable();
             $table->string('entry_date');
             $table->string('exit_date')->nullable();
-            
-
             $table->foreignId('user_id')->constrained('users')->onUpdate('cascade')->onDelete('cascade');
             $table->softDeletes();
 

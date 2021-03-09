@@ -10,12 +10,9 @@ class Parking extends Model
 {
     use HasFactory,SoftDeletes;
     protected $fillable = [
-        'name',
         'vehicle_no',
-        'entry_time',
-        'exit_time',
-        'entry_date',
-        'exit_date',
-        'user_id',
+        'type',
+        'spot',
+        'Visitor_id',
     ];
 }

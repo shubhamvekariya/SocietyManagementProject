@@ -14,7 +14,6 @@ class Visitor extends Model
         'name',
         'phone_no',
         'address',
-        'block',
         'reason_to_meet',
         'entry_time',
         'exit_time',
