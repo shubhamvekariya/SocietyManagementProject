@@ -27,3 +27,23 @@ Edit Meeting
     </form>
 </div>
 @endsection
+
+@push('script')
+    <script type="text/javascript">
+        $(function () {
+
+            starttime = {!! str_replace("'", "\'", json_encode($meeting->start_time)) !!};
+            endtime = {!! str_replace("'", "\'", json_encode($meeting->end_time)) !!};
+            $('#datetimepicker1').datetimepicker({
+                date: new Date(starttime)
+            });
+            $('#datetimepicker2').datetimepicker({
+                date: new Date(endtime)
+            });
+        });
+    </script>
+     <script>
+        place = {!! str_replace("'", "\'", json_encode($meeting->place)) !!};
+        $('#place').val(place).trriger();
+    </script>
+@endpush

@@ -18,9 +18,9 @@ class MeetingRepository implements MeetingInterface
     {
         $meeting = Meeting::create([
             'title' =>  $request->title,
-            'date' =>  $request->date,
-            'start_time' =>  $request->start_time,
-            'end_time' =>  $request->end_time,
+            'description' =>  $request->description,
+            'start_time' =>  date('Y-m-d H:i:s', strtotime($request->start_time)),
+            'end_time' =>  date('Y-m-d H:i:s', strtotime($request->end_time)),
             'place' =>  $request->place,
             'society_id' => Auth::user()->id,
         ]);
@@ -72,7 +72,9 @@ class MeetingRepository implements MeetingInterface
 
     public function updateMeeting($request,$meeting)
     {
-        $m = $meeting->update($request->all());
+        $m = $meeting->update($request->except('start_time','end_time'));
+        $meeting->update(['start_time' => date('Y-m-d H:i:s', strtotime($request->start_time)),'end_time' => date('Y-m-d H:i:s', strtotime($request->end_time))]);
+
         if($m)
         {
             return true;

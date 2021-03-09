@@ -12,7 +12,7 @@ class Meeting extends Model
     protected $table = 'meeting_details';
     protected $fillable = [
         'title',
-        'date',
+        'description',
         'start_time',
         'end_time',
         'place',

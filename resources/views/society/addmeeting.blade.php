@@ -26,3 +26,12 @@ Add Meeting
     </form>
 </div>
 @endsection
+
+@push('script')
+    <script type="text/javascript">
+        $(function () {
+            $('#datetimepicker1').datetimepicker();
+            $('#datetimepicker2').datetimepicker();
+        });
+    </script>
+@endpush

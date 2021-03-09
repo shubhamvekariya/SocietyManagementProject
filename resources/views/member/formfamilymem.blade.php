@@ -24,14 +24,14 @@
         <div class="form-group row ">
             <label class="col-sm-2 col-form-label">Enter Age:</label>
 
-           <div class="col-sm-10"><input type="text" class="form-control" placeholder="Enter Age" name="age" value="@if(isset($family_mem->age)){{ $family_mem['age']}}@endif">
+           <div class="col-sm-10"><input type="number" class="form-control" placeholder="Enter Age" name="age" value="@if(isset($family_mem->age)){{ $family_mem['age']}}@endif">
            </div>
         </div>
 
         <div class="form-group row ">
             <label class="col-sm-2 col-form-label">Contact Number:</label>
 
-           <div class="col-sm-10"><input type="text" class="form-control" placeholder="Enter Contact Number" name="contact_no" value="@if(isset($family_mem->contact_no)){{ $family_mem['contact_no']}}@endif">
+           <div class="col-sm-10"><input type="number" class="form-control" placeholder="Enter Contact Number" name="contact_no" value="@if(isset($family_mem->contact_no)){{ $family_mem['contact_no']}}@endif">
            </div>
         </div>
 
@@ -40,7 +40,7 @@
         <div class="form-group row ">
             <label class="col-sm-2 col-form-label">Email ID:</label>
 
-           <div class="col-sm-10"><input type="text" class="form-control" placeholder="Enter Your Email" name="email" value="@if(isset($family_mem->email)){{ $family_mem['email']}}@endif">
+           <div class="col-sm-10"><input type="email" class="form-control" placeholder="Enter Your Email" name="email" value="@if(isset($family_mem->email)){{ $family_mem['email']}}@endif">
            </div>
         </div>
 

@@ -42,7 +42,7 @@ All Meeting
                 <tr>
                     <th>No</th>
                     <th>Title</th>
-                    <th>Date</th>
+                    <th>Description</th>
                     <th>Start Time</th>
                     <th>End Time</th>
                     <th>Place</th>
@@ -53,7 +53,7 @@ All Meeting
                 <tr>
                     <th>No</th>
                     <th>Title</th>
-                    <th>Date</th>
+                    <th>Description</th>
                     <th>Start Time</th>
                     <th>End Time</th>
                     <th>Place</th>
@@ -77,7 +77,7 @@ All Meeting
                 columns: [
                     {data: 'id', name: 'id'},
                     {data: 'title', name: 'title'},
-                    {data: 'date', name: 'date'},
+                    {data: 'description', name: 'description'},
                     {data: 'start_time', name: 'start_time'},
                     {data: 'end_time', name: 'end_time'},
                     {data: 'place', name: 'place'},

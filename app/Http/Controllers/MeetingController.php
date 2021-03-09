@@ -7,6 +7,7 @@ use App\Interfaces\MeetingInterface;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Yajra\DataTables\DataTables;
+use App\Http\Requests\meetingValidation;
 
 class MeetingController extends Controller
 {
@@ -68,7 +69,7 @@ class MeetingController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(meetingValidation $request)
     {
        // Meeting::create($request->all());
         /*Meeting::create([

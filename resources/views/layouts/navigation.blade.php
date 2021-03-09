@@ -62,6 +62,15 @@
                 </ul>
             </li>
 
+            <li>
+                <a href="#"><i class="fa fa-calendar"></i><span class="nav-label">Event/Assets</span><span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level collapse">
+                    <li><a href="#">Book Assets</a></li>
+                    <li><a href="#">View Assets</a></li>
+
+                </ul>
+            </li>
+
 
             @else
             @role('member')
@@ -131,15 +140,7 @@
 
 
 
-            <li>
-                <a href="#"><i class="fa fa-calendar"></i><span class="nav-label">Event/Assets</span><span class="fa arrow"></span></a>
-                <ul class="nav nav-second-level collapse">
-                    <li><a href="#">Book Assets</a></li>
-                    <li><a href="#">View Assets</a></li>
 
-
-                </ul>
-            </li>
             <li>
                 <a href="#"><i class="fa fa-search"></i><span class="nav-label">Search</span><span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level collapse">

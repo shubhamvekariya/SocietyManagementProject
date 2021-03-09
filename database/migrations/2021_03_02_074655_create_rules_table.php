@@ -15,7 +15,7 @@ class CreateRulesTable extends Migration
     {
         Schema::create('rules', function (Blueprint $table) {
             $table->id();
-            $table->string('description')->nullable();
+            $table->longText('description')->nullable();
             $table->foreignId('society_id')->constrained('societies')->onUpdate('cascade')->onDelete('cascade');
 
             $table->softDeletes();
