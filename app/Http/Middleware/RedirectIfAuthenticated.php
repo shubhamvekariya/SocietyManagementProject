@@ -26,7 +26,7 @@ class RedirectIfAuthenticated
                 if($guard == "society")
                     return redirect()->route('society.home');
                 if($guard == "staff_security")
-                    return redirect()->route('society.home');
+                    return redirect()->route('staff.home');
                 if(Auth::user()->hasRole('member'))
                     return redirect()->route('member.home');
                 return redirect(RouteServiceProvider::HOME);

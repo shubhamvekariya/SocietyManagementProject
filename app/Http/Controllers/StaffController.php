@@ -4,10 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StaffRequest;
 use App\Interfaces\StaffInterface;
+use App\Models\Staff;
+use GrahamCampbell\ResultType\Result;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Spatie\Permission\Models\Role;
 
 class StaffController extends Controller
 {
@@ -21,9 +25,14 @@ class StaffController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         //
+        if ($request->ajax()) {
+            return $this->staffInterface->allStaffs();
+        }
+        return view('cmember.staffs');
+
     }
 
     /**
@@ -50,14 +59,14 @@ class StaffController extends Controller
         $password = Str::random(8);
         $status = $this->staffInterface->addStaff($request,$password);
         if($status)
-            $work = '('.$request->work.')' ?? '';
+            $work = $request->work ? '('.$request->work.')' : '';
             $details = [
                 'title' => 'Mail from ISocietyClub.com',
                 'position' => $request->position.$work,
                 'password' => $password
             ];
-            Mail::to('yagnesh.p@simformsolutions.com')->send(new \App\Mail\StaffPasswordMail($details)); //$request->email for emaill
-        return 'Add staff successfully';
+            Mail::to('shubham.v@simformsolutions.com')->send(new \App\Mail\StaffPasswordMail($details)); //$request->email for emaill
+        return redirect()->route('member.staffs.index')->with('success',$request->position.$work.' added successfully');
     }
 
     /**
@@ -66,7 +75,7 @@ class StaffController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Staff $staff)
     {
         //
     }
@@ -77,9 +86,10 @@ class StaffController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Staff $staff)
     {
         //
+        return view('cmember.editstaff',compact('staff'));
     }
 
     /**
@@ -89,9 +99,14 @@ class StaffController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(StaffRequest $request, Staff $staff)
     {
         //
+        $request->validated();
+        $status = $this->staffInterface->editStaff($request,$staff);
+        $work = $request->work ? '('.$request->work.')' : '';
+        if($status)
+            return redirect()->route('member.staffs.index')->with('success',$request->position.$work.' edited successfully');
     }
 
     /**
@@ -100,8 +115,27 @@ class StaffController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Staff $staff)
     {
         //
+        $status = $this->staffInterface->deleteStaff($staff);
+        if($status)
+            return redirect()->route('member.staffs.index')->with('success','staff deleteted successfully');
+        else
+            return redirect()->route('member.staffs.index')->with('error','something went wrong');
+    }
+
+    public function getPassword()
+    {
+        //
+        return view('cmember.setpassword');
+    }
+
+    public function setPassword(StaffRequest $request)
+    {
+        //
+        $request->validated();
+        $status = $this->staffInterface->setPassword($request);
+        return redirect()->route('staff.home');
     }
 }

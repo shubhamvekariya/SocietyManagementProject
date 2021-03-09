@@ -7,7 +7,6 @@ All Rules
 <link href="{{ mix('/css/datatables.min.css') }}" rel="stylesheet">
 @endpush
 
-@section('content')
 @section('breadcrumb-title')
     All Rules
 @endsection
@@ -20,6 +19,7 @@ All Rules
         <strong>Rules</strong>
     </li>
 @endsection
+@section('content')
 
 @if(session()->has('success'))
 <div class="alert alert-success alert-dismissable">

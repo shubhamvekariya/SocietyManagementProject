@@ -56,7 +56,7 @@ class ApproveRepository implements ApproveInterface
 
     public function disapprovemembers()
     {
-        $disapprovemembers = User::where('approved_at',null);
+        $disapprovemembers = User::join('apartments', 'users.id', '=', 'apartments.user_id')->where('users.approved_at',null,'and')->where('apartments.society_id',Auth::user()->id)->get();
             return DataTables::of($disapprovemembers)
                     ->addIndexColumn()
                     ->addColumn('action', function($row){
