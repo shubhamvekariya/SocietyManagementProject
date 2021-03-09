@@ -20,4 +20,5 @@ mix.js('resources/js/app.js', 'public/js')
     .postCss('resources/css/templatemo-style.css', 'public/css')
     .postCss('resources/font-awesome/css/fontawesome.css', 'public/css')
     .postCss('resources/css/plugins/toastr/toastr.min.css', 'public/css')
-    .postCss('resources/css/emails/styles.css', 'public/css/email');
+    .postCss('resources/css/emails/styles.css', 'public/css/email')
+    .postCss('resources/css/plugins/datetimepicker/bootstrap-datetimepicker.min.css', 'public/css');

@@ -20643,6 +20643,19 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/css/plugins/datetimepicker/bootstrap-datetimepicker.min.css":
+/*!*******************************************************************************!*\
+  !*** ./resources/css/plugins/datetimepicker/bootstrap-datetimepicker.min.css ***!
+  \*******************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ }),
+
 /***/ "./resources/css/app.css":
 /*!*******************************!*\
   !*** ./resources/css/app.css ***!
@@ -25577,7 +25590,8 @@ runtime.setup(pusher_Pusher);
 /******/ 			["./resources/css/templatemo-style.css"],
 /******/ 			["./resources/font-awesome/css/fontawesome.css"],
 /******/ 			["./resources/css/plugins/toastr/toastr.min.css"],
-/******/ 			["./resources/css/emails/styles.css"]
+/******/ 			["./resources/css/emails/styles.css"],
+/******/ 			["./resources/css/plugins/datetimepicker/bootstrap-datetimepicker.min.css"]
 /******/ 		];
 /******/ 		// no chunk on demand loading
 /******/ 		
