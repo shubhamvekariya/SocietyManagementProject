@@ -1,17 +1,16 @@
            <!--form starte-->
-                <div class="ibox-content">
-                    <form method="get">
-                        <div class="form-group row has-success">
+
+                        <div class="form-group row ">
                             <label class="col-sm-2 col-form-label">Name:</label>
 
                            <div class="col-sm-10">
-                            <input type="text" class="form-control" placeholder="Enter Full Name" name="name">
+                            <input type="text" class="form-control" placeholder="Enter Assets/Event Name" name="name">
                         </div>
                         </div>
 
-                         <div class="form-group row" id="data_1">
+                         <div class="form-group row">
                         <label class="font-normal col-sm-2 col-form-label">Date Of Booking:</label>
-                        <div class="input-group date col-sm-10 has-success">
+                        <div class="input-group date col-sm-10 ">
                             <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
                             <input type="text" class="form-control" id="DATE" value="" onClick="current_Date();" placeholder="Booking Date" name="">
                         </div>
@@ -21,6 +20,7 @@
                     <h3>
                         Start & End Time:
                     </h3>
+
 
 
                     <label class="font-normal col-sm-2 col-form-label">Start Time:</label>

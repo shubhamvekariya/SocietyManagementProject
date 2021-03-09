@@ -4,7 +4,6 @@
 <link href="{{ mix('/css/bootstrap-datetimepicker.min.css') }}" rel="stylesheet">
 @endpush
 
-<div class="ibox-content">
         @if ($errors->any())
             <div class="alert alert-danger">
                 <ul>
@@ -26,20 +25,20 @@
 
             <label class="col-sm-2 col-form-label">Description:</label>
 
-            <div class="col-lg-9"><textarea  rows="3" class="form-control" placeholder="Enter Description" name="description">@if(isset($meeting->description)){{ $meeting['description']}}@endif</textarea></div>
+            <div class="col-lg-10"><textarea  rows="3" class="form-control" placeholder="Enter Description" name="description">@if(isset($meeting->description)){{ $meeting['description']}}@endif</textarea></div>
         </div>
 
     <div class="form-group row">
         <label class="font-normal col-sm-2 col-form-label">Start Date & Time:</label>
         <div class="input-group date col-sm-10 ">
-            <span class="input-group-addon" ><i class="fa fa-calendar"></i></span><input type="text" name="start_time" class="form-control" id="datetimepicker1" value="@if(isset($meeting->start_time)){{ $meeting['start_time']}}@endif" onClick="return current_Date();" placeholder="Start Date & Time of Meeting" autocomplete="off">
+            <span class="input-group-addon" ><i class="fa fa-calendar"></i></span><input type="text" name="start_time" class="form-control" id="datetimepicker1"  onClick="return current_Date();" placeholder="Start Date & Time of Meeting" autocomplete="off">
         </div>
     </div>
 
     <div class="form-group row">
         <label class="font-normal col-sm-2 col-form-label">End Date & Time:</label>
         <div class="input-group date col-sm-10 ">
-            <span class="input-group-addon" ><i class="fa fa-calendar"></i></span><input type="text" name="end_time" class="form-control" id="datetimepicker2" value="@if(isset($meeting->end_time)){{ $meeting['end_time']}}@endif" onClick="return current_Date();" placeholder="End Date & Time of Meeting" autocomplete="off">
+            <span class="input-group-addon" ><i class="fa fa-calendar"></i></span><input type="text" name="end_time" class="form-control" id="datetimepicker2"  onClick="return current_Date();" placeholder="End Date & Time of Meeting" autocomplete="off">
         </div>
     </div>
 

@@ -6,6 +6,7 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\MemberController;
 use App\Http\Controllers\StaffController;
 use App\Http\Controllers\MeetingController;
+use App\Http\Controllers\AssetController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
 
@@ -65,6 +66,8 @@ Route::group(['middleware' => ['auth','role:member'] ], function(){
         Route::put('/updatefamilymem', [MemberController::class,'update_familymem'])->name('member.updatefamilymem');
 
         Route::resource('staffs', StaffController::class, ['as' => 'member']);
+        Route::resource('assets',AssetController::class,['as' => 'member']);
+
         Route::middleware(['role:committeemember'])->group(function () {
 
         });

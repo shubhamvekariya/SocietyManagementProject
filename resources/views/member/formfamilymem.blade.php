@@ -1,7 +1,7 @@
 @push('css')
     <link href="{{ mix('/css/select2.min.css') }}" rel="stylesheet">
 @endpush
-<div class="ibox-content">
+
 
     @if ($errors->any())
         <div class="alert alert-danger">
@@ -18,7 +18,7 @@
 
            <div class="col-sm-10">
             <input type="text" class="form-control" placeholder="Enter Full Name" name="name" value="@if(isset($family_mem->name)){{ $family_mem['name']}}@endif">
-        </div>
+            </div>
         </div>
 
         <div class="form-group row ">

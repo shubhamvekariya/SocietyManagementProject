@@ -38,7 +38,7 @@ class MeetingRepository implements MeetingInterface
     public function showMeeting($request)
     {
 
-    $data = Meeting::all();
+    $data = Meeting::where('society_id',Auth::user()->id)->get();
             return DataTables::of($data)
                     ->addIndexColumn()
                     ->addColumn('action', function($row){

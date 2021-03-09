@@ -14,19 +14,18 @@ class CreateAssetsTable extends Migration
     public function up()
     {
         Schema::create('assets', function (Blueprint $table) {
-            
+
             $table->id();
-            $table->string('date_of_booking');
-            $table->string('start_time');
-            $table->string('end_time');
+            $table->string('name');
+            $table->timestamp('start_time');
+            $table->timestamp('end_time')->nullable();
             $table->string('assets');
             $table->longText('func_details')->nullable();
-            $table->string('charges')->nullable();
-
+            $table->bigInteger('charges')->nullable();
             $table->foreignId('user_id')->constrained('users')->onUpdate('cascade')->onDelete('cascade');
             $table->softDeletes();
 
-            
+
 
             $table->timestamps();
         });
