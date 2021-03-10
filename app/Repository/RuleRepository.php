@@ -86,4 +86,3 @@ class RuleRepository implements RuleInterface
 
     }
 }
-?>

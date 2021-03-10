@@ -14,18 +14,17 @@ class CreateVisitorsDetailsTable extends Migration
     public function up()
     {
         Schema::create('visitors_details', function (Blueprint $table) {
+            Schema::dropIfExists('parking_details');
             $table->id();
             $table->string('name');
-            $table->string('phone_no');
-            $table->string('block')->nullable();
+            $table->bigInteger('phoneno');
+            $table->longText('address')->nullable();
             $table->string('reason_to_meet')->nullable();
-            $table->string('entry_time');
-            $table->string('exit_time')->nullable();
-            $table->string('entry_date');
-            $table->string('exit_date')->nullable();
+            $table->timestamp('entry_time');
+            $table->timestamp('exit_time')->nullable();
+            $table->timestamp('approved_at')->nullable();
             $table->foreignId('user_id')->constrained('users')->onUpdate('cascade')->onDelete('cascade');
             $table->softDeletes();
-
             $table->timestamps();
         });
     }

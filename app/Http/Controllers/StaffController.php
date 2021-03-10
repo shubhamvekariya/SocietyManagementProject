@@ -32,7 +32,6 @@ class StaffController extends Controller
             return $this->staffInterface->allStaffs();
         }
         return view('cmember.staffs');
-
     }
 
     /**
@@ -57,16 +56,16 @@ class StaffController extends Controller
         //
         $request->validated();
         $password = Str::random(8);
-        $status = $this->staffInterface->addStaff($request,$password);
-        if($status)
-            $work = $request->work ? '('.$request->work.')' : '';
-            $details = [
-                'title' => 'Mail from ISocietyClub.com',
-                'position' => $request->position.$work,
-                'password' => $password
-            ];
-            Mail::to('shubham.v@simformsolutions.com')->send(new \App\Mail\StaffPasswordMail($details)); //$request->email for emaill
-        return redirect()->route('member.staffs.index')->with('success',$request->position.$work.' added successfully');
+        $status = $this->staffInterface->addStaff($request, $password);
+        if ($status)
+            $work = $request->work ? '(' . $request->work . ')' : '';
+        $details = [
+            'title' => 'Mail from ISocietyClub.com',
+            'position' => $request->position . $work,
+            'password' => $password
+        ];
+        Mail::to('shubham.v@simformsolutions.com')->send(new \App\Mail\StaffPasswordMail($details)); //$request->email for emaill
+        return redirect()->route('member.staffs.index')->with('success', $request->position . $work . ' added successfully');
     }
 
     /**
@@ -89,7 +88,7 @@ class StaffController extends Controller
     public function edit(Staff $staff)
     {
         //
-        return view('cmember.editstaff',compact('staff'));
+        return view('cmember.editstaff', compact('staff'));
     }
 
     /**
@@ -103,10 +102,10 @@ class StaffController extends Controller
     {
         //
         $request->validated();
-        $status = $this->staffInterface->editStaff($request,$staff);
-        $work = $request->work ? '('.$request->work.')' : '';
-        if($status)
-            return redirect()->route('member.staffs.index')->with('success',$request->position.$work.' edited successfully');
+        $status = $this->staffInterface->editStaff($request, $staff);
+        $work = $request->work ? '(' . $request->work . ')' : '';
+        if ($status)
+            return redirect()->route('member.staffs.index')->with('success', $request->position . $work . ' edited successfully');
     }
 
     /**
@@ -119,10 +118,10 @@ class StaffController extends Controller
     {
         //
         $status = $this->staffInterface->deleteStaff($staff);
-        if($status)
-            return redirect()->route('member.staffs.index')->with('success','staff deleteted successfully');
+        if ($status)
+            return redirect()->route('member.staffs.index')->with('success', 'staff deleteted successfully');
         else
-            return redirect()->route('member.staffs.index')->with('error','something went wrong');
+            return redirect()->route('member.staffs.index')->with('error', 'something went wrong');
     }
 
     public function getPassword()

@@ -5,6 +5,7 @@ use App\Http\Controllers\SecretaryController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\MemberController;
 use App\Http\Controllers\StaffController;
+use App\Http\Controllers\VisitorController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
 
@@ -59,6 +60,8 @@ Route::group(['middleware' => ['auth','role:member'] ], function(){
         Route::get('/deletefamilymem/{id}', [MemberController::class,'delete_familymem'])->name('member.deletefamilymem');
         Route::get('/editfamilymem/{id}', [MemberController::class,'edit_familymem'])->name('member.editfamilymem');
         Route::put('/updatefamilymem', [MemberController::class,'update_familymem'])->name('member.updatefamilymem');
+        Route::get('/approvevisitor/{visitor_id}', [MemberController::class,'approvevisitor'])->name('member.approvevisitor');
+        Route::get('/rejectvisitor/{visitor_id}', [MemberController::class,'rejectvisitor'])->name('member.rejectvisitor');
 
         Route::resource('staffs', StaffController::class, ['as' => 'member']);
         Route::middleware(['role:committeemember'])->group(function () {
@@ -78,8 +81,9 @@ Route::group(['middleware' => ['auth:staff_security','role:staff|security,staff_
         Route::get('/setpassword' , [StaffController::class , 'getpassword'])->name('staff.setpassword');
         Route::post('/setpassword' , [StaffController::class , 'setpassword'])->name('staff.setpassword');
     });
-
-
+    Route::group(['middleware' => ['role:security,staff_security']], function () {
+        Route::resource('visitors', VisitorController::class, ['as' => 'staff']);
+    });
 });
 
 Route::get('/login/society',[LoginController::class,'show_login'])->name('login.society');

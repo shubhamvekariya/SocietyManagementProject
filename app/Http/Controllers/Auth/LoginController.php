@@ -19,20 +19,15 @@ class LoginController extends Controller
     protected $societyInterface;
     protected $staffInterface;
     //
-    public function __construct(Request $request, MemberInterface $memberInterface,SocietyInterface $societyInterface,StaffInterface $staffInterface)
+    public function __construct(Request $request, MemberInterface $memberInterface, SocietyInterface $societyInterface, StaffInterface $staffInterface)
     {
-        if($request->segment(2) == 'society')
-        {
+        if ($request->segment(2) == 'society') {
             $this->societyInterface = $societyInterface;
             $this->middleware('guest:society')->except('destroy');
-        }
-        elseif($request->segment(2) == 'member')
-        {
+        } elseif ($request->segment(2) == 'member') {
             $this->memberInterface = $memberInterface;
             $this->middleware('guest')->except('destroy');
-        }
-        elseif($request->segment(2) == 'staff')
-        {
+        } elseif ($request->segment(2) == 'staff') {
             $this->staffInterface = $staffInterface;
             $this->middleware('guest:staff_security')->except('destroy');
         }
@@ -46,47 +41,40 @@ class LoginController extends Controller
     public function check_login(AuthRequest $request)
     {
         $request->validated();
-        if($request->segment(2) == 'society')
-        {
+        if ($request->segment(2) == 'society') {
             $login = $this->societyInterface->checkLogin($request->email, $request->password, $request->rememberme);
-            if($login)
-            {
+            if ($login) {
                 $request->session()->regenerate();
                 return redirect()->route('society.home');
             }
         }
-        if($request->segment(2) == 'member')
-        {
+        if ($request->segment(2) == 'member') {
             $login = $this->memberInterface->checkLogin($request->email, $request->password, $request->rememberme);
-            if($login)
-            {
+            if ($login) {
                 $request->session()->regenerate();
                 return redirect()->route('member.home');
             }
         }
-        if($request->segment(2) == 'staff')
-        {
-            $staff =Staff::where('email',$request->email)->first();
+        if ($request->segment(2) == 'staff') {
+            $staff = Staff::where('email', $request->email)->first();
             $login = $this->staffInterface->checkLogin($request->email, $request->password, $request->rememberme);
-            if($login)
-            {
+            if ($login) {
                 $request->session()->regenerate();
-                $staff =Staff::where('email',$request->email)->first();
-                if($staff->hasPermissionTo('set password', 'staff_security'))
+                $staff = Staff::where('email', $request->email)->first();
+                if ($staff->hasPermissionTo('set password', 'staff_security'))
                     return redirect()->route('staff.setpassword');
                 else
                     return redirect()->route('staff.home');
             }
         }
-        return redirect()->back()->with('danger','Invalid credentials');
+        return redirect()->back()->with('danger', 'Invalid credentials');
     }
 
     public function show_register(Request $request)
     {
-        if($request->segment(2) == 'member')
-        {
+        if ($request->segment(2) == 'member') {
             $societies = Society::all();
-            return view('auth.register',)->with('societies',$societies);
+            return view('auth.register',)->with('societies', $societies);
         }
         return view('auth.register');
     }
@@ -95,23 +83,23 @@ class LoginController extends Controller
     {
         $request->validated();
         $status = $this->societyInterface->addSociety($request);
-        if($status)
-            return redirect()->route('login.society')->with('success','Society registration done');
+        if ($status)
+            return redirect()->route('login.society')->with('success', 'Society registration done');
     }
 
     public function create_member(AuthRequest $request)
     {
         $request->validated();
         $status = $this->memberInterface->addMember($request);
-        if($status)
-            return redirect()->route('login.member')->with('success','Member registration done');
+        if ($status)
+            return redirect()->route('login.member')->with('success', 'Member registration done');
     }
 
     public function destroy(Request $request)
     {
-        if(Auth::guard('society')->check())
+        if (Auth::guard('society')->check())
             $url = 'login.society';
-        elseif(Auth::guard('staff_security')->check())
+        elseif (Auth::guard('staff_security')->check())
             $url = 'login.staff';
         else
             $url = 'login.member';

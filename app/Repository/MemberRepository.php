@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Repository;
 
 use App\Interfaces\MemberInterface;
@@ -30,8 +31,7 @@ class MemberRepository implements MemberInterface
             'gender' => $request->gender,
             'password' => Hash::make($request->password),
         ]);
-        if($user)
-        {
+        if ($user) {
             $apartment = Apartment::create([
                 'name_or_number' => $request->name_or_number,
                 'BHK' => $request->BHK,
@@ -40,8 +40,7 @@ class MemberRepository implements MemberInterface
                 'society_id' => $request->society_id,
                 'user_id' => $user->id
             ]);
-            if($apartment)
-            {
+            if ($apartment) {
                 $user->assignRole('member');
                 return true;
             }
@@ -50,7 +49,7 @@ class MemberRepository implements MemberInterface
     }
     public function checkLogin($email, $password, $rememberme)
     {
-        if (Auth::attempt(['email' => $email, 'password' => $password],$rememberme)) {
+        if (Auth::attempt(['email' => $email, 'password' => $password], $rememberme)) {
             return true;
         }
         return false;
@@ -58,19 +57,25 @@ class MemberRepository implements MemberInterface
 
     public function getMembers()
     {
-        $disapprovemembers = User::join('apartments', 'users.id', '=', 'apartments.user_id')->where('apartments.society_id',Auth::user()->id)->get();
-            return DataTables::of($disapprovemembers)
-                    ->addIndexColumn()
-                    ->addColumn('committeemember', function($row){
-                        if($row['approved_at']==null)
-                            $btn = 'Member Not Approved';
-                        elseif(!$row->hasRole('committeemember'))
-                            $btn = '<a href="'.route('society.addcmember',$row['id']).'" class="edit btn btn-primary btn-rounded mx-5" style="width:78px;">Add</a>';
-                        else
-                            $btn = '<a href="'.route('society.removecmember',$row['id']).'" class="edit btn btn-danger btn-rounded mx-5" style="width:78px;">Remove</a>';
-                        return $btn;
-                    })
-                    ->rawColumns(['committeemember'])
-                    ->make(true);
+        $disapprovemembers = User::join('apartments', 'users.id', '=', 'apartments.user_id')->where('apartments.society_id', Auth::user()->id)->get();
+        return DataTables::of($disapprovemembers)
+            ->addIndexColumn()
+            ->addColumn('committeemember', function ($row) {
+                if ($row['approved_at'] == null)
+                    $btn = 'Member Not Approved';
+                elseif (!$row->hasRole('committeemember'))
+                    $btn = '<a href="' . route('society.addcmember', $row['id']) . '" class="edit btn btn-primary btn-rounded mx-5" style="width:78px;">Add</a>';
+                else
+                    $btn = '<a href="' . route('society.removecmember', $row['id']) . '" class="edit btn btn-danger btn-rounded mx-5" style="width:78px;">Remove</a>';
+                return $btn;
+            })
+            ->rawColumns(['committeemember'])
+            ->make(true);
+    }
+
+    public function getSocietyMember()
+    {
+        if (Auth::user()->hasRole('security', 'staff_security'))
+            return User::join('apartments', 'users.id', '=', 'apartments.user_id')->where('apartments.society_id', Auth::user()->society->id)->where('users.approved_at', '!=', null)->get();
     }
 }
