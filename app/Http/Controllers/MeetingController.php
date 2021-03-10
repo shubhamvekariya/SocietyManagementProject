@@ -26,8 +26,7 @@ class MeetingController extends Controller
     public function index(Request $request)
     {
 
-        if($request->ajax())
-        {
+        if ($request->ajax()) {
             /*$data = Meeting::all();
             return DataTables::of($data)
                     ->addIndexColumn()
@@ -45,8 +44,7 @@ class MeetingController extends Controller
                     })
                     ->rawColumns(['action'])
                     ->make(true);*/
-                    return $this->meetingInterface->showMeeting($request);
-
+            return $this->meetingInterface->showMeeting($request);
         }
         return view('society.allmeeting');
     }
@@ -60,7 +58,6 @@ class MeetingController extends Controller
     {
 
         return view('society.addmeeting');
-
     }
 
     /**
@@ -71,7 +68,7 @@ class MeetingController extends Controller
      */
     public function store(meetingValidation $request)
     {
-       // Meeting::create($request->all());
+        // Meeting::create($request->all());
         /*Meeting::create([
             'title' =>  $request->title,
             'date' =>  $request->date,
@@ -81,13 +78,10 @@ class MeetingController extends Controller
             'society_id' => Auth::user()->id,
         ]);*/
         $status = $this->meetingInterface->addMeeting($request);
-        if($status)
-        {
-        return redirect()->route('society.meetings.index')->with('success','Meeting created successfully');
-        }
-        else
-        {
-            return redirect()->back()->with('error','Something went wrong');
+        if ($status) {
+            return redirect()->route('society.meetings.index')->with('success', 'Meeting created successfully');
+        } else {
+            return redirect()->back()->with('error', 'Something went wrong');
         }
 
         //echo "<script>alert('Meeting Added');</script>";
@@ -103,8 +97,6 @@ class MeetingController extends Controller
      */
     public function show(Meeting $meeting)
     {
-
-
     }
 
     /**
@@ -115,8 +107,7 @@ class MeetingController extends Controller
      */
     public function edit(Meeting $meeting)
     {
-        return view('society.editmeeting',compact('meeting'));
-
+        return view('society.editmeeting', compact('meeting'));
     }
 
     /**
@@ -130,18 +121,12 @@ class MeetingController extends Controller
     {
 
         //$meeting->update($request->all());
-        $status = $this->meetingInterface->updateMeeting($request,$meeting);
-        if($status)
-        {
-            return redirect()->route('society.meetings.index')->with('success','Meeting Edited successfully');
+        $status = $this->meetingInterface->updateMeeting($request, $meeting);
+        if ($status) {
+            return redirect()->route('society.meetings.index')->with('success', 'Meeting Edited successfully');
+        } else {
+            return redirect()->back()->with('error', 'Something went wrong');
         }
-        else
-        {
-            return redirect()->back()->with('error','Something went wrong');
-        }
-
-
-
     }
 
     /**
@@ -155,13 +140,10 @@ class MeetingController extends Controller
 
         //$meeting->delete();
         $status = $this->meetingInterface->deleteMeeting($meeting);
-        if($status)
-        {
-        return redirect()->back()->with('success','Meeting Deleted successfully');
-        }
-        else
-        {
-            return redirect()->back()->with('error','Something went wrong');
+        if ($status) {
+            return redirect()->back()->with('success', 'Meeting Deleted successfully');
+        } else {
+            return redirect()->back()->with('error', 'Something went wrong');
         }
 
 

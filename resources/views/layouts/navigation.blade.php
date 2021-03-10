@@ -61,6 +61,14 @@
 
                 </ul>
             </li>
+            <li>
+                <a href="#"><i class="fa fa-user-circle-o"></i><span class="nav-label">Notice</span><span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level collapse">
+                    <li><a href="{{route('society.notices.create')}}">Add Notice</a></li>
+                    <li><a href="{{route('society.notices.index')}}">All Notice</a></li>
+
+                </ul>
+            </li>
 
 
             @else

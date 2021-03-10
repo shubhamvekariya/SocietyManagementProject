@@ -70,5 +70,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Asset::class);
     }
+    public function notice()
+    {
+        return $this->hasMany(Notice::class);
+    }
 
 }

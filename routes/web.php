@@ -7,6 +7,7 @@ use App\Http\Controllers\MemberController;
 use App\Http\Controllers\StaffController;
 use App\Http\Controllers\MeetingController;
 use App\Http\Controllers\AssetController;
+use App\Http\Controllers\NoticeController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
 
@@ -47,6 +48,7 @@ Route::group(['middleware' => ['auth:society','role:secretary,society'] ], funct
     Route::put('/update_rule', [SecretaryController::class,'update_rule'])->name('society.update_rule');
 
     Route::resource('meetings',MeetingController::class,['as' => 'society']);
+    Route::resource('notices',NoticeController::class,['as' => 'society']);
 
 });
 
