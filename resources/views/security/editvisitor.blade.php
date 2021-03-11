@@ -45,8 +45,9 @@
     <script>
         user_id = {!! str_replace("'", "\'", json_encode($visitor->user_id)) !!};
         $('#member').val(user_id);
-        type = {!! str_replace("'", "\'", json_encode($visitor->parking->type)) !!};
-        $('#type').val(type);
+        parking = {!! str_replace("'", "\'", json_encode($visitor->parking)) !!};
+        if(parking != null)
+            $('#type').val(parking['type']);
     </script>
 @endpush
 
