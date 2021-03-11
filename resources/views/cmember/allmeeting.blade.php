@@ -73,7 +73,7 @@ All Meeting
             var table = $('#all_meeting').DataTable({
                 processing: true,
                 serverSide: true,
-                ajax: "{{ route('society.meetings.index') }}",
+                ajax: "{{ route('member.meetings.index') }}",
                 columns: [
                     {data: 'id', name: 'id'},
                     {data: 'title', name: 'title'},

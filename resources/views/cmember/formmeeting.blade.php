@@ -65,7 +65,7 @@
                     @else Add
                     @endif
                 </button>
-                <a class="btn btn-white btn-lg" href="{{ route('society.meetings.index') }}">Cancel</a>
+                <a class="btn btn-white btn-lg" href="{{ route('member.meetings.index') }}">Cancel</a>
             </div>
         </div>
 

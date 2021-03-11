@@ -19,10 +19,10 @@ Edit Meeting
 
 @section('content')
 <div class="ibox-content w-75 my-5 p-5 mx-auto border">
-    <form  action="{{route('society.meetings.update',$meeting->id)}}" method="POST">
+    <form  action="{{route('member.meetings.update',$meeting->id)}}" method="POST">
         @csrf
         @method('put')
-        @include('society.formmeeting')
+        @include('cmember.formmeeting')
 
     </form>
 </div>

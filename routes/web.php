@@ -71,6 +71,8 @@ Route::group(['middleware' => ['auth','role:member'] ], function(){
         Route::resource('assets',AssetController::class,['as' => 'member']);
 
         Route::middleware(['role:committeemember'])->group(function () {
+            Route::resource('meetings',MeetingController::class,['as' => 'member']);
+            Route::resource('notices',NoticeController::class,['as' => 'member']);
 
         });
     });

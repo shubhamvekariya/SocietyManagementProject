@@ -62,17 +62,8 @@ class User extends Authenticatable
     {
         return $this->hasMany(Rule::class);
     }
-    public function meeting()
-    {
-        return $this->hasMany(Meeting::class);
-    }
     public function asset()
     {
         return $this->hasMany(Asset::class);
     }
-    public function notice()
-    {
-        return $this->hasMany(Notice::class);
-    }
-
 }

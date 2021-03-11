@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Notice;
 use App\Interfaces\NoticeInterface;
+use App\Http\Requests\NoticeValidation;
+use Illuminate\Support\Facades\DB;
+
 
 class NoticeController extends Controller
 {
@@ -24,8 +27,8 @@ class NoticeController extends Controller
     public function index()
     {
        // $this->noticeInterface->showNotice($request);
-        $notice = Notice::all();
-        return view('notice.allnotice',compact('notice'));
+        $notices = Notice::latest()->paginate(12);
+        return view('notice.allnotice',['notices' => $notices]);
     }
 
     /**
@@ -45,11 +48,11 @@ class NoticeController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function store(Request $request)
+    public function store(NoticeValidation $request)
     {
         $status = $this->noticeInterface->addNotice($request);
         if ($status) {
-            return redirect()->route('society.notices.index')->with('success', 'Notice Added successfully');
+            return redirect()->route('member.notices.index')->with('success', 'Notice Added successfully');
         } else {
             return redirect()->back()->with('error', 'Something went wrong');
         }
@@ -76,6 +79,7 @@ class NoticeController extends Controller
     public function edit(Notice $notice)
     {
         //
+        return view('notice.editnotice', compact('notice'));
     }
 
     /**
@@ -87,7 +91,12 @@ class NoticeController extends Controller
      */
     public function update(Request $request, Notice $notice)
     {
-        //
+        $status = $this->noticeInterface->updateNotice($request, $notice);
+        if ($status) {
+            return redirect()->route('member.notices.index')->with('success', 'Notice Edited successfully');
+        } else {
+            return redirect()->back()->with('error', 'Something went wrong');
+        }
     }
 
     /**
@@ -98,6 +107,13 @@ class NoticeController extends Controller
      */
     public function destroy(Notice $notice)
     {
-        //
+        //dd($notice);
+        $status = $this->noticeInterface->deleteNotice($notice);
+        if ($status) {
+            return redirect()->route('member.notices.index')->with('success', 'Notice Deleted successfully');
+            //echo "<script>alert('deleted');</script>";
+        } else {
+            return redirect()->back()->with('error', 'Something went wrong');
+        }
     }
 }

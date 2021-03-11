@@ -14,7 +14,7 @@
                             <label class="col-sm-2 col-form-label">Title:</label>
 
                            <div class="col-sm-10">
-                            <input type="text" class="form-control" placeholder="Enter Title Name" name="title">
+                            <input type="text" class="form-control" placeholder="Enter Title Name" name="title" value="@if(isset($notice->title)){{ $notice['title']}}@endif">
                         </div>
                         </div>
 
@@ -23,7 +23,7 @@
                             <label class="font-normal col-sm-2 col-form-label">Description:</label>
 
                             <div class="col-sm-10">
-                                <textarea  rows="3" class="form-control" placeholder="Enter Description" name="description"></textarea>
+                                <textarea  rows="3" class="form-control" placeholder="Enter Description" name="description" >@if(isset($notice->description)){{ $notice['description']}}@endif</textarea>
                             </div>
                         </div>
 
@@ -32,9 +32,11 @@
                      <div class="form-group row text-center">
                         <div class="col-12">
                             <button class="btn btn-primary btn-lg" type="submit">
-                               Add
+                                @if(isset($notice['title'])) Edit
+                                @else Add
+                                @endif
                             </button>
-                            <a class="btn btn-white btn-lg" href="{{ route('society.notices.index') }}">Cancel</a>
+                            <a class="btn btn-white btn-lg" href="{{ route('member.notices.index') }}">Cancel</a>
                         </div>
                     </div>
 

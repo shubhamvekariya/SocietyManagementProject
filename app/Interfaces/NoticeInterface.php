@@ -6,7 +6,7 @@ interface NoticeInterface
 {
     public function addNotice($request);
     //public function showNotice($request);
-    //public function deleteNotice($meeting);
-    //public function updateNotice($request,$meeting);
+    public function deleteNotice($notice);
+    public function updateNotice($request,$meeting);
 
 }

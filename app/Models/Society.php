@@ -39,4 +39,12 @@ class Society extends Authenticatable
     {
         return $this->hasMany(Staff::class);
     }
+    public function meeting()
+    {
+        return $this->hasMany(Meeting::class);
+    }
+    public function notice()
+    {
+        return $this->hasMany(Notice::class);
+    }
 }

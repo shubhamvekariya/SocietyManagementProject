@@ -38,14 +38,14 @@ class MeetingRepository implements MeetingInterface
     public function showMeeting($request)
     {
 
-    $data = Meeting::where('society_id',Auth::user()->id)->get();
+    $data = Meeting::where('society_id',Auth::user()->apartment->society_id)->get();
             return DataTables::of($data)
                     ->addIndexColumn()
                     ->addColumn('action', function($row){
 
-                            $btn = '<form action="'.route('society.meetings.destroy',[$row->id]).'" method="POST">';
+                            $btn = '<form action="'.route('member.meetings.destroy',[$row->id]).'" method="POST">';
                             $btn .= '<input type="hidden" name="_method" value="DELETE"><input type="hidden" name="_token" value="'.csrf_token().'">';
-                            $btn .= '<a href="'.route('society.meetings.edit',[$row->id]).'" class="edit btn btn-primary btn-rounded mx-4" style="width:78px;">Edit</a>';
+                            $btn .= '<a href="'.route('member.meetings.edit',[$row->id]).'" class="edit btn btn-primary btn-rounded mx-4" style="width:78px;">Edit</a>';
                            // @method('DELETE')
                             $btn .= '<button type="submit" class="edit btn btn-danger btn-rounded mx-3" style="width:78px;">Delete</button>';
                             $btn .= '</form>';

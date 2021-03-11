@@ -1,11 +1,11 @@
 @extends('layouts.app')
 
 @section('title')
-Add Meeting
+Edit Notice
 @endsection
 
 @section('breadcrumb-title')
-    Add Meeting
+Edit Notice
 @endsection
 
 @section('breadcrumb-item')
@@ -13,25 +13,18 @@ Add Meeting
         <a href="{{ route('society.home') }}">Home</a>
     </li>
     <li class="breadcrumb-item active">
-        <strong>Add Meeting</strong>
+        <strong>Edit Notice</strong>
     </li>
 @endsection
 
 @section('content')
 <div class="ibox-content w-75 my-5 p-5 mx-auto border">
-    <form  action="{{route('society.meetings.store')}}" method="POST">
+    <form  action="{{route('member.notices.update',$notice->id)}}" method="POST">
         @csrf
-        @include('society.formmeeting')
+        @method('put')
+        @include('notice.formnotice')
 
     </form>
 </div>
 @endsection
 
-@push('script')
-    <script type="text/javascript">
-        $(function () {
-            $('#datetimepicker1').datetimepicker();
-            $('#datetimepicker2').datetimepicker();
-        });
-    </script>
-@endpush

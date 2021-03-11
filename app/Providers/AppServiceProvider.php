@@ -20,7 +20,7 @@ use App\Interfaces\AssetInterface;
 use App\Repository\AssetRepository;
 use App\Interfaces\NoticeInterface;
 use App\Repository\NoticeRepository;
-
+use Illuminate\Pagination\Paginator;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Schema;
 
@@ -44,6 +44,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Schema::defaultStringLength(191);
+        Paginator::useBootstrap();
         $this->app->bind(MemberInterface::class,MemberRepository::class);
         $this->app->bind(SocietyInterface::class,SocietyRepository::class);
         $this->app->bind(ApproveInterface::class,ApproveRepository::class);

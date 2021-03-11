@@ -34,4 +34,28 @@ class NoticeRepository implements NoticeInterface
     {
 
     }*/
+    public function deleteNotice($notice)
+    {
+        $n = $notice->delete();
+        if($n)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+    public function updateNotice($request,$notice)
+    {
+        $n = $notice->update($request->all());
+        if($n)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
 }
