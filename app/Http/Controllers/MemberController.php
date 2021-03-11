@@ -99,4 +99,13 @@ class MemberController extends Controller
             return redirect()->back()->with('error', 'Something went wrong');
         }
     }
+
+    public function disapprovevisitors(Request $request)
+    {
+        if ($request->ajax()) {
+            return $this->approveInterface->disapprovevisitors();
+        }
+
+        return view('member.approvevisitors');
+    }
 }

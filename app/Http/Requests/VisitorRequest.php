@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Route;
 
 class VisitorRequest extends FormRequest
 {
@@ -29,13 +30,29 @@ class VisitorRequest extends FormRequest
      */
     public function rules()
     {
-        return [
-            //
-            'name' => 'required',
-            'phoneno' => 'required',
-            'member' => 'required',
-            'entryTime' => 'required|date|after:today',
-            'type' => 'required_with:vehicle_no'
-        ];
+        switch (Route::currentRouteName()) {
+
+            case 'staff.visitors.create':
+                $rules = [
+                    'name' => 'required',
+                    'phoneno' => 'required',
+                    'member' => 'required',
+                    'entryTime' => 'required|date|after:today',
+                    'type' => 'required_with:vehicle_no'
+                ];
+                break;
+            case 'staff.visitors.update':
+                $rules = [
+                    'name' => 'required',
+                    'phoneno' => 'required',
+                    'member' => 'required',
+                    'type' => 'required_with:vehicle_no'
+                ];
+                break;
+            default:
+                $rules = [];
+        }
+
+        return $rules;
     }
 }

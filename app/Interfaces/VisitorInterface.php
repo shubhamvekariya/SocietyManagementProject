@@ -5,5 +5,6 @@ namespace App\Interfaces;
 interface VisitorInterface
 {
     public function addVisitor($request);
-    public function getvisitors();
+    public function getVisitors();
+    public function editVisitor($request,$visitor);
 }

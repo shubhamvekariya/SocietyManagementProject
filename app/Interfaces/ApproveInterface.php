@@ -10,4 +10,5 @@ interface ApproveInterface
     public function disapprovemembers();
     public function approveVisitor($visitor_id);
     public function rejectVisitor($visitor_id);
+    public function disapprovevisitors();
 }

@@ -55,7 +55,7 @@ class VisitorController extends Controller
         $request->validated();
         $status = $this->visitorInterface->addVisitor($request);
         if ($status)
-            return redirect()->route('staff.visitors.index');
+            return redirect()->route('staff.visitors.index')->with('success','Entry of visitor done');
         else
             return redirect()->back();
     }
@@ -69,6 +69,7 @@ class VisitorController extends Controller
     public function show(Visitor $visitor)
     {
         //
+
     }
 
     /**
@@ -80,6 +81,8 @@ class VisitorController extends Controller
     public function edit(Visitor $visitor)
     {
         //
+        $members = $this->memberInterface->getSocietyMember();
+        return view('security.editvisitor', compact(['members','visitor']));
     }
 
     /**
@@ -89,9 +92,15 @@ class VisitorController extends Controller
      * @param  \App\Models\visitor $visitor
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Visitor $visitor)
+    public function update(VisitorRequest $request, Visitor $visitor)
     {
         //
+        $request->validated();
+        $status = $this->visitorInterface->editVisitor($request,$visitor);
+        if ($status)
+            return redirect()->route('staff.visitors.index')->with('success','Visitor details updated successfully');
+        else
+            return redirect()->back();
     }
 
     /**

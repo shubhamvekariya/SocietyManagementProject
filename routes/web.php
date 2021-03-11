@@ -6,6 +6,8 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\MemberController;
 use App\Http\Controllers\StaffController;
 use App\Http\Controllers\VisitorController;
+use App\Models\Staff;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
 
@@ -28,7 +30,6 @@ Route::group(['middleware' => ['auth:society','role:secretary,society'] ], funct
     Route::get('/society',  function () {
         return view('society.index');
     })->name('society.home');
-
     Route::get('/approvemember/{user_id}', [SecretaryController::class,'approve'])->name('society.approvemember');
     Route::get('/rejectmember/{user_id}', [SecretaryController::class,'reject'])->name('society.rejectmember');
     Route::get('/disapprovemembers', [SecretaryController::class,'disapprovemembers'])->name('society.needapprove');
@@ -44,6 +45,10 @@ Route::group(['middleware' => ['auth:society','role:secretary,society'] ], funct
     Route::get('/delete_rule/{id}', [SecretaryController::class,'delete_rule'])->name('society.delete_rule');
     Route::get('/edit_rule/{id}', [SecretaryController::class,'edit_rule'])->name('society.edit_rule');
     Route::put('/update_rule', [SecretaryController::class,'update_rule'])->name('society.update_rule');
+    Route::get('/markasread/{id}',  function ($id) {
+        Auth::user()->unreadNotifications->where('id',$id)->markAsRead();
+        return redirect()->back();
+    })->name('society.markasread');
 });
 
 Route::group(['middleware' => ['auth','role:member'] ], function(){
@@ -60,9 +65,15 @@ Route::group(['middleware' => ['auth','role:member'] ], function(){
         Route::get('/deletefamilymem/{id}', [MemberController::class,'delete_familymem'])->name('member.deletefamilymem');
         Route::get('/editfamilymem/{id}', [MemberController::class,'edit_familymem'])->name('member.editfamilymem');
         Route::put('/updatefamilymem', [MemberController::class,'update_familymem'])->name('member.updatefamilymem');
+
         Route::get('/approvevisitor/{visitor_id}', [MemberController::class,'approvevisitor'])->name('member.approvevisitor');
         Route::get('/rejectvisitor/{visitor_id}', [MemberController::class,'rejectvisitor'])->name('member.rejectvisitor');
-
+        Route::get('/disapprovevisitors', [MemberController::class,'disapprovevisitors'])->name('member.needapprovevisitor');
+        Route::get('/visitors/index' , [VisitorController::class , 'index'])->name('member.visitors');
+        Route::get('/markasreadmember/{id}',  function ($id) {
+            Auth::user()->unreadNotifications->where('id',$id)->markAsRead();
+            return redirect()->back();
+        })->name('member.markasread');
         Route::resource('staffs', StaffController::class, ['as' => 'member']);
         Route::middleware(['role:committeemember'])->group(function () {
 
@@ -74,6 +85,7 @@ Route::group(['middleware' => ['auth','role:member'] ], function(){
 
 Route::group(['middleware' => ['auth:staff_security','role:staff|security,staff_security'] ], function(){
     Route::get('/staff',  function () {
+
         return view('staff_security.index');
     })->name('staff.home');
     Route::group(['middleware' => ['permission:set password,staff_security']], function () {
@@ -84,6 +96,10 @@ Route::group(['middleware' => ['auth:staff_security','role:staff|security,staff_
     Route::group(['middleware' => ['role:security,staff_security']], function () {
         Route::resource('visitors', VisitorController::class, ['as' => 'staff']);
     });
+    Route::get('/markasread/{id}',  function ($id) {
+        Auth::user()->unreadNotifications->where('id',$id)->markAsRead();
+        return redirect()->back();
+    })->name('staff.markasread');
 });
 
 Route::get('/login/society',[LoginController::class,'show_login'])->name('login.society');
@@ -101,8 +117,8 @@ Route::post('/login/staff',[LoginController::class,'check_login'])->name('login.
 
 Route::get('/logout',[LoginController::class,'destroy'])->name('logout');
 
+
 Route::get('/country', function () {
     $country = Storage::get('public/country.json');
     return json_decode($country, true);
 });
-

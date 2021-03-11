@@ -3,6 +3,8 @@
 namespace App\Repository;
 
 use App\Interfaces\ApproveInterface;
+use App\Models\Society;
+use App\Models\Staff;
 use App\Models\User;
 use App\Models\Visitor;
 use Illuminate\Support\Facades\Auth;
@@ -75,10 +77,17 @@ class ApproveRepository implements ApproveInterface
 
     public function approveVisitor($visitor_id)
     {
-        $user = Visitor::findOrFail($visitor_id);
-        $user->approved_at = now();
-        $user->save();
-        if ($user->wasChanged())
+        $visitor = Visitor::findOrFail($visitor_id);
+        $visitor->approved_at = now();
+        $society_id = Auth::user()->apartment->society_id;
+        $users = Staff::where('society_id',$society_id)->get();
+        $details = [
+                'body' => 'Visitor '.$visitor->name.' approved',
+        ];
+        foreach($users as $user)
+            $user->notify(new \App\Notifications\Approve($details));
+        $visitor->save();
+        if ($visitor->wasChanged())
             return true;
         return false;
     }
@@ -92,5 +101,17 @@ class ApproveRepository implements ApproveInterface
             return true;
         return false;
     }
-
+    public function disapprovevisitors()
+    {
+        $disapprovevisitors = Visitor::select('parking_details.*', 'visitors_details.*')->leftjoin('parking_details', 'visitors_details.id', '=', 'parking_details.visitor_id')->where('visitors_details.user_id', Auth::user()->id)->where('visitors_details.approved_at', null)->get();
+        return DataTables::of($disapprovevisitors)
+            ->addIndexColumn()
+            ->addColumn('action', function ($row) {
+                $btn = '<a href="' . route('member.approvevisitor', $row['id']) . '" class="edit btn btn-primary btn-rounded mx-4" style="width:78px;">Approve</a>';
+                $btn .= '<a href="' . route('member.rejectvisitor', $row['id']) . '" class="edit btn btn-danger btn-rounded mx-3" style="width:78px;">Reject</a>';
+                return $btn;
+            })
+            ->rawColumns(['action'])
+            ->make(true);
+    }
 }

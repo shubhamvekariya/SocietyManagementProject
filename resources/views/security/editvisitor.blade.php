@@ -1,11 +1,11 @@
 @extends('layouts.app')
 
 @section('title')
-    Make entry of visitor
+    Edit visitor details
 @endsection
 
 @section('breadcrumb-title')
-    Make entry of visitor
+   Edit visitor details
 @endsection
 
 @section('breadcrumb-item')
@@ -13,7 +13,7 @@
         <a href="{{ route('member.home') }}">Home</a>
     </li>
     <li class="breadcrumb-item active">
-        <strong>Make entry of visitor</strong>
+        <strong>Edit visitor</strong>
     </li>
 @endsection
 
@@ -32,8 +32,9 @@
     @endif
     <div class="wrapper wrapper-content mt-0">
         <div class="ibox-content w-75 my-5 mx-auto border py-5">
-            <form action="{{ route('staff.visitors.store') }}" method="post">
+            <form action="{{ route('staff.visitors.update',$visitor->id) }}" method="post">
                 @csrf
+                @method('PUT')
                 @include('security.formvisitor')
             </form>
         </div>
@@ -41,23 +42,11 @@
 @endsection
 
 @push('script')
-    <script type="text/javascript">
-        $(document).ready(function() {
-
-            var m = new Date();
-            var nowTime =
-                m.getFullYear() + "-" +
-                ("0" + (m.getMonth() + 1)).slice(-2) + "-" +
-                ("0" + m.getDate()).slice(-2) + " " +
-                ("0" + m.getHours()).slice(-2) + ":" +
-                ("0" + m.getMinutes()).slice(-2) + ":" +
-                ("0" + m.getSeconds()).slice(-2);
-            $('#entryTime').datetimepicker({
-                format: 'Y-M-DD H:m:s',
-                minDate: 'now',
-                date: nowTime
-            });
-        });
-
+    <script>
+        user_id = {!! str_replace("'", "\'", json_encode($visitor->user_id)) !!};
+        $('#member').val(user_id);
+        type = {!! str_replace("'", "\'", json_encode($visitor->parking->type)) !!};
+        $('#type').val(type);
     </script>
 @endpush
+

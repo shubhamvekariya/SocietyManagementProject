@@ -11,7 +11,12 @@ Visitors
 @endsection
 @section('breadcrumb-item')
     <li class="breadcrumb-item">
-        <a href="{{ route('staff.home') }}">Home</a>
+        @role('security')
+            <a href="{{ route('staff.home') }}">Home</a>
+        @endrole
+        @role('member')
+            <a href="{{ route('member.home') }}">Home</a>
+        @endrole
     </li>
     <li class="breadcrumb-item active">
         <strong>Visitors</strong>
@@ -33,8 +38,12 @@ Visitors
                     <th>No</th>
                     <th>Name</th>
                     <th>Phone Number</th>
-                    <th>Whom to meet</th>
-                    <th width="250px">Action</th>
+                    <th>Entry time</th>
+                    <th>Exit time</th>
+                    @role('security')
+                        <th>Whom to meet</th>
+                        <th width="250px">Action</th>
+                    @endrole
                 </tr>
             </thead>
             <tfoot>
@@ -42,8 +51,12 @@ Visitors
                     <th>No</th>
                     <th>Name</th>
                     <th>Phone Number</th>
-                    <th>Whom to meet</th>
-                    <th width="250px">Action</th>
+                    <th>Entry time</th>
+                    <th>Exit time</th>
+                    @role('security')
+                        <th>Whom to meet</th>
+                        <th width="250px">Action</th>
+                    @endrole
                 </tr>
             </tfoot>
         </table>
@@ -53,21 +66,45 @@ Visitors
 @push('script')
     <script src="{{ asset('js/datatables.min.js') }}"></script>
     <script src="{{ asset('js/dataTables.bootstrap4.min.js') }}"></script>
-    <script>
-        $(function () {
-            var table = $('#visitorTable').DataTable({
-                processing: true,
-                serverSide: true,
-                ajax: "{{ route('staff.visitors.index') }}",
-                columns: [
-                    {data: 'id', name: 'id'},
-                    {data: 'name', name: 'name'},
-                    {data: 'phoneno', name: 'phoneno'},
-                    {data: 'memberdetails', name: 'memberdetails'},
-                    {data: 'action', name: 'action', orderable: false, searchable: false},
-                ]
-            });
+    @role('security')
+        <script>
+            $(function () {
+                var table = $('#visitorTable').DataTable({
+                    processing: true,
+                    serverSide: true,
+                    ajax: "{{ route('staff.visitors.index') }}",
+                    columns: [
+                        {data: 'id', name: 'id'},
+                        {data: 'name', name: 'name'},
+                        {data: 'phoneno', name: 'phoneno'},
+                        {data: 'entry_time', name: 'entry_time'},
+                        {data: 'exit_time', name: 'exit_time'},
+                        {data: 'memberdetails', name: 'memberdetails'},
+                        {data: 'action', name: 'action', orderable: false, searchable: false},
+                    ]
+                });
 
-        });
-    </script>
+            });
+        </script>
+    @endrole
+    @role('member')
+        <script>
+            $(function () {
+                var table = $('#visitorTable').DataTable({
+                    processing: true,
+                    serverSide: true,
+                    ajax: "{{ route('member.visitors') }}",
+                    columns: [
+                        {data: 'id', name: 'id'},
+                        {data: 'name', name: 'name'},
+                        {data: 'phoneno', name: 'phoneno'},
+                        {data: 'entry_time', name: 'entry_time'},
+                        {data: 'exit_time', name: 'exit_time'},
+                    ],
+                    "order": [[ 3, "asc" ]]
+                });
+
+            });
+        </script>
+    @endrole
 @endpush

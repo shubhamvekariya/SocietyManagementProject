@@ -64,6 +64,14 @@
                 </ul>
             </li>
             <li>
+                <a href="#"><i class="fa fa-eye"></i><span class="nav-label">Visitors</span><span
+                        class="fa arrow"></span></a>
+                <ul class="nav nav-second-level collapse">
+                    <li><a href="{{ route('member.needapprovevisitor') }}">Approve Visitor</a></li>
+                    <li><a href="{{ route('member.visitors') }}">See Visitor Records</a></li>
+                </ul>
+            </li>
+            <li>
                 <a href="#"><i class="fa fa-shield"></i><span class="nav-label">Security & Staff</span><span
                         class="fa arrow"></span></a>
                 <ul class="nav nav-second-level collapse">
