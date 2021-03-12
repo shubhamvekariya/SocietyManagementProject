@@ -16,10 +16,10 @@ class CreateMeetingDetailsTable extends Migration
         Schema::create('meeting_details', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->string('date');
-            $table->string('start_time');
-            $table->string('end_time')->nullable();
-            $table->longText('place');
+            $table->longText('description')->nullable();
+            $table->timestamp('start_time');
+            $table->timestamp('end_time')->nullable();
+            $table->string('place');
 
             $table->foreignId('society_id')->constrained('societies')->onUpdate('cascade')->onDelete('cascade');
             $table->softDeletes();

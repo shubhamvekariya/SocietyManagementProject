@@ -14,4 +14,8 @@ class Rule extends Model
         'description',
         'society_id',
     ];
+    public function society()
+    {
+        return $this->belongsTo('App\Models\Society');
+    }
 }

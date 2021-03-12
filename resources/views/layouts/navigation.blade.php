@@ -80,8 +80,36 @@
                     <li><a href="#">Monthly Attendence</a></li>
                 </ul>
             </li>
-        @else
-        @role('security')
+            <li>
+                <a href="#"><i class="fa fa-calendar"></i><span class="nav-label">Event/Assets</span><span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level collapse">
+                    <li><a href="{{route('member.assets.create')}}">Book Assets</a></li>
+                    <li><a href="{{route('member.assets.index')}}">View Assets</a></li>
+                </ul>
+            </li>
+            @role('committeemember')
+
+                <li>
+                    <a href="#"><i class="fa fa-user-circle-o"></i><span class="nav-label">Meeting</span><span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level collapse">
+                        <li><a href="{{route('member.meetings.create')}}">Add Meeting</a></li>
+                        <li><a href="{{route('member.meetings.index')}}">Manage Meeting</a></li>
+
+                    </ul>
+                </li>
+                <li>
+                    <a href="#"><i class="fa fa-sticky-note"></i><span class="nav-label">Notice</span><span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level collapse">
+                        <li><a href="{{route('member.notices.create')}}">Add Notice</a></li>
+                        <li><a href="{{route('member.notices.index')}}">All Notice</a></li>
+
+                    </ul>
+                </li>
+
+            @endrole
+            @else
+
+            @role('security')
             <li>
                 <a href="#"><i class="fa fa-eye"></i><span class="nav-label">Visitors</span><span
                         class="fa arrow"></span></a>

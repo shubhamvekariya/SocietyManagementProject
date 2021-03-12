@@ -6,8 +6,10 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\MemberController;
 use App\Http\Controllers\StaffController;
 use App\Http\Controllers\VisitorController;
-use App\Models\Staff;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\MeetingController;
+use App\Http\Controllers\AssetController;
+use App\Http\Controllers\NoticeController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
 
@@ -49,6 +51,10 @@ Route::group(['middleware' => ['auth:society','role:secretary,society'] ], funct
         Auth::user()->unreadNotifications->where('id',$id)->markAsRead();
         return redirect()->back();
     })->name('society.markasread');
+
+    Route::resource('meetings',MeetingController::class,['as' => 'society']);
+    Route::resource('notices',NoticeController::class,['as' => 'society']);
+
 });
 
 Route::group(['middleware' => ['auth','role:member'] ], function(){
@@ -75,7 +81,11 @@ Route::group(['middleware' => ['auth','role:member'] ], function(){
             return redirect()->back();
         })->name('member.markasread');
         Route::resource('staffs', StaffController::class, ['as' => 'member']);
+        Route::resource('assets',AssetController::class,['as' => 'member']);
+
         Route::middleware(['role:committeemember'])->group(function () {
+            Route::resource('meetings',MeetingController::class,['as' => 'member']);
+            Route::resource('notices',NoticeController::class,['as' => 'member']);
 
         });
     });

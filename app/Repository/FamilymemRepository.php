@@ -36,7 +36,7 @@ class FamilymemRepository implements FamilymemInterface
 
     public function showFamilymem($request)
     {
-        $data = Family::all();
+        $data = Family::where('user_id',Auth::user()->id)->get();
         return DataTables::of($data)
             ->addIndexColumn()
             ->addColumn('action', function ($row) {
