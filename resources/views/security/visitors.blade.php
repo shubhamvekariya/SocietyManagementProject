@@ -1,9 +1,9 @@
 @extends('layouts.app')
 @section('title')
-Visitors
+    Visitors
 @endsection
 @push('css')
-<link href="{{ mix('/css/datatables.min.css') }}" rel="stylesheet">
+    <link href="{{ mix('/css/datatables.min.css') }}" rel="stylesheet">
 @endpush
 
 @section('breadcrumb-title')
@@ -12,10 +12,10 @@ Visitors
 @section('breadcrumb-item')
     <li class="breadcrumb-item">
         @role('security')
-            <a href="{{ route('staff.home') }}">Home</a>
+        <a href="{{ route('staff.home') }}">Home</a>
         @endrole
         @role('member')
-            <a href="{{ route('member.home') }}">Home</a>
+        <a href="{{ route('member.home') }}">Home</a>
         @endrole
     </li>
     <li class="breadcrumb-item active">
@@ -24,87 +24,176 @@ Visitors
 @endsection
 
 @section('content')
-@if(session()->has('success'))
-<div class="alert alert-success alert-dismissable">
-    <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
-        <strong>{{ session()->get('success') }}</strong>
-    </div>
-@endif
-<div class="wrapper wrapper-content">
-    <div class="table-responsive">
-        <table class="table table-striped table-bordered table-hover" id="visitorTable" >
-            <thead>
-                <tr>
-                    <th>No</th>
-                    <th>Name</th>
-                    <th>Phone Number</th>
-                    <th>Entry time</th>
-                    <th>Exit time</th>
-                    @role('security')
+    @if (session()->has('success'))
+        <div class="alert alert-success alert-dismissable">
+            <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+            <strong>{{ session()->get('success') }}</strong>
+        </div>
+    @endif
+    <div class="wrapper wrapper-content">
+        <div class="table-responsive">
+            <table class="table table-striped table-bordered table-hover" id="visitorTable">
+                <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>Name</th>
+                        <th>Phone Number</th>
+                        <th>Entry time</th>
+                        @unlessrole('security')
+                        <th>Exit time</th>
+                        @endunlessrole
+                        @if (Route::currentRouteName() == 'staff.visitors.allvisitors')
+                            <th>Exit time</th>
+                        @endif
+                        @role('security')
                         <th>Whom to meet</th>
-                        <th width="250px">Action</th>
-                    @endrole
-                </tr>
-            </thead>
-            <tfoot>
-                <tr>
-                    <th>No</th>
-                    <th>Name</th>
-                    <th>Phone Number</th>
-                    <th>Entry time</th>
-                    <th>Exit time</th>
-                    @role('security')
+                        @if (Route::currentRouteName() == 'staff.visitors.index')
+                            <th width="250px">Action</th>
+                        @endif
+                        @endrole
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <th>No</th>
+                        <th>Name</th>
+                        <th>Phone Number</th>
+                        <th>Entry time</th>
+                        @unlessrole('security')
+                        <th>Exit time</th>
+                        @endunlessrole
+                        @if (Route::currentRouteName() == 'staff.visitors.allvisitors')
+                            <th>Exit time</th>
+                        @endif
+                        @role('security')
                         <th>Whom to meet</th>
-                        <th width="250px">Action</th>
-                    @endrole
-                </tr>
-            </tfoot>
-        </table>
-</div>
-@endsection
+                        @if (Route::currentRouteName() == 'staff.visitors.index')
+                            <th width="250px">Action</th>
+                        @endif
+                        @endrole
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    @endsection
 
-@push('script')
-    <script src="{{ asset('js/datatables.min.js') }}"></script>
-    <script src="{{ asset('js/dataTables.bootstrap4.min.js') }}"></script>
-    @role('security')
-        <script>
-            $(function () {
-                var table = $('#visitorTable').DataTable({
-                    processing: true,
-                    serverSide: true,
-                    ajax: "{{ route('staff.visitors.index') }}",
-                    columns: [
-                        {data: 'id', name: 'id'},
-                        {data: 'name', name: 'name'},
-                        {data: 'phoneno', name: 'phoneno'},
-                        {data: 'entry_time', name: 'entry_time'},
-                        {data: 'exit_time', name: 'exit_time'},
-                        {data: 'memberdetails', name: 'memberdetails'},
-                        {data: 'action', name: 'action', orderable: false, searchable: false},
-                    ]
+    @push('script')
+        <script src="{{ asset('js/datatables.min.js') }}"></script>
+        <script src="{{ asset('js/dataTables.bootstrap4.min.js') }}"></script>
+        @role('security')
+        @if (Route::currentRouteName() == 'staff.visitors.index')
+            <script>
+                $(function() {
+                    var table = $('#visitorTable').DataTable({
+                        processing: true,
+                        serverSide: true,
+                        ajax: "{{ route('staff.visitors.index') }}",
+                        columns: [{
+                                data: 'id',
+                                name: 'id'
+                            },
+                            {
+                                data: 'name',
+                                name: 'name'
+                            },
+                            {
+                                data: 'phoneno',
+                                name: 'phoneno'
+                            },
+                            {
+                                data: 'entry_time',
+                                name: 'entry_time'
+                            },
+                            {
+                                data: 'memberdetails',
+                                name: 'memberdetails'
+                            },
+                            {
+                                data: 'action',
+                                name: 'action',
+                                orderable: false,
+                                searchable: false
+                            },
+                        ]
+                    });
+
                 });
 
-            });
-        </script>
-    @endrole
-    @role('member')
+            </script>
+        @elseif(Route::currentRouteName() == 'staff.visitors.allvisitors')
+            <script>
+                $(function() {
+                    var table = $('#visitorTable').DataTable({
+                        processing: true,
+                        serverSide: true,
+                        ajax: "{{ route('staff.visitors.allvisitors') }}",
+                        columns: [{
+                                data: 'id',
+                                name: 'id'
+                            },
+                            {
+                                data: 'name',
+                                name: 'name'
+                            },
+                            {
+                                data: 'phoneno',
+                                name: 'phoneno'
+                            },
+                            {
+                                data: 'entry_time',
+                                name: 'entry_time'
+                            },
+                            {
+                                data: 'exit_time',
+                                name: 'exit_time'
+                            },
+                            {
+                                data: 'memberdetails',
+                                name: 'memberdetails'
+                            }
+                        ]
+                    });
+
+                });
+
+            </script>
+        @endif
+        @endrole
+        @role('member')
         <script>
-            $(function () {
+            $(function() {
                 var table = $('#visitorTable').DataTable({
                     processing: true,
                     serverSide: true,
                     ajax: "{{ route('member.visitors') }}",
-                    columns: [
-                        {data: 'id', name: 'id'},
-                        {data: 'name', name: 'name'},
-                        {data: 'phoneno', name: 'phoneno'},
-                        {data: 'entry_time', name: 'entry_time'},
-                        {data: 'exit_time', name: 'exit_time'},
+                    columns: [{
+                            data: 'id',
+                            name: 'id'
+                        },
+                        {
+                            data: 'name',
+                            name: 'name'
+                        },
+                        {
+                            data: 'phoneno',
+                            name: 'phoneno'
+                        },
+                        {
+                            data: 'entry_time',
+                            name: 'entry_time'
+                        },
+                        {
+                            data: 'exit_time',
+                            name: 'exit_time'
+                        },
                     ],
-                    "order": [[ 3, "asc" ]]
+                    "order": [
+                        [3, "asc"]
+                    ]
                 });
 
             });
+
         </script>
-    @endrole
-@endpush
+        @endrole
+    @endpush

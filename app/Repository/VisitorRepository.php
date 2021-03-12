@@ -6,6 +6,7 @@ use App\Interfaces\VisitorInterface;
 use App\Models\Parking;
 use App\Models\User;
 use App\Models\Visitor;
+use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use Pusher\Pusher;
 use Yajra\DataTables\Facades\DataTables;
@@ -69,7 +70,10 @@ class VisitorRepository implements VisitorInterface
     {
         $user = Auth::user();
         if ($user->hasAnyRole('security', 'staff_security'))
-            $visitors = Visitor::select('parking_details.*', 'visitors_details.*')->leftjoin('parking_details', 'visitors_details.id', '=', 'parking_details.visitor_id')->join('users', 'users.id', '=', 'visitors_details.user_id')->join('apartments', 'users.id', '=', 'apartments.user_id')->where('apartments.society_id', $user->society_id)->where('visitors_details.approved_at','!=',null)->get();
+            if(Route::currentRouteName() == "staff.visitors.index")
+                $visitors = Visitor::select('parking_details.*', 'visitors_details.*')->leftjoin('parking_details', 'visitors_details.id', '=', 'parking_details.visitor_id')->join('users', 'users.id', '=', 'visitors_details.user_id')->join('apartments', 'users.id', '=', 'apartments.user_id')->where('apartments.society_id', $user->society_id)->where('visitors_details.approved_at','!=',null)->where('visitors_details.exit_time',null)->get();
+            else if(Route::currentRouteName() == "staff.visitors.allvisitors")
+                $visitors = Visitor::select('parking_details.*', 'visitors_details.*')->leftjoin('parking_details', 'visitors_details.id', '=', 'parking_details.visitor_id')->join('users', 'users.id', '=', 'visitors_details.user_id')->join('apartments', 'users.id', '=', 'apartments.user_id')->where('apartments.society_id', $user->society_id)->where('visitors_details.approved_at','!=',null)->where('visitors_details.exit_time','!=',null)->get();
         if ($user->hasAnyRole('member'))
             $visitors = Visitor::select('parking_details.*', 'visitors_details.*')->leftjoin('parking_details', 'visitors_details.id', '=', 'parking_details.visitor_id')->where('visitors_details.user_id', $user->id)->where('visitors_details.approved_at','!=', null)->get();
         return DataTables::of($visitors)
@@ -82,11 +86,8 @@ class VisitorRepository implements VisitorInterface
                 return $memberdata;
             })
             ->addColumn('action', function ($row) {
-                $btn = '<form action="' . route('staff.visitors.destroy', $row['id']) . '" method="POST">';
-                $btn .= '<input type="hidden" name="_method" value="DELETE"> <input type="hidden" name="_token" value="' . csrf_token() . '">';
-                $btn .= '<a href="' . route('staff.visitors.edit', $row['id']) . '" class="edit btn btn-primary btn-rounded mx-4" style="width:78px;">Edit</a>';
-                $btn .= '<button class="edit btn btn-danger btn-rounded mx-3" style="width:78px;">Delete</a>';
-                $btn .= '</form>';
+                $btn = '<a href="' . route('staff.visitors.edit', $row['id']) . '" class="edit btn btn-primary btn-rounded mx-3" style="width:90px;">Edit</a>';
+                $btn .= '<a href="' . route('staff.visitors.checkout', $row['id']) . '" class="edit btn btn-success btn-rounded mx-3" style="width:90px;">Check Out</a>';
                 return $btn;
             })
             ->rawColumns(['action'])

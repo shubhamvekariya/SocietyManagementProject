@@ -100,7 +100,7 @@
         @else
             <button class="btn btn-primary btn-lg mx-2" type="submit">Edit</button>
         @endif
-        <a class="btn btn-white btn-lg mx-2">Cancel</a>
+        <a href="{{ route('staff.visitors.index') }}" class="btn btn-white btn-lg mx-2">Cancel</a>
 
     </div>
 </div>

@@ -26,6 +26,7 @@ class VisitorController extends Controller
     public function index(Request $request)
     {
         //
+
         if($request->ajax())
             return $this->visitorInterface->getvisitors();
         return view('security.visitors');
@@ -112,5 +113,16 @@ class VisitorController extends Controller
     public function destroy(Visitor $visitor)
     {
         //
+    }
+
+     /**
+     *
+     * @param  \App\Models\visitor $visitor
+     * @return \Illuminate\Http\Response
+     */
+    public function checkout(Visitor $visitor)
+    {
+        $visitor->update(['exit_time' => now()]);
+        return redirect()->back()->with('success','Visitor '.$visitor->name.' check out');
     }
 }

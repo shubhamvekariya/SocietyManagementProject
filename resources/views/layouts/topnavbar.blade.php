@@ -55,12 +55,19 @@
                         <li class="dropdown-divider"></li>
                     @endforeach
                     <li>
-                        <div class="text-center link-block">
-                            <a href="notifications.html" class="dropdown-item">
-                                <strong>See All Notification</strong>
-                                <i class="fa fa-angle-right"></i>
-                            </a>
-                        </div>
+                        @if(Auth::user()->unreadNotifications->count() != 0)
+                            <div class="text-center link-block">
+                                <a href="notifications.html" class="dropdown-item">
+                                    <strong>See All Notification</strong>
+                                    <i class="fa fa-angle-right"></i>
+                                </a>
+                            </div>
+                        @else
+                            <div class="text-center link-block">
+                                <strong>Nothing to see</strong>
+                            </div>
+                        @endif
+
                     </li>
                 </ul>
             </li>

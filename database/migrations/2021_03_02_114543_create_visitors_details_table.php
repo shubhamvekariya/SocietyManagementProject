@@ -20,12 +20,12 @@ class CreateVisitorsDetailsTable extends Migration
             $table->bigInteger('phoneno');
             $table->longText('address')->nullable();
             $table->string('reason_to_meet')->nullable();
-            $table->timestamp('entry_time');
+            $table->timestamps();
+            $table->timestamp('entry_time')->useCurrent();
             $table->timestamp('exit_time')->nullable();
             $table->timestamp('approved_at')->nullable();
             $table->foreignId('user_id')->constrained('users')->onUpdate('cascade')->onDelete('cascade');
             $table->softDeletes();
-            $table->timestamps();
         });
     }
 

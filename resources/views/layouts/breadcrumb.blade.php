@@ -5,11 +5,6 @@
             @yield('breadcrumb-item')
         </ol>
     </div>
-    <div class="col-sm-8">
-        <div class="title-action">
-            <a href="" class="btn btn-primary">This is action area</a>
-        </div>
-    </div>
 </div>
 
 @if (Session::has('approvesuccess'))
