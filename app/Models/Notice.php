@@ -9,10 +9,14 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Notice extends Model
 {
     use HasFactory,SoftDeletes;
+    protected $table = "notice_details";
     protected $fillable = [
         'title',
         'description',
-        'date',
         'society_id',
     ];
+    public function society()
+    {
+        return $this->belongsTo('App\Models\Society');
+    }
 }

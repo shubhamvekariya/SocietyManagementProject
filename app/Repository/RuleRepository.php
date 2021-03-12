@@ -34,7 +34,7 @@ class RuleRepository implements RuleInterface
     public function showRule($request)
     {
 
-            $data = Rule::all();
+            $data = Rule::where('society_id',Auth::user()->id)->get();
             return DataTables::of($data)
                     ->addIndexColumn()
                     ->addColumn('action', function($row){

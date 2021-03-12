@@ -17,10 +17,6 @@ class CreateNoticeDetailsTable extends Migration
             $table->id();
             $table->string('title');
             $table->longText('description')->nullable();
-            $table->string('date');
-            
-            
-
             $table->foreignId('society_id')->constrained('societies')->onUpdate('cascade')->onDelete('cascade');
             $table->softDeletes();
 

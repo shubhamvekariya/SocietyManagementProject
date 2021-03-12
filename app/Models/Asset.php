@@ -10,15 +10,19 @@ class Asset extends Model
 {
     use HasFactory,SoftDeletes;
     protected $fillable = [
-        'date_of_booking',
+        'name',
         'start_time',
         'end_time',
         'assets',
         'func_details',
         'charges',
         'user_id',
-        
-    ];
 
-    
+    ];
+    public function user()
+    {
+        return $this->belongsTo('App\Models\User');
+    }
+
+
 }
