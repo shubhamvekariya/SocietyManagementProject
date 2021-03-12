@@ -9,13 +9,19 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Complaint extends Model
 {
     use HasFactory,SoftDeletes;
+    protected $table = 'complaint_details';
     protected $fillable = [
-        'complaint_no',
+        'title',
+        'description',
         'category',
-        'complaint_title',
         'reg_date',
         'status',
         'remarks',
         'user_id',
     ];
+
+    public function user()
+    {
+        return $this->belongsTo('App\Models\User');
+    }
 }

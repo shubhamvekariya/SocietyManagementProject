@@ -8,6 +8,7 @@ use App\Http\Controllers\StaffController;
 use App\Http\Controllers\MeetingController;
 use App\Http\Controllers\AssetController;
 use App\Http\Controllers\NoticeController;
+use App\Http\Controllers\ComplaintController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
 
@@ -69,6 +70,7 @@ Route::group(['middleware' => ['auth','role:member'] ], function(){
 
         Route::resource('staffs', StaffController::class, ['as' => 'member']);
         Route::resource('assets',AssetController::class,['as' => 'member']);
+        Route::resource('complaints',ComplaintController::class,['as' => 'member']);
 
         Route::middleware(['role:committeemember'])->group(function () {
             Route::resource('meetings',MeetingController::class,['as' => 'member']);

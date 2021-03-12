@@ -79,6 +79,17 @@
                     <li><a href="{{route('member.assets.index')}}">View Assets</a></li>
                 </ul>
             </li>
+            <li>
+                <a href="#"><i class="fa fa-book"></i><span class="nav-label">Complaints</span><span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level collapse">
+                    <li><a href="{{route('member.complaints.create')}}">Register Complaints</a></li>
+                    <li><a href="{{route('member.complaints.index')}}">All Complaints</a></li>
+                    <li><a href="#">Resolved</a></li>
+                    <li><a href="#">In progress</a></li>
+
+                </ul>
+            </li>
+
             @role('committeemember')
 
                 <li>
@@ -137,15 +148,6 @@
                 </ul>
             </li>
 
-            <li>
-                <a href="#"><i class="fa fa-book"></i><span class="nav-label">Complaints</span><span class="fa arrow"></span></a>
-                <ul class="nav nav-second-level collapse">
-                    <li><a href="#">All Complaints</a></li>
-                    <li><a href="#">Resolved</a></li>
-                    <li><a href="#">In progress</a></li>
-
-                </ul>
-            </li>
 
 
 

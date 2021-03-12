@@ -15,11 +15,11 @@ class CreateComplaintDetailsTable extends Migration
     {
         Schema::create('complaint_details', function (Blueprint $table) {
             $table->id();
-            $table->string('complaint_no');
+            $table->string('title');
+            $table->string('description');
             $table->string('category')->nullable();
-            $table->string('complaint_title');
-            $table->string('reg_date')->nullable();
-            $table->string('status');
+            $table->timestamp('reg_date')->nullable();
+            $table->string('status')->nullable();
             $table->longText('remarks')->nullable();
 
             $table->foreignId('user_id')->constrained('users')->onUpdate('cascade')->onDelete('cascade');
