@@ -18,7 +18,7 @@ class NoticeRepository implements NoticeInterface
         $notice = Notice::create([
             'title' =>  $request->title,
             'description' =>  $request->description,
-            'society_id' => Auth::user()->id,
+            'society_id' => Auth::user()->apartment->society_id,
         ]);
         if($notice)
         {

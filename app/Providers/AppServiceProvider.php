@@ -53,13 +53,10 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(RuleInterface::class,RuleRepository::class);
         $this->app->bind(FamilymemInterface::class,FamilymemRepository::class);
         $this->app->bind(StaffInterface::class,StaffRepository::class);
-<<<<<<< HEAD
         $this->app->bind(VisitorInterface::class,VisitorRepository::class);
-=======
         $this->app->bind(MeetingInterface::class,MeetingRepository::class);
         $this->app->bind(AssetInterface::class,AssetRepository::class);
         $this->app->bind(NoticeInterface::class,NoticeRepository::class);
 
->>>>>>> d946887735f1fdf685ac0eff7374af9d2b7a9f70
     }
 }

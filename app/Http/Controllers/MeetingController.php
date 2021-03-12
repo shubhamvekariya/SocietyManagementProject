@@ -27,23 +27,6 @@ class MeetingController extends Controller
     {
 
         if ($request->ajax()) {
-            /*$data = Meeting::all();
-            return DataTables::of($data)
-                    ->addIndexColumn()
-                    ->addColumn('action', function($row){
-
-                            $btn = '<form action="'.route('society.meetings.destroy',[$row->id]).'" method="POST">';
-                            $btn .= '<input type="hidden" name="_method" value="DELETE"><input type="hidden" name="_token" value="'.csrf_token().'">';
-                            $btn .= '<a href="'.route('society.meetings.edit',[$row->id]).'" class="edit btn btn-primary btn-rounded mx-4" style="width:78px;">Edit</a>';
-                           // @method('DELETE')
-                            $btn .= '<button type="submit" class="edit btn btn-danger btn-rounded mx-3" style="width:78px;">Delete</button>';
-                            $btn .= '</form>';
-
-
-                            return $btn;
-                    })
-                    ->rawColumns(['action'])
-                    ->make(true);*/
             return $this->meetingInterface->showMeeting($request);
         }
         return view('cmember.allmeeting');
@@ -68,25 +51,12 @@ class MeetingController extends Controller
      */
     public function store(meetingValidation $request)
     {
-        // Meeting::create($request->all());
-        /*Meeting::create([
-            'title' =>  $request->title,
-            'date' =>  $request->date,
-            'start_time' =>  $request->start_time,
-            'end_time' =>  $request->end_time,
-            'place' =>  $request->place,
-            'society_id' => Auth::user()->id,
-        ]);*/
         $status = $this->meetingInterface->addMeeting($request);
         if ($status) {
             return redirect()->route('member.meetings.index')->with('success', 'Meeting created successfully');
         } else {
             return redirect()->back()->with('error', 'Something went wrong');
         }
-
-        //echo "<script>alert('Meeting Added');</script>";
-
-
     }
 
     /**
@@ -145,10 +115,5 @@ class MeetingController extends Controller
         } else {
             return redirect()->back()->with('error', 'Something went wrong');
         }
-
-
-        //echo "<script>alert('Meeting Deleted');</script>";
-
-
     }
 }

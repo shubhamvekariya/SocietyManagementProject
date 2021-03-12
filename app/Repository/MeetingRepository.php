@@ -22,7 +22,7 @@ class MeetingRepository implements MeetingInterface
             'start_time' =>  date('Y-m-d H:i:s', strtotime($request->start_time)),
             'end_time' =>  date('Y-m-d H:i:s', strtotime($request->end_time)),
             'place' =>  $request->place,
-            'society_id' => Auth::user()->id,
+            'society_id' => Auth::user()->apartment->society_id,
         ]);
 
         if($meeting)
