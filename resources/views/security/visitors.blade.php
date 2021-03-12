@@ -42,12 +42,12 @@
                         @unlessrole('security')
                         <th>Exit time</th>
                         @endunlessrole
-                        @if (Route::currentRouteName() == 'staff.visitors.allvisitors')
+                        @if (Route::is('staff.visitors.allvisitors'))
                             <th>Exit time</th>
                         @endif
                         @role('security')
                         <th>Whom to meet</th>
-                        @if (Route::currentRouteName() == 'staff.visitors.index')
+                        @if (Route::is('staff.visitors.index'))
                             <th width="250px">Action</th>
                         @endif
                         @endrole
@@ -62,12 +62,12 @@
                         @unlessrole('security')
                         <th>Exit time</th>
                         @endunlessrole
-                        @if (Route::currentRouteName() == 'staff.visitors.allvisitors')
+                        @if (Route::is('staff.visitors.allvisitors'))
                             <th>Exit time</th>
                         @endif
                         @role('security')
                         <th>Whom to meet</th>
-                        @if (Route::currentRouteName() == 'staff.visitors.index')
+                        @if (Route::is('staff.visitors.index'))
                             <th width="250px">Action</th>
                         @endif
                         @endrole
@@ -81,7 +81,7 @@
         <script src="{{ asset('js/datatables.min.js') }}"></script>
         <script src="{{ asset('js/dataTables.bootstrap4.min.js') }}"></script>
         @role('security')
-        @if (Route::currentRouteName() == 'staff.visitors.index')
+        @if (Route::is('staff.visitors.index'))
             <script>
                 $(function() {
                     var table = $('#visitorTable').DataTable({
@@ -120,7 +120,7 @@
                 });
 
             </script>
-        @elseif(Route::currentRouteName() == 'staff.visitors.allvisitors')
+        @elseif(Route::is('staff.visitors.allvisitors'))
             <script>
                 $(function() {
                     var table = $('#visitorTable').DataTable({
