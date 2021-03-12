@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,6 +15,7 @@
     <link href="{{ mix('/css/toastr.min.css') }}" rel="stylesheet">
     @endrole
 </head>
+
 <body>
     <div id="wrapper">
         @include('layouts.navigation')
@@ -23,6 +25,7 @@
             @yield('content')
             @include('layouts.footer')
         </div>
+        @include('layouts.notification')
     </div>
     <!-- Mainly scripts -->
     <script src="{!! asset('js/jquery-3.1.1.min.js') !!}"></script>
@@ -69,9 +72,10 @@
                 "'> Approve</a> </div> <div class='col-6'> <a class='btn btn-danger btn-rounded' href='" +
                 data['rejectlink'] + "'>Reject</a></div></div>", "<h1>Approve user</h1>")
         });
+
     </script>
-@endrole
-@role('member')
+    @endrole
+    @role('member')
     <script src="https://js.pusher.com/7.0/pusher.min.js"></script>
     <!-- Toastr script -->
     <script src="{!! asset('js/toastr.min.js') !!}"></script>
@@ -106,7 +110,9 @@
                 "'> Approve</a> </div> <div class='col-6'> <a class='btn btn-danger btn-rounded' href='" +
                 data['rejectlink'] + "'>Reject</a></div></div>", "<h1>Approve visitor</h1>")
         });
+
     </script>
-@endrole
+    @endrole
 </body>
+
 </html>

@@ -97,6 +97,7 @@ Route::group(['middleware' => ['auth:staff_security','role:staff|security,staff_
         Route::resource('visitors', VisitorController::class, ['as' => 'staff']);
         Route::get('/checkout/{visitor}' , [VisitorController::class , 'checkout'])->name('staff.visitors.checkout');
         Route::get('/allvisitors' , [VisitorController::class , 'index'])->name('staff.visitors.allvisitors');
+        Route::get('/parkingdetails' , [VisitorController::class , 'index'])->name('staff.visitors.parkings');
     });
     Route::get('/markasread/{id}',  function ($id) {
         Auth::user()->unreadNotifications->where('id',$id)->markAsRead();

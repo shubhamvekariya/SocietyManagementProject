@@ -95,8 +95,7 @@
                 <a href="#"><i class="fa fa-car"></i><span class="nav-label">Parking</span><span
                         class="fa arrow"></span></a>
                 <ul class="nav nav-second-level collapse">
-                    <li><a href="#">View Parking Details</a></li>
-                    <li><a href="#">Manage Parking</a></li>
+                    <li><a href="{{ route('staff.visitors.parkings') }}">View Parking Details</a></li>
                 </ul>
             </li>
         @else

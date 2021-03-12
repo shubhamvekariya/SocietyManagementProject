@@ -7,6 +7,7 @@ use App\Interfaces\MemberInterface;
 use App\Interfaces\VisitorInterface;
 use App\Models\Visitor;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
 
 class VisitorController extends Controller
 {
@@ -29,6 +30,8 @@ class VisitorController extends Controller
 
         if($request->ajax())
             return $this->visitorInterface->getvisitors();
+        if(Route::is('staff.visitors.parkings'))
+            return view('security.parkings');
         return view('security.visitors');
     }
 
