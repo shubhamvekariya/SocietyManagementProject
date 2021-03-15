@@ -9,7 +9,7 @@ This project is of society management system in which society members can have f
 Committee member will be interacting with society members for bills (maintenance bill, gas bill etc.), manage apartment, members of apartment, resolve complaints and track of visitors and staff. 
 Security & staff will be monitoring of parking spot, entry exit time, track of visitors.
 
-After download/clone project perform following steps:
+After download/clone project, perform following steps:
 1. composer install
 2. npm install
 3. php artisan migrate
