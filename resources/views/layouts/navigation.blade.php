@@ -68,6 +68,7 @@
                         class="fa arrow"></span></a>
                 <ul class="nav nav-second-level collapse">
                     <li><a href="{{ route('member.needapprovevisitor') }}">Approve Visitor</a></li>
+                    <li><a href="{{ route('member.preregistervisitor') }}">Pre-approve Visitor</a></li>
                     <li><a href="{{ route('member.visitors') }}">See Visitor Records</a></li>
                 </ul>
             </li>

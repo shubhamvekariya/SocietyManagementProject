@@ -49,6 +49,13 @@ class VisitorRequest extends FormRequest
                     'type' => 'required_with:vehicle_no'
                 ];
                 break;
+            case 'member.preregistervisitor':
+                $rules = [
+                    'name' => 'required',
+                    'phoneno' => 'required',
+                    'entryTime' => 'required|date|after:today',
+                ];
+                break;
             default:
                 $rules = [];
         }

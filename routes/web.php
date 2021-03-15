@@ -75,6 +75,8 @@ Route::group(['middleware' => ['auth','role:member'] ], function(){
         Route::get('/approvevisitor/{visitor_id}', [MemberController::class,'approvevisitor'])->name('member.approvevisitor');
         Route::get('/rejectvisitor/{visitor_id}', [MemberController::class,'rejectvisitor'])->name('member.rejectvisitor');
         Route::get('/disapprovevisitors', [MemberController::class,'disapprovevisitors'])->name('member.needapprovevisitor');
+        Route::get('/preregistervisitor', [MemberController::class,'previsitor'])->name('member.preregistervisitor');
+        Route::post('/preregistervisitor', [MemberController::class,'preregistervisitor'])->name('member.preregistervisitor');
         Route::get('/visitors/index' , [VisitorController::class , 'index'])->name('member.visitors');
         Route::get('/markasreadmember/{id}',  function ($id) {
             Auth::user()->unreadNotifications->where('id',$id)->markAsRead();
