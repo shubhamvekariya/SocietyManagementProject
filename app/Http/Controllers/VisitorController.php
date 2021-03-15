@@ -28,9 +28,9 @@ class VisitorController extends Controller
     {
         //
 
-        if($request->ajax())
+        if ($request->ajax())
             return $this->visitorInterface->getvisitors();
-        if(Route::is('staff.visitors.parkings'))
+        if (Route::is('staff.visitors.parkings'))
             return view('security.parkings');
         return view('security.visitors');
     }
@@ -59,7 +59,7 @@ class VisitorController extends Controller
         $request->validated();
         $status = $this->visitorInterface->addVisitor($request);
         if ($status)
-            return redirect()->route('staff.visitors.index')->with('success','Entry of visitor done');
+            return redirect()->route('staff.visitors.index')->with('success', 'Entry of visitor done');
         else
             return redirect()->back();
     }
@@ -86,7 +86,7 @@ class VisitorController extends Controller
     {
         //
         $members = $this->memberInterface->getSocietyMember();
-        return view('security.editvisitor', compact(['members','visitor']));
+        return view('security.editvisitor', compact(['members', 'visitor']));
     }
 
     /**
@@ -100,9 +100,9 @@ class VisitorController extends Controller
     {
         //
         $request->validated();
-        $status = $this->visitorInterface->editVisitor($request,$visitor);
+        $status = $this->visitorInterface->editVisitor($request, $visitor);
         if ($status)
-            return redirect()->route('staff.visitors.index')->with('success','Visitor details updated successfully');
+            return redirect()->route('staff.visitors.index')->with('success', 'Visitor details updated successfully');
         else
             return redirect()->back();
     }
@@ -118,7 +118,7 @@ class VisitorController extends Controller
         //
     }
 
-     /**
+    /**
      *
      * @param  \App\Models\visitor $visitor
      * @return \Illuminate\Http\Response
@@ -126,6 +126,6 @@ class VisitorController extends Controller
     public function checkout(Visitor $visitor)
     {
         $visitor->update(['exit_time' => now()]);
-        return redirect()->back()->with('success','Visitor '.$visitor->name.' check out');
+        return redirect()->back()->with('success', 'Visitor ' . $visitor->name . ' check out');
     }
 }

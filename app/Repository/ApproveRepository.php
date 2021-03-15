@@ -3,7 +3,6 @@
 namespace App\Repository;
 
 use App\Interfaces\ApproveInterface;
-use App\Models\Society;
 use App\Models\Staff;
 use App\Models\User;
 use App\Models\Visitor;
@@ -37,6 +36,10 @@ class ApproveRepository implements ApproveInterface
         $data['message'] = 'New member has registered with email ' . $member->email;
         $data['approvelink'] = route('society.approvemember', $member->id);
         $data['rejectlink'] = route('society.rejectmember', $member->id);
+        $details = [
+            'body' => 'Member '.$member->name.' need to approve!<br><form class="text-center" action="'.route('society.needapprove').'" method="GET"><button type="submit" class="btn btn-primary mb-0">Approve</button></form>',
+        ];
+        $member->apartment->society->notify(new \App\Notifications\Approve($details));
         $pusher->trigger('approve-channel-' . $member->apartment->society->id, 'approve-event', $data);
     }
 

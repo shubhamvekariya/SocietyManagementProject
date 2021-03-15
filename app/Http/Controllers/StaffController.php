@@ -5,13 +5,9 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StaffRequest;
 use App\Interfaces\StaffInterface;
 use App\Models\Staff;
-use GrahamCampbell\ResultType\Result;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
-use Spatie\Permission\Models\Role;
 
 class StaffController extends Controller
 {

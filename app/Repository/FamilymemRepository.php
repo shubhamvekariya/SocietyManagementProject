@@ -4,10 +4,8 @@ namespace App\Repository;
 
 use App\Interfaces\FamilymemInterface;
 use App\Models\Family;
-use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Yajra\DataTables\DataTables;
-use Illuminate\Support\Facades\Hash;
 
 
 class FamilymemRepository implements FamilymemInterface

@@ -1,17 +1,15 @@
 <?php
+
 namespace App\Repository;
+
 use App\Interfaces\NoticeInterface;
 use App\Models\Notice;
-use App\Models\User;
 use Illuminate\Support\Facades\Auth;
-use Yajra\DataTables\DataTables;
-use Illuminate\Support\Facades\Hash;
 
 class NoticeRepository implements NoticeInterface
 {
     public function __construct()
     {
-
     }
     public function addNotice($request)
     {
@@ -20,41 +18,27 @@ class NoticeRepository implements NoticeInterface
             'description' =>  $request->description,
             'society_id' => Auth::user()->apartment->society_id,
         ]);
-        if($notice)
-        {
+        if ($notice) {
             return true;
-        }
-        else
-        {
+        } else {
             return false;
         }
-
     }
-    /*public function showNotice($request)
-    {
-
-    }*/
     public function deleteNotice($notice)
     {
         $n = $notice->delete();
-        if($n)
-        {
+        if ($n) {
             return true;
-        }
-        else
-        {
+        } else {
             return false;
         }
     }
-    public function updateNotice($request,$notice)
+    public function updateNotice($request, $notice)
     {
         $n = $notice->update($request->all());
-        if($n)
-        {
+        if ($n) {
             return true;
-        }
-        else
-        {
+        } else {
             return false;
         }
     }

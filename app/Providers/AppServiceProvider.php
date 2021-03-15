@@ -47,16 +47,15 @@ class AppServiceProvider extends ServiceProvider
     {
         Schema::defaultStringLength(191);
         Paginator::useBootstrap();
-        $this->app->bind(MemberInterface::class,MemberRepository::class);
-        $this->app->bind(SocietyInterface::class,SocietyRepository::class);
-        $this->app->bind(ApproveInterface::class,ApproveRepository::class);
-        $this->app->bind(RuleInterface::class,RuleRepository::class);
-        $this->app->bind(FamilymemInterface::class,FamilymemRepository::class);
-        $this->app->bind(StaffInterface::class,StaffRepository::class);
-        $this->app->bind(VisitorInterface::class,VisitorRepository::class);
-        $this->app->bind(MeetingInterface::class,MeetingRepository::class);
-        $this->app->bind(AssetInterface::class,AssetRepository::class);
-        $this->app->bind(NoticeInterface::class,NoticeRepository::class);
-
+        $this->app->bind(MemberInterface::class, MemberRepository::class);
+        $this->app->bind(SocietyInterface::class, SocietyRepository::class);
+        $this->app->bind(ApproveInterface::class, ApproveRepository::class);
+        $this->app->bind(RuleInterface::class, RuleRepository::class);
+        $this->app->bind(FamilymemInterface::class, FamilymemRepository::class);
+        $this->app->bind(StaffInterface::class, StaffRepository::class);
+        $this->app->bind(VisitorInterface::class, VisitorRepository::class);
+        $this->app->bind(MeetingInterface::class, MeetingRepository::class);
+        $this->app->bind(AssetInterface::class, AssetRepository::class);
+        $this->app->bind(NoticeInterface::class, NoticeRepository::class);
     }
 }

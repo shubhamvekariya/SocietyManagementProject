@@ -4,11 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Interfaces\ApproveInterface;
 use App\Interfaces\FamilymemInterface;
-use App\Models\Family;
-use Illuminate\Support\Facades\Auth;
-use App\Models\User;
 use Illuminate\Http\Request;
-use Yajra\DataTables\DataTables;
 use App\Http\Requests\FamilymemValidation;
 
 class MemberController extends Controller

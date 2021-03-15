@@ -7,8 +7,6 @@ use App\Models\Notice;
 use App\Interfaces\NoticeInterface;
 use App\Http\Requests\NoticeValidation;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
-
 
 class NoticeController extends Controller
 {
@@ -26,7 +24,7 @@ class NoticeController extends Controller
     }
 
     public function index()
-    { 
+    {
         $notices = Notice::where('society_id',Auth::user()->apartment->society_id)->paginate(12);
         return view('notice.allnotice',['notices' => $notices]);
     }

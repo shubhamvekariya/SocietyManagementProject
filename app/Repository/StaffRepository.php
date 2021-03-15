@@ -2,7 +2,6 @@
 
 namespace App\Repository;
 
-use App\Interfaces\MemberInterface;
 use App\Interfaces\StaffInterface;
 use App\Models\Staff;
 use Illuminate\Support\Facades\Auth;

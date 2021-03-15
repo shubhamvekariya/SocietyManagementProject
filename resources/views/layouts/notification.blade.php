@@ -33,6 +33,10 @@ function secondsToWords($seconds)
                             @else
                             @role('member')
                                 <a href="{{ route('member.markasread', $notification->id) }}">
+                            @else
+                            @role('secretary')
+                                <a href="{{ route('society.markasread', $notification->id) }}">
+                            @endrole
                             @endrole
                             @endrole
                                 <div class="media-body">
@@ -56,13 +60,7 @@ function secondsToWords($seconds)
                 <div>
                     @foreach (Auth::user()->readNotifications as $notification)
                         <div class="sidebar-message">
-                            @role('security')
-                                <a href="{{ route('staff.markasread', $notification->id) }}">
-                            @else
-                            @role('member')
-                                <a href="{{ route('member.markasread', $notification->id) }}">
-                            @endrole
-                            @endrole
+                            <a href="#">
                                 <div class="media-body">
                                     {!! $notification->data['data'] !!}
                                     <br>
