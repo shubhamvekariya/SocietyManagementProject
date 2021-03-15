@@ -92,7 +92,7 @@
                 <ul class="nav nav-second-level collapse">
                     <li><a href="{{route('member.complaints.create')}}">Register Complaints</a></li>
                     <li><a href="{{route('member.complaints.index')}}">All Complaints</a></li>
-                    <li><a href="#">Resolved</a></li>
+                    <li><a href="{{route('member.complaints.resolveComplaintList')}}">Resolved</a></li>
                     <li><a href="#">In progress</a></li>
 
                 </ul>
