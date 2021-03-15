@@ -5,7 +5,7 @@ namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Route;
 
-class StaffRequest extends FormRequest
+class VisitorRequest extends FormRequest
 {
     /**
      * Indicates if the validator should stop on the first rule failure.
@@ -30,30 +30,23 @@ class StaffRequest extends FormRequest
      */
     public function rules()
     {
-
         switch (Route::currentRouteName()) {
 
-            case 'member.staff.create':
+            case 'staff.visitors.create':
                 $rules = [
-                    'email' => 'required|unique:staff_security|email',
                     'name' => 'required',
-                    'age' => 'required|numeric|gt:18',
-                    'position' => 'required',
-                    'usage' => 'required',
+                    'phoneno' => 'required',
+                    'member' => 'required',
+                    'entryTime' => 'required|date|after:today',
+                    'type' => 'required_with:vehicle_no'
                 ];
                 break;
-            case 'member.staff.update':
+            case 'staff.visitors.update':
                 $rules = [
-                    'email' => 'required|unique:staff_security|email',
                     'name' => 'required',
-                    'age' => 'required|numeric|gt:18',
-                    'position' => 'required',
-                    'usage' => 'required',
-                ];
-                break;
-            case 'staff.setpassword':
-                $rules = [
-                    'password' => 'required_with:password_confirmation|confirmed|min:8|max:16',
+                    'phoneno' => 'required',
+                    'member' => 'required',
+                    'type' => 'required_with:vehicle_no'
                 ];
                 break;
             default:
@@ -61,7 +54,5 @@ class StaffRequest extends FormRequest
         }
 
         return $rules;
-        //
-
     }
 }

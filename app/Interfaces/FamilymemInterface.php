@@ -9,5 +9,4 @@ interface FamilymemInterface
     public function deleteFamilymem($id);
     public function editFamilymem($id);
     public function updateFamilymem($request);
-
 }

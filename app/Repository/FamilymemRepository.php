@@ -1,18 +1,17 @@
 <?php
+
 namespace App\Repository;
+
 use App\Interfaces\FamilymemInterface;
 use App\Models\Family;
-use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Yajra\DataTables\DataTables;
-use Illuminate\Support\Facades\Hash;
 
 
 class FamilymemRepository implements FamilymemInterface
 {
     public function __construct()
     {
-
     }
 
     public function addFamilymem($request)
@@ -26,15 +25,11 @@ class FamilymemRepository implements FamilymemInterface
             'user_id' => Auth::user()->id,
         ]);
 
-        if($family_mem)
-        {
+        if ($family_mem) {
             return true;
-        }
-        else
-        {
+        } else {
             return false;
         }
-
     }
 
     public function showFamilymem($request)
@@ -42,10 +37,10 @@ class FamilymemRepository implements FamilymemInterface
         $data = Family::where('user_id',Auth::user()->id)->get();
         return DataTables::of($data)
             ->addIndexColumn()
-            ->addColumn('action', function($row){
-                    $btn = '<a href="'.route('member.editfamilymem',$row['id']).'" class="edit btn btn-primary btn-rounded mx-4" style="width:78px;">Edit</a>';
-                    $btn .= '<a href="'.route('member.deletefamilymem',$row['id']).'" class="edit btn btn-danger btn-rounded mx-3" style="width:78px;">Delete</a>';
-                    return $btn;
+            ->addColumn('action', function ($row) {
+                $btn = '<a href="' . route('member.editfamilymem', $row['id']) . '" class="edit btn btn-primary btn-rounded mx-4" style="width:78px;">Edit</a>';
+                $btn .= '<a href="' . route('member.deletefamilymem', $row['id']) . '" class="edit btn btn-danger btn-rounded mx-3" style="width:78px;">Delete</a>';
+                return $btn;
             })
             ->rawColumns(['action'])
             ->make(true);
@@ -56,12 +51,9 @@ class FamilymemRepository implements FamilymemInterface
         $family_mem = Family::findOrFail($id);
         $family_mem->delete();
 
-        if($family_mem->trashed())
-        {
+        if ($family_mem->trashed()) {
             return true;
-        }
-        else
-        {
+        } else {
             return false;
         }
     }
@@ -73,7 +65,7 @@ class FamilymemRepository implements FamilymemInterface
 
     public function updateFamilymem($request)
     {
-        $family_mem=Family::find($request->fid);;
+        $family_mem = Family::find($request->fid);;
         $family_mem->name = $request->name;
         $family_mem->email = $request->email;
         $family_mem->contact_no = $request->contact_no;
@@ -81,15 +73,10 @@ class FamilymemRepository implements FamilymemInterface
         $family_mem->gender = $request->gender;
 
         $family_mem->save();
-        if($family_mem)
-        {
+        if ($family_mem) {
             return true;
-        }
-        else
-        {
+        } else {
             return false;
         }
     }
-
-
 }

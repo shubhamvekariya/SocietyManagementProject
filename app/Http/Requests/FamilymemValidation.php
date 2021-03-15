@@ -39,11 +39,11 @@ class FamilymemValidation extends FormRequest
 
     public function messages()
     {
-    return [
-        'name.required' => 'A Name is required',
-        'name.max' => 'Maximum 20 chars length',
-        'age.required' => 'Age is required',
-        'gender.required' => 'please Select Gender',
-    ];
+        return [
+            'name.required' => 'A Name is required',
+            'name.max' => 'maximum 20 chars length',
+            'age.required' => 'Age is required',
+            'gender.required' => 'please Select Gender',
+        ];
     }
 }

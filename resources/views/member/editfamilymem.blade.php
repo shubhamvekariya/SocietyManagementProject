@@ -32,6 +32,6 @@ Add Family Member
 @push('script')
     <script>
         gender = {!! str_replace("'", "\'", json_encode($family_mem->gender)) !!};
-        $('#gender').val(gender).trriger();
+        $('#gender').val(gender);
     </script>
 @endpush

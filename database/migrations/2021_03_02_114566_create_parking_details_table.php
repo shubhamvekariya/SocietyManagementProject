@@ -17,7 +17,7 @@ class CreateParkingDetailsTable extends Migration
             $table->id();
             $table->string('vehicle_no');
             $table->string('type');
-            $table->string('spot');
+            $table->string('spot')->nullable();
             $table->foreignId('visitor_id')->constrained('visitors_details')->onUpdate('cascade')->onDelete('cascade');
             $table->softDeletes();
             $table->timestamps();

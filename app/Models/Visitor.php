@@ -10,16 +10,23 @@ class Visitor extends Model
 {
     use HasFactory,SoftDeletes;
 
+    protected $table = 'visitors_details';
     protected $fillable = [
         'name',
-        'phone_no',
+        'phoneno',
         'address',
         'reason_to_meet',
         'entry_time',
         'exit_time',
-        'entry_date',
-        'exit_date',
         'user_id',
-
     ];
+
+    public function user()
+    {
+        return $this->belongsTo('App\Models\User');
+    }
+    public function parking()
+    {
+        return $this->hasOne(Parking::class);
+    }
 }
