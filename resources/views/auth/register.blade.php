@@ -221,7 +221,7 @@
                                         </div>
                                         <div class="col-lg-6">
                                             <div class="form-group">
-                                                <label>Price</label>
+                                                <label>Price (in million)</label>
                                                 <input id="price" name="price" type="number" step="0.01" class="form-control" value={{ old('price') }}>
                                             </div>
                                         </div>

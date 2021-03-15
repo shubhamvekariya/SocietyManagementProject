@@ -27,7 +27,26 @@
         </div>
         <div class="form-group col-md-6">
             <label for="phoneno">Phone Number</label>
-            <input id="phoneno" name="phoneno" type="text" class="form-control" placeholder="Phoneno" value="@if(isset($staff->phoneno)){{ $staff->phoneno }}@endif">
+            <input id="phoneno" name="phoneno" type="number" class="form-control" placeholder="Phoneno" value="@if(isset($staff->phoneno)){{ $staff->phoneno }}@endif">
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label for="salary">Salary </label>
+            <input id="salary" name="salary" type="number" class="form-control" placeholder="Salary (per day) (in k)" value="@if(isset($staff->salary)){{ $staff->salary }}@endif">
+        </div>
+        <div class="form-group col-md-6">
+            <label for="nonworkingday">Non Working Day</label>
+            <select class="form-control" id="nonworkingday" name="nonworkingday">
+                <option></option>
+                <option value="monday">Monday</option>
+                <option value="tuesday">Tuesday</option>
+                <option value="wednesday">Wednesday</option>
+                <option value="thursday">Thursday</option>
+                <option value="friday">Friday</option>
+                <option value="saturday">Saturday</option>
+                <option value="sunday">Sunday</option>
+            </select>
         </div>
     </div>
     <div class="form-group">
@@ -65,6 +84,10 @@
         $(document).ready(function(){
             $("#gender").select2({
                 placeholder: "Select a gender",
+                allowClear: true
+            });
+            $("#nonworkingday").select2({
+                placeholder: "Select a Non working day",
                 allowClear: true
             });
             $("#position").select2({

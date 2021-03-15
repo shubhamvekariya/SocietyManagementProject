@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Interfaces\StaffInterface;
+use App\Models\Attendance;
 use App\Models\Staff;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -36,6 +37,8 @@ class StaffRepository implements StaffInterface
             'gender' => $request->gender,
             'position' => $request->position,
             'work' => $request->work,
+            'salary' => $request->salary,
+            'nonworkingday' => $request->nonworkingday,
             'society_id' => $society_id,
             'user_id' => $user_id,
             'password' => Hash::make($password),
@@ -72,8 +75,25 @@ class StaffRepository implements StaffInterface
             $staffs = Staff::where('society_id', $user->apartment->society->id)->orWhere('user_id', $user->id)->get();
         else if ($user->hasAnyRole('member'))
             $staffs = Staff::Where('user_id', $user->id)->get();
+        else if ($user->hasAnyRole('security','staff_security'))
+            $staffs = Staff::whereIn('user_id', function($query)
+            {
+                $query->select('users.id')
+                    ->from('users')
+                    ->join('apartments', 'apartments.user_id', '=', 'users.id')
+                    ->where('apartments.society_id',Auth::user()->society_id);
+            })->orWhere('society_id',$user->society_id)->get();
         return DataTables::of($staffs)
             ->addIndexColumn()
+            ->addColumn('check', function ($row) {
+                $attendance = Attendance::where('staff_id',$row['id'])->where('entry_time','!=',null)->where('exit_time',null)->latest('entry_time')->first();;
+                $btn = '';
+                if(!isset($attendance))
+                    $btn = '<a href="' . route('staff.checkinstaff', $row['id']) . '" class="edit btn btn-primary btn-rounded d-block mx-auto" style="width:100px;">Check In</a>';
+                else
+                    $btn = '<a href="' . route('staff.checkoutstaff', $attendance->id) . '" class="edit btn btn-primary btn-rounded d-block mx-auto" style="width:100px;">Check Out</a>';
+                return $btn;
+            })
             ->addColumn('action', function ($row) {
                 $btn = '<form action="' . route('member.staffs.destroy', $row['id']) . '" method="POST">';
                 $btn .= '<input type="hidden" name="_method" value="DELETE"> <input type="hidden" name="_token" value="' . csrf_token() . '">';
@@ -82,7 +102,7 @@ class StaffRepository implements StaffInterface
                 $btn .= '</form>';
                 return $btn;
             })
-            ->rawColumns(['action'])
+            ->rawColumns(['action','check'])
             ->make(true);
     }
 
@@ -121,5 +141,13 @@ class StaffRepository implements StaffInterface
         Auth::user()->assignRole($role);
         $staff->update(['password' => Hash::make($request->password)]);
         return true;
+    }
+
+    public function staffAttendance()
+    {
+        $attendance = Attendance::where('staff_id',Auth::user()->id);
+        return DataTables::of($attendance)
+            ->addIndexColumn()
+            ->make(true);
     }
 }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\VisitorRequest;
 use App\Interfaces\MemberInterface;
+use App\Interfaces\StaffInterface;
 use App\Interfaces\VisitorInterface;
 use App\Models\Visitor;
 use Illuminate\Http\Request;
@@ -13,10 +14,12 @@ class VisitorController extends Controller
 {
     protected $memberInterface;
     protected $visitorInterface;
-    public function __construct(MemberInterface $memberInterface, VisitorInterface $visitorInterface)
+    protected $staffInterface;
+    public function __construct(MemberInterface $memberInterface, VisitorInterface $visitorInterface, StaffInterface $staffInterface)
     {
         $this->memberInterface = $memberInterface;
         $this->visitorInterface = $visitorInterface;
+        $this->staffInterface = $staffInterface;
     }
 
     /**
@@ -128,4 +131,6 @@ class VisitorController extends Controller
         $visitor->update(['exit_time' => now()]);
         return redirect()->back()->with('success', 'Visitor ' . $visitor->name . ' check out');
     }
+
+
 }

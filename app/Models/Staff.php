@@ -23,8 +23,10 @@ class Staff extends Authenticatable
         'password',
         'age',
         'phoneno',
+        'salary',
+        'nonworkingday',
         'gender',
-        'user_id'
+        'user_id',
     ];
 
     protected $hidden = [
@@ -40,5 +42,8 @@ class Staff extends Authenticatable
     {
         return $this->belongsTo('App\Models\Society');
     }
-
+    public function attendance()
+    {
+        return $this->hasMany(Attendance::class);
+    }
 }

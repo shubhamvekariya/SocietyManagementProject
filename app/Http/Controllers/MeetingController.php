@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Meeting;
 use App\Interfaces\MeetingInterface;
 use Illuminate\Http\Request;
-use App\Http\Requests\meetingValidation;
+use App\Http\Requests\MeetingValidation;
 
 class MeetingController extends Controller
 {
@@ -47,7 +47,7 @@ class MeetingController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(meetingValidation $request)
+    public function store(MeetingValidation $request)
     {
         $status = $this->meetingInterface->addMeeting($request);
         if ($status) {

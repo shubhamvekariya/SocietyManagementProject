@@ -23,6 +23,8 @@ class CreateStaffSecurityTable extends Migration
             $table->bigInteger('phoneno')->nullable();
             $table->string('gender')->nullable();
             $table->string('password');
+            $table->float('salary');
+            $table->string('nonworkingday');
             $table->foreignId('society_id')->nullable()->constrained('societies')->onUpdate('cascade')->onDelete('cascade');
             $table->foreignId('user_id')->nullable()->constrained('users')->onUpdate('cascade')->onDelete('cascade');
             $table->softDeletes();

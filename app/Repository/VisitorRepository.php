@@ -92,8 +92,10 @@ class VisitorRepository implements VisitorInterface
         if ($user->hasAnyRole('security', 'staff_security'))
             if(Route::is("staff.visitors.index"))
                 $visitors = Visitor::select('parking_details.*', 'visitors_details.*')->leftjoin('parking_details', 'visitors_details.id', '=', 'parking_details.visitor_id')->join('users', 'users.id', '=', 'visitors_details.user_id')->join('apartments', 'users.id', '=', 'apartments.user_id')->where('apartments.society_id', $user->society_id)->where('visitors_details.approved_at','!=',null)->where('visitors_details.exit_time',null)->get();
-            else if(Route::is("staff.visitors.allvisitors") || Route::is("staff.visitors.parkings"))
+            else if(Route::is("staff.visitors.allvisitors"))
                 $visitors = Visitor::select('parking_details.*', 'visitors_details.*')->leftjoin('parking_details', 'visitors_details.id', '=', 'parking_details.visitor_id')->join('users', 'users.id', '=', 'visitors_details.user_id')->join('apartments', 'users.id', '=', 'apartments.user_id')->where('apartments.society_id', $user->society_id)->where('visitors_details.approved_at','!=',null)->where('visitors_details.exit_time','!=',null)->get();
+            else if(Route::is("staff.visitors.parkings"))
+            $visitors = Visitor::select('parking_details.*', 'visitors_details.*')->leftjoin('parking_details', 'visitors_details.id', '=', 'parking_details.visitor_id')->join('users', 'users.id', '=', 'visitors_details.user_id')->join('apartments', 'users.id', '=', 'apartments.user_id')->where('apartments.society_id', $user->society_id)->where('visitors_details.approved_at','!=',null)->where('visitors_details.exit_time','!=',null)->where('parking_details.id','!=',null)->get();
         if ($user->hasAnyRole('member'))
             $visitors = Visitor::select('parking_details.*', 'visitors_details.*')->leftjoin('parking_details', 'visitors_details.id', '=', 'parking_details.visitor_id')->where('visitors_details.user_id', $user->id)->where('visitors_details.approved_at','!=', null)->get();
         return DataTables::of($visitors)
