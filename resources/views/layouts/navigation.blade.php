@@ -114,7 +114,7 @@
                 <a href="#"><i class="fa fa-eye"></i><span class="nav-label">Visitors</span><span
                         class="fa arrow"></span></a>
                 <ul class="nav nav-second-level collapse">
-                    <li><a href="{{ route('staff.visitors.create') }}">Add Visitor</a></li>
+                    <li><a href="{{ route('staff.visitors.create') }}">Make entry of Visitor</a></li>
                     <li><a href="{{ route('staff.visitors.index') }}">Manage Visitor</a></li>
                     <li><a href="{{ route('staff.visitors.allvisitors') }}">See all Visitor</a></li>
                 </ul>

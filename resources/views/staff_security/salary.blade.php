@@ -1,20 +1,20 @@
 @extends('layouts.app')
 @section('title')
-    Salary Detials
+    Salary Details
 @endsection
 @push('css')
     <link href="{{ mix('/css/datatables.min.css') }}" rel="stylesheet">
 @endpush
 
 @section('breadcrumb-title')
-    Salary Detials
+    Salary Details
 @endsection
 @section('breadcrumb-item')
     <li class="breadcrumb-item">
         <a href="{{ route('staff.home') }}">Home</a>
     </li>
     <li class="breadcrumb-item active">
-        <strong>Salary Detials</strong>
+        <strong>Salary Details</strong>
     </li>
 @endsection
 
