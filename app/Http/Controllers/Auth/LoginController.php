@@ -127,6 +127,7 @@ class LoginController extends Controller
         $apart = Apartment::find(Auth::user()->apartment->id);
         $apart->update($request->all());
        // dd($apart);
+        return redirect()->route('member.home')->with('success','Profile Updated');
         echo "<script>alert('Updated');</script>";
 
     }
