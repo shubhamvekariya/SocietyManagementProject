@@ -24,7 +24,7 @@ class ComplaintRepository implements ComplaintInterface
             'category' => $request->category,
             'reg_date' =>  date('Y-m-d H:i:s', strtotime($request->reg_date)),
             'status' =>  'In Progress',
-            'remarks' =>  $request->remarks,
+            //'remarks' =>  $request->remarks,
             'user_id' => Auth::user()->id,
         ]);
 
@@ -52,17 +52,30 @@ class ComplaintRepository implements ComplaintInterface
         return DataTables::of($data)
             ->addIndexColumn()
             ->addColumn('status', function ($row) {
-                if ($row->status == 'In Progress') {
-                    $status = '<span class="label label-primary">' . $row->status . '</span>';
-                } elseif ($row->status == 'Resolved') {
-                    $status = '<span class="label label-success">' . $row->status . '</span>';
+                if ($row->status == 'In Progress')
+                {
+                    $status = '<span class="label label-primary w-15 p-2">' . $row->status . '</span>';
+                }
+                else//if ($row->status == 'Resolved')
+                 {
+                     $status = '<span class="label label-success w-20 p-2">' . $row->status . '</span>';
                 }
 
                 return $status;
             })
             ->addColumn('action', function ($row) {
                 if (Auth::user()->hasRole('committeemember'))
-                    $btn = '<a href="' . route('member.complaints.resolve', [$row->id]) . '" class="edit btn btn-primary btn-rounded mx-4" style="width:78px;">Resolve</a>';
+                {
+                    if($row->status == 'In Progress')
+                    {
+                     $btn = '<a href="' . route('member.complaints.resolve', [$row->id]) . '" class="btn btn-outline-success btn-rounded mx-4 " style="width:78px;">Resolve</a>';
+                    }
+                    else
+                    {
+                     $btn = '<button type="button" class="btn btn-outline-danger btn-rounded mx-4" style="width:78px;">Closed</button>';
+                    }
+                }
+
                 else {
                     $btn = '<form action="' . route('member.complaints.destroy', [$row->id]) . '" method="POST">';
                     $btn .= '<input type="hidden" name="_method" value="DELETE"><input type="hidden" name="_token" value="' . csrf_token() . '">';
@@ -90,7 +103,7 @@ class ComplaintRepository implements ComplaintInterface
     public function updateComplaint($request, $complaint)
     {
         $c = $complaint->update($request->except('reg_date', 'status'));
-        $complaint->update(['reg_date' => date('Y-m-d H:i:s', strtotime($request->reg_date)), 'status' => 'Resolved']);
+        $complaint->update(['reg_date' => date('Y-m-d H:i:s', strtotime($request->reg_date))]);
 
         if ($c) {
             return true;
@@ -111,7 +124,7 @@ class ComplaintRepository implements ComplaintInterface
         return false;
     }
 
-    public function resolveComplaintList($request)
+   /* public function resolveComplaintList($request)
     {
         if (Auth::user()->hasRole('committeemember'))
         {
@@ -133,11 +146,11 @@ class ComplaintRepository implements ComplaintInterface
         return DataTables::of($data)
             ->addIndexColumn()
             ->addColumn('status', function ($row) {
-                if ($row->status == 'In Progress') {
+               // if ($row->status == 'In Progress') {
                     $status = '<span class="label label-primary">' . $row->status . '</span>';
-                } elseif ($row->status == 'Resolved') {
-                    $status = '<span class="label label-success">' . $row->status . '</span>';
-                }
+               // } elseif ($row->status == 'Resolved') {
+                 //   $status = '<span class="label label-success">' . $row->status . '</span>';
+                //}
 
                 return $status;
             })
@@ -158,7 +171,7 @@ class ComplaintRepository implements ComplaintInterface
             })
             ->rawColumns(['status', 'action'])
             ->make(true);
-    }
+    }*/
 
 
 }

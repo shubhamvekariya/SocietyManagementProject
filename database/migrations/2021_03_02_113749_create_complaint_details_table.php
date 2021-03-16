@@ -20,7 +20,7 @@ class CreateComplaintDetailsTable extends Migration
             $table->string('category')->nullable();
             $table->timestamp('reg_date')->nullable();
             $table->string('status')->nullable();
-            $table->longText('remarks')->nullable();
+           // $table->longText('remarks')->nullable();
 
             $table->foreignId('user_id')->constrained('users')->onUpdate('cascade')->onDelete('cascade');
             $table->softDeletes();

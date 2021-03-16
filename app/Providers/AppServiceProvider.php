@@ -59,6 +59,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(AssetInterface::class,AssetRepository::class);
         $this->app->bind(NoticeInterface::class,NoticeRepository::class);
         $this->app->bind(ComplaintInterface::class,ComplaintRepository::class);
+        $this->app->bind(VisitorInterface::class,VisitorRepository::class);
 
     }
 }

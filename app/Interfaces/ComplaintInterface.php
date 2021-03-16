@@ -9,6 +9,4 @@ interface ComplaintInterface
     public function deleteComplaint($complaint);
     public function updateComplaint($request,$complaint);
     public function resolveComplaint($request,$complaint);
-    public function resolveComplaintList($request);
-
 }

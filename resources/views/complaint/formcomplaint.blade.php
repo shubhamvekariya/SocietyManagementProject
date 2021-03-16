@@ -28,15 +28,6 @@
             name="description">@if(isset($complaint->description)){{ $complaint['description']}}@endif</textarea></div>
 </div>
 
-<div class="form-group row">
-    <label class="font-normal col-sm-2 col-form-label">Date & Time:</label>
-    <div class="input-group date col-sm-10 ">
-        <span class="input-group-addon"><i class="fa fa-calendar"></i></span><input type="text" name="reg_date"
-            class="form-control" id="datetimepicker1" onClick="return current_Date();" placeholder="Registration Date"
-            autocomplete="off">
-    </div>
-</div>
-
 
 <div class="form-group row ">
     <label class="col-sm-2 col-form-label">Select Category:</label>
@@ -54,12 +45,23 @@
 </div>
 
 <div class="form-group row">
+    <label class="font-normal col-sm-2 col-form-label">Date & Time:</label>
+    <div class="input-group date col-sm-10 ">
+        <span class="input-group-addon"><i class="fa fa-calendar"></i></span><input type="text" name="reg_date"
+            class="form-control" id="datetimepicker1" onClick="return current_Date();" placeholder="Registration Date"
+            autocomplete="off">
+    </div>
+</div>
+
+
+
+<!--<div class="form-group row">
 
     <label class="col-sm-2 col-form-label">Remarks:</label>
 
     <div class="col-lg-10"><textarea rows="3" class="form-control" placeholder="Enter Remarks"
             name="remarks">@if(isset($complaint->remarks)){{ $complaint['remarks']}}@endif</textarea></div>
-</div>
+</div>-->
 
 
 <div class="form-group row text-center">

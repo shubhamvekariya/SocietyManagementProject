@@ -46,7 +46,6 @@ All Complaints
                     <th>Category</th>
                     <th>Registration Date</th>
                     <th>Status</th>
-                    <th>Remarks</th>
                     <th width="250px">Action</th>
                 </tr>
             </thead>
@@ -58,7 +57,6 @@ All Complaints
                     <th>Category</th>
                     <th>Registration Date</th>
                     <th>Status</th>
-                    <th>Remarks</th>
                     <th width="250px">Action</th>
                 </tr>
             </tfoot>
@@ -83,7 +81,7 @@ All Complaints
                     {data: 'category', name: 'category'},
                     {data: 'reg_date', name: 'reg_date'},
                     {data: 'status', name: 'status'},
-                    {data: 'remarks', name: 'remarks'},
+                   // {data: 'remarks', name: 'remarks'},
                     {data: 'action', name: 'action', orderable: false, searchable: false},
                 ]
             });

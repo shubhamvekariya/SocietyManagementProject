@@ -7,6 +7,7 @@ use App\Models\Complaint;
 use App\Interfaces\ComplaintInterface;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\ComplaintValidation;
 
 class ComplaintController extends Controller
 {
@@ -47,7 +48,7 @@ class ComplaintController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ComplaintValidation $request)
     {
         $status = $this->complaintInterface->addComplaint($request);
         if($status)
@@ -142,20 +143,11 @@ class ComplaintController extends Controller
         $status = $this->complaintInterface->resolveComplaint($request,$complaint);
         if($status)
         {
-            $apartments = Auth::user()->apartment->society->apartment;
             $details = [
                 'body' => 'Complaint Resolved',
             ];
-            foreach($apartments as $apartment)
-            {
-                $user = $apartment->user;
-                //dd($user);
-                if($user->hasRole('committeemember'))
-                {
-                    $user->notify(new \App\Notifications\Approve($details));
-                }
-            }
-        return redirect()->back()->with('success','Complaint Resolved successfully');
+            $complaint->user->notify(new \App\Notifications\Approve($details));
+            return redirect()->back()->with('success','Complaint Resolved successfully');
         }
         else
         {
@@ -164,7 +156,7 @@ class ComplaintController extends Controller
 
     }
 
-    public function resolveComplaintList(Request $request)
+    /*public function resolveComplaintList(Request $request)
     {
 
         if($request->ajax())
@@ -173,5 +165,5 @@ class ComplaintController extends Controller
         }
         return view('complaint.allcomplaint');
 
-    }
+    }*/
 }

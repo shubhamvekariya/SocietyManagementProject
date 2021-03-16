@@ -87,7 +87,7 @@ Route::group(['middleware' => ['auth','role:member'] ], function(){
         Route::resource('assets',AssetController::class,['as' => 'member']);
         Route::resource('complaints',ComplaintController::class,['as' => 'member']);
         Route::get('/complaints/resolve/{complaint}', [ComplaintController::class,'resolve'])->name('member.complaints.resolve');
-        Route::get('/complaints/resolveComplaintList', [ComplaintController::class,'resolveComplaintList'])->name('member.complaints.resolveComplaintList');
+       // Route::get('/resolveComplaintList', [ComplaintController::class,'resolveComplaintList'])->name('member.complaints.resolveComplaintList');
 
         Route::middleware(['role:committeemember'])->group(function () {
             Route::resource('meetings',MeetingController::class,['as' => 'member']);
