@@ -29,7 +29,7 @@
 
     </div>
 </div>
-
+@role('security')
 <div class="form-group row">
     <label class="col-sm-2 col-form-label">Whom To Meet:</label>
 
@@ -42,7 +42,7 @@
         </select>
     </div>
 </div>
-
+@endrole
 <div class="form-group row">
     <label class="col-sm-2 col-form-label">Reason To Meet:</label>
 
@@ -59,6 +59,7 @@
         </div>
     </div>
 @endif
+@role('security')
 <hr />
 <h3 class="mt-5 mb-3">
     Vehicle Parking details
@@ -93,6 +94,7 @@
             value="@if(isset($visitor->parking->spot)){{ $visitor->parking->spot }}@endif">
     </div>
 </div>
+@endrole
 <div class="form-group row justify-content-md-center mt-5">
     <div class="col-sm-12 col-md-auto">
         @if (!isset($visitor))

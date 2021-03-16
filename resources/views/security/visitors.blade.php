@@ -114,7 +114,8 @@
                                 orderable: false,
                                 searchable: false
                             },
-                        ]
+                        ],
+                        order: [3,'asc']
                     });
 
                 });

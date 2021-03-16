@@ -46,6 +46,8 @@ Edit security & staff
     <script>
         gender = {!! str_replace("'", "\'", json_encode($staff->gender)) !!};
         $('#gender').val(gender);
+        nonworkingday = {!! str_replace("'", "\'", json_encode($staff->nonworkingday)) !!};
+        $('#nonworkingday').val(nonworkingday);
         position = {!! str_replace("'", "\'", json_encode($staff->position)) !!};
         $('#position').val(position);
         if(position == "security")

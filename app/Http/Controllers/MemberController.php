@@ -6,17 +6,24 @@ use App\Interfaces\ApproveInterface;
 use App\Interfaces\FamilymemInterface;
 use Illuminate\Http\Request;
 use App\Http\Requests\FamilymemValidation;
+use App\Http\Requests\VisitorRequest;
+use App\Interfaces\MemberInterface;
+use App\Interfaces\VisitorInterface;
 
 class MemberController extends Controller
 {
     //
     protected $approveInterface;
     protected $familymemInterface;
+    protected $memberInterface;
+    protected $visitorInterface;
 
-    public function __construct(ApproveInterface $approveInterface, FamilymemInterface $familymemInterface)
+    public function __construct(ApproveInterface $approveInterface, FamilymemInterface $familymemInterface, MemberInterface $memberInterface,VisitorInterface $visitorInterface)
     {
         $this->approveInterface = $approveInterface;
         $this->familymemInterface = $familymemInterface;
+        $this->memberInterface = $memberInterface;
+        $this->visitorInterface = $visitorInterface;
     }
 
     public function index()
@@ -115,5 +122,19 @@ class MemberController extends Controller
         }
 
         return view('member.approvevisitors');
+    }
+
+    public function previsitor()
+    {
+        return view('security.entryofvisitor');
+    }
+    public function preregistervisitor(VisitorRequest $request)
+    {
+        $request->validated();
+        $status = $this->visitorInterface->addVisitor($request);
+        if ($status)
+            return redirect()->route('member.visitors')->with('success', 'Entry of visitor done');
+        else
+            return redirect()->back();
     }
 }

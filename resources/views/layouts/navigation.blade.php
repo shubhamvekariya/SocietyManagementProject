@@ -68,6 +68,7 @@
                         class="fa arrow"></span></a>
                 <ul class="nav nav-second-level collapse">
                     <li><a href="{{ route('member.needapprovevisitor') }}">Approve Visitor</a></li>
+                    <li><a href="{{ route('member.preregistervisitor') }}">Pre-approve Visitor</a></li>
                     <li><a href="{{ route('member.visitors') }}">See Visitor Records</a></li>
                 </ul>
             </li>
@@ -137,7 +138,18 @@
                     <li><a href="{{ route('staff.visitors.parkings') }}">View Parking Details</a></li>
                 </ul>
             </li>
+            <li>
+                <a href="{{ route('staff.allstaffs') }}"><i class="fa fa-eye"></i><span class="nav-label">Staff</span></a>
+            </li>
+            <li>
+                <a href="{{ route('staff.attendance') }}"><i class="fa fa-eye"></i><span class="nav-label">Attendance</span></a>
+            </li>
         @else
+        @role('staff')
+            <li>
+                <a href="{{ route('staff.attendance') }}"><i class="fa fa-eye"></i><span class="nav-label">Attendance</span></a>
+            </li>
+        @endrole
             <li>
                 <a href="#"><i class="fa fa-building"></i><span class="nav-label">Apartment</span><span
                         class="fa arrow"></span></a>

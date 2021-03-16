@@ -76,6 +76,8 @@ Route::group(['middleware' => ['auth','role:member'] ], function(){
         Route::get('/approvevisitor/{visitor_id}', [MemberController::class,'approvevisitor'])->name('member.approvevisitor');
         Route::get('/rejectvisitor/{visitor_id}', [MemberController::class,'rejectvisitor'])->name('member.rejectvisitor');
         Route::get('/disapprovevisitors', [MemberController::class,'disapprovevisitors'])->name('member.needapprovevisitor');
+        Route::get('/preregistervisitor', [MemberController::class,'previsitor'])->name('member.preregistervisitor');
+        Route::post('/preregistervisitor', [MemberController::class,'preregistervisitor'])->name('member.preregistervisitor');
         Route::get('/visitors/index' , [VisitorController::class , 'index'])->name('member.visitors');
         Route::get('/markasreadmember/{id}',  function ($id) {
             Auth::user()->unreadNotifications->where('id',$id)->markAsRead();
@@ -112,6 +114,10 @@ Route::group(['middleware' => ['auth:staff_security','role:staff|security,staff_
         Route::get('/checkout/{visitor}' , [VisitorController::class , 'checkout'])->name('staff.visitors.checkout');
         Route::get('/allvisitors' , [VisitorController::class , 'index'])->name('staff.visitors.allvisitors');
         Route::get('/parkingdetails' , [VisitorController::class , 'index'])->name('staff.visitors.parkings');
+        Route::get('/allstaffs' , [StaffController::class , 'allStaffs'])->name('staff.allstaffs');
+        Route::get('/checkinstaff/{id}' , [StaffController::class , 'checkinStaff'])->name('staff.checkinstaff');
+        Route::get('/checkoutstaff/{id}' , [StaffController::class , 'checkoutStaff'])->name('staff.checkoutstaff');
+        Route::get('/attendance' , [StaffController::class , 'attendance'])->name('staff.attendance');
     });
     Route::get('/markasread/{id}',  function ($id) {
         Auth::user()->unreadNotifications->where('id',$id)->markAsRead();

@@ -32,7 +32,12 @@
     @endif
     <div class="wrapper wrapper-content mt-0">
         <div class="ibox-content w-75 my-5 mx-auto border py-5">
-            <form action="{{ route('staff.visitors.store') }}" method="post">
+            @role('security')
+                <form action="{{ route('staff.visitors.store') }}" method="post">
+            @endrole
+            @role('member')
+                <form action="{{ route('member.preregistervisitor') }}" method="post">
+            @endrole
                 @csrf
                 @include('security.formvisitor')
             </form>

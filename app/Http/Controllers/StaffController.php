@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StaffRequest;
 use App\Interfaces\StaffInterface;
+use App\Models\Attendance;
 use App\Models\Staff;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
@@ -132,5 +133,42 @@ class StaffController extends Controller
         $request->validated();
         $status = $this->staffInterface->setPassword($request);
         return redirect()->route('staff.home');
+    }
+     /**
+     *
+     * @param  \App\Models\visitor $visitor
+     * @return \Illuminate\Http\Response
+     */
+    public function allStaffs(Request $request)
+    {
+        if($request->ajax())
+            return $this->staffInterface->allStaffs();
+        return view('security.staffattendance');
+    }
+
+    public function checkinStaff($id)
+    {
+        Attendance::create([
+            'staff_id' => $id,
+            'entry_time' => now()
+        ]);
+        return redirect()->back()->with('success','Staff entry done');
+    }
+
+    public function checkoutStaff($id)
+    {
+        $attendance = Attendance::find($id);
+        $attendance->update([
+            'exit_time' => now()
+        ]);
+        return redirect()->back()->with('success','Staff exit done');
+    }
+
+    public function attendance(Request $request)
+    {
+        if ($request->ajax()) {
+            return $this->staffInterface->staffAttendance();
+        }
+        return view('staff_security.attendance');
     }
 }
