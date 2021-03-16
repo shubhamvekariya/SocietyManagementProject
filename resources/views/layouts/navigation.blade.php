@@ -132,12 +132,18 @@
             <li>
                 <a href="{{ route('staff.attendance') }}"><i class="fa fa-eye"></i><span class="nav-label">Attendance</span></a>
             </li>
+            <li>
+                <a href="{{ route('staff.showSalary') }}"><i class="fa fa-eye"></i><span class="nav-label">Salary</span></a>
+            </li>
         @else
         @role('staff')
             <li>
                 <a href="{{ route('staff.attendance') }}"><i class="fa fa-eye"></i><span class="nav-label">Attendance</span></a>
             </li>
-        @endrole
+            <li>
+                <a href="{{ route('staff.showSalary') }}"><i class="fa fa-eye"></i><span class="nav-label">Salary</span></a>
+            </li>
+        @else
             <li>
                 <a href="#"><i class="fa fa-building"></i><span class="nav-label">Apartment</span><span
                         class="fa arrow"></span></a>
@@ -192,6 +198,7 @@
             <li>
                 <a href="#"><i class="fa fa-fire-extinguisher"></i><span class="nav-label">Emergency Button</span></a>
             </li>
+        @endrole
         @endrole
         @endrole
         @endrole

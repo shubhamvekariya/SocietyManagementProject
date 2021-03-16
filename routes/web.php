@@ -85,6 +85,9 @@ Route::group(['middleware' => ['auth','role:member'] ], function(){
         Route::resource('staffs', StaffController::class, ['as' => 'member']);
         Route::resource('assets',AssetController::class,['as' => 'member']);
         Route::get('/staffAttendance/{id}' , [StaffController::class , 'staffAttendance'])->name('member.staffAttendance');
+        Route::post('/paysalary' , [StaffController::class , 'payStaffSalary'])->name('member.paysalary');
+        Route::get('/showSalary/{id}' , [StaffController::class , 'showStaffSalary'])->name('member.showSalary');
+
         Route::middleware(['role:committeemember'])->group(function () {
             Route::resource('meetings',MeetingController::class,['as' => 'member']);
             Route::resource('notices',NoticeController::class,['as' => 'member']);
@@ -100,6 +103,9 @@ Route::group(['middleware' => ['auth:staff_security','role:staff|security,staff_
 
         return view('staff_security.index');
     })->name('staff.home');
+
+    Route::get('/attendance' , [StaffController::class , 'attendance'])->name('staff.attendance');
+    Route::get('/salaries' , [StaffController::class , 'showSalary'])->name('staff.showSalary');
     Route::group(['middleware' => ['permission:set password,staff_security']], function () {
         //
         Route::get('/setpassword' , [StaffController::class , 'getpassword'])->name('staff.setpassword');
@@ -113,7 +119,7 @@ Route::group(['middleware' => ['auth:staff_security','role:staff|security,staff_
         Route::get('/allstaffs' , [StaffController::class , 'allStaffs'])->name('staff.allstaffs');
         Route::get('/checkinstaff/{id}' , [StaffController::class , 'checkinStaff'])->name('staff.checkinstaff');
         Route::get('/checkoutstaff/{id}' , [StaffController::class , 'checkoutStaff'])->name('staff.checkoutstaff');
-        Route::get('/attendance' , [StaffController::class , 'attendance'])->name('staff.attendance');
+
     });
     Route::get('/markasread/{id}',  function ($id) {
         Auth::user()->unreadNotifications->where('id',$id)->markAsRead();

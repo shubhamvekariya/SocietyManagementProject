@@ -35,7 +35,7 @@ Staffs & Securities
                     <th>Name</th>
                     <th>Email</th>
                     <th>Position</th>
-                    <th width="250px">Action</th>
+                    <th width="400px">Action</th>
                 </tr>
             </thead>
             <tfoot>
@@ -44,7 +44,7 @@ Staffs & Securities
                     <th>Name</th>
                     <th>Email</th>
                     <th>Position</th>
-                    <th width="250px">Action</th>
+                    <th width="400px">Action</th>
                 </tr>
             </tfoot>
         </table>

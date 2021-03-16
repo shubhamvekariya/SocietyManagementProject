@@ -5,10 +5,13 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StaffRequest;
 use App\Interfaces\StaffInterface;
 use App\Models\Attendance;
+use App\Models\Salary;
 use App\Models\Staff;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use PhpParser\Node\Expr\Cast\Object_;
 
 class StaffController extends Controller
 {
@@ -134,14 +137,14 @@ class StaffController extends Controller
         $status = $this->staffInterface->setPassword($request);
         return redirect()->route('staff.home');
     }
-     /**
+    /**
      *
      * @param  \App\Models\visitor $visitor
      * @return \Illuminate\Http\Response
      */
     public function allStaffs(Request $request)
     {
-        if($request->ajax())
+        if ($request->ajax())
             return $this->staffInterface->allStaffs();
         return view('security.staffattendance');
     }
@@ -152,7 +155,7 @@ class StaffController extends Controller
             'staff_id' => $id,
             'entry_time' => now()
         ]);
-        return redirect()->back()->with('success','Staff entry done');
+        return redirect()->back()->with('success', 'Staff entry done');
     }
 
     public function checkoutStaff($id)
@@ -161,7 +164,7 @@ class StaffController extends Controller
         $attendance->update([
             'exit_time' => now()
         ]);
-        return redirect()->back()->with('success','Staff exit done');
+        return redirect()->back()->with('success', 'Staff exit done');
     }
 
     public function attendance(Request $request)
@@ -172,11 +175,35 @@ class StaffController extends Controller
         return view('staff_security.attendance');
     }
 
-    public function staffAttendance(Request $request,$id)
+    public function staffAttendance(Request $request, $id)
     {
         if ($request->ajax()) {
             return $this->staffInterface->staffAttendance($id);
         }
-        return view('staff_security.attendance',compact('id'));
+        return view('staff_security.attendance', compact('id'));
+    }
+
+    public function payStaffSalary(Request $request)
+    {
+        $paystaff = Salary::create([
+            'month' => $request->month,
+            'year' => $request->year,
+            'salary' => $request->salary,
+            'staff_id' => $request->staff_id,
+            'leave' => $request->leave
+        ]);
+        return redirect()->back()->with('success','Salary Payed');
+    }
+
+    public function showStaffSalary($id)
+    {
+        $salaries = $this->staffInterface->staffSalary($id);
+        return view('staff_security.salary',compact('salaries'));
+    }
+
+    public function showSalary()
+    {
+        $salaries = $this->staffInterface->staffSalary(Auth::user()->id);
+        return view('staff_security.salary',compact('salaries'));
     }
 }

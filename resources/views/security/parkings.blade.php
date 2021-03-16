@@ -11,9 +11,7 @@
 @endsection
 @section('breadcrumb-item')
     <li class="breadcrumb-item">
-        @role('security')
         <a href="{{ route('staff.home') }}">Home</a>
-        @endrole
     </li>
     <li class="breadcrumb-item active">
         <strong>Parking Detials</strong>

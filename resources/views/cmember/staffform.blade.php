@@ -33,7 +33,7 @@
     <div class="form-row">
         <div class="form-group col-md-6">
             <label for="salary">Salary </label>
-            <input id="salary" name="salary" type="number" class="form-control" placeholder="Salary (per day) (in k)" value="@if(isset($staff->salary)){{ $staff->salary }}@endif">
+            <input id="salary" name="salary" type="number" class="form-control" placeholder="Salary (per month) (in k)" value="@if(isset($staff->salary)){{ $staff->salary }}@endif">
         </div>
         <div class="form-group col-md-6">
             <label for="nonworkingday">Non Working Day</label>

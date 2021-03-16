@@ -4,11 +4,15 @@ namespace App\Repository;
 
 use App\Interfaces\StaffInterface;
 use App\Models\Attendance;
+use App\Models\Salary;
 use App\Models\Staff;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Spatie\Permission\Models\Role;
 use Yajra\DataTables\Facades\DataTables;
+use DateInterval;
+use DatePeriod;
+use DateTime;
 
 /**
  * Class UserRepository
@@ -97,9 +101,10 @@ class StaffRepository implements StaffInterface
             ->addColumn('action', function ($row) {
                 $btn = '<form action="' . route('member.staffs.destroy', $row['id']) . '" method="POST">';
                 $btn .= '<input type="hidden" name="_method" value="DELETE"> <input type="hidden" name="_token" value="' . csrf_token() . '">';
-                $btn .= '<a href="' . route('member.staffs.edit', $row['id']) . '" class="edit btn btn-primary btn-rounded mx-1" >Edit</a>';
-                $btn .= '<button class="edit btn btn-danger btn-rounded" >Delete</button>';
+                $btn .= '<a href="' . route('member.staffs.edit', $row['id']) . '" class="edit btn btn-primary btn-rounded mx-1"  style="width:78px;">Edit</a>';
+                $btn .= '<button class="edit btn btn-danger btn-rounded mx-1"  style="width:78px;" >Delete</button>';
                 $btn .= '<a href="' . route('member.staffAttendance', $row['id']) . '" class="edit btn btn-success btn-rounded mx-1" >Attendance</a>';
+                $btn .= '<a href="' . route('member.showSalary', $row['id']) . '" class="edit btn btn-success btn-rounded mx-1" >Pay Salary</a>';
                 $btn .= '</form>';
                 return $btn;
             })
@@ -110,8 +115,22 @@ class StaffRepository implements StaffInterface
     public function editStaff($request, $staff)
     {
         $work = $request->work;
+        $role1 = Role::findByName('security', 'staff_security');
+        $role2 = Role::findByName('staff', 'staff_security');
         if ($request->position == 'security')
+        {
+            $staff->assignRole($role1);
+            $staff->removeRole($role2);
             $work = null;
+        }
+        else
+        {
+            if($staff->position == "security")
+            {
+                $staff->removeRole($role1);
+                $staff->assignRole($role2);
+            }
+        }
         $user_id = null;
         $society_id = null;
         if ($request->usage == 'personal')
@@ -153,5 +172,58 @@ class StaffRepository implements StaffInterface
         return DataTables::of($attendance)
             ->addIndexColumn()
             ->make(true);
+    }
+
+    public function staffSalary($id)
+    {
+
+        $staff = Staff::findOrFail($id);
+        $salaries = array();
+        $start = new DateTime($staff->created_at);
+        $start->modify('first day of this month');
+        $end = new DateTime(now());
+        $end->modify('first day of this month');
+        $interval = DateInterval::createFromDateString('1 month');
+        $period = new DatePeriod($start, $interval, $end);
+        $no = 0;
+        foreach ($period as $dt) {
+            $month = $dt->format("m");
+            $year = $dt->format("Y");
+            $staffsalary = Salary::where('staff_id',$id)->where('month',$month)->where('year',$year)->first();
+            if($staffsalary)
+            {
+                $no += 1;
+                array_push($salaries,(Object)['no'=> $no,'salary'=>$staffsalary->salary,'staff_id'=>$staffsalary->staff_id,'leave'=>$staffsalary->leave,'month'=>$month,'year'=>$year,'status'=>0]);
+            }
+            else
+            {
+                $total = 0;
+                $leave = 0;
+                $nonworkingday = $staff->nonworkingday;
+                for($d=1; $d<=31; $d++)
+                {
+                    $time=mktime(12, 0, 0, $month, $d, $year);
+                    if (date('m', $time)==$month)
+                    {
+                        $attendance = Attendance::where('staff_id',$id)->whereDate('entry_time', '=', date('Y-m-d',$time))->first();
+                        if(strcasecmp(date('l',$time),$nonworkingday) !=0)
+                        {
+                            $total += 1;
+                            if(!$attendance)
+                                $leave += 1;
+                        }
+                    }
+                }
+                $salary = $staff->salary;
+                $salary = $salary - ($leave *$salary/$total);
+                $salary = round($salary,0);
+                if($salary != 0)
+                {
+                    $no += 1;
+                    array_push($salaries,(Object)['no'=> $no,'salary'=>(int)$salary,'staff_id'=>$staff->id,'leave'=>$leave,'month'=>$month,'year'=>$year,'status'=>1]);
+                }
+            }
+        }
+        return $salaries;
     }
 }
