@@ -78,7 +78,6 @@
                 <ul class="nav nav-second-level collapse">
                     <li><a href="{{ route('member.staffs.create') }}">Add Staff</a></li>
                     <li><a href="{{ route('member.staffs.index') }}">Manage Staff</a></li>
-                    <li><a href="#">Monthly Attendence</a></li>
                 </ul>
             </li>
             <li>

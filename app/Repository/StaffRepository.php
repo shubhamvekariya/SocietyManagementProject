@@ -97,8 +97,9 @@ class StaffRepository implements StaffInterface
             ->addColumn('action', function ($row) {
                 $btn = '<form action="' . route('member.staffs.destroy', $row['id']) . '" method="POST">';
                 $btn .= '<input type="hidden" name="_method" value="DELETE"> <input type="hidden" name="_token" value="' . csrf_token() . '">';
-                $btn .= '<a href="' . route('member.staffs.edit', $row['id']) . '" class="edit btn btn-primary btn-rounded mx-4" style="width:78px;">Edit</a>';
-                $btn .= '<button class="edit btn btn-danger btn-rounded mx-3" style="width:78px;">Delete</button>';
+                $btn .= '<a href="' . route('member.staffs.edit', $row['id']) . '" class="edit btn btn-primary btn-rounded mx-1" >Edit</a>';
+                $btn .= '<button class="edit btn btn-danger btn-rounded" >Delete</button>';
+                $btn .= '<a href="' . route('member.staffAttendance', $row['id']) . '" class="edit btn btn-success btn-rounded mx-1" >Attendance</a>';
                 $btn .= '</form>';
                 return $btn;
             })
@@ -143,9 +144,12 @@ class StaffRepository implements StaffInterface
         return true;
     }
 
-    public function staffAttendance()
+    public function staffAttendance($id)
     {
-        $attendance = Attendance::where('staff_id',Auth::user()->id);
+        if($id)
+            $attendance = Attendance::where('staff_id',$id);
+        else
+            $attendance = Attendance::where('staff_id',Auth::user()->id);
         return DataTables::of($attendance)
             ->addIndexColumn()
             ->make(true);

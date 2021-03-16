@@ -167,8 +167,16 @@ class StaffController extends Controller
     public function attendance(Request $request)
     {
         if ($request->ajax()) {
-            return $this->staffInterface->staffAttendance();
+            return $this->staffInterface->staffAttendance(null);
         }
         return view('staff_security.attendance');
+    }
+
+    public function staffAttendance(Request $request,$id)
+    {
+        if ($request->ajax()) {
+            return $this->staffInterface->staffAttendance($id);
+        }
+        return view('staff_security.attendance',compact('id'));
     }
 }
