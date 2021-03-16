@@ -83,6 +83,9 @@ Route::group(['middleware' => ['auth','role:member'] ], function(){
             Auth::user()->unreadNotifications->where('id',$id)->markAsRead();
             return redirect()->back();
         })->name('member.markasread');
+
+        Route::get('/edit/member',[LoginController::class,'edit_member'])->name('member.edit');
+        Route::post('/update/member',[LoginController::class,'update_member'])->name('member.update');
         Route::resource('staffs', StaffController::class, ['as' => 'member']);
         Route::resource('assets',AssetController::class,['as' => 'member']);
         Route::resource('complaints',ComplaintController::class,['as' => 'member']);
@@ -135,6 +138,7 @@ Route::post('/login/member',[LoginController::class,'check_login'])->name('login
 Route::get('/register/member',[LoginController::class,'show_register'])->name('register.member');
 Route::post('/register/member',[LoginController::class,'create_member'])->name('register.member');
 
+
 Route::get('/login/staff',[LoginController::class,'show_login'])->name('login.staff');
 Route::post('/login/staff',[LoginController::class,'check_login'])->name('login.staff');
 
@@ -145,3 +149,6 @@ Route::get('/country', function () {
     $country = Storage::get('public/country.json');
     return json_decode($country, true);
 });
+
+
+
