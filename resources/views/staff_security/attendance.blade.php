@@ -50,19 +50,38 @@ Staffs & Securities
 @push('script')
     <script src="{{ asset('js/datatables.min.js') }}"></script>
     <script src="{{ asset('js/dataTables.bootstrap4.min.js') }}"></script>
-    <script>
-        $(function () {
-            var table = $('#staffTable').DataTable({
-                processing: true,
-                serverSide: true,
-                ajax: "{{ route('staff.attendance') }}",
-                columns: [
-                    {data: 'id', name: 'id'},
-                    {data: 'entry_time', name: 'entry_time'},
-                    {data: 'exit_time', name: 'exit_time'}
-                ]
-            });
+    @role('member')
+        <script>
+            $(function () {
+                route = {!! str_replace("'", "\'", json_encode(route('member.staffAttendance',$id))) !!};
+                var table = $('#staffTable').DataTable({
+                    processing: true,
+                    serverSide: true,
+                    ajax: route,
+                    columns: [
+                        {data: 'id', name: 'id'},
+                        {data: 'entry_time', name: 'entry_time'},
+                        {data: 'exit_time', name: 'exit_time'}
+                    ]
+                });
 
-        });
-    </script>
+            });
+        </script>
+    @else
+        <script>
+            $(function () {
+                var table = $('#staffTable').DataTable({
+                    processing: true,
+                    serverSide: true,
+                    ajax: "{{ route('staff.attendance') }}",
+                    columns: [
+                        {data: 'id', name: 'id'},
+                        {data: 'entry_time', name: 'entry_time'},
+                        {data: 'exit_time', name: 'exit_time'}
+                    ]
+                });
+
+            });
+        </script>
+    @endrole
 @endpush
