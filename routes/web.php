@@ -53,6 +53,10 @@ Route::group(['middleware' => ['auth:society','role:secretary,society'] ], funct
         return redirect()->back();
     })->name('society.markasread');
 
+    Route::get('/edit/society',[LoginController::class,'edit_society'])->name('society.edit');
+    Route::post('/update/society',[LoginController::class,'update_society'])->name('society.update');
+
+
     Route::resource('meetings',MeetingController::class,['as' => 'society']);
     Route::resource('notices',NoticeController::class,['as' => 'society']);
 
@@ -86,6 +90,8 @@ Route::group(['middleware' => ['auth','role:member'] ], function(){
 
         Route::get('/edit/member',[LoginController::class,'edit_member'])->name('member.edit');
         Route::post('/update/member',[LoginController::class,'update_member'])->name('member.update');
+
+
         Route::resource('staffs', StaffController::class, ['as' => 'member']);
         Route::resource('assets',AssetController::class,['as' => 'member']);
         Route::resource('complaints',ComplaintController::class,['as' => 'member']);

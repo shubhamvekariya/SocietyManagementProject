@@ -25,7 +25,7 @@ class ComplaintValidation extends FormRequest
     public function rules()
     {
         return [
-            'title' => 'required|max:20',
+            'title' => 'required|min:3',
             'description' => 'required',
             'category' => 'required',
             'reg_date' => 'required',
@@ -35,7 +35,7 @@ class ComplaintValidation extends FormRequest
     {
         return [
             'title.required' => 'Title is required',
-            'name.max' => 'maximum 20 chars length',
+            'title.min' => 'minimum 3 chars length',
             'description.required' => 'Description is required',
             'category.required' => 'please Select Category',
             'reg_date.required' => 'please Select Date',

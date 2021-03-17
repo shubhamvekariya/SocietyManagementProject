@@ -21,7 +21,12 @@
                         </span>
                     </a>
                     <ul class="dropdown-menu animated fadeInRight m-t-xs">
-                        <li><a class="dropdown-item" href="{{route('member.edit')}}">Profile</a></li>
+                        @if (Auth::guard('society')->check())
+                            <li><a class="dropdown-item" href="{{route('society.edit')}}">Edit Profile</a></li>
+                        @else
+                            <li><a class="dropdown-item" href="{{route('member.edit')}}">Edit Profile</a></li>
+                        @endif
+
                         <li class="dropdown-divider"></li>
                         <li><a class="dropdown-item" href="{{ route('logout') }}">Logout</a></li>
                     </ul>

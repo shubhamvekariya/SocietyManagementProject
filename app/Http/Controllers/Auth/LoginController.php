@@ -25,13 +25,13 @@ class LoginController extends Controller
     {
         if ($request->segment(2) == 'society') {
             $this->societyInterface = $societyInterface;
-            $this->middleware('guest:society')->except('destroy','edit_member','update_member');
+            $this->middleware('guest:society')->except('destroy','edit_member','update_member','edit_society','update_society');
         } elseif ($request->segment(2) == 'member') {
             $this->memberInterface = $memberInterface;
-            $this->middleware('guest')->except('destroy','edit_member','update_member');
+            $this->middleware('guest')->except('destroy','edit_member','update_member','edit_society','update_society');
         } elseif ($request->segment(2) == 'staff') {
             $this->staffInterface = $staffInterface;
-            $this->middleware('guest:staff_security')->except('destroy','edit_member','update_member');
+            $this->middleware('guest:staff_security')->except('destroy','edit_member','update_member','edit_society','update_society');
         }
     }
 
@@ -128,7 +128,23 @@ class LoginController extends Controller
         $apart->update($request->all());
        // dd($apart);
         return redirect()->route('member.home')->with('success','Profile Updated');
-        echo "<script>alert('Updated');</script>";
+        //echo "<script>alert('Updated');</script>";
+
+    }
+
+    public function edit_society()
+    {
+        $secretary = Auth::user();
+        //dd($secretary);
+        return view('auth.editprofile',compact('secretary'));
+    }
+    public function update_society(Request $request)
+    {
+        $secretary = Society::find(Auth::user()->id);
+        $secretary->update($request->all());
+
+        return redirect()->route('society.home')->with('success','Profile Updated');
+        //echo "<script>alert('Updated');</script>";
 
     }
 }

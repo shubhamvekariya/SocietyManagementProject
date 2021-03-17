@@ -25,12 +25,11 @@ class AssetValidation extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|max:20',
+            'name' => 'required|min:3',
             'start_time' => 'required',
             'end_time' => 'nullable',
             'assets' => 'required',
             'func_details' => 'nullable',
-            'charges' => 'required',
         ];
 
     }
@@ -38,10 +37,9 @@ class AssetValidation extends FormRequest
     {
     return [
         'name.required' => 'Name required',
-        'name.max' => 'Maximum 20 chars length',
+        'name.min' => 'Minimum 3 chars length',
         'start_time.required' => 'Please Select Asset Date Time',
         'assets.required' => 'please Select Asset or Event',
-        'charges.required' => 'please Add Charges',
     ];
     }
 }
