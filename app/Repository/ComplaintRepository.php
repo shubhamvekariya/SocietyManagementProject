@@ -54,9 +54,9 @@ class ComplaintRepository implements ComplaintInterface
             ->addColumn('status', function ($row) {
                 if ($row->status == 'In Progress')
                 {
-                    $status = '<span class="label label-primary w-15 p-2">' . $row->status . '</span>';
+                    $status = '<span class="label label-primary w-15 p-2 mt-2">' . $row->status . '</span>';
                 }
-                else//if ($row->status == 'Resolved')
+                else
                  {
                      $status = '<span class="label label-success w-20 p-2">' . $row->status . '</span>';
                 }

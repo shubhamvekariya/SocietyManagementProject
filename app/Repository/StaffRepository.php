@@ -176,13 +176,12 @@ class StaffRepository implements StaffInterface
 
     public function staffSalary($id)
     {
-
         $staff = Staff::findOrFail($id);
         $salaries = array();
         $start = new DateTime($staff->created_at);
         $start->modify('first day of this month');
         $end = new DateTime(now());
-        $end->modify('first day of this month');
+        $end->modify('first day of next month');
         $interval = DateInterval::createFromDateString('1 month');
         $period = new DatePeriod($start, $interval, $end);
         $no = 0;
