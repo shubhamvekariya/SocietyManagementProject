@@ -220,6 +220,7 @@ class StaffRepository implements StaffInterface
                 {
                     $no += 1;
                     array_push($salaries,(Object)['no'=> $no,'salary'=>(int)$salary,'staff_id'=>$staff->id,'leave'=>$leave,'month'=>$month,'year'=>$year,'status'=>1]);
+                    // Hello
                 }
             }
         }
