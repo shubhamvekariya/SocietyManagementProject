@@ -30,7 +30,7 @@ class FamilymemValidation extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|max:20',
+            'name' => 'required|min:3',
             'age' => 'required',
             'email' => 'nullable|email',
             'gender' => 'required',
@@ -41,7 +41,7 @@ class FamilymemValidation extends FormRequest
     {
         return [
             'name.required' => 'A Name is required',
-            'name.max' => 'maximum 20 chars length',
+            'name.min' => 'minimum 3 chars length',
             'age.required' => 'Age is required',
             'gender.required' => 'please Select Gender',
         ];

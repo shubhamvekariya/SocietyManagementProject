@@ -80,4 +80,9 @@ class MemberRepository implements MemberInterface
         if (Auth::user()->hasRole('member'))
             return User::join('apartments', 'users.id', '=', 'apartments.user_id')->where('apartments.society_id', Auth::user()->apartment->society->id)->where('users.approved_at', '!=', null)->get();
     }
+
+    public function editMember()
+    {
+        return true;
+    }
 }
