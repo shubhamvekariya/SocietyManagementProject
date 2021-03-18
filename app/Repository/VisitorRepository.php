@@ -80,6 +80,15 @@ class VisitorRepository implements VisitorInterface
                     'body' => 'Visitor '.$visitor->name.' need to approve!<br><form class="text-center" action="'.route('member.needapprovevisitor').'" method="GET"><button type="submit" class="btn btn-primary mb-0">Approve</button></form>',
                 ];
                 $member->notify(new \App\Notifications\Approve($details));
+                // SMS notification
+                // $basic  = new \Nexmo\Client\Credentials\Basic('8e5576b8', 'harboJXLDKcG7ntT');
+                // $client = new \Nexmo\Client($basic);
+
+                // $message = $client->message()->send([
+                //     'to' => '917575800502',
+                //     'from' => 'ISocietyClub',
+                //     'text' => 'Hello '.$member->name.', Request for new visitor '.$visitor->name.'. Approve here http://127.0.0.1:8000/approvevisitor/1'
+                // ]);
                 return true;
             }
         }
