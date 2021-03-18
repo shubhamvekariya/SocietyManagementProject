@@ -29,6 +29,18 @@ class MemberController extends Controller
     public function index()
     {
         return view('member.index');
+        /*$apartments = Auth::user()->apartment->society->apartment;
+        $details = [
+            'body' => 'Visitor  approved',
+        ];
+        foreach($apartments as $apartment)
+        {
+            $user = $apartment->user;
+            if($user->hasRole('committeemember'))
+            {
+                $user->notify(new \App\Notifications\Approve($details));
+            }
+        }*/
     }
 
     public function approve()

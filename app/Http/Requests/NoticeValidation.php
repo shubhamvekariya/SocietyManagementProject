@@ -25,17 +25,17 @@ class NoticeValidation extends FormRequest
     public function rules()
     {
             return [
-                'title' => 'required|max:20',
-                'description' => 'required|string|max:100',
+                'title' => 'required|min:3',
+                'description' => 'required|string|min:5',
         ];
     }
     public function messages()
     {
     return [
         'title.required' => 'Notic Title required',
-        'title.max' => 'Maximum 20 chars length',
+        'title.min' => 'Minimum 3 chars length',
         'description.required' => 'Notice Description required',
-        'description.max' => 'Maximum 100 chars length',
+        'description.min' => 'Minimum 5 chars length',
     ];
 }
 }

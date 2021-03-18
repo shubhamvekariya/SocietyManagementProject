@@ -9,7 +9,9 @@ use App\Http\Requests\AuthRequest;
 use App\Interfaces\MemberInterface;
 use App\Interfaces\SocietyInterface;
 use App\Interfaces\StaffInterface;
+use App\Models\Apartment;
 use App\Models\Staff;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
 
@@ -23,13 +25,13 @@ class LoginController extends Controller
     {
         if ($request->segment(2) == 'society') {
             $this->societyInterface = $societyInterface;
-            $this->middleware('guest:society')->except('destroy');
+            $this->middleware('guest:society')->except('destroy','edit_member','update_member','edit_society','update_society');
         } elseif ($request->segment(2) == 'member') {
             $this->memberInterface = $memberInterface;
-            $this->middleware('guest')->except('destroy');
+            $this->middleware('guest')->except('destroy','edit_member','update_member','edit_society','update_society');
         } elseif ($request->segment(2) == 'staff') {
             $this->staffInterface = $staffInterface;
-            $this->middleware('guest:staff_security')->except('destroy');
+            $this->middleware('guest:staff_security')->except('destroy','edit_member','update_member','edit_society','update_society');
         }
     }
 
@@ -107,5 +109,42 @@ class LoginController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
         return redirect()->route($url);
+    }
+
+    public function edit_member()
+    {
+        $user = Auth::user();
+        return view('auth.editprofile',compact('user'));
+    }
+
+    public function update_member(Request $request)
+    {
+
+
+        $user = User::find(Auth::user()->id);
+        $user->update($request->all());
+
+        $apart = Apartment::find(Auth::user()->apartment->id);
+        $apart->update($request->all());
+       // dd($apart);
+        return redirect()->route('member.home')->with('success','Profile Updated');
+        //echo "<script>alert('Updated');</script>";
+
+    }
+
+    public function edit_society()
+    {
+        $secretary = Auth::user();
+        //dd($secretary);
+        return view('auth.editprofile',compact('secretary'));
+    }
+    public function update_society(Request $request)
+    {
+        $secretary = Society::find(Auth::user()->id);
+        $secretary->update($request->all());
+
+        return redirect()->route('society.home')->with('success','Profile Updated');
+        //echo "<script>alert('Updated');</script>";
+
     }
 }

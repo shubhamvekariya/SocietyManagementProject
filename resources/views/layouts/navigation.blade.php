@@ -21,7 +21,12 @@
                         </span>
                     </a>
                     <ul class="dropdown-menu animated fadeInRight m-t-xs">
-                        <li><a class="dropdown-item" href="#">Profile</a></li>
+                        @if (Auth::guard('society')->check())
+                            <li><a class="dropdown-item" href="{{route('society.edit')}}">Edit Profile</a></li>
+                        @else
+                            <li><a class="dropdown-item" href="{{route('member.edit')}}">Edit Profile</a></li>
+                        @endif
+
                         <li class="dropdown-divider"></li>
                         <li><a class="dropdown-item" href="{{ route('logout') }}">Logout</a></li>
                     </ul>
@@ -87,6 +92,14 @@
                     <li><a href="{{route('member.assets.index')}}">View Assets</a></li>
                 </ul>
             </li>
+            <li>
+                <a href="#"><i class="fa fa-book"></i><span class="nav-label">Complaints</span><span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level collapse">
+                    <li><a href="{{route('member.complaints.create')}}">Register Complaints</a></li>
+                    <li><a href="{{route('member.complaints.index')}}">All Complaints</a></li>
+                </ul>
+            </li>
+
             @role('committeemember')
 
                 <li>
@@ -158,15 +171,6 @@
                 <ul class="nav nav-second-level collapse">
                     <li><a href="#">Add Bills</a></li>
                     <li><a href="#">Manage Bills</a></li>
-                </ul>
-            </li>
-            <li>
-                <a href="#"><i class="fa fa-book"></i><span class="nav-label">Complaints</span><span
-                        class="fa arrow"></span></a>
-                <ul class="nav nav-second-level collapse">
-                    <li><a href="#">All Complaints</a></li>
-                    <li><a href="#">Resolved</a></li>
-                    <li><a href="#">In progress</a></li>
                 </ul>
             </li>
             <li>

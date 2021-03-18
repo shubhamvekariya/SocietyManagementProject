@@ -8,4 +8,5 @@ interface MemberInterface
     public function checkLogin($email, $password, $rememberme);
     public function getMembers();
     public function getSocietyMember();
+    public function editMember();
 }

@@ -27,8 +27,8 @@ class MeetingValidation extends FormRequest
     public function rules()
     {
             return [
-                'title' => 'required|max:20',
-                'description' => 'required|max:100',
+                'title' => 'required|min:3',
+                'description' => 'required|min:5',
                 'start_time' => 'required',
                 'end_time' => 'nullable',
                 'place' => 'required',
@@ -39,9 +39,9 @@ class MeetingValidation extends FormRequest
     {
     return [
         'title.required' => 'Meeting Title required',
-        'title.max' => 'Maximum 20 chars length',
+        'title.min' => 'Minimum 3 chars length',
         'description.required' => 'Meeting Description required',
-        'description.max' => 'Maximum 100 chars length',
+        'description.min' => 'Minimum 5 chars length',
         'start_time.required' => 'Please Select Meeting Time',
         'place.required' => 'please Select Place',
     ];

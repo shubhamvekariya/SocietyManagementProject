@@ -5,7 +5,7 @@
         </div>
         <ul class="nav navbar-top-links navbar-right">
             <li>
-                <span class="m-r-sm text-muted welcome-message">Welcome to ISocietyClub</span>
+                <span class="m-r-sm text-muted welcome-message"><marquee>Welcome to ISocietyClub</marquee></span>
             </li>
             <li class="dropdown">
                 <a class="right-sidebar-toggle count-info">

@@ -18,13 +18,13 @@ class CreateMaintenanceBillTable extends Migration
             $table->string('bill_date');
             $table->string('charges');
             $table->string('category');
-            $table->string('due_dates');
+            $table->timestamp('due_dates');
             $table->longText('paid_status');
 
             $table->foreignId('user_id')->constrained('users')->onUpdate('cascade')->onDelete('cascade');
             $table->softDeletes();
 
-            
+
             $table->timestamps();
         });
     }
