@@ -16,7 +16,6 @@ class Complaint extends Model
         'category',
         'reg_date',
         'status',
-        //'remarks',
         'user_id',
     ];
 

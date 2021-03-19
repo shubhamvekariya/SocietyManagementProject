@@ -11,6 +11,7 @@ use App\Http\Controllers\MeetingController;
 use App\Http\Controllers\AssetController;
 use App\Http\Controllers\NoticeController;
 use App\Http\Controllers\ComplaintController;
+use App\Http\Controllers\ServiceController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
 
@@ -59,6 +60,7 @@ Route::group(['middleware' => ['auth:society','role:secretary,society'] ], funct
 
     Route::resource('meetings',MeetingController::class,['as' => 'society']);
     Route::resource('notices',NoticeController::class,['as' => 'society']);
+    Route::resource('services',ServiceController::class,['as' => 'society']);
 
 });
 

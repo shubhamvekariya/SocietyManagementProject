@@ -32,11 +32,11 @@
                     </ul>
                 </div>
                 <div class="logo-element">
-                    SC+
+                    ISC+
                 </div>
             </li>
             <li>
-                <a href="#"><i class="fa fa-th-large"></i> <span class="nav-label">Dashboard</span></a>
+                <a href="#"><i class="fa fa-home"></i> <span class="nav-label">Dashboard</span></a>
             </li>
         @role('secretary','society')
             <li>
@@ -51,11 +51,20 @@
                         class="nav-label">Committee Member</span></a>
             </li>
             <li>
-                <a href="#"><i class="fa fa-user-circle-o"></i><span class="nav-label">Rules</span><span
+                <a href="#"><i class="fa fa-male"></i><span class="nav-label">Rules</span><span
                         class="fa arrow"></span></a>
                 <ul class="nav nav-second-level collapse">
                     <li><a href="{{ route('society.rule') }}">Add Rules</a></li>
                     <li><a href="{{ route('society.all_rule') }}">Manage Rules</a></li>
+                </ul>
+            </li>
+
+            <li>
+                <a href="#"><i class="fa fa-cogs  "></i><span class="nav-label">Services</span><span
+                        class="fa arrow"></span></a>
+                <ul class="nav nav-second-level collapse">
+                    <li><a href="{{ route('society.services.create') }}">Add Service</a></li>
+                    <li><a href="{{ route('society.services.index') }}">All Services</a></li>
                 </ul>
             </li>
         @else
@@ -100,6 +109,7 @@
                     <li><a href="{{route('member.complaints.index')}}">All Complaints</a></li>
                 </ul>
             </li>
+
 
             @role('committeemember')
 
