@@ -114,7 +114,7 @@ class ServiceController extends Controller
     public function show_service(Request $request)
     {
         if ($request->ajax()) {
-            return $this->serviceInterface->showServicemem($request);
+            return $this->serviceInterface->showServiceMem($request);
         }
         return view('service.allservice');
     }

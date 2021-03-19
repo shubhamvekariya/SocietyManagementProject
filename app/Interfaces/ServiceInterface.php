@@ -8,6 +8,6 @@ interface ServiceInterface
     public function showService($request);
     public function deleteService($service);
     public function updateService($request,$service);
-    public function showServiceMem($request);
+    //public function showServiceMem($request);
 
 }

@@ -102,8 +102,8 @@ Route::group(['middleware' => ['auth', 'role:member']], function () {
         Route::resource('complaints',ComplaintController::class,['as' => 'member']);
         Route::get('/complaints/resolve/{complaint}', [ComplaintController::class,'resolve'])->name('member.complaints.resolve');
 
-        Route::get('/allservice', [ServiceController::class,'show_service'])->name('service.allservice');
-       // Route::get('/resolveComplaintList', [ComplaintController::class,'resolveComplaintList'])->name('member.complaints.resolveComplaintList');
+       Route::get('/allservice', [ServiceController::class,'show_service'])->name('member.services.allservice');
+       //Route::resource('services',ServiceController::class,['as' => 'member']);
 
         Route::resource('assets', AssetController::class, ['as' => 'member']);
         Route::get('/staffAttendance/{id}', [StaffController::class, 'staffAttendance'])->name('member.staffAttendance');

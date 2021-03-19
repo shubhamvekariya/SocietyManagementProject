@@ -44,7 +44,9 @@ All Services
                     <th>Name</th>
                     <th>Position</th>
                     <th>Mobile No</th>
+                    @role('secretary','society')
                     <th width="250px">Action</th>
+                    @endrole
 
                 </tr>
             </thead>
@@ -54,7 +56,9 @@ All Services
                     <th>Name</th>
                     <th>Position</th>
                     <th>Mobile No</th>
+                    @role('secretary','society')
                     <th width="250px">Action</th>
+                    @endrole
 
                 </tr>
             </tfoot>
@@ -66,6 +70,8 @@ All Services
 @push('script')
     <script src="{{ asset('js/datatables.min.js') }}"></script>
     <script src="{{ asset('js/dataTables.bootstrap4.min.js') }}"></script>
+    @role('secretary')
+    @if (Route::is('society.services.index'))
     <script>
         $(function () {
             var table = $('#all_service').DataTable({
@@ -83,6 +89,27 @@ All Services
 
         });
     </script>
+    @endif
+    @endrole
+
+    @role('member')
+    <script>
+        $(function () {
+            var table = $('#all_service').DataTable({
+                processing: true,
+                serverSide: true,
+                ajax: "{{ route('member.services.allservice') }}",
+                columns: [
+                    {data: 'id', name: 'id'},
+                    {data: 'name', name: 'name'},
+                    {data: 'position', name: 'position'},
+                    {data: 'mobile_no', name: 'mobile_no'},
+                ]
+            });
+
+        });
+    </script>
+    @endrole
 
 @endpush
 
