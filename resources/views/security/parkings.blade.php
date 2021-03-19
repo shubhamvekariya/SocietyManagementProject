@@ -1,22 +1,20 @@
 @extends('layouts.app')
 @section('title')
-    Parking Detials
+    Parking Details
 @endsection
 @push('css')
     <link href="{{ mix('/css/datatables.min.css') }}" rel="stylesheet">
 @endpush
 
 @section('breadcrumb-title')
-    Parking Detials
+    Parking Details
 @endsection
 @section('breadcrumb-item')
     <li class="breadcrumb-item">
-        @role('security')
         <a href="{{ route('staff.home') }}">Home</a>
-        @endrole
     </li>
     <li class="breadcrumb-item active">
-        <strong>Parking Detials</strong>
+        <strong>Parking Details</strong>
     </li>
 @endsection
 

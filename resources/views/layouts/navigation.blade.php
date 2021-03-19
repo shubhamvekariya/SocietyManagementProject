@@ -92,7 +92,6 @@
                 <ul class="nav nav-second-level collapse">
                     <li><a href="{{ route('member.staffs.create') }}">Add Staff</a></li>
                     <li><a href="{{ route('member.staffs.index') }}">Manage Staff</a></li>
-                    <li><a href="#">Monthly Attendence</a></li>
                 </ul>
             </li>
             <li>
@@ -146,7 +145,7 @@
                 <a href="#"><i class="fa fa-eye"></i><span class="nav-label">Visitors</span><span
                         class="fa arrow"></span></a>
                 <ul class="nav nav-second-level collapse">
-                    <li><a href="{{ route('staff.visitors.create') }}">Add Visitor</a></li>
+                    <li><a href="{{ route('staff.visitors.create') }}">Make entry of Visitor</a></li>
                     <li><a href="{{ route('staff.visitors.index') }}">Manage Visitor</a></li>
                     <li><a href="{{ route('staff.visitors.allvisitors') }}">See all Visitor</a></li>
                 </ul>
@@ -164,13 +163,27 @@
             <li>
                 <a href="{{ route('staff.attendance') }}"><i class="fa fa-eye"></i><span class="nav-label">Attendance</span></a>
             </li>
+            <li>
+                <a href="{{ route('staff.showSalary') }}"><i class="fa fa-eye"></i><span class="nav-label">Salary</span></a>
+            </li>
         @else
         @role('staff')
             <li>
                 <a href="{{ route('staff.attendance') }}"><i class="fa fa-eye"></i><span class="nav-label">Attendance</span></a>
             </li>
-        @endrole
 
+            <li>
+                <a href="{{ route('staff.showSalary') }}"><i class="fa fa-eye"></i><span class="nav-label">Salary</span></a>
+            </li>
+        @else
+            <li>
+                <a href="#"><i class="fa fa-building"></i><span class="nav-label">Apartment</span><span
+                        class="fa arrow"></span></a>
+                <ul class="nav nav-second-level collapse">
+                    <li><a href="#">Add Flats</a></li>
+                    <li><a href="#">Manage Flats</a></li>
+                </ul>
+            </li>
             <li>
                 <a href="#"><i class="fa fa-sticky-note"></i><span class="nav-label">Bills</span><span
                         class="fa arrow"></span></a>
@@ -192,6 +205,7 @@
             <li>
                 <a href="#"><i class="fa fa-fire-extinguisher"></i><span class="nav-label">Emergency Button</span></a>
             </li>
+        @endrole
         @endrole
         @endrole
         @endrole
