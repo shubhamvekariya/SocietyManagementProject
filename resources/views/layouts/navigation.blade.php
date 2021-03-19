@@ -110,6 +110,14 @@
                 </ul>
             </li>
 
+            <li>
+                <a href="#"><i class="fa fa-cogs  "></i><span class="nav-label">Services</span><span
+                        class="fa arrow"></span></a>
+                <ul class="nav nav-second-level collapse">
+                    <li><a href="{{ route('service.allservice') }}">All Services</a></li>
+                </ul>
+            </li>
+
 
             @role('committeemember')
 
@@ -162,14 +170,7 @@
                 <a href="{{ route('staff.attendance') }}"><i class="fa fa-eye"></i><span class="nav-label">Attendance</span></a>
             </li>
         @endrole
-            <li>
-                <a href="#"><i class="fa fa-building"></i><span class="nav-label">Apartment</span><span
-                        class="fa arrow"></span></a>
-                <ul class="nav nav-second-level collapse">
-                    <li><a href="#">Add Flats</a></li>
-                    <li><a href="#">Manage Flats</a></li>
-                </ul>
-            </li>
+
             <li>
                 <a href="#"><i class="fa fa-sticky-note"></i><span class="nav-label">Bills</span><span
                         class="fa arrow"></span></a>
@@ -178,23 +179,7 @@
                     <li><a href="#">Manage Bills</a></li>
                 </ul>
             </li>
-            <li>
-                <a href="#"><i class="fa fa-calendar"></i><span class="nav-label">Event/Assets</span><span
-                        class="fa arrow"></span></a>
-                <ul class="nav nav-second-level collapse">
-                    <li><a href="#">Book Assets</a></li>
-                    <li><a href="#">View Assets</a></li>
-                </ul>
-            </li>
-            <li>
-                <a href="#"><i class="fa fa-search"></i><span class="nav-label">Search</span><span
-                        class="fa arrow"></span></a>
-                <ul class="nav nav-second-level collapse">
-                    <li><a href="#">Search Visitor</a></li>
-                    <li><a href="#">Search member</a></li>
-                    <li><a href="#">Search Staff</a></li>
-                </ul>
-            </li>
+
             <li>
                 <a href="#"><i class="fa fa-address-book-o"></i><span class="nav-label">Reports</span><span
                         class="fa arrow"></span></a>

@@ -64,5 +64,18 @@ class ServiceRepository implements ServiceInterface
             return false;
         }
     }
+
+    public function showServiceMem($request)
+    {
+        $user = Auth::user();
+        dd($user);
+        if ($user->hasAnyRole('member'))
+        {
+        $data = Service::where(Auth::user()->id)->get();
+        return DataTables::of($data)
+            ->addIndexColumn()
+            ->make(true);
+        }
+    }
 }
 

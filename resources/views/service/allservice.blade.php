@@ -45,6 +45,7 @@ All Services
                     <th>Position</th>
                     <th>Mobile No</th>
                     <th width="250px">Action</th>
+
                 </tr>
             </thead>
             <tfoot>
@@ -54,6 +55,7 @@ All Services
                     <th>Position</th>
                     <th>Mobile No</th>
                     <th width="250px">Action</th>
+
                 </tr>
             </tfoot>
         </table>
@@ -81,5 +83,6 @@ All Services
 
         });
     </script>
+
 @endpush
 

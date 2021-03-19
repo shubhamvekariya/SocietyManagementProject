@@ -110,4 +110,12 @@ class ServiceController extends Controller
             return redirect()->back()->with('error', 'Something went wrong');
         }
     }
+
+    public function show_service(Request $request)
+    {
+        if ($request->ajax()) {
+            return $this->serviceInterface->showServicemem($request);
+        }
+        return view('service.allservice');
+    }
 }

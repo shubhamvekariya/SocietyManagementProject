@@ -62,6 +62,7 @@ Route::group(['middleware' => ['auth:society','role:secretary,society'] ], funct
     Route::resource('notices',NoticeController::class,['as' => 'society']);
     Route::resource('services',ServiceController::class,['as' => 'society']);
 
+
 });
 
 Route::group(['middleware' => ['auth','role:member'] ], function(){
@@ -98,6 +99,8 @@ Route::group(['middleware' => ['auth','role:member'] ], function(){
         Route::resource('assets',AssetController::class,['as' => 'member']);
         Route::resource('complaints',ComplaintController::class,['as' => 'member']);
         Route::get('/complaints/resolve/{complaint}', [ComplaintController::class,'resolve'])->name('member.complaints.resolve');
+
+        Route::get('/allservice', [ServiceController::class,'show_service'])->name('service.allservice');
        // Route::get('/resolveComplaintList', [ComplaintController::class,'resolveComplaintList'])->name('member.complaints.resolveComplaintList');
 
         Route::middleware(['role:committeemember'])->group(function () {
