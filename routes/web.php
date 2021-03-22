@@ -12,6 +12,7 @@ use App\Http\Controllers\AssetController;
 use App\Http\Controllers\NoticeController;
 use App\Http\Controllers\ComplaintController;
 use App\Http\Controllers\ServiceController;
+use App\Http\Controllers\ExpenseController;
 use App\Http\Controllers\PDFController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
@@ -112,9 +113,11 @@ Route::group(['middleware' => ['auth', 'role:member']], function () {
         Route::get('/showSalary/{id}', [StaffController::class, 'showStaffSalary'])->name('member.showSalary');
         Route::resource('complaints', ComplaintController::class, ['as' => 'member']);
         Route::get('/complaints/resolve/{complaint}', [ComplaintController::class, 'resolve'])->name('member.complaints.resolve');
+
         Route::middleware(['role:committeemember'])->group(function () {
             Route::resource('meetings', MeetingController::class, ['as' => 'member']);
             Route::resource('notices', NoticeController::class, ['as' => 'member']);
+            Route::resource('expenses', ExpenseController::class, ['as' => 'member']);
         });
     });
 });

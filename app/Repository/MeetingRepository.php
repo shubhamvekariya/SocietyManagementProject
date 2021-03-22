@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Interfaces\MeetingInterface;
 use App\Models\Meeting;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Yajra\DataTables\DataTables;
 
@@ -15,6 +16,8 @@ class MeetingRepository implements MeetingInterface
 
     public function addMeeting($request)
     {
+        //$users = User::all()->except(Auth::id());
+        //dd($users);
         $meeting = Meeting::create([
             'title' =>  $request->title,
             'description' =>  $request->description,
@@ -34,17 +37,20 @@ class MeetingRepository implements MeetingInterface
             //     'from' => 'ISocietyClub',
             //     'text' => 'Hello '.$member->name.', Request for new visitor '.$visitor->name.'. Approve here http://127.0.0.1:8000/approvevisitor/1'
             // ]);
-            $basic  = new \Nexmo\Client\Credentials\Basic('b055a611', 'hsubS9eN82UkNusj');
-            $client = new \Nexmo\Client($basic);
+            //dd($request->all());
 
-            $message = $client->message()->send([
-                'to' => '918401564660',
-                'from' => 'Society Club',
-                'text' => 'Hello Yagnesh'
-            ]);
+            $users = User::select('users.*')->join('apartments', 'users.id', '=', 'apartments.user_id')->where('apartments.society_id', Auth::user()->apartment->society_id)->get();
+            foreach ($users as $u) {
+                $basic  = new \Nexmo\Client\Credentials\Basic('b055a611', 'hsubS9eN82UkNusj');
+                $client = new \Nexmo\Client($basic);
+
+                $client->message()->send([
+                    'to' => (string)$u->phoneno,
+                    'from' => 'Meeting Details',
+                    'text' => 'Meeting Title : '. $meeting->title .'<br>Meeting Description : '.$meeting->description,
+                ]);
+            }
             return true;
-        } else {
-            return false;
         }
     }
     public function showMeeting($request)

@@ -26,6 +26,8 @@ use App\Interfaces\ComplaintInterface;
 use App\Repository\ComplaintRepository;
 use App\Interfaces\ServiceInterface;
 use App\Repository\ServiceRepository;
+use App\Interfaces\ExpenseInterface;
+use App\Repository\ExpenseRepository;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Schema;
@@ -63,6 +65,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(ComplaintInterface::class,ComplaintRepository::class);
         $this->app->bind(VisitorInterface::class,VisitorRepository::class);
         $this->app->bind(ServiceInterface::class,ServiceRepository::class);
+        $this->app->bind(ExpenseInterface::class,ExpenseRepository::class);
 
     }
 }

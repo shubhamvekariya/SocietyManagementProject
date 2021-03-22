@@ -137,6 +137,15 @@
                     </ul>
                 </li>
 
+                <li>
+                    <a href="#"><i class="fa  fa-table"></i><span class="nav-label">Expenses</span><span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level collapse">
+                        <li><a href="{{route('member.expenses.create')}}">Add Expenses</a></li>
+                        <li><a href="{{route('member.expenses.index')}}">Manage Expenses</a></li>
+
+                    </ul>
+                </li>
+
             @endrole
             @else
 
