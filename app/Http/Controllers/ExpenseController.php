@@ -7,6 +7,8 @@ use App\Models\Expense;
 use App\Interfaces\ExpenseInterface;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use App\Http\Requests\ExpenseValidation;
 
 class ExpenseController extends Controller
 {
@@ -47,7 +49,7 @@ class ExpenseController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ExpenseValidation $request)
     {
         $status = $this->expenseInterface->addExpense($request);
         if($status)
@@ -120,5 +122,11 @@ class ExpenseController extends Controller
             return redirect()->back()->with('error','Something went wrong');
         }
     }
+
+    // public function cal_sum(Expense $expense)
+    // {
+    //     $sum = DB::table('expenses')->sum('money');
+    //     return $sum;
+    // }
 
 }

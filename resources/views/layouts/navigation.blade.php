@@ -67,6 +67,15 @@
                     <li><a href="{{ route('society.services.index') }}">All Services</a></li>
                 </ul>
             </li>
+
+
+            <li>
+                <a href="#"><i class="fa fa-cogs  "></i><span class="nav-label">Bill</span><span
+                        class="fa arrow"></span></a>
+                <ul class="nav nav-second-level collapse">
+                    <li><a href="{{ route('society.bill') }}">Bills</a></li>
+                </ul>
+            </li>
         @else
         @role('member')
             <li>
