@@ -1,37 +1,90 @@
-<!--Bill start-->
+<!DOCTYPE html>
+<html>
 
+<head>
+    <style>
+        body
+        {
+            /* margin:5%; */
+        }
+        #invoice {
+            /* float: right; */
+            /* border: 1px solid black; */
+            font-size: 20px;
+            text-align: right;
+        }
 
-<div class="row">
+        #from {
+            float: left;
+            /* border: 1px solid black; */
+            font-size: 20px;
+
+        }
+        #total {
+
+            /* border: 1px solid rgb(224, 8, 8); */
+            margin-left: 550px;
+            margin-top:400px;
+
+        }
+        h1{
+            text-align:center;
+        }
+
+    </style>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Invoice Print</title>
+
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="font-awesome/css/font-awesome.css" rel="stylesheet">
+
+    <link href="css/animate.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+
+</head>
+
+<body class="white-bg">
+    <!--Bill start-->
+    {{-- <div class="row">
     <div class="col-lg-12">
         <div class="wrapper wrapper-content animated fadeInRight">
             <div class="ibox-content p-xl">
-                <div class="row">
-                    <div class="col-sm-6">
-                        <h5>From:</h5>
-                        <address>
-                            <strong>ISociety Club</strong><br>
-                            <abbr title="Phone">P:</abbr> (123) 601-4590
-                        </address>
-                    </div>
+                <div class="row"> --}}
+    {{-- <div style="clear: both;"> --}}
+        <h1>Maintenance Bill</h1>
+        <hr>
+        <div id="from" class="col-sm-6">
+            <h5>From:</h5>
+            <address>
+                <strong>ISociety Club</strong><br>
+                <abbr title="Phone">P:</abbr> (123) 601-4590
+            </address>
+        </div>
 
-                    <div class="col-sm-6 text-right">
-                        <h4>Invoice No.</h4>
-                        <h4 class="text-navy">{{ $societies->id }}</h4>
-                        <span>To:</span>
-                        <address>
-                            <strong>{{ $societies->secretary_name }}.</strong><br>
-                            Society,{{ $societies->society_name }}<br>
-                            <br>
-                            <abbr title="Phone">Phone <i class="fa fa-phone"></i> : </abbr> {{ $societies->phoneno }}
-                        </address>
-                        <p>
-                            <span><strong>Invoice Date:</strong> {{ $bills[0]->day }}/{{ $bills[0]->month }}/{{ $bills[0]->year }}</span><br />
-                            <span><strong>Due Date:</strong> {{$bills[0]->due_date}}</span>
-                        </p>
-                    </div>
-                </div>
 
-                {{-- <div class="table-responsive m-t">
+        <div id="invoice" class="col-sm-6 text-right">
+            <h4>Invoice No.</h4>
+            <h4 class="text-navy">{{ $societies->id }}</h4>
+            <span>To:</span>
+            <address>
+                <strong>{{ $societies->secretary_name }}.</strong><br>
+                Society,{{ $societies->society_name }}<br>
+                <br>
+                <abbr title="Phone">Phone <i class="fa fa-phone"></i> : </abbr> {{ $societies->phoneno }}
+            </address>
+            <p>
+                <span><strong>Invoice Date:</strong>
+                    {{ $bills[0]->day }}/{{ $bills[0]->month }}/{{ $bills[0]->year }}</span><br />
+                <span><strong>Due Date:</strong> {{ $bills[0]->due_date }}</span>
+            </p>
+        </div>
+    {{-- </div> --}}
+
+
+    {{-- <div class="table-responsive m-t">
                     <table class="table invoice-table">
                         <thead>
                             <tr>
@@ -83,35 +136,38 @@
                     </table>
                 </div><!-- /table-responsive --> --}}
 
-                <table class="table invoice-total">
-                    <tbody>
-                        <tr>
-                            <td><strong>Sub Total :</strong></td>
-                            <td>${{ $bills[0]->sum }}</td>
-                        </tr>
-                        <tr>
-                            <td><strong>TAX :</strong></td>
-                            <td>$135.98</td>
-                        </tr>
-                        <tr>
-                            <td><strong>TOTAL :</strong></td>
-                            <td>${{ ($bills[0]->sum)+135.98 }}</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-                <hr>
-                <div class="text-right">
-                    <a href="#" class="btn btn-primary">Send Bill</a>
-                </div>
+    <div id="total">
+        <hr>
+      <table  class="table invoice-total">
+        <tbody>
+            <tr>
+                <td><strong>Sub Total :</strong></td>
+                <td>${{ $bills[0]->sum }}</td>
+            </tr>
+            <tr>
+                <td><strong>TAX :</strong></td>
+                <td>$135.98</td>
+            </tr>
+            <tr>
+                <td><strong>TOTAL :</strong></td>
+                <td>${{ $bills[0]->sum + 135.98 }}</td>
+            </tr>
+        </tbody>
+    </table>
+    <hr>
+    </div>
 
-                {{-- <div class="well m-t"><strong>Comments</strong>
+    {{-- <div class="text-right">
+                    <button class="btn btn-primary"><i class="fa fa-dollar"></i> Make A Payment</button>
+                </div> --}}
+
+    {{-- <div class="well m-t"><strong>Comments</strong>
                     It is a long established fact that a reader will be distracted by the readable content of a page
                     when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less
                 </div> --}}
-            </div>
+    {{-- </div>
         </div>
     </div>
-</div>
+</div> --}}
 
-<!--end bill-->
+    <!--end bill-->

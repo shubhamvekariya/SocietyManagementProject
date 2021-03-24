@@ -67,9 +67,10 @@ class DemoCron extends Command
 
         $due_date = ((int)$day+5)."/".$month."/".$year;
         $bill = Bill::create([
+            'day' => $day,
             'month' =>  $month,
             'year' =>  $year,
-            'sum' =>  $sum,
+            'sum' =>  $total_expense,
             'count' =>  $count,
             'due_date' =>  $due_date,
             'society_id' =>  $society->id,

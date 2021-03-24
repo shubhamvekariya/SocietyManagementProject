@@ -15,6 +15,7 @@ class CreateBillsTable extends Migration
     {
         Schema::create('bills', function (Blueprint $table) {
             $table->id();
+            $table->string('day');
             $table->string('month');
             $table->string('year');
             $table->float('sum');
