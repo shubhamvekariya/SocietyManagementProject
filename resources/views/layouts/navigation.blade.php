@@ -154,6 +154,9 @@
 
                     </ul>
                 </li>
+                <li>
+                    <a href="{{ route('member.send_emergency') }}"><i class="fa fa-fire-extinguisher"></i><span class="nav-label">Emergency Button</span></a>
+                </li>
 
             @endrole
             @else
@@ -220,9 +223,7 @@
                     <li><a href="#"></a></li>
                 </ul>
             </li>
-            <li>
-                <a href="#"><i class="fa fa-fire-extinguisher"></i><span class="nav-label">Emergency Button</span></a>
-            </li>
+
         @endrole
         @endrole
         @endrole

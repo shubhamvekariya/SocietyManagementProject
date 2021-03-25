@@ -51,4 +51,5 @@ class Society extends Authenticatable
     {
         return $this->hasMany(Service::class);
     }
+
 }

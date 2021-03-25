@@ -14,6 +14,7 @@ use App\Http\Controllers\ComplaintController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\ExpenseController;
 use App\Http\Controllers\PDFController;
+use App\Http\Controllers\EmergencyController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
 
@@ -54,7 +55,7 @@ Route::group(['middleware' => ['auth:society', 'role:secretary,society']], funct
 
     //Route::get('society/bill', [PDFController::class, 'show_bill'])->name('society.bill');
     //Route::get('society/view_pdf', [PDFController::class, 'view_pdf'])->name('society.view_pdf');
-   // Route::get('society/download_pdf',[PDFController::class,'download_pdf'])->name('society.download_pdf');
+    //Route::get('society/download_pdf',[PDFController::class,'download_pdf'])->name('society.download_pdf');
     //Route::get('society/sendemail_pdf', [PDFController::class, 'sendemail_pdf'])->name('society.sendemail_pdf');
 
     Route::get('/markasreadsociety/{id}',  function ($id) {
@@ -124,6 +125,8 @@ Route::group(['middleware' => ['auth', 'role:member']], function () {
             Route::resource('meetings', MeetingController::class, ['as' => 'member']);
             Route::resource('notices', NoticeController::class, ['as' => 'member']);
             Route::resource('expenses', ExpenseController::class, ['as' => 'member']);
+
+            Route::get('/member/send_emergency',[EmergencyController::class,'send_emergency'])->name('member.send_emergency');
         });
     });
 });
