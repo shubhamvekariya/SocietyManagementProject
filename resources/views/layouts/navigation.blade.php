@@ -69,13 +69,13 @@
             </li>
 
 
-            <li>
+            {{-- <li>
                 <a href="#"><i class="fa fa-cogs  "></i><span class="nav-label">Bill</span><span
                         class="fa arrow"></span></a>
                 <ul class="nav nav-second-level collapse">
                     <li><a href="{{ route('society.bill') }}">Bills</a></li>
                 </ul>
-            </li>
+            </li> --}}
         @else
         @role('member')
             <li>

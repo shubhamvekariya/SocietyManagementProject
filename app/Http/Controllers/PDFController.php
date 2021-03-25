@@ -39,25 +39,26 @@ class PDFController extends Controller
         $pdf = PDF::loadView('bill.index', compact('societies', 'bills'));
         return $pdf->stream('invoice.pdf');
     }
-        public function sendemail_pdf(Request $request){
-            $societies = Society::find( Auth::user()->id);
-            $bills = Bill::where('society_id',Auth::user()->id)->get();
+    public function sendemail_pdf(Request $request)
+    {
+        $societies = Society::find(Auth::user()->id);
+        $bills = Bill::where('society_id', Auth::user()->id)->get();
 
-            $data["email"]="shubham.v@simformsolutions.com";
-            $data["client_name"]="Yagnesh";
-            $data["subject"]="Mail from Yp";
+        $data["email"] = "shubham.v@simformsolutions.com";
+        $data["client_name"] = "Yagnesh";
+        $data["subject"] = "Mail from Yp";
 
-            $pdf = PDF::loadView('bill.index',$data,compact('societies','bills'));
+        $pdf = PDF::loadView('bill.index', $data, compact('societies', 'bills'));
 
 
-                Mail::send('myPDF', $data, function($message)use($data,$pdf) {
-                $message->to($data["email"], $data["client_name"])
+        Mail::send('myPDF', $data, function ($message) use ($data, $pdf) {
+            $message->to($data["email"], $data["client_name"])
                 ->subject($data["subject"])
                 ->attachData($pdf->output(), "bill.pdf");
-                });
+        });
 
-            return true;
-     }
+        return true;
+    }
     // public function sendemail_pdf(Request $request)
     // {
     //     $societies = Society::find(Auth::user()->id);

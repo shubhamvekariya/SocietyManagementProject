@@ -52,10 +52,10 @@ Route::group(['middleware' => ['auth:society', 'role:secretary,society']], funct
     Route::get('/edit_rule/{id}', [SecretaryController::class, 'edit_rule'])->name('society.edit_rule');
     Route::put('/update_rule', [SecretaryController::class, 'update_rule'])->name('society.update_rule');
 
-    Route::get('society/bill', [PDFController::class, 'show_bill'])->name('society.bill');
-    Route::get('society/view_pdf', [PDFController::class, 'view_pdf'])->name('society.view_pdf');
-    Route::get('society/download_pdf',[PDFController::class,'download_pdf'])->name('society.download_pdf');
-    Route::get('society/sendemail_pdf', [PDFController::class, 'sendemail_pdf'])->name('society.sendemail_pdf');
+    //Route::get('society/bill', [PDFController::class, 'show_bill'])->name('society.bill');
+    //Route::get('society/view_pdf', [PDFController::class, 'view_pdf'])->name('society.view_pdf');
+   // Route::get('society/download_pdf',[PDFController::class,'download_pdf'])->name('society.download_pdf');
+    //Route::get('society/sendemail_pdf', [PDFController::class, 'sendemail_pdf'])->name('society.sendemail_pdf');
 
     Route::get('/markasreadsociety/{id}',  function ($id) {
         Auth::user()->unreadNotifications->where('id', $id)->markAsRead();

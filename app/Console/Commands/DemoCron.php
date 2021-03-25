@@ -9,6 +9,8 @@ use App\Models\Society;
 use App\Models\User;
 use App\Models\Bill;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Mail;
+use PDF;
 use Vonage\Numbers\Number;
 
 class DemoCron extends Command
@@ -62,7 +64,7 @@ class DemoCron extends Command
 
         $total_expense = $sum/$count;
 
-        Log::info((string)$users."".$total_expense);
+        //Log::info((string)$users."".$total_expense);
 
 
         $due_date = ((int)$day+5)."/".$month."/".$year;
@@ -75,6 +77,34 @@ class DemoCron extends Command
             'due_date' =>  $due_date,
             'society_id' =>  $society->id,
         ]);
+
+        //$societies = Society::find(Auth::user()->id);
+        $societies = $society;
+
+        //Log::info($societies."".$users[0]->id);
+        foreach($users as $user)
+        {
+        $bills = Bill::where('society_id',$society->id)->get();
+        //Log::info($user);
+        //Log::info($societies->id."".$users->id);
+
+        //$bills = Bill::where('society_id', Auth::user()->id)->get();
+
+        $data["email"] = "yagnesh.p@simformsolutions.com";
+        $data["client_name"] = "Yagnesh";
+        $data["subject"] = "Mail from Yp";
+
+        $pdf = PDF::loadView('bill.index', $data, compact('societies', 'bills','user'));
+
+
+        Mail::send('myPDF', $data, function ($message) use ($data, $pdf) {
+            $message->to($data["email"], $data["client_name"])->from('yp@gmail.com')
+                ->subject($data["subject"])
+                ->attachData($pdf->output(), "bill.pdf");
+        });
+        }
+
+        //return true;
 
         }
 

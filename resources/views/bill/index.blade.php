@@ -24,7 +24,7 @@
 
             /* border: 1px solid rgb(224, 8, 8); */
             margin-left: 550px;
-            margin-top:400px;
+            margin-top:300px;
 
         }
         h1{
@@ -59,8 +59,9 @@
         <div id="from" class="col-sm-6">
             <h5>From:</h5>
             <address>
-                <strong>ISociety Club</strong><br>
-                <abbr title="Phone">P:</abbr> (123) 601-4590
+                <strong> Society:{{ $societies->society_name }}</strong><br>
+                Secretary:{{ $societies->secretary_name }}<br>
+                <abbr title="Phone">P:</abbr>{{ $societies->phoneno }}
             </address>
         </div>
 
@@ -70,10 +71,10 @@
             <h4 class="text-navy">{{ $societies->id }}</h4>
             <span>To:</span>
             <address>
-                <strong>{{ $societies->secretary_name }}.</strong><br>
-                Society,{{ $societies->society_name }}<br>
+                <strong>{{ $user->name }}.</strong><br>
+                Email:{{ $user->email }}<br>
                 <br>
-                <abbr title="Phone">Phone <i class="fa fa-phone"></i> : </abbr> {{ $societies->phoneno }}
+                <abbr title="Phone">Phone <i class="fa fa-phone"></i> : </abbr> {{ $user->phoneno }}
             </address>
             <p>
                 <span><strong>Invoice Date:</strong>
@@ -156,7 +157,7 @@
     </table>
     <hr>
     </div>
-
+<hr>
     {{-- <div class="text-right">
                     <button class="btn btn-primary"><i class="fa fa-dollar"></i> Make A Payment</button>
                 </div> --}}
