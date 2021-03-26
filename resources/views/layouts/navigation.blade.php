@@ -32,11 +32,11 @@
                     </ul>
                 </div>
                 <div class="logo-element">
-                    SC+
+                    ISC+
                 </div>
             </li>
             <li>
-                <a href="#"><i class="fa fa-th-large"></i> <span class="nav-label">Dashboard</span></a>
+                <a href="#"><i class="fa fa-home"></i> <span class="nav-label">Dashboard</span></a>
             </li>
         @role('secretary','society')
             <li>
@@ -51,13 +51,31 @@
                         class="nav-label">Committee Member</span></a>
             </li>
             <li>
-                <a href="#"><i class="fa fa-user-circle-o"></i><span class="nav-label">Rules</span><span
+                <a href="#"><i class="fa fa-male"></i><span class="nav-label">Rules</span><span
                         class="fa arrow"></span></a>
                 <ul class="nav nav-second-level collapse">
                     <li><a href="{{ route('society.rule') }}">Add Rules</a></li>
                     <li><a href="{{ route('society.all_rule') }}">Manage Rules</a></li>
                 </ul>
             </li>
+
+            <li>
+                <a href="#"><i class="fa fa-cogs  "></i><span class="nav-label">Services</span><span
+                        class="fa arrow"></span></a>
+                <ul class="nav nav-second-level collapse">
+                    <li><a href="{{ route('society.services.create') }}">Add Service</a></li>
+                    <li><a href="{{ route('society.services.index') }}">All Services</a></li>
+                </ul>
+            </li>
+
+
+            {{-- <li>
+                <a href="#"><i class="fa fa-cogs  "></i><span class="nav-label">Bill</span><span
+                        class="fa arrow"></span></a>
+                <ul class="nav nav-second-level collapse">
+                    <li><a href="{{ route('society.bill') }}">Bills</a></li>
+                </ul>
+            </li> --}}
         @else
         @role('member')
             <li>
@@ -100,6 +118,15 @@
                 </ul>
             </li>
 
+            <li>
+                <a href="#"><i class="fa fa-cogs  "></i><span class="nav-label">Services</span><span
+                        class="fa arrow"></span></a>
+                <ul class="nav nav-second-level collapse">
+                    <li><a href="{{ route('member.services.allservice') }}">All Services</a></li>
+                </ul>
+            </li>
+
+
             @role('committeemember')
 
                 <li>
@@ -117,6 +144,18 @@
                         <li><a href="{{route('member.notices.index')}}">All Notice</a></li>
 
                     </ul>
+                </li>
+
+                <li>
+                    <a href="#"><i class="fa  fa-table"></i><span class="nav-label">Expenses</span><span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level collapse">
+                        <li><a href="{{route('member.expenses.create')}}">Add Expenses</a></li>
+                        <li><a href="{{route('member.expenses.index')}}">Manage Expenses</a></li>
+
+                    </ul>
+                </li>
+                <li>
+                    <a href="{{ route('member.send_emergency') }}"><i class="fa fa-fire-extinguisher"></i><span class="nav-label">Emergency Button</span></a>
                 </li>
 
             @endrole
@@ -153,6 +192,7 @@
             <li>
                 <a href="{{ route('staff.attendance') }}"><i class="fa fa-eye"></i><span class="nav-label">Attendance</span></a>
             </li>
+
             <li>
                 <a href="{{ route('staff.showSalary') }}"><i class="fa fa-eye"></i><span class="nav-label">Salary</span></a>
             </li>
@@ -173,23 +213,7 @@
                     <li><a href="#">Manage Bills</a></li>
                 </ul>
             </li>
-            <li>
-                <a href="#"><i class="fa fa-calendar"></i><span class="nav-label">Event/Assets</span><span
-                        class="fa arrow"></span></a>
-                <ul class="nav nav-second-level collapse">
-                    <li><a href="#">Book Assets</a></li>
-                    <li><a href="#">View Assets</a></li>
-                </ul>
-            </li>
-            <li>
-                <a href="#"><i class="fa fa-search"></i><span class="nav-label">Search</span><span
-                        class="fa arrow"></span></a>
-                <ul class="nav nav-second-level collapse">
-                    <li><a href="#">Search Visitor</a></li>
-                    <li><a href="#">Search member</a></li>
-                    <li><a href="#">Search Staff</a></li>
-                </ul>
-            </li>
+
             <li>
                 <a href="#"><i class="fa fa-address-book-o"></i><span class="nav-label">Reports</span><span
                         class="fa arrow"></span></a>
@@ -199,9 +223,7 @@
                     <li><a href="#"></a></li>
                 </ul>
             </li>
-            <li>
-                <a href="#"><i class="fa fa-fire-extinguisher"></i><span class="nav-label">Emergency Button</span></a>
-            </li>
+
         @endrole
         @endrole
         @endrole

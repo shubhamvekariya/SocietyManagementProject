@@ -6,21 +6,20 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Complaint extends Model
+class Expense extends Model
 {
     use HasFactory,SoftDeletes;
-    protected $table = 'complaint_details';
+    protected $table = 'expenses';
     protected $fillable = [
         'title',
         'description',
-        'category',
-        'reg_date',
-        'status',
-        'user_id',
+        'date',
+        'money',
+        'society_id',
     ];
 
-    public function user()
+    public function society()
     {
-        return $this->belongsTo('App\Models\User');
+        return $this->belongsTo('App\Models\Society');
     }
 }

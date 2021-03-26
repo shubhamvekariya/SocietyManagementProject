@@ -1,6 +1,7 @@
 @push('css')
     <link href="{{ mix('/css/select2.min.css') }}" rel="stylesheet">
 @endpush
+{{-- Temp --}}
 
     <div class="form-group">
         <label for="email">Email</label>

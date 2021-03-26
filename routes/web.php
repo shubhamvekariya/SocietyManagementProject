@@ -11,6 +11,10 @@ use App\Http\Controllers\MeetingController;
 use App\Http\Controllers\AssetController;
 use App\Http\Controllers\NoticeController;
 use App\Http\Controllers\ComplaintController;
+use App\Http\Controllers\ServiceController;
+use App\Http\Controllers\ExpenseController;
+use App\Http\Controllers\PDFController;
+use App\Http\Controllers\EmergencyController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
 
@@ -48,6 +52,12 @@ Route::group(['middleware' => ['auth:society', 'role:secretary,society']], funct
     Route::get('/delete_rule/{id}', [SecretaryController::class, 'delete_rule'])->name('society.delete_rule');
     Route::get('/edit_rule/{id}', [SecretaryController::class, 'edit_rule'])->name('society.edit_rule');
     Route::put('/update_rule', [SecretaryController::class, 'update_rule'])->name('society.update_rule');
+
+    //Route::get('society/bill', [PDFController::class, 'show_bill'])->name('society.bill');
+    //Route::get('society/view_pdf', [PDFController::class, 'view_pdf'])->name('society.view_pdf');
+    //Route::get('society/download_pdf',[PDFController::class,'download_pdf'])->name('society.download_pdf');
+    //Route::get('society/sendemail_pdf', [PDFController::class, 'sendemail_pdf'])->name('society.sendemail_pdf');
+
     Route::get('/markasreadsociety/{id}',  function ($id) {
         Auth::user()->unreadNotifications->where('id', $id)->markAsRead();
         return redirect()->back();
@@ -55,6 +65,11 @@ Route::group(['middleware' => ['auth:society', 'role:secretary,society']], funct
 
     Route::get('/edit/society', [LoginController::class, 'edit_society'])->name('society.edit');
     Route::post('/update/society', [LoginController::class, 'update_society'])->name('society.update');
+
+
+    Route::resource('meetings',MeetingController::class,['as' => 'society']);
+    Route::resource('notices',NoticeController::class,['as' => 'society']);
+    Route::resource('services',ServiceController::class,['as' => 'society']);
 
 
     Route::resource('meetings', MeetingController::class, ['as' => 'society']);
@@ -92,15 +107,26 @@ Route::group(['middleware' => ['auth', 'role:member']], function () {
 
 
         Route::resource('staffs', StaffController::class, ['as' => 'member']);
+        Route::resource('assets',AssetController::class,['as' => 'member']);
+        Route::resource('complaints',ComplaintController::class,['as' => 'member']);
+        Route::get('/complaints/resolve/{complaint}', [ComplaintController::class,'resolve'])->name('member.complaints.resolve');
+
+       Route::get('/allservice', [ServiceController::class,'show_service'])->name('member.services.allservice');
+       //Route::resource('services',ServiceController::class,['as' => 'member']);
+
         Route::resource('assets', AssetController::class, ['as' => 'member']);
         Route::get('/staffAttendance/{id}', [StaffController::class, 'staffAttendance'])->name('member.staffAttendance');
         Route::post('/paysalary', [StaffController::class, 'payStaffSalary'])->name('member.paysalary');
         Route::get('/showSalary/{id}', [StaffController::class, 'showStaffSalary'])->name('member.showSalary');
         Route::resource('complaints', ComplaintController::class, ['as' => 'member']);
         Route::get('/complaints/resolve/{complaint}', [ComplaintController::class, 'resolve'])->name('member.complaints.resolve');
+
         Route::middleware(['role:committeemember'])->group(function () {
             Route::resource('meetings', MeetingController::class, ['as' => 'member']);
             Route::resource('notices', NoticeController::class, ['as' => 'member']);
+            Route::resource('expenses', ExpenseController::class, ['as' => 'member']);
+
+            Route::get('/member/send_emergency',[EmergencyController::class,'send_emergency'])->name('member.send_emergency');
         });
     });
 });
@@ -154,3 +180,8 @@ Route::get('/country', function () {
     $country = Storage::get('public/country.json');
     return json_decode($country, true);
 });
+
+
+//Route::get('showpdf',[PDFController::class,'show']);
+
+//Route::get('sum',[ExpenseController::class,'cal_sum']);
