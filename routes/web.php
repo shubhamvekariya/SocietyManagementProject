@@ -9,6 +9,7 @@ use App\Http\Controllers\VisitorController;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\MeetingController;
 use App\Http\Controllers\AssetController;
+use App\Http\Controllers\ChatsController;
 use App\Http\Controllers\NoticeController;
 use App\Http\Controllers\ComplaintController;
 use App\Http\Controllers\ServiceController;
@@ -181,7 +182,6 @@ Route::get('/country', function () {
     return json_decode($country, true);
 });
 
-
-//Route::get('showpdf',[PDFController::class,'show']);
-
-//Route::get('sum',[ExpenseController::class,'cal_sum']);
+Route::get('/chats',[ChatsController::class,'index']);
+Route::get('/messages',[ChatsController::class,'fetchMessages']);
+Route::post('/messages',[ChatsController::class,'sendMessage']);

@@ -74,4 +74,8 @@ class User extends Authenticatable
     {
         return $this->hasMany(Complaint::class);
     }
+    public function messages()
+    {
+        return $this->hasMany(Message::class);
+    }
 }

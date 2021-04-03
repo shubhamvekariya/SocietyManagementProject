@@ -1,12 +1,12 @@
 {
     "/js/app.js": "/js/app.js",
     "/css/app.css": "/css/app.css",
-    "/css/select2.min.css": "/css/select2.min.css",
     "/css/jquery.steps.css": "/css/jquery.steps.css",
     "/css/custom.css": "/css/custom.css",
     "/css/datatables.min.css": "/css/datatables.min.css",
     "/css/bootstrap-datetimepicker.min.css": "/css/bootstrap-datetimepicker.min.css",
     "/css/toastr.min.css": "/css/toastr.min.css",
     "/css/fontawesome.css": "/css/fontawesome.css",
-    "/css/templatemo-style.css": "/css/templatemo-style.css"
+    "/css/templatemo-style.css": "/css/templatemo-style.css",
+    "/css/select2.min.css": "/css/select2.min.css"
 }
