@@ -30,12 +30,13 @@ Add security & staff
         </ul>
     </div>
 @endif
-<div class="ibox-content w-75 my-5 mx-auto border">
-
-    <form action="{{ route('member.staffs.store') }}" method="POST">
-        @csrf
-        @include('cmember.staffform')
-    <button type="submit" class="btn btn-primary d-block font-weight-bold mx-auto mt-4" style="width:12%;font-size:20px;">Add</button>
-    </form>
+<div class="wrapper wrapper-content mt-0">
+    <div class="ibox-content w-75 my-5 mx-auto border">
+        <form action="{{ route('member.staffs.store') }}" method="POST">
+            @csrf
+            @include('cmember.staffform')
+        <button type="submit" class="btn btn-primary d-block font-weight-bold mx-auto mt-4" style="width:12%;font-size:20px;">Add</button>
+        </form>
+    </div>
 </div>
 @endsection

@@ -18,13 +18,15 @@ Edit Notice
 @endsection
 
 @section('content')
-<div class="ibox-content w-75 my-5 p-5 mx-auto border">
-    <form  action="{{route('member.notices.update',$notice->id)}}" method="POST">
-        @csrf
-        @method('put')
-        @include('notice.formnotice')
+<div class="wrapper wrapper-content mt-0">
+    <div class="ibox-content w-75 my-5 p-5 mx-auto border">
+        <form  action="{{route('member.notices.update',$notice->id)}}" method="POST">
+            @csrf
+            @method('put')
+            @include('notice.formnotice')
 
-    </form>
+        </form>
+    </div>
 </div>
 @endsection
 

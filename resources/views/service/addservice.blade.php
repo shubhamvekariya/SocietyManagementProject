@@ -18,6 +18,7 @@
 @endsection
 
 @section('content')
+<div class="wrapper wrapper-content mt-0">
     <div class="ibox-content w-75 my-5 p-5 mx-auto border">
         <form action="{{ route('society.services.store') }}" method="POST">
             @csrf
@@ -25,4 +26,5 @@
 
         </form>
     </div>
+</div>
 @endsection

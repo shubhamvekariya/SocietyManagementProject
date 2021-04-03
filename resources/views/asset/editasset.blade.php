@@ -18,13 +18,15 @@ Edit Asset/Events
 @endsection
 
 @section('content')
-<div class="ibox-content w-75 my-5 p-5 mx-auto border">
-    <form  action="{{route('member.assets.update',$asset->id)}}" method="POST">
-        @csrf
-        @method('put')
-        @include('asset.formasset')
+<div class="wrapper wrapper-content mt-0">
+    <div class="ibox-content w-75 my-5 p-5 mx-auto border">
+        <form  action="{{route('member.assets.update',$asset->id)}}" method="POST">
+            @csrf
+            @method('put')
+            @include('asset.formasset')
 
-    </form>
+        </form>
+    </div>
 </div>
 @endsection
 

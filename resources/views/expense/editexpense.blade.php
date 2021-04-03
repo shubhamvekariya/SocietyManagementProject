@@ -18,13 +18,15 @@ Edit Expenses
 @endsection
 
 @section('content')
-<div class="ibox-content w-75 my-5 p-5 mx-auto border">
-    <form  action="{{route('member.expenses.update',$expense->id)}}" method="POST">
-        @csrf
-        @method('put')
-        @include('expense.formexpense')
+<div class="wrapper wrapper-content mt-0">
+    <div class="ibox-content w-75 my-5 p-5 mx-auto border">
+        <form  action="{{route('member.expenses.update',$expense->id)}}" method="POST">
+            @csrf
+            @method('put')
+            @include('expense.formexpense')
 
-    </form>
+        </form>
+    </div>
 </div>
 @endsection
 

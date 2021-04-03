@@ -18,11 +18,13 @@ Add Family Member
 @endsection
 
 @section('content')
-<div class="ibox-content w-75 my-5 p-5 mx-auto border">
-    <form  action="{{route('member.addfamilymem')}}" method="POST">
-        @csrf
-        @include('member.formfamilymem')
+<div class="wrapper wrapper-content mt-0">
+    <div class="ibox-content w-75 my-5 p-5 mx-auto border">
+        <form  action="{{route('member.addfamilymem')}}" method="POST">
+            @csrf
+            @include('member.formfamilymem')
 
-    </form>
+        </form>
+    </div>
 </div>
 @endsection

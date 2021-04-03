@@ -18,12 +18,14 @@ Add Notice
 @endsection
 
 @section('content')
+<div class="wrapper wrapper-content mt-0">
 <div class="ibox-content w-75 my-5 p-5 mx-auto border">
     <form  action="{{route('member.notices.store')}}" method="POST">
         @csrf
         @include('notice.formnotice')
 
     </form>
+</div>
 </div>
 @endsection
 

@@ -30,15 +30,17 @@ Edit security & staff
         </ul>
     </div>
 @endif
-<div class="ibox-content w-75 my-5 mx-auto border">
+<div class="wrapper wrapper-content mt-0">
+    <div class="ibox-content w-75 my-5 mx-auto border">
 
-    <form action="{{ route('member.staffs.update' , $staff->id) }}"  method="POST">
-        @csrf
-        @method('PUT')
-        @include('cmember.staffform')
+        <form action="{{ route('member.staffs.update' , $staff->id) }}"  method="POST">
+            @csrf
+            @method('PUT')
+            @include('cmember.staffform')
 
-    <button type="submit" class="btn btn-primary d-block font-weight-bold mx-auto mt-4" style="width:12%;font-size:20px;">Edit</button>
-    </form>
+        <button type="submit" class="btn btn-primary d-block font-weight-bold mx-auto mt-4" style="width:12%;font-size:20px;">Edit</button>
+        </form>
+    </div>
 </div>
 @endsection
 

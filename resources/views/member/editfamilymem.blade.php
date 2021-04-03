@@ -18,14 +18,16 @@ Add Family Member
 @endsection
 
 @section('content')
-<div class="ibox-content w-75 my-5 p-5 mx-auto border">
-    <form  action="{{ route('member.updatefamilymem') }}" method="POST">
-        @csrf
-        @method('put')
-        <input type="hidden" value="{{$family_mem['id']}}" name="fid">
-        @include('member.formfamilymem')
+<div class="wrapper wrapper-content mt-0">
+    <div class="ibox-content w-75 my-5 p-5 mx-auto border">
+        <form  action="{{ route('member.updatefamilymem') }}" method="POST">
+            @csrf
+            @method('put')
+            <input type="hidden" value="{{$family_mem['id']}}" name="fid">
+            @include('member.formfamilymem')
 
-    </form>
+        </form>
+    </div>
 </div>
 @endsection
 

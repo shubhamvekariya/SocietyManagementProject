@@ -1874,7 +1874,10 @@ window.Echo = new laravel_echo__WEBPACK_IMPORTED_MODULE_0__.default({
   broadcaster: 'pusher',
   key: "6b723375502146131d40",
   cluster: "ap2",
-  forceTLS: true
+  wsHost: window.location.hostname,
+  wsPort: 6001,
+  forceTLS: false,
+  disableStats: true
 });
 
 /***/ }),
@@ -20630,19 +20633,6 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/css/emails/styles.css":
-/*!*****************************************!*\
-  !*** ./resources/css/emails/styles.css ***!
-  \*****************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-// extracted by mini-css-extract-plugin
-
-
-/***/ }),
-
 /***/ "./resources/css/plugins/datetimepicker/bootstrap-datetimepicker.min.css":
 /*!*******************************************************************************!*\
   !*** ./resources/css/plugins/datetimepicker/bootstrap-datetimepicker.min.css ***!
@@ -25590,7 +25580,6 @@ runtime.setup(pusher_Pusher);
 /******/ 			["./resources/css/templatemo-style.css"],
 /******/ 			["./resources/font-awesome/css/fontawesome.css"],
 /******/ 			["./resources/css/plugins/toastr/toastr.min.css"],
-/******/ 			["./resources/css/emails/styles.css"],
 /******/ 			["./resources/css/plugins/datetimepicker/bootstrap-datetimepicker.min.css"]
 /******/ 		];
 /******/ 		// no chunk on demand loading
