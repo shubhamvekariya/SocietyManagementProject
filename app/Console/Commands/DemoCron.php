@@ -84,15 +84,15 @@ class DemoCron extends Command
         {
             $bills = Bill::where('society_id',$society->id)->get();
 
-            $data["email"] = "shubham.v@simformsolutions.com";
-            $data["client_name"] = "Yagnesh";
-            $data["subject"] = "Mail from Yp";
+            $data["email"] = "shubham.v@simformsolutions.com"; // $user->email
+            $data["client_name"] = "ISocietyClub"; // $user->name
+            $data["subject"] = "Mail from ISocietyClub";
 
             $pdf = PDF::loadView('bill.index', $data, compact('societies', 'bills','user'));
 
 
             Mail::send('emails.billPDF', $data, function ($message) use ($data, $pdf) {
-                $message->to($data["email"], $data["client_name"])->from('yp@gmail.com')
+                $message->to($data["email"], $data["client_name"])->from('isocietyclub@gmail.com')
                     ->subject($data["subject"])
                     ->attachData($pdf->output(), "bill.pdf");
             });
