@@ -12,5 +12,4 @@ Security & staff will be monitoring of parking spot, entry exit time, track of v
 After download/clone project, perform following steps:
 1. composer install
 2. npm install
-3. php artisan migrate
-4. php artisan db:seed --class="RolePermissionTableSeeder"
+3. php artisan migrate --seed
