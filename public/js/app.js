@@ -1898,22 +1898,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  props: ['user'],
+  props: ["user", "discussion"],
   data: function data() {
     return {
       messages: [],
-      newMessage: '',
+      newMessage: "",
       users: [],
       activeUser: false,
       typingTimer: false
@@ -1923,8 +1913,7 @@ __webpack_require__.r(__webpack_exports__);
     var _this = this;
 
     this.fetchMessages();
-    console.log(this.user);
-    var chat = 'chat1';
+    var chat = "chat" + this.discussion["id"];
     Echo.join(chat).here(function (user) {
       _this.users = user;
     }).joining(function (user) {
@@ -1933,9 +1922,9 @@ __webpack_require__.r(__webpack_exports__);
       _this.users = _this.users.filter(function (u) {
         return u.id != user.id;
       });
-    }).listen('DiscussionEvent', function (event) {
+    }).listen("DiscussionEvent", function (event) {
       _this.messages.push(event.message);
-    }).listenForWhisper('typing', function (user) {
+    }).listenForWhisper("typing", function (user) {
       _this.activeUser = user;
 
       if (_this.typingTimer) {
@@ -1951,7 +1940,7 @@ __webpack_require__.r(__webpack_exports__);
     fetchMessages: function fetchMessages() {
       var _this2 = this;
 
-      axios.get('messages').then(function (response) {
+      axios.get("/messages/" + this.discussion["id"]).then(function (response) {
         _this2.messages = response.data;
       });
     },
@@ -1960,13 +1949,13 @@ __webpack_require__.r(__webpack_exports__);
         user: this.user,
         message: this.newMessage
       });
-      axios.post('messages', {
+      axios.post("/messages/" + this.discussion["id"], {
         message: this.newMessage
       });
-      this.newMessage = '';
+      this.newMessage = "";
     },
     sendTypingEvent: function sendTypingEvent() {
-      Echo.join('chat1').whisper('typing', this.user);
+      Echo.join(this.chat).whisper("typing", this.user);
     }
   }
 });
@@ -25831,11 +25820,13 @@ var render = function() {
   return _c("div", { staticClass: "row" }, [
     _c("div", { staticClass: "col-lg-12" }, [
       _c("div", { staticClass: "ibox chat-view" }, [
-        _vm._m(0),
+        _c("div", { staticClass: "ibox-title" }, [
+          _vm._v("\n        Discuss about topic\n      ")
+        ]),
         _vm._v(" "),
         _c("div", { staticClass: "ibox-content" }, [
           _c("div", { staticClass: "row" }, [
-            _c("div", { staticClass: "col-md-12 " }, [
+            _c("div", { staticClass: "col-md-12" }, [
               _c(
                 "div",
                 { staticClass: "chat-discussion" },
@@ -25846,7 +25837,11 @@ var render = function() {
                     [
                       _c("img", {
                         staticClass: "message-avatar",
-                        attrs: { src: "", alt: "" }
+                        attrs: {
+                          src:
+                            "http://127.0.0.1:8000/images/undraw_profile_2.svg",
+                          alt: ""
+                        }
                       }),
                       _vm._v(" "),
                       _c("div", { staticClass: "message" }, [
@@ -25856,18 +25851,20 @@ var render = function() {
                             staticClass: "message-author",
                             attrs: { href: "#" }
                           },
-                          [_vm._v(" " + _vm._s(message.user.name) + " ")]
+                          [
+                            _vm._v(
+                              "\n                    " +
+                                _vm._s(message.user.name) +
+                                "\n                  "
+                            )
+                          ]
                         ),
-                        _vm._v(" "),
-                        _c("span", { staticClass: "message-date" }, [
-                          _vm._v(" Mon Jan 26 2015 - 18:39:23 ")
-                        ]),
                         _vm._v(" "),
                         _c("span", { staticClass: "message-content" }, [
                           _vm._v(
-                            "\n\t\t\t\t\t\t\t\t\t\t\t" +
+                            "\n                    " +
                               _vm._s(message.message) +
-                              "\n                                            "
+                              "\n                  "
                           )
                         ])
                       ])
@@ -25933,19 +25930,7 @@ var render = function() {
     ])
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "ibox-title" }, [
-      _c("small", { staticClass: "float-right text-muted" }, [
-        _vm._v("Last message:  Mon Jan 26 2015 - 18:39:23")
-      ]),
-      _vm._v("\n                         Chat room panel\n                    ")
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 

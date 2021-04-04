@@ -17,6 +17,7 @@ class CreateDiscussionDetails extends Migration
             $table->id();
             $table->string('title');
             $table->string('description')->nullable();
+            $table->foreignId('society_id')->constrained('societies')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });
     }

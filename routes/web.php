@@ -12,6 +12,7 @@ use App\Http\Controllers\AssetController;
 use App\Http\Controllers\ChatsController;
 use App\Http\Controllers\NoticeController;
 use App\Http\Controllers\ComplaintController;
+use App\Http\Controllers\DiscussionController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\ExpenseController;
 use App\Http\Controllers\PDFController;
@@ -112,8 +113,7 @@ Route::group(['middleware' => ['auth', 'role:member']], function () {
         Route::resource('complaints',ComplaintController::class,['as' => 'member']);
         Route::get('/complaints/resolve/{complaint}', [ComplaintController::class,'resolve'])->name('member.complaints.resolve');
 
-       Route::get('/allservice', [ServiceController::class,'show_service'])->name('member.services.allservice');
-       //Route::resource('services',ServiceController::class,['as' => 'member']);
+        Route::get('/allservice', [ServiceController::class,'show_service'])->name('member.services.allservice');
 
         Route::resource('assets', AssetController::class, ['as' => 'member']);
         Route::get('/staffAttendance/{id}', [StaffController::class, 'staffAttendance'])->name('member.staffAttendance');
@@ -122,6 +122,10 @@ Route::group(['middleware' => ['auth', 'role:member']], function () {
         Route::resource('complaints', ComplaintController::class, ['as' => 'member']);
         Route::get('/complaints/resolve/{complaint}', [ComplaintController::class, 'resolve'])->name('member.complaints.resolve');
 
+        Route::resource('discussion', DiscussionController::class, ['as' => 'member']);
+        Route::get('/chats/{discussion}',[ChatsController::class,'index'])->name('member.discussion.chats');;
+        Route::get('/messages/{discussion}',[ChatsController::class,'fetchMessages'])->name('member.discussion.messages');;
+        Route::post('/messages/{discussion}',[ChatsController::class,'sendMessage'])->name('member.discussion.messages');;
         Route::middleware(['role:committeemember'])->group(function () {
             Route::resource('meetings', MeetingController::class, ['as' => 'member']);
             Route::resource('notices', NoticeController::class, ['as' => 'member']);
@@ -182,6 +186,3 @@ Route::get('/country', function () {
     return json_decode($country, true);
 });
 
-Route::get('/chats',[ChatsController::class,'index']);
-Route::get('/messages',[ChatsController::class,'fetchMessages']);
-Route::post('/messages',[ChatsController::class,'sendMessage']);

@@ -20,7 +20,7 @@ Add Assets
 @section('content')
 <div class="wrapper wrapper-content mt-0">
     <div class="ibox-content w-75 my-5 p-5 mx-auto border">
-        <form  action="{{route('member.assets.store')}}" method="POST">
+        <form action="{{route('member.assets.store')}}" method="POST">
             @csrf
             @include('asset.formasset')
 

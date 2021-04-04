@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\User;
+use App\Models\Discussion;
 use Illuminate\Support\Facades\Broadcast;
 
 /*
@@ -17,10 +18,12 @@ use Illuminate\Support\Facades\Broadcast;
 Broadcast::channel('App.Models.User.{id}', function ($user, $id) {
     return (int) $user->id === (int) $id;
 });
-
-Broadcast::channel('chat1', function ($user) {
-    return $user;
-});
+$discussion = Discussion::all();
+foreach($discussion as $dis) {
+    Broadcast::channel('chat'.$dis->id, function ($user) {
+        return $user;
+    });
+}
 Broadcast::channel('user.{userId}', function ($user, $userId) {
     $user = User::find($userId);
     return $user->id == $user->user_id;

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Events\DiscussionEvent;
 use App\Events\WebSocketDemoEvent;
+use App\Models\Discussion;
 use App\Models\Message;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -16,24 +17,24 @@ class ChatsController extends Controller
 
     }
 
-    public function index()
+    public function index(Discussion $discussion)
     {
-        return view('chats');
+        return view('discussion.discussion_chats',compact('discussion'));
     }
-    public function fetchMessages()
+    public function fetchMessages(Discussion $discussion)
     {
-        return Message::with('user')->get();
+        return Message::where('discussion_id',$discussion->id)->with('user')->get();
     }
 
-    public function sendMessage(Request $request)
+    public function sendMessage(Request $request,Discussion $discussion)
     {
         $message = Message::create([
             'message' => $request->message,
-            'discussion_id' => 1,
+            'discussion_id' => $discussion->id,
             'user_id' => Auth::user()->id
         ]);
 
-        broadcast(new DiscussionEvent($message->load('user')))->toOthers();
+        broadcast(new DiscussionEvent($message->load('user'),$discussion))->toOthers();
         return ['status' => 'success'];
     }
 }

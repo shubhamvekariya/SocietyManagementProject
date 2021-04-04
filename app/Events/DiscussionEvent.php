@@ -2,6 +2,7 @@
 
 namespace App\Events;
 
+use App\Models\Discussion;
 use App\Models\Message;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
@@ -15,14 +16,16 @@ class DiscussionEvent implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
     public $message;
+    public $discussion;
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct(Message $message)
+    public function __construct(Message $message,Discussion $discussion)
     {
         $this->message = $message;
+        $this->discussion = $discussion;
     }
 
     /**
@@ -32,6 +35,6 @@ class DiscussionEvent implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return new PresenceChannel('chat1');
+        return new PresenceChannel('chat'.$this->discussion->id);
     }
 }
