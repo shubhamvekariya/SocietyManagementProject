@@ -5654,7 +5654,7 @@ ul.nav-second-level {
 }
 .nav > li.active {
   border-left: 4px solid #19aa8d;
-  background: #293846;
+  background: #1f2b36;
 }
 .nav.nav-second-level > li.active {
   border: none;
@@ -14024,5 +14024,6 @@ input::-webkit-inner-spin-button {
 input[type=number] {
     -moz-appearance: textfield;
 }
+
 
 

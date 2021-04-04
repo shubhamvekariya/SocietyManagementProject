@@ -10,7 +10,7 @@ Edit Complaint
 
 @section('breadcrumb-item')
     <li class="breadcrumb-item">
-        <a href="{{ route('society.home') }}">Home</a>
+        <a href="{{ route('member.home') }}">Home</a>
     </li>
     <li class="breadcrumb-item active">
         <strong>Edit Complaint</strong>
@@ -38,9 +38,10 @@ Edit Complaint
             $('#datetimepicker1').datetimepicker({
                 date: new Date(regdate)
             });
+            $('.complaints').addClass('active');
+            $('.complaints ul').addClass('in');
+            $('.complaints ul li:nth-child(2)').addClass('active');
         });
-    </script>
-     <script>
         complaints = {!! str_replace("'", "\'", json_encode($complaint->category)) !!};
         $('#category').val(complaints).trriger();
     </script>

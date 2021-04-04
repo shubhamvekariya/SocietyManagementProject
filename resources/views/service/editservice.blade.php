@@ -29,3 +29,13 @@ Edit Services
     </div>
 </div>
 @endsection
+
+@push('script')
+    <script>
+        $(function() {
+            $('.service').addClass('active');
+            $('.service ul').addClass('in');
+            $('.service ul li:nth-child(2)').addClass('active');
+        });
+    </script>
+@endpush

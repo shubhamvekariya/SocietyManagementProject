@@ -14,7 +14,7 @@ All Expenses
 
 @section('breadcrumb-item')
     <li class="breadcrumb-item">
-        <a href="{{ route('society.home') }}">Home</a>
+        <a href="{{ route('member.home') }}">Home</a>
     </li>
     <li class="breadcrumb-item active">
         <strong>Expenses</strong>
@@ -81,8 +81,11 @@ All Expenses
                     {data: 'action', name: 'action', orderable: false, searchable: false},
                 ]
             });
-
+            $('.expenses').addClass('active');
+            $('.expenses ul').addClass('in');
+            $('.expenses ul li:nth-child(2)').addClass('active');
         });
+
     </script>
 @endpush
 

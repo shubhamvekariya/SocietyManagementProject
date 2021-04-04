@@ -14,7 +14,7 @@ All Meeting
 
 @section('breadcrumb-item')
     <li class="breadcrumb-item">
-        <a href="{{ route('society.home') }}">Home</a>
+        <a href="{{ route('member.home') }}">Home</a>
     </li>
     <li class="breadcrumb-item active">
         <strong>Meeting</strong>
@@ -84,7 +84,9 @@ All Meeting
                     {data: 'action', name: 'action', orderable: false, searchable: false},
                 ]
             });
-
+            $('.meeting').addClass('active');
+            $('.meeting ul').addClass('in');
+            $('.meeting ul li:nth-child(2)').addClass('active');
         });
     </script>
 @endpush

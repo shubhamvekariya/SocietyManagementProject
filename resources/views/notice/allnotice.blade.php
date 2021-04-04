@@ -19,7 +19,7 @@
 
 @section('breadcrumb-item')
     <li class="breadcrumb-item">
-        <a href="{{ route('society.home') }}">Home</a>
+        <a href="{{ route('member.home') }}">Home</a>
     </li>
     <li class="breadcrumb-item active">
         <strong>Notice</strong>
@@ -97,3 +97,12 @@
 
     <div class="center" style="align:center;">{{ $notices->links() }}</div>
 @endsection
+@push('script')
+    <script>
+        $(function() {
+            $('.notice').addClass('active');
+            $('.notice ul').addClass('in');
+            $('.notice ul li:nth-child(2)').addClass('active');
+        });
+    </script>
+@endpush

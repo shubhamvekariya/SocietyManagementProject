@@ -10,7 +10,7 @@ Add Notice
 
 @section('breadcrumb-item')
     <li class="breadcrumb-item">
-        <a href="{{ route('society.home') }}">Home</a>
+        <a href="{{ route('member.home') }}">Home</a>
     </li>
     <li class="breadcrumb-item active">
         <strong>Add Notice</strong>
@@ -29,3 +29,13 @@ Add Notice
 </div>
 @endsection
 
+
+@push('script')
+    <script>
+        $(function() {
+            $('.notice').addClass('active');
+            $('.notice ul').addClass('in');
+            $('.notice ul li:nth-child(1)').addClass('active');
+        });
+    </script>
+@endpush

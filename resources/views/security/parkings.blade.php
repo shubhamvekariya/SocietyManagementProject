@@ -87,7 +87,9 @@
                         },
                     ]
                 });
-
+                $('.parking').addClass('active');
+                $('.parking ul').addClass('in');
+                $('.parking ul li:nth-child(1)').addClass('active');
             });
 
         </script>

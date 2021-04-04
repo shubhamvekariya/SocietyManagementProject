@@ -10,7 +10,7 @@ Add Meeting
 
 @section('breadcrumb-item')
     <li class="breadcrumb-item">
-        <a href="{{ route('society.home') }}">Home</a>
+        <a href="{{ route('member.home') }}">Home</a>
     </li>
     <li class="breadcrumb-item active">
         <strong>Add Meeting</strong>
@@ -34,6 +34,9 @@ Add Meeting
         $(function () {
             $('#datetimepicker1').datetimepicker();
             $('#datetimepicker2').datetimepicker();
+            $('.meeting').addClass('active');
+            $('.meeting ul').addClass('in');
+            $('.meeting ul li:nth-child(1)').addClass('active');
         });
     </script>
 @endpush

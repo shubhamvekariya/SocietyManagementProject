@@ -98,7 +98,11 @@
 <div class="form-group row justify-content-md-center mt-5">
     <div class="col-sm-12 col-md-auto">
         @if (!isset($visitor))
-            <button class="btn btn-primary btn-lg mx-2" type="submit">Make entry</button>
+            <button class="btn btn-primary btn-lg mx-2" type="submit">@role('member')
+                Pre-approve
+                @else
+                Make entry
+                @endrole</button>
         @else
             <button class="btn btn-primary btn-lg mx-2" type="submit">Edit</button>
         @endif

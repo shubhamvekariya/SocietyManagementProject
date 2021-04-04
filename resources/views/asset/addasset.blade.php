@@ -10,7 +10,7 @@ Add Assets
 
 @section('breadcrumb-item')
     <li class="breadcrumb-item">
-        <a href="{{ route('society.home') }}">Home</a>
+        <a href="{{ route('member.home') }}">Home</a>
     </li>
     <li class="breadcrumb-item active">
         <strong>Add Assets</strong>
@@ -35,6 +35,9 @@ Add Assets
         $(function () {
             $('#datetimepicker1').datetimepicker();
             $('#datetimepicker2').datetimepicker();
+            $('.assets').addClass('active');
+            $('.assets ul').addClass('in');
+            $('.assets ul li:nth-child(1)').addClass('active');
         });
     </script>
 @endpush

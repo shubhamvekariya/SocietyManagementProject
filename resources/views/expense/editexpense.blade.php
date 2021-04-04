@@ -10,7 +10,7 @@ Edit Expenses
 
 @section('breadcrumb-item')
     <li class="breadcrumb-item">
-        <a href="{{ route('society.home') }}">Home</a>
+        <a href="{{ route('member.home') }}">Home</a>
     </li>
     <li class="breadcrumb-item active">
         <strong>Edit Expenses</strong>
@@ -38,6 +38,9 @@ Edit Expenses
             $('#datetimepicker1').datetimepicker({
                 date: new Date(date)
             });
+            $('.expenses').addClass('active');
+            $('.expenses ul').addClass('in');
+            $('.expenses ul li:nth-child(2)').addClass('active');
         });
     </script>
 

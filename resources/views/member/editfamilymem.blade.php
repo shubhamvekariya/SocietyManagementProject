@@ -10,7 +10,7 @@ Add Family Member
 
 @section('breadcrumb-item')
     <li class="breadcrumb-item">
-        <a href="{{ route('society.home') }}">Home</a>
+        <a href="{{ route('member.home') }}">Home</a>
     </li>
     <li class="breadcrumb-item active">
         <strong>Add Family Member</strong>
@@ -35,5 +35,10 @@ Add Family Member
     <script>
         gender = {!! str_replace("'", "\'", json_encode($family_mem->gender)) !!};
         $('#gender').val(gender);
+        $(function() {
+            $('.familymember').addClass('active');
+            $('.familymember ul').addClass('in');
+            $('.familymember ul li:nth-child(2)').addClass('active');
+        });
     </script>
 @endpush

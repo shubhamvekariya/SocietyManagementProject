@@ -67,5 +67,10 @@ Edit security & staff
             $('#usage').val('personal');
         else
             $('#usage').val('society');
+        $(function() {
+            $('.staffs').addClass('active');
+            $('.staffs ul').addClass('in');
+            $('.staffs ul li:nth-child(2)').addClass('active');
+        });
     </script>
 @endpush

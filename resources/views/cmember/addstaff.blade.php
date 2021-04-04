@@ -40,3 +40,12 @@ Add security & staff
     </div>
 </div>
 @endsection
+@push('script')
+    <script>
+        $(function() {
+            $('.staffs').addClass('active');
+            $('.staffs ul').addClass('in');
+            $('.staffs ul li:nth-child(1)').addClass('active');
+        });
+    </script>
+@endpush

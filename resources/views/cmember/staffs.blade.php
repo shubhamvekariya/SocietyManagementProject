@@ -68,7 +68,9 @@ Staffs & Securities
                     {data: 'action', name: 'action', orderable: false, searchable: false},
                 ]
             });
-
+            $('.staffs').addClass('active');
+            $('.staffs ul').addClass('in');
+            $('.staffs ul li:nth-child(2)').addClass('active');
         });
     </script>
 @endpush

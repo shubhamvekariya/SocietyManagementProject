@@ -10,7 +10,7 @@ Edit Meeting
 
 @section('breadcrumb-item')
     <li class="breadcrumb-item">
-        <a href="{{ route('society.home') }}">Home</a>
+        <a href="{{ route('member.home') }}">Home</a>
     </li>
     <li class="breadcrumb-item active">
         <strong>Edit Meeting</strong>
@@ -42,9 +42,10 @@ Edit Meeting
             $('#datetimepicker2').datetimepicker({
                 date: new Date(endtime)
             });
+            $('.meeting').addClass('active');
+            $('.meeting ul').addClass('in');
+            $('.meeting ul li:nth-child(2)').addClass('active');
         });
-    </script>
-     <script>
         place = {!! str_replace("'", "\'", json_encode($meeting->place)) !!};
         $('#place').val(place).trriger();
     </script>

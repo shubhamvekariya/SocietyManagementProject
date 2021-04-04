@@ -36,3 +36,10 @@ Society Page
 </div>
 @endsection
 
+@push('script')
+    <script>
+        $(function() {
+            $('.dashboard').addClass('active');
+        });
+    </script>
+@endpush

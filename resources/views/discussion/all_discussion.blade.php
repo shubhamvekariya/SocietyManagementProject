@@ -8,10 +8,10 @@
 @endsection
 @section('breadcrumb-item')
     <li class="breadcrumb-item">
-        Home
+        <a href="{{ route('member.home') }}">Home</a>
     </li>
     <li class="breadcrumb-item active">
-        Discussion
+        <strong>Discussion</strong>
     </li>
 @endsection
 @section('content')
@@ -134,5 +134,9 @@
     </div>
 @endsection
 @push('script')
-    <script src="{{ asset('js/app.js') }}" defer></script>
+    <script>
+        $(function() {
+            $('.discussion').addClass('active');
+        });
+    </script>
 @endpush

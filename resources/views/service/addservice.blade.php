@@ -28,3 +28,12 @@
     </div>
 </div>
 @endsection
+@push('script')
+    <script>
+        $(function() {
+            $('.service').addClass('active');
+            $('.service ul').addClass('in');
+            $('.service ul li:nth-child(1)').addClass('active');
+        });
+    </script>
+@endpush

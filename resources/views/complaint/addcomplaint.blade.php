@@ -10,7 +10,7 @@ Add Complaint
 
 @section('breadcrumb-item')
     <li class="breadcrumb-item">
-        <a href="{{ route('society.home') }}">Home</a>
+        <a href="{{ route('member.home') }}">Home</a>
     </li>
     <li class="breadcrumb-item active">
         <strong>Add Complaint</strong>
@@ -34,6 +34,9 @@ Add Complaint
     <script type="text/javascript">
         $(function () {
             $('#datetimepicker1').datetimepicker();
+            $('.complaints').addClass('active');
+            $('.complaints ul').addClass('in');
+            $('.complaints ul li:nth-child(1)').addClass('active');
         });
     </script>
 @endpush

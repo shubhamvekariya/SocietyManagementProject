@@ -28,3 +28,12 @@ Add Rules
     </div>
 </div>
 @endsection
+@push('script')
+    <script>
+        $(function() {
+            $('.rule').addClass('active');
+            $('.rule ul').addClass('in');
+            $('.rule ul li:nth-child(1)').addClass('active');
+        });
+    </script>
+@endpush
