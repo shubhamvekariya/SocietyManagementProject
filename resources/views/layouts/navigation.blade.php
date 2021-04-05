@@ -69,7 +69,7 @@
             </li>
 
 
-            {{-- <li>
+             {{-- <li>
                 <a href="#"><i class="fa fa-cogs  "></i><span class="nav-label">Bill</span><span
                         class="fa arrow"></span></a>
                 <ul class="nav nav-second-level collapse">
@@ -123,6 +123,14 @@
                         class="fa arrow"></span></a>
                 <ul class="nav nav-second-level collapse">
                     <li><a href="{{ route('member.services.allservice') }}">All Services</a></li>
+                </ul>
+            </li>
+
+            <li>
+                <a href="#"><i class="fa fa-cogs  "></i><span class="nav-label">Payment</span><span
+                        class="fa arrow"></span></a>
+                <ul class="nav nav-second-level collapse">
+                    <li><a href="{{ route('stripe.pay') }}">Pay Bill</a></li>
                 </ul>
             </li>
 
