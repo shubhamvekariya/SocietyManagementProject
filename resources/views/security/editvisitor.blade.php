@@ -48,6 +48,11 @@
         parking = {!! str_replace("'", "\'", json_encode($visitor->parking)) !!};
         if(parking != null)
             $('#type').val(parking['type']);
+        $(function() {
+            $('.visitors').addClass('active');
+            $('.visitors ul').addClass('in');
+            $('.visitors ul li:nth-child(2)').addClass('active');
+        });
     </script>
 @endpush
 

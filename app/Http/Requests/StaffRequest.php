@@ -30,10 +30,9 @@ class StaffRequest extends FormRequest
      */
     public function rules()
     {
-
         switch (Route::currentRouteName()) {
 
-            case 'member.staff.create':
+            case 'member.staffs.store':
                 $rules = [
                     'email' => 'required|unique:staff_security|email',
                     'name' => 'required',
@@ -42,7 +41,7 @@ class StaffRequest extends FormRequest
                     'usage' => 'required',
                 ];
                 break;
-            case 'member.staff.update':
+            case 'member.staffs.update':
                 $rules = [
                     'email' => 'required|unique:staff_security|email',
                     'name' => 'required',

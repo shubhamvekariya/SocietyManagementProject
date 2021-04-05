@@ -8,7 +8,7 @@ Society Page
 @section('content')
 
 @section('breadcrumb-title')
-    Welcome staff   
+    Welcome staff
 @endsection
 @section('breadcrumb-item')
     <li class="breadcrumb-item active">
@@ -28,3 +28,10 @@ Society Page
 </div>
 @endsection
 
+@push('script')
+    <script>
+        $(function() {
+            $('.dashboard').addClass('active');
+        });
+    </script>
+@endpush

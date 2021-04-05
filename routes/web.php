@@ -9,8 +9,10 @@ use App\Http\Controllers\VisitorController;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\MeetingController;
 use App\Http\Controllers\AssetController;
+use App\Http\Controllers\ChatsController;
 use App\Http\Controllers\NoticeController;
 use App\Http\Controllers\ComplaintController;
+use App\Http\Controllers\DiscussionController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\ExpenseController;
 use App\Http\Controllers\PDFController;
@@ -53,11 +55,6 @@ Route::group(['middleware' => ['auth:society', 'role:secretary,society']], funct
     Route::get('/delete_rule/{id}', [SecretaryController::class, 'delete_rule'])->name('society.delete_rule');
     Route::get('/edit_rule/{id}', [SecretaryController::class, 'edit_rule'])->name('society.edit_rule');
     Route::put('/update_rule', [SecretaryController::class, 'update_rule'])->name('society.update_rule');
-
-    // Route::get('society/bill', [PDFController::class, 'show_bill'])->name('society.bill');
-    //Route::get('society/view_pdf', [PDFController::class, 'view_pdf'])->name('society.view_pdf');
-    //Route::get('society/download_pdf',[PDFController::class,'download_pdf'])->name('society.download_pdf');
-    //Route::get('society/sendemail_pdf', [PDFController::class, 'sendemail_pdf'])->name('society.sendemail_pdf');
 
     Route::get('/markasreadsociety/{id}',  function ($id) {
         Auth::user()->unreadNotifications->where('id', $id)->markAsRead();
@@ -112,8 +109,7 @@ Route::group(['middleware' => ['auth', 'role:member']], function () {
         Route::resource('complaints', ComplaintController::class, ['as' => 'member']);
         Route::get('/complaints/resolve/{complaint}', [ComplaintController::class, 'resolve'])->name('member.complaints.resolve');
 
-        Route::get('/allservice', [ServiceController::class, 'show_service'])->name('member.services.allservice');
-        //Route::resource('services',ServiceController::class,['as' => 'member']);
+        Route::get('/allservice', [ServiceController::class,'show_service'])->name('member.services.allservice');
 
         Route::resource('assets', AssetController::class, ['as' => 'member']);
         Route::get('/staffAttendance/{id}', [StaffController::class, 'staffAttendance'])->name('member.staffAttendance');
@@ -122,17 +118,16 @@ Route::group(['middleware' => ['auth', 'role:member']], function () {
         Route::resource('complaints', ComplaintController::class, ['as' => 'member']);
         Route::get('/complaints/resolve/{complaint}', [ComplaintController::class, 'resolve'])->name('member.complaints.resolve');
 
+        Route::resource('discussion', DiscussionController::class, ['as' => 'member']);
+        Route::get('/chats/{discussion}',[ChatsController::class,'index'])->name('member.discussion.chats');;
+        Route::get('/messages/{discussion}',[ChatsController::class,'fetchMessages'])->name('member.discussion.messages');;
+        Route::post('/messages/{discussion}',[ChatsController::class,'sendMessage'])->name('member.discussion.messages');;
         Route::middleware(['role:committeemember'])->group(function () {
             Route::resource('meetings', MeetingController::class, ['as' => 'member']);
             Route::resource('notices', NoticeController::class, ['as' => 'member']);
             Route::resource('expenses', ExpenseController::class, ['as' => 'member']);
 
             Route::get('/member/send_emergency', [EmergencyController::class, 'send_emergency'])->name('member.send_emergency');
-            //for payment
-            // Route::get('stripe', function () {
-            //     return view('stripe');
-            // })->name('stripe.pay');
-            // Route::post('stripe', [StripePaymentController::class, 'stripePost'])->name('stripe.post');
         });
     });
 });
@@ -186,12 +181,6 @@ Route::get('/country', function () {
     $country = Storage::get('public/country.json');
     return json_decode($country, true);
 });
-
-
-//Route::get('showpdf',[PDFController::class,'show']);
-//Route::get('sum',[ExpenseController::class,'cal_sum']);
-
-
 
 Route::get('stripe', function () {
     return view('stripe');

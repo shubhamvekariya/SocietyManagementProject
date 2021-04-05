@@ -48,69 +48,57 @@ class DemoCron extends Command
     public function handle()
     {
 
-        try{
+        foreach($societies as $society)
+        {
+        $users = User::select('users.*')->join('apartments', 'users.id', '=', 'apartments.user_id')->where('apartments.society_id',$society->id)->get();
+        $count = count($users);
 
-            // curl_setopt($process, CURLOPT_SSL_VERIFYPEER, false);
+        $day = date('d');
+        $month = date('m');
+        $year = date('Y');
+        $sum = DB::table('expenses')
+        ->whereYear('created_at', $year)
+        ->whereMonth('created_at', $month)
+        ->sum('money');
 
-            $societies = Society::all();
+        $total_expense = $sum/$count;
 
-            foreach ($societies as $society) {
-                $users = User::select('users.*')->join('apartments', 'users.id', '=', 'apartments.user_id')->where('apartments.society_id', $society->id)->get();
-                $count = count($users);
-                if ($count != 0) {
-
-                    $day = date('d');
-                    $month = date('m');
-                    $year = date('Y');
-                    $sum = DB::table('expenses')
-                        ->whereYear('created_at', $year)
-                        ->whereMonth('created_at', $month)
-                        ->sum('money');
-
-                    $total_expense = $sum / $count;
-
-                    //Log::info((string)$users."".$total_expense);
+        //Log::info((string)$users."".$total_expense);
 
 
-                    $due_date = ((int)$day + 5) . "/" . $month . "/" . $year;
-                    $bill = Bill::create([
-                        'day' => $day,
-                        'month' =>  $month,
-                        'year' =>  $year,
-                        'sum' =>  $total_expense,
-                        'count' =>  $count,
-                        'due_date' =>  $due_date,
-                        'society_id' =>  $society->id,
-                    ]);
+        $due_date = ((int)$day+5)."/".$month."/".$year;
+        $bill = Bill::create([
+            'day' => $day,
+            'month' =>  $month,
+            'year' =>  $year,
+            'sum' =>  $total_expense,
+            'count' =>  $count,
+            'due_date' =>  $due_date,
+            'society_id' =>  $society->id,
+        ]);
 
-                    //$societies = Society::find(Auth::user()->id);
-                    $societies = $society;
+        $societies = $society;
 
-                    //Log::info($societies."".$users[0]->id);
-                    foreach ($users as $user) {
-                        $bills = Bill::where('society_id', $society->id)->get();
-                        //Log::info($user);
-                        //Log::info($societies->id."".$users->id);
+        foreach($users as $user)
+        {
+            $bills = Bill::where('society_id',$society->id)->get();
 
-                        //$bills = Bill::where('society_id', Auth::user()->id)->get();
+            $data["email"] = "shubham.v@simformsolutions.com"; // $user->email
+            $data["client_name"] = "ISocietyClub"; // $user->name
+            $data["subject"] = "Mail from ISocietyClub";
 
-                        $data["email"] = "yagnesh.p@simformsolutions.com";
-                        $data["client_name"] = "Yagnesh";
-                        $data["subject"] = "Mail from Yp";
-
-                        $pdf = PDF::loadView('bill.index', $data, compact('societies', 'bills', 'user'));
+            $pdf = PDF::loadView('bill.index', $data, compact('societies', 'bills','user'));
 
 
-                        Mail::send('myPDF', $data, function ($message) use ($data, $pdf) {
-                            $message->to($data["email"], $data["client_name"])->from('yp@gmail.com')
-                                ->subject($data["subject"])
-                                ->attachData($pdf->output(), "bill.pdf");
-                        });
-                    }
-                }
-                //return true;
+            Mail::send('emails.billPDF', $data, function ($message) use ($data, $pdf) {
+                $message->to($data["email"], $data["client_name"])->from('isocietyclub@gmail.com')
+                    ->subject($data["subject"])
+                    ->attachData($pdf->output(), "bill.pdf");
+            });
+        }
 
-            }
+        }
+        $this->info('Demo:Cron Cummand Run successfully!');
 
 
             // $month = date('m');

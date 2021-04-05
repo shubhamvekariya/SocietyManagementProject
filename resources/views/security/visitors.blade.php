@@ -80,88 +80,86 @@
     @push('script')
         <script src="{{ asset('js/datatables.min.js') }}"></script>
         <script src="{{ asset('js/dataTables.bootstrap4.min.js') }}"></script>
+        <script>
         @role('security')
         @if (Route::is('staff.visitors.index'))
-            <script>
-                $(function() {
-                    var table = $('#visitorTable').DataTable({
-                        processing: true,
-                        serverSide: true,
-                        ajax: "{{ route('staff.visitors.index') }}",
-                        columns: [{
-                                data: 'id',
-                                name: 'id'
-                            },
-                            {
-                                data: 'name',
-                                name: 'name'
-                            },
-                            {
-                                data: 'phoneno',
-                                name: 'phoneno'
-                            },
-                            {
-                                data: 'entry_time',
-                                name: 'entry_time'
-                            },
-                            {
-                                data: 'memberdetails',
-                                name: 'memberdetails'
-                            },
-                            {
-                                data: 'action',
-                                name: 'action',
-                                orderable: false,
-                                searchable: false
-                            },
-                        ],
-                        order: [3,'asc']
-                    });
-
+            $(function() {
+                var table = $('#visitorTable').DataTable({
+                    processing: true,
+                    serverSide: true,
+                    ajax: "{{ route('staff.visitors.index') }}",
+                    columns: [{
+                            data: 'id',
+                            name: 'id'
+                        },
+                        {
+                            data: 'name',
+                            name: 'name'
+                        },
+                        {
+                            data: 'phoneno',
+                            name: 'phoneno'
+                        },
+                        {
+                            data: 'entry_time',
+                            name: 'entry_time'
+                        },
+                        {
+                            data: 'memberdetails',
+                            name: 'memberdetails'
+                        },
+                        {
+                            data: 'action',
+                            name: 'action',
+                            orderable: false,
+                            searchable: false
+                        },
+                    ],
+                    order: [3,'asc']
                 });
-
-            </script>
+                $('.visitors').addClass('active');
+                $('.visitors ul').addClass('in');
+                $('.visitors ul li:nth-child(2)').addClass('active');
+            });
         @elseif(Route::is('staff.visitors.allvisitors'))
-            <script>
-                $(function() {
-                    var table = $('#visitorTable').DataTable({
-                        processing: true,
-                        serverSide: true,
-                        ajax: "{{ route('staff.visitors.allvisitors') }}",
-                        columns: [{
-                                data: 'id',
-                                name: 'id'
-                            },
-                            {
-                                data: 'name',
-                                name: 'name'
-                            },
-                            {
-                                data: 'phoneno',
-                                name: 'phoneno'
-                            },
-                            {
-                                data: 'entry_time',
-                                name: 'entry_time'
-                            },
-                            {
-                                data: 'exit_time',
-                                name: 'exit_time'
-                            },
-                            {
-                                data: 'memberdetails',
-                                name: 'memberdetails'
-                            }
-                        ]
-                    });
-
+            $(function() {
+                var table = $('#visitorTable').DataTable({
+                    processing: true,
+                    serverSide: true,
+                    ajax: "{{ route('staff.visitors.allvisitors') }}",
+                    columns: [{
+                            data: 'id',
+                            name: 'id'
+                        },
+                        {
+                            data: 'name',
+                            name: 'name'
+                        },
+                        {
+                            data: 'phoneno',
+                            name: 'phoneno'
+                        },
+                        {
+                            data: 'entry_time',
+                            name: 'entry_time'
+                        },
+                        {
+                            data: 'exit_time',
+                            name: 'exit_time'
+                        },
+                        {
+                            data: 'memberdetails',
+                            name: 'memberdetails'
+                        }
+                    ]
                 });
-
-            </script>
+                $('.visitors').addClass('active');
+                $('.visitors ul').addClass('in');
+                $('.visitors ul li:nth-child(3)').addClass('active');
+            });
         @endif
         @endrole
         @role('member')
-        <script>
             $(function() {
                 var table = $('#visitorTable').DataTable({
                     processing: true,
@@ -192,9 +190,11 @@
                         [3, "asc"]
                     ]
                 });
-
+                $('.approvevisitor').addClass('active');
+                $('.approvevisitor ul').addClass('in');
+                $('.approvevisitor ul li:nth-child(3)').addClass('active');
             });
-
-        </script>
         @endrole
+
+    </script>
     @endpush

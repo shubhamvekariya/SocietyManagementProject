@@ -14,7 +14,11 @@ All Services
 
 @section('breadcrumb-item')
     <li class="breadcrumb-item">
+        @role('member')
+        <a href="{{ route('member.home') }}">Home</a>
+        @else
         <a href="{{ route('society.home') }}">Home</a>
+        @endrole
     </li>
     <li class="breadcrumb-item active">
         <strong>Services</strong>
@@ -70,46 +74,48 @@ All Services
 @push('script')
     <script src="{{ asset('js/datatables.min.js') }}"></script>
     <script src="{{ asset('js/dataTables.bootstrap4.min.js') }}"></script>
-    @role('secretary')
-    @if (Route::is('society.services.index'))
     <script>
-        $(function () {
-            var table = $('#all_service').DataTable({
-                processing: true,
-                serverSide: true,
-                ajax: "{{ route('society.services.index') }}",
-                columns: [
-                    {data: 'id', name: 'id'},
-                    {data: 'name', name: 'name'},
-                    {data: 'position', name: 'position'},
-                    {data: 'mobile_no', name: 'mobile_no'},
-                    {data: 'action', name: 'action', orderable: false, searchable: false},
-                ]
+        @role('secretary')
+        @if (Route::is('society.services.index'))
+            $(function () {
+                var table = $('#all_service').DataTable({
+                    processing: true,
+                    serverSide: true,
+                    ajax: "{{ route('society.services.index') }}",
+                    columns: [
+                        {data: 'id', name: 'id'},
+                        {data: 'name', name: 'name'},
+                        {data: 'position', name: 'position'},
+                        {data: 'mobile_no', name: 'mobile_no'},
+                        {data: 'action', name: 'action', orderable: false, searchable: false},
+                    ]
+                });
+                $('.service').addClass('active');
+                $('.service ul').addClass('in');
+                $('.service ul li:nth-child(2)').addClass('active');
             });
+        @endif
+        @endrole
 
-        });
-    </script>
-    @endif
-    @endrole
-
-    @role('member')
-    <script>
-        $(function () {
-            var table = $('#all_service').DataTable({
-                processing: true,
-                serverSide: true,
-                ajax: "{{ route('member.services.allservice') }}",
-                columns: [
-                    {data: 'id', name: 'id'},
-                    {data: 'name', name: 'name'},
-                    {data: 'position', name: 'position'},
-                    {data: 'mobile_no', name: 'mobile_no'},
-                ]
+        @role('member')
+            $(function () {
+                var table = $('#all_service').DataTable({
+                    processing: true,
+                    serverSide: true,
+                    ajax: "{{ route('member.services.allservice') }}",
+                    columns: [
+                        {data: 'id', name: 'id'},
+                        {data: 'name', name: 'name'},
+                        {data: 'position', name: 'position'},
+                        {data: 'mobile_no', name: 'mobile_no'},
+                    ]
+                });
+                $('.servicemember').addClass('active');
+                $('.servicemember ul').addClass('in');
+                $('.servicemember ul li:nth-child(1)').addClass('active');
             });
+        @endrole
 
-        });
     </script>
-    @endrole
-
 @endpush
 

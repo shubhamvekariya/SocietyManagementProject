@@ -10,7 +10,7 @@ Add Expenses
 
 @section('breadcrumb-item')
     <li class="breadcrumb-item">
-        <a href="{{ route('society.home') }}">Home</a>
+        <a href="{{ route('member.home') }}">Home</a>
     </li>
     <li class="breadcrumb-item active">
         <strong>Add Expense</strong>
@@ -18,11 +18,13 @@ Add Expenses
 @endsection
 
 @section('content')
+<div class="wrapper wrapper-content mt-0">
 <div class="ibox-content w-75 my-5 p-5 mx-auto border">
     <form  action="{{route('member.expenses.store')}}" method="POST">
         @csrf
         @include('expense.formexpense')
     </form>
+</div>
 </div>
 @endsection
 
@@ -31,6 +33,9 @@ Add Expenses
     <script type="text/javascript">
         $(function () {
             $('#datetimepicker1').datetimepicker();
+            $('.expenses').addClass('active');
+            $('.expenses ul').addClass('in');
+            $('.expenses ul li:nth-child(1)').addClass('active');
         });
     </script>
 @endpush

@@ -10,7 +10,7 @@ Edit Expenses
 
 @section('breadcrumb-item')
     <li class="breadcrumb-item">
-        <a href="{{ route('society.home') }}">Home</a>
+        <a href="{{ route('member.home') }}">Home</a>
     </li>
     <li class="breadcrumb-item active">
         <strong>Edit Expenses</strong>
@@ -18,13 +18,15 @@ Edit Expenses
 @endsection
 
 @section('content')
-<div class="ibox-content w-75 my-5 p-5 mx-auto border">
-    <form  action="{{route('member.expenses.update',$expense->id)}}" method="POST">
-        @csrf
-        @method('put')
-        @include('expense.formexpense')
+<div class="wrapper wrapper-content mt-0">
+    <div class="ibox-content w-75 my-5 p-5 mx-auto border">
+        <form  action="{{route('member.expenses.update',$expense->id)}}" method="POST">
+            @csrf
+            @method('put')
+            @include('expense.formexpense')
 
-    </form>
+        </form>
+    </div>
 </div>
 @endsection
 
@@ -36,6 +38,9 @@ Edit Expenses
             $('#datetimepicker1').datetimepicker({
                 date: new Date(date)
             });
+            $('.expenses').addClass('active');
+            $('.expenses ul').addClass('in');
+            $('.expenses ul li:nth-child(2)').addClass('active');
         });
     </script>
 

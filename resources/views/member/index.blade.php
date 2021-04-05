@@ -32,3 +32,10 @@ member Page
     </div>
 </div>
 @endsection
+@push('script')
+    <script>
+        $(function() {
+            $('.dashboard').addClass('active');
+        });
+    </script>
+@endpush

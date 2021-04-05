@@ -11,7 +11,11 @@
 @endsection
 @section('breadcrumb-item')
     <li class="breadcrumb-item">
+        @role('member')
+        <a href="{{ route('member.home') }}">Home</a>
+        @else
         <a href="{{ route('staff.home') }}">Home</a>
+        @endrole
     </li>
     <li class="breadcrumb-item active">
         <strong>Salary Details</strong>
@@ -103,6 +107,13 @@
         <script>
             $(function() {
                 var table = $('#salaryTable').DataTable();
+                @role('member')
+                    $('.staffs').addClass('active');
+                    $('.staffs ul').addClass('in');
+                    $('.staffs ul li:nth-child(2)').addClass('active');
+                @else
+                    $('.salary').addClass('active');
+                @endrole
             });
         </script>
     @endpush
