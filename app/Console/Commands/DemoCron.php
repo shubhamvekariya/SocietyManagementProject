@@ -47,6 +47,9 @@ class DemoCron extends Command
      */
     public function handle()
     {
+        try{
+
+      
 
         foreach($societies as $society)
         {

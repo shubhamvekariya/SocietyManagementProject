@@ -50,7 +50,7 @@ class DiscussionController extends Controller
             'description' => $request->description,
             'society_id' => Auth::user()->apartment->society_id
         ]);
-        return redirect()->back()->with('success','Discussion aadeed successfully');
+        return redirect()->back()->with('success','Discussion added successfully');
     }
 
     /**

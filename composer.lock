@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "6e8984c6244cbce8f0d53fa93eb13bd2",
+    "content-hash": "9e407c2606a85c396ecbf7197885cd53",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -1512,18 +1512,6 @@
         },
         {
             "name": "laravel/framework",
-<<<<<<< HEAD
-            "version": "v8.34.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/laravel/framework.git",
-                "reference": "81892ca110795a9c46c7e198cba7763bfd2af0bf"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/81892ca110795a9c46c7e198cba7763bfd2af0bf",
-                "reference": "81892ca110795a9c46c7e198cba7763bfd2af0bf",
-=======
             "version": "v8.35.1",
             "source": {
                 "type": "git",
@@ -1534,7 +1522,6 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/laravel/framework/zipball/d118c0df39e7524131176aaf76493eae63a8a602",
                 "reference": "d118c0df39e7524131176aaf76493eae63a8a602",
->>>>>>> ba23479e6cf09785e7807ff299dcafa12ae9fab4
                 "shasum": ""
             },
             "require": {
@@ -1689,11 +1676,7 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-<<<<<<< HEAD
-            "time": "2021-03-23T15:12:51+00:00"
-=======
             "time": "2021-03-30T21:34:17+00:00"
->>>>>>> ba23479e6cf09785e7807ff299dcafa12ae9fab4
         },
         {
             "name": "laravel/tinker",
@@ -1765,7 +1748,6 @@
         },
         {
             "name": "lcobucci/jwt",
-<<<<<<< HEAD
             "version": "3.4.5",
             "source": {
                 "type": "git",
@@ -1776,18 +1758,6 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/lcobucci/jwt/zipball/511629a54465e89a31d3d7e4cf0935feab8b14c1",
                 "reference": "511629a54465e89a31d3d7e4cf0935feab8b14c1",
-=======
-            "version": "4.0.3",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/lcobucci/jwt.git",
-                "reference": "ae4165a76848e070fdac691e773243d10cd06ce1"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/lcobucci/jwt/zipball/ae4165a76848e070fdac691e773243d10cd06ce1",
-                "reference": "ae4165a76848e070fdac691e773243d10cd06ce1",
->>>>>>> ba23479e6cf09785e7807ff299dcafa12ae9fab4
                 "shasum": ""
             },
             "require": {
@@ -1839,11 +1809,7 @@
             ],
             "support": {
                 "issues": "https://github.com/lcobucci/jwt/issues",
-<<<<<<< HEAD
                 "source": "https://github.com/lcobucci/jwt/tree/3.4.5"
-=======
-                "source": "https://github.com/lcobucci/jwt/tree/4.0.3"
->>>>>>> ba23479e6cf09785e7807ff299dcafa12ae9fab4
             },
             "funding": [
                 {
@@ -1855,11 +1821,7 @@
                     "type": "patreon"
                 }
             ],
-<<<<<<< HEAD
             "time": "2021-02-16T09:40:01+00:00"
-=======
-            "time": "2021-03-23T23:47:22+00:00"
->>>>>>> ba23479e6cf09785e7807ff299dcafa12ae9fab4
         },
         {
             "name": "league/commonmark",
@@ -3272,22 +3234,22 @@
         },
         {
             "name": "pusher/pusher-php-server",
-            "version": "v3.3.1",
+            "version": "v3.4.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/pusher/pusher-http-php.git",
-                "reference": "2279bcd21a608a76f9be1fe0675aa2dd1efb2fa0"
+                "reference": "a5fcdc65efd8d9a8291efbe01d326ec7ef5d5cee"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/pusher/pusher-http-php/zipball/2279bcd21a608a76f9be1fe0675aa2dd1efb2fa0",
-                "reference": "2279bcd21a608a76f9be1fe0675aa2dd1efb2fa0",
+                "url": "https://api.github.com/repos/pusher/pusher-http-php/zipball/a5fcdc65efd8d9a8291efbe01d326ec7ef5d5cee",
+                "reference": "a5fcdc65efd8d9a8291efbe01d326ec7ef5d5cee",
                 "shasum": ""
             },
             "require": {
                 "ext-curl": "*",
                 "paragonie/sodium_compat": "^1.6",
-                "php": "^5.4 || ^7.0",
+                "php": ">=5.4 <7.4",
                 "psr/log": "^1.0"
             },
             "require-dev": {
@@ -3296,7 +3258,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "3.0-dev"
+                    "dev-master": "3.4-dev"
                 }
             },
             "autoload": {
@@ -3326,7 +3288,7 @@
                 "issues": "https://github.com/pusher/pusher-http-php/issues",
                 "source": "https://github.com/pusher/pusher-http-php/tree/master"
             },
-            "time": "2019-01-18T12:10:21+00:00"
+            "time": "2019-03-19T11:19:11+00:00"
         },
         {
             "name": "ralouphie/getallheaders",
@@ -4382,7 +4344,6 @@
                 }
             ],
             "time": "2021-03-22T18:38:29+00:00"
-<<<<<<< HEAD
         },
         {
             "name": "stripe/stripe-php",
@@ -4444,8 +4405,6 @@
                 "source": "https://github.com/stripe/stripe-php/tree/v7.76.0"
             },
             "time": "2021-03-22T16:50:21+00:00"
-=======
->>>>>>> ba23479e6cf09785e7807ff299dcafa12ae9fab4
         },
         {
             "name": "swiftmailer/swiftmailer",
@@ -7318,18 +7277,6 @@
         },
         {
             "name": "facade/ignition",
-<<<<<<< HEAD
-            "version": "2.6.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/facade/ignition.git",
-                "reference": "4be10a998815f77952b9eb983fb0b64c8a4defbb"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/facade/ignition/zipball/4be10a998815f77952b9eb983fb0b64c8a4defbb",
-                "reference": "4be10a998815f77952b9eb983fb0b64c8a4defbb",
-=======
             "version": "2.7.0",
             "source": {
                 "type": "git",
@@ -7340,7 +7287,6 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/facade/ignition/zipball/bdc8b0b32c888f6edc838ca641358322b3d9506d",
                 "reference": "bdc8b0b32c888f6edc838ca641358322b3d9506d",
->>>>>>> ba23479e6cf09785e7807ff299dcafa12ae9fab4
                 "shasum": ""
             },
             "require": {
@@ -7404,11 +7350,7 @@
                 "issues": "https://github.com/facade/ignition/issues",
                 "source": "https://github.com/facade/ignition"
             },
-<<<<<<< HEAD
-            "time": "2021-03-24T18:58:31+00:00"
-=======
             "time": "2021-03-30T15:55:38+00:00"
->>>>>>> ba23479e6cf09785e7807ff299dcafa12ae9fab4
         },
         {
             "name": "fakerphp/faker",
@@ -7477,18 +7419,6 @@
         },
         {
             "name": "filp/whoops",
-<<<<<<< HEAD
-            "version": "2.11.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/filp/whoops.git",
-                "reference": "f6e14679f948d8a5cfb866fa7065a30c66bd64d3"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/filp/whoops/zipball/f6e14679f948d8a5cfb866fa7065a30c66bd64d3",
-                "reference": "f6e14679f948d8a5cfb866fa7065a30c66bd64d3",
-=======
             "version": "2.12.0",
             "source": {
                 "type": "git",
@@ -7499,7 +7429,6 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/filp/whoops/zipball/d501fd2658d55491a2295ff600ae5978eaad7403",
                 "reference": "d501fd2658d55491a2295ff600ae5978eaad7403",
->>>>>>> ba23479e6cf09785e7807ff299dcafa12ae9fab4
                 "shasum": ""
             },
             "require": {
@@ -7549,11 +7478,7 @@
             ],
             "support": {
                 "issues": "https://github.com/filp/whoops/issues",
-<<<<<<< HEAD
-                "source": "https://github.com/filp/whoops/tree/2.11.0"
-=======
                 "source": "https://github.com/filp/whoops/tree/2.12.0"
->>>>>>> ba23479e6cf09785e7807ff299dcafa12ae9fab4
             },
             "funding": [
                 {
@@ -7561,11 +7486,7 @@
                     "type": "github"
                 }
             ],
-<<<<<<< HEAD
-            "time": "2021-03-19T12:00:00+00:00"
-=======
             "time": "2021-03-30T12:00:00+00:00"
->>>>>>> ba23479e6cf09785e7807ff299dcafa12ae9fab4
         },
         {
             "name": "hamcrest/hamcrest-php",
@@ -7620,18 +7541,6 @@
         },
         {
             "name": "laravel/sail",
-<<<<<<< HEAD
-            "version": "v1.4.9",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/laravel/sail.git",
-                "reference": "935b453bf536b284d6fef7c1b5dd2ea52bca34c0"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/laravel/sail/zipball/935b453bf536b284d6fef7c1b5dd2ea52bca34c0",
-                "reference": "935b453bf536b284d6fef7c1b5dd2ea52bca34c0",
-=======
             "version": "v1.4.10",
             "source": {
                 "type": "git",
@@ -7642,7 +7551,6 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/laravel/sail/zipball/4f0b2bac128ee60a11d9758651f103f78157474a",
                 "reference": "4f0b2bac128ee60a11d9758651f103f78157474a",
->>>>>>> ba23479e6cf09785e7807ff299dcafa12ae9fab4
                 "shasum": ""
             },
             "require": {
@@ -7689,11 +7597,7 @@
                 "issues": "https://github.com/laravel/sail/issues",
                 "source": "https://github.com/laravel/sail"
             },
-<<<<<<< HEAD
-            "time": "2021-03-23T17:29:26+00:00"
-=======
             "time": "2021-03-30T21:26:44+00:00"
->>>>>>> ba23479e6cf09785e7807ff299dcafa12ae9fab4
         },
         {
             "name": "mockery/mockery",

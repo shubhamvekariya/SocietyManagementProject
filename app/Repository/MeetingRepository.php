@@ -28,27 +28,16 @@ class MeetingRepository implements MeetingInterface
         ]);
         if ($meeting) {
 
-            // SMS notification
-            // $basic  = new \Nexmo\Client\Credentials\Basic('8e5576b8', 'harboJXLDKcG7ntT');
-            //$client = new \Nexmo\Client($basic);
-
-            // $message = $client->message()->send([
-            //     'to' => '8401564660',
-            //     'from' => 'ISocietyClub',
-            //     'text' => 'Hello '.$member->name.', Request for new visitor '.$visitor->name.'. Approve here http://127.0.0.1:8000/approvevisitor/1'
-            // ]);
-            //dd($request->all());
-
             $users = User::select('users.*')->join('apartments', 'users.id', '=', 'apartments.user_id')->where('apartments.society_id', Auth::user()->apartment->society_id)->get();
             foreach ($users as $u) {
-                $basic  = new \Nexmo\Client\Credentials\Basic('b055a611', 'hsubS9eN82UkNusj');
-                $client = new \Nexmo\Client($basic);
+                // $basic  = new \Nexmo\Client\Credentials\Basic('b055a611', 'hsubS9eN82UkNusj');
+                // $client = new \Nexmo\Client($basic);
 
-                $client->message()->send([
-                    'to' => (string)$u->phoneno,
-                    'from' => 'Meeting Details',
-                    'text' => 'Meeting Title : '. $meeting->title .'<br>Meeting Description : '.$meeting->description,
-                ]);
+                // $client->message()->send([
+                //     'to' => (string)$u->phoneno,
+                //     'from' => 'Meeting Details',
+                //     'text' => 'Meeting Title : '. $meeting->title .'<br>Meeting Description : '.$meeting->description,
+                // ]);
             }
             return true;
         }
