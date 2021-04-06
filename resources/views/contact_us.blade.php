@@ -73,8 +73,9 @@
 			<div class="tm-container-inner-2 tm-contact-section">
 				<div class="row">
 					<div class="col-md-6">
-						<form action="" method="POST" class="tm-contact-form">
-					        <div class="form-group">
+						<form action="{{ route('contact_us.store') }}" method="POST" class="tm-contact-form">
+                            @csrf
+                            <div class="form-group">
 					          <input type="text" name="name" class="form-control" placeholder="Name" required="" />
 					        </div>
 

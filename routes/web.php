@@ -18,6 +18,7 @@ use App\Http\Controllers\ExpenseController;
 use App\Http\Controllers\PDFController;
 use App\Http\Controllers\EmergencyController;
 use App\Http\Controllers\StripePaymentController;
+use App\Http\Controllers\ContactusController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
 
@@ -40,6 +41,8 @@ Route::get('/', function () {
 Route::get('contact', function () {
     return view('contact_us');
 })->name('contact_us');
+
+Route::post('contact_us', [ContactusController::class, 'store'])->name('contact_us.store');
 //about us
 Route::get('about', function () {
     return view('about_us');
