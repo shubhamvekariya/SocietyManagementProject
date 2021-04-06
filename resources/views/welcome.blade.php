@@ -258,57 +258,6 @@
 			</div>
 		</main>
         <br>
-<!--Contact us-->
-        <div class="ibox-content w-100 my-5 p-5 mx-auto border bg-primary">
-            <div id="contact" class="container bg-primary">
-                <h2 class="text-center text-white">Contact Us</h2>
-                <br>
-                <div class="row">
-                  <div class="col-sm-5">
-                    <p>Contact us and we'll get back to you within 24 hours.</p>
-                    <p><span class="glyphicon glyphicon-map-marker"></span> Gujarat,India</p>
-                    <p><span class="glyphicon glyphicon-phone"></span> +91 8401564660</p>
-                    <p><span class="glyphicon glyphicon-envelope"></span> isocietyclub@gmail.com</p>
-                  </div>
-                  <div class="col-sm-7">
-                    <div class="row">
-                      <div class="col-sm-6 form-group">
-                        <input class="form-control" id="name" name="name" placeholder="Name" type="text" required autocomplete="off">
-                      </div>
-                      <div class="col-sm-6 form-group">
-                        <input class="form-control" id="email" name="email" placeholder="Email" type="email" required autocomplete="off">
-                      </div>
-                    </div>
-                    <textarea class="form-control" id="comments" name="comments" placeholder="Comment" rows="5" autocomplete="off"></textarea><br>
-                    <div class="row">
-                      <div class="col-sm-12 form-group">
-                       <button class="btn btn-dark btn-lg pull-right" type="submit">Send</button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-        </div>
-        <!--end contact us-->
-
-
-        <!--About us-->
-        <div class="ibox-content w-100 my-5 p-5 mx-auto border bg-primary">
-            <div id="about" class="container  bg-primary">
-                <h2 class="text-center ">About Us</h2>
-                <br>
-                <div class="row text-center">
-                  <div class="col-sm-12 ">
-                    <p class="text-white">Society management system in which society members can have facilities like notice board, book events, track of their income & expenses, complaints status etc. And make payment through cash or online payment gateway. Committee member will be interacting with society members for bills (maintenance bill, gas bill etc.), manage apartment, members of apartment, resolve complaints and track of visitors and staff. Security & staff will be monitoring of parking spot, entry exit time, track of visitors.</p>
-                    {{-- <p><span class="glyphicon glyphicon-map-marker"></span> Gujarat,India</p>
-                    <p><span class="glyphicon glyphicon-phone "></span> +91 8401564660</p>
-                    <p><span class="glyphicon glyphicon-envelope"></span> isocietyclub@gmail.com</p> --}}
-                  </div>
-                </div>
-            </div>
-        </div>
-        <!--End About us-->
-
 
 		<!--top button-->
 

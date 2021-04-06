@@ -53,8 +53,8 @@
 						</div>
 						<nav class="col-md-6 col-12 tm-nav">
 							<ul class="tm-nav-ul" >
-								<li class="tm-nav-li"><a href="{{ route('Home')}}" class="tm-nav-link active">Home</a></li>
-								<li class="tm-nav-li"><a href="{{ route('about_us')}}" class="tm-nav-link">About</a></li>
+								<li class="tm-nav-li"><a href="{{ route('Home')}}" class="tm-nav-link ">Home</a></li>
+								<li class="tm-nav-li"><a href="{{ route('about_us')}}" class="tm-nav-link active">About</a></li>
 								<li class="tm-nav-li"><a href="{{ route('contact_us')}}" class="tm-nav-link">Contact</a></li>
 								<li class="tm-nav-li"><a href="{{ route('login.member')}}" class="tm-nav-link">Login</a></li>
 							</ul>
@@ -67,7 +67,11 @@
 		<main>
             <header class="row tm-welcome-section">
 				<h2 class="col-12 text-center tm-section-title">About ISociety Club</h2>
-				<p class="col-12 text-center">Society management system in which society members can have facilities like notice board, book events, track of their income & expenses, complaints status etc. And make payment through cash or online payment gateway. Committee member will be interacting with society members for bills (maintenance bill, gas bill etc.), manage apartment, members of apartment, resolve complaints and track of visitors and staff. Security & staff will be monitoring of parking spot, entry exit time, track of visitors.</p>
+				<p class="col-12 text-center">Society management system in which society members can have facilities like notice board, book events, track of their income & expenses, complaints status etc.
+                    And make payment through cash or online payment gateway.<br><br>
+                    Committee member will be interacting with society members for bills (maintenance bill, gas bill etc.),
+                    manage apartment, members of apartment, resolve complaints and track of visitors and staff.<br><br>
+                    Security & staff will be monitoring of parking spot, entry exit time, track of visitors.</p>
 			</header>
         </main>
 

@@ -53,9 +53,9 @@
 						</div>
 						<nav class="col-md-6 col-12 tm-nav">
 							<ul class="tm-nav-ul" >
-								<li class="tm-nav-li"><a href="{{ route('Home') }}" class="tm-nav-link active">Home</a></li>
+								<li class="tm-nav-li"><a href="{{ route('Home') }}" class="tm-nav-link ">Home</a></li>
 								<li class="tm-nav-li"><a href="{{ route('about_us')}}" class="tm-nav-link">About</a></li>
-								<li class="tm-nav-li"><a href="{{ route('contact_us') }}" class="tm-nav-link">Contact</a></li>
+								<li class="tm-nav-li"><a href="{{ route('contact_us') }}" class="tm-nav-link active">Contact</a></li>
 								<li class="tm-nav-li"><a href="{{ route('login.member') }}" class="tm-nav-link">Login</a></li>
 							</ul>
 						</nav>
