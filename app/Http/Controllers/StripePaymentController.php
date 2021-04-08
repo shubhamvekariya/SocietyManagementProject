@@ -53,6 +53,8 @@ class StripePaymentController extends Controller
             'source'  => $request->stripeToken
         ));
         //dd($customer);
+        $bills[0]->sum += ($bills[0]->sum)*0.05;
+        //dd($bills[0]->sum);
 
 
         $charge = Charge::create(array(

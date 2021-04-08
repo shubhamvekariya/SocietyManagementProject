@@ -26,7 +26,7 @@ class Kernel extends ConsoleKernel
     {
 
 
-        //$schedule->command('demo:cron')->everyMinute( );
+       // $schedule->command('demo:cron')->everyMinute( );
         // $schedule->command('demo:cron')->monthly( );
 
     }
