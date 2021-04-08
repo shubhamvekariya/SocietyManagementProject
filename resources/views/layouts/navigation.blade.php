@@ -131,13 +131,13 @@
                 </ul>
             </li>
 
-            <li>
+            {{-- <li>
                 <a href="#"><i class="fa fa-cogs  "></i><span class="nav-label">Payment</span><span
                         class="fa arrow"></span></a>
                 <ul class="nav nav-second-level collapse">
                     <li><a href="{{ route('stripe.pay') }}">Pay Bill</a></li>
                 </ul>
-            </li>
+            </li> --}}
 
 
             @role('committeemember')
@@ -169,7 +169,7 @@
                 </li>
             @endrole
             <li class="discussion">
-                <a href="{{ route('member.discussion.index') }}"><i class="fa fa-fire-extinguisher"></i><span class="nav-label">Discussion</span></a>
+                <a href="{{ route('member.discussion.index') }}"><i class="fa fa-comments"></i><span class="nav-label">Discussion</span></a>
             </li>
             <li class="emergency">
                 <a href="{{ route('member.send_emergency') }}"><i class="fa fa-fire-extinguisher"></i><span class="nav-label">Emergency Button</span></a>

@@ -21,6 +21,7 @@ use App\Http\Controllers\StripePaymentController;
 use App\Http\Controllers\ContactusController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Request;
 
 /*
 |--------------------------------------------------------------------------
@@ -203,3 +204,6 @@ Route::get('stripe', function () {
 })->name('stripe.pay');
 Route::post('stripe', [StripePaymentController::class, 'stripePost'])->name('stripe.post');
 
+
+Route::post('stripesalary', [StaffController::class, 'salarypayment'])->name('stripe.salary');
+Route::post('stripesalarypay', [StaffController::class, 'payStaffSalary'])->name('stripe.paysalary');

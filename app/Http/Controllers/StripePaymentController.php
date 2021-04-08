@@ -1,23 +1,29 @@
 <?php
 
 namespace App\Http\Controllers;
-//use Session;
+use Session;
 //use Stripe;
 
 use App\Models\Society;
+use App\Models\Bill;
 use Stripe\Charge;
 use Stripe\Stripe;
 use Stripe\Customer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 
 class StripePaymentController extends Controller
 {
 
     public function stripePost(Request $request)
     {
-        //dd('Hello');
-       // dd($request->all());
+        //Society::find(Auth::user()->id);
+
+        $bills = Bill::where('society_id', Auth::user()->id)->get();
+        //dd($bills[0]->sum);
+        //dd($societies);
+
 
     //     Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
 
@@ -35,14 +41,9 @@ class StripePaymentController extends Controller
 
     //    // return back();
 
-    //dd($request->all());
 
-      //$user_id = Auth::user()->id;
       $user_email = Auth::user()->email;
       $user_name = Auth::user()->name;
-     // $society = Society::where('id',Auth::user()->id);
-      //dd($society);
-      //dd($user_email);
 
     Stripe::setApiKey(env('STRIPE_SECRET'));
     //dd('Hello');
@@ -56,9 +57,9 @@ class StripePaymentController extends Controller
 
         $charge = Charge::create(array(
             'customer' => $customer->id,
-            'amount'   => 1999*100,
+            'amount'   => ($bills[0]->sum),
             'currency' => 'inr',
-            "description" => "Payment Done By".$user_name,
+            "description" => "Payment Done By ".$user_name,
             "metadata" => [
                 "name" => Auth::user()->name,
                 "email" => Auth::user()->email,
@@ -67,7 +68,17 @@ class StripePaymentController extends Controller
                 "gender" => Auth::user()->gender
              ],
         ));
-        //dd($charge);
-        echo "<script>alert('Payment successful');</script>";
+
+        $details = [
+                     'title' => 'Mail from ISocietyClub.com',
+                     'success' => 'Bill Paid successfully By:'.$user_name,
+                     'amount' => 'Amount:' .($bills[0]->sum),
+                ];
+                Mail::to('yagnesh.p@simformsolutions.com') //Auth::user()->apartment->society->email;
+            ->send(new \App\Mail\BillMail($details));
+
+        Session::flash('success', 'Payment successful!');
+        return back();
+
     }
 }

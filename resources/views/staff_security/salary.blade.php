@@ -50,7 +50,7 @@
                     @foreach($salaries as $salary)
                         <tr>
                             @role('member')
-                            <form action="{{ route('member.paysalary') }}" method="POST">
+                            <form action="{{ route('stripe.salary') }}" method="POST">
                                 @csrf
                                 <th><input name="no" value="{{ $salary->no }}" readonly /></th>
                                 <th><input name="month" value="{{ $salary->month }}" readonly /></th>
@@ -60,7 +60,7 @@
                                 <th>
                                     @if($salary->status == 1)
                                         <input type="hidden" name="staff_id" value="{{ $salary->staff_id }}"/>
-                                        <button class="btn btn-primary btn-rounded d-block mx-auto" type="submit">Pay Salary</button>
+                                        <button type="submit" class="btn btn-primary btn-rounded d-block mx-auto">Pay Salary</button>
                                     @else
                                         <button class="btn btn-success btn-rounded d-block mx-auto text-bold" type="submit" disabled>Paid</button>
                                     @endif
