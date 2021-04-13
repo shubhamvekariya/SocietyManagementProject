@@ -64,7 +64,7 @@ Committee members
                     {data: 'committeemember', name: 'committeemember', orderable: false, searchable: false},
                 ]
             });
-
+            $('.committeemember').addClass('active');
         });
     </script>
 @endpush

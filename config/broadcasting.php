@@ -34,8 +34,14 @@ return [
             'driver' => 'pusher',
             'key' => '6b723375502146131d40',
             'secret' => '958aa14555a4cafd0847',
-            'app_id' => '1164693'
-            // 'options' => [],
+            'app_id' => '1164693',
+            'options' => [
+                'cluster' => env('PUSHER_APP_CLUSTER'),
+                'encrypted' => true,
+                'host' => '127.0.0.1',
+                'port' => 6001,
+                'scheme' => 'http'
+            ],
         ],
 
         'ably' => [

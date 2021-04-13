@@ -12,4 +12,8 @@ Security & staff will be monitoring of parking spot, entry exit time, track of v
 After download/clone project, perform following steps:
 1. composer install
 2. npm install
-3. php artisan migrate:fresh --seed
+3. php artisan migrate --seed
+
+For runing project, perform following steps:
+1. php artisan websocket:serve
+2. php artisan serve

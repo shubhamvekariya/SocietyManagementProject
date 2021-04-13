@@ -10,7 +10,7 @@ Edit Asset/Events
 
 @section('breadcrumb-item')
     <li class="breadcrumb-item">
-        <a href="{{ route('society.home') }}">Home</a>
+        <a href="{{ route('member.home') }}">Home</a>
     </li>
     <li class="breadcrumb-item active">
         <strong>Edit Asset/Events</strong>
@@ -18,13 +18,15 @@ Edit Asset/Events
 @endsection
 
 @section('content')
-<div class="ibox-content w-75 my-5 p-5 mx-auto border">
-    <form  action="{{route('member.assets.update',$asset->id)}}" method="POST">
-        @csrf
-        @method('put')
-        @include('asset.formasset')
+<div class="wrapper wrapper-content mt-0">
+    <div class="ibox-content w-75 my-5 p-5 mx-auto border">
+        <form  action="{{route('member.assets.update',$asset->id)}}" method="POST">
+            @csrf
+            @method('put')
+            @include('asset.formasset')
 
-    </form>
+        </form>
+    </div>
 </div>
 @endsection
 
@@ -40,9 +42,10 @@ Edit Asset/Events
             $('#datetimepicker2').datetimepicker({
                 date: new Date(endtime)
             });
+            $('.assets').addClass('active');
+            $('.assets ul').addClass('in');
+            $('.assets ul li:nth-child(2)').addClass('active');
         });
-    </script>
-     <script>
         assets = {!! str_replace("'", "\'", json_encode($asset->assets)) !!};
         $('#asset').val(assets).trriger();
     </script>

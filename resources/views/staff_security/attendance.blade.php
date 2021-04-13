@@ -1,20 +1,24 @@
 @extends('layouts.app')
 @section('title')
-Staffs & Securities
+Staffs & Securities Attendance
 @endsection
 @push('css')
 <link href="{{ mix('/css/datatables.min.css') }}" rel="stylesheet">
 @endpush
 
 @section('breadcrumb-title')
-    Staffs & Securities
+    Staffs & Securities Attendance
 @endsection
 @section('breadcrumb-item')
     <li class="breadcrumb-item">
+        @role('member')
         <a href="{{ route('member.home') }}">Home</a>
+        @else
+        <a href="{{ route('staff.home') }}">Home</a>
+        @endrole
     </li>
     <li class="breadcrumb-item active">
-        <strong>Staffs & Securities</strong>
+        <strong>Attendance</strong>
     </li>
 @endsection
 
@@ -50,8 +54,8 @@ Staffs & Securities
 @push('script')
     <script src="{{ asset('js/datatables.min.js') }}"></script>
     <script src="{{ asset('js/dataTables.bootstrap4.min.js') }}"></script>
-    @role('member')
-        <script>
+    <script>
+        @role('member')
             $(function () {
                 route = {!! str_replace("'", "\'", json_encode(route('member.staffAttendance',$id))) !!};
                 var table = $('#staffTable').DataTable({
@@ -64,12 +68,13 @@ Staffs & Securities
                         {data: 'exit_time', name: 'exit_time'}
                     ]
                 });
-
             });
-        </script>
-    @else
-        <script>
+            $('.staffs').addClass('active');
+            $('.staffs ul').addClass('in');
+            $('.staffs ul li:nth-child(2)').addClass('active');
+        @else
             $(function () {
+
                 var table = $('#staffTable').DataTable({
                     processing: true,
                     serverSide: true,
@@ -80,8 +85,8 @@ Staffs & Securities
                         {data: 'exit_time', name: 'exit_time'}
                     ]
                 });
-
+                $('.attendance').addClass('active');
             });
-        </script>
-    @endrole
+        @endrole
+    </script>
 @endpush

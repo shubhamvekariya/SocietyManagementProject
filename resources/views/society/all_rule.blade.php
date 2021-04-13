@@ -72,7 +72,9 @@ All Rules
                     {data: 'action', name: 'action', orderable: false, searchable: false},
                 ]
             });
-
+            $('.rule').addClass('active');
+            $('.rule ul').addClass('in');
+            $('.rule ul li:nth-child(2)').addClass('active');
         });
     </script>
 @endpush

@@ -32,7 +32,7 @@ class VisitorRequest extends FormRequest
     {
         switch (Route::currentRouteName()) {
 
-            case 'staff.visitors.create':
+            case 'staff.visitors.store':
                 $rules = [
                     'name' => 'required',
                     'phoneno' => 'required',

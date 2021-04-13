@@ -14,7 +14,7 @@ All Complaints
 
 @section('breadcrumb-item')
     <li class="breadcrumb-item">
-        <a href="{{ route('society.home') }}">Home</a>
+        <a href="{{ route('member.home') }}">Home</a>
     </li>
     <li class="breadcrumb-item active">
         <strong>Complaints</strong>
@@ -81,11 +81,12 @@ All Complaints
                     {data: 'category', name: 'category'},
                     {data: 'reg_date', name: 'reg_date'},
                     {data: 'status', name: 'status'},
-                   // {data: 'remarks', name: 'remarks'},
                     {data: 'action', name: 'action', orderable: false, searchable: false},
                 ]
             });
-
+            $('.complaints').addClass('active');
+            $('.complaints ul').addClass('in');
+            $('.complaints ul li:nth-child(2)').addClass('active');
         });
     </script>
 @endpush

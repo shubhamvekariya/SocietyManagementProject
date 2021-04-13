@@ -59,7 +59,9 @@ Need Approve user
                     {data: 'action', name: 'action', orderable: false, searchable: false},
                 ]
             });
-
+            $('.approvemember').addClass('active');
+            $('.approvemember ul').addClass('in');
+            $('.approvemember ul li:nth-child(1)').addClass('active');
         });
     </script>
 @endpush

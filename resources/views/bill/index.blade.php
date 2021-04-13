@@ -145,13 +145,16 @@
                 <td><strong>Sub Total :</strong></td>
                 <td>${{ $bills[0]->sum }}</td>
             </tr>
+            @php
+                $tax = $bills[0]->sum * 0.05;
+            @endphp
             <tr>
                 <td><strong>TAX :</strong></td>
-                <td>$135.98</td>
+                <td>${{ $tax }}</td>
             </tr>
             <tr>
                 <td><strong>TOTAL :</strong></td>
-                <td>${{ $bills[0]->sum + 135.98 }}</td>
+                <td>${{ $bills[0]->sum + $tax }}</td>
             </tr>
         </tbody>
     </table>

@@ -68,7 +68,7 @@ Attendance of Staffs & Securities
                     {data: 'check', name: 'check', orderable: false, searchable: false},
                 ]
             });
-
+            $('.staffentry').addClass('active');
         });
     </script>
 @endpush

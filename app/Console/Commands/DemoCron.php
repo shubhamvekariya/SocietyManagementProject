@@ -78,47 +78,27 @@ class DemoCron extends Command
             'society_id' =>  $society->id,
         ]);
 
-        //$societies = Society::find(Auth::user()->id);
         $societies = $society;
 
-        //Log::info($societies."".$users[0]->id);
         foreach($users as $user)
         {
-        $bills = Bill::where('society_id',$society->id)->get();
-        //Log::info($user);
-        //Log::info($societies->id."".$users->id);
+            $bills = Bill::where('society_id',$society->id)->get();
 
-        //$bills = Bill::where('society_id', Auth::user()->id)->get();
+            $data["email"] = "shubham.v@simformsolutions.com"; // $user->email
+            $data["client_name"] = "ISocietyClub"; // $user->name
+            $data["subject"] = "Mail from ISocietyClub";
 
-        $data["email"] = "yagnesh.p@simformsolutions.com";
-        $data["client_name"] = "Yagnesh";
-        $data["subject"] = "Mail from Yp";
-
-        $pdf = PDF::loadView('bill.index', $data, compact('societies', 'bills','user'));
+            $pdf = PDF::loadView('bill.index', $data, compact('societies', 'bills','user'));
 
 
-        Mail::send('myPDF', $data, function ($message) use ($data, $pdf) {
-            $message->to($data["email"], $data["client_name"])->from('yp@gmail.com')
-                ->subject($data["subject"])
-                ->attachData($pdf->output(), "bill.pdf");
-        });
+            Mail::send('emails.billPDF', $data, function ($message) use ($data, $pdf) {
+                $message->to($data["email"], $data["client_name"])->from('isocietyclub@gmail.com')
+                    ->subject($data["subject"])
+                    ->attachData($pdf->output(), "bill.pdf");
+            });
         }
 
-        //return true;
-
         }
-
-
-        // $month = date('m');
-        // $year = date('Y');
-
-        // $sum = DB::table('expenses')
-        // ->whereYear('created_at', $year)
-        // ->whereMonth('created_at', $month)
-        // ->sum('money');
-
-        // \Log::info("Sum of Monthly is working fine!".$sum);
-
         $this->info('Demo:Cron Cummand Run successfully!');
 
     }

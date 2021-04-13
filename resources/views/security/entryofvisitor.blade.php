@@ -1,19 +1,39 @@
 @extends('layouts.app')
 
 @section('title')
+    @role('member')
+    Pre-approve visitor
+    @else
     Make entry of visitor
+    @endrole
 @endsection
 
 @section('breadcrumb-title')
+    @role('member')
+    Pre-approve visitor
+    @else
     Make entry of visitor
+    @endrole
 @endsection
 
 @section('breadcrumb-item')
     <li class="breadcrumb-item">
-        <a href="{{ route('member.home') }}">Home</a>
+        <a href="
+        @role('member')
+        {{ route('member.home') }}
+        @else
+        {{ route('staff.home') }}
+        @endrole
+        ">Home</a>
     </li>
     <li class="breadcrumb-item active">
-        <strong>Make entry of visitor</strong>
+        <strong>
+            @role('member')
+            Pre-approve visitor
+            @else
+            Make entry of visitor
+            @endrole
+        </strong>
     </li>
 @endsection
 
@@ -63,6 +83,18 @@
                 date: nowTime
             });
         });
-
+        @role('member')
+            $(function() {
+                $('.approvevisitor').addClass('active');
+                $('.approvevisitor ul').addClass('in');
+                $('.approvevisitor ul li:nth-child(2)').addClass('active');
+            });
+        @else
+            $(function() {
+                $('.visitors').addClass('active');
+                $('.visitors ul').addClass('in');
+                $('.visitors ul li:nth-child(1)').addClass('active');
+            });
+        @endrole
     </script>
 @endpush

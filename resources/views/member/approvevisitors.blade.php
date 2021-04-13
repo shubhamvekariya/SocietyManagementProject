@@ -62,7 +62,9 @@ Need Approve visitors
                     {data: 'action', name: 'action', orderable: false, searchable: false},
                 ]
             });
-
+            $('.approvevisitor').addClass('active');
+            $('.approvevisitor ul').addClass('in');
+            $('.approvevisitor ul li:nth-child(1)').addClass('active');
         });
     </script>
 @endpush
