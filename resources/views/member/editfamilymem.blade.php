@@ -1,11 +1,11 @@
 @extends('layouts.app')
 
 @section('title')
-Add Family Member
+Edit Family Member
 @endsection
 
 @section('breadcrumb-title')
-Add Family Member
+Edit Family Member
 @endsection
 
 @section('breadcrumb-item')
@@ -13,7 +13,7 @@ Add Family Member
         <a href="{{ route('member.home') }}">Home</a>
     </li>
     <li class="breadcrumb-item active">
-        <strong>Add Family Member</strong>
+        <strong>Edit Family Member</strong>
     </li>
 @endsection
 

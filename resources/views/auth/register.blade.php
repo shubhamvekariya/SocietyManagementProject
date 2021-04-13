@@ -15,12 +15,12 @@
     <div>
         <div>
 
-            <h4 class="logo-name" style="font-size: 100px;margin-top:0;">AP+</h4>
+            <h4 class="logo-name" style="font-size: 100px;margin-top:0;">ISC+</h4>
 
         </div>
         <div class="ibox-content">
                         <h2>
-                            Register to AP+
+                            Register to ISC+
                         </h2>
                         <p>
                           Create account to see it in action.

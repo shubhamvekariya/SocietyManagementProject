@@ -26,11 +26,12 @@ Society Page
 
 <div class="wrapper wrapper-content">
     <div class="middle-box text-center animated fadeInRightBig">
-        <h3 class="font-bold">Society Page</h3>
+        <h3 class="font-bold">Secretary</h3>
         <div class="error-desc">
-            You can create here any grid layout you want. And any variation layout you imagine:) Check out
-            main dashboard and other site. It use many different layout.
-            <br/><a href="{{ route('Home') }}" class="btn btn-primary m-t">Dashboard</a>
+            The Secretary is responsible for:-<br>
+            1.Ensuring meetings are effectively organised and minuted.<br>
+            2.Maintaining effective records and administration.
+            <br/><a href="{{ route('Home') }}" class="btn btn-primary m-t">Home</a>
         </div>
     </div>
 </div>

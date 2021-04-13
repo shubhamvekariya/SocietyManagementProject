@@ -70,4 +70,14 @@ class RuleRepository implements RuleInterface
             return false;
         }
     }
+
+    public function showRuleMem($request)
+    {
+
+        $data = Rule::where('society_id', Auth::user()->id)->get();
+        return DataTables::of($data)
+            ->addIndexColumn()
+            ->make(true);
+    }
+
 }
