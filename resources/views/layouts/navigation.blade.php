@@ -131,6 +131,14 @@
                 </ul>
             </li>
 
+            <li class="rulesmember">
+                <a href="#"><i class="fa fa-male  "></i><span class="nav-label">Rules</span><span
+                        class="fa arrow"></span></a>
+                <ul class="nav nav-second-level collapse">
+                    <li><a href="{{ route('member.rules.allrule') }}">All Rules</a></li>
+                </ul>
+            </li>
+
             {{-- <li>
                 <a href="#"><i class="fa fa-cogs  "></i><span class="nav-label">Payment</span><span
                         class="fa arrow"></span></a>
