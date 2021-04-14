@@ -80,6 +80,7 @@
                     <li><a href="{{ route('society.services.index') }}">All Services</a></li>
                 </ul>
             </li>
+
         @else
         @role('member')
             <li class="familymember">
@@ -130,6 +131,23 @@
                 </ul>
             </li>
 
+            <li class="rulesmember">
+                <a href="#"><i class="fa fa-male  "></i><span class="nav-label">Rules</span><span
+                        class="fa arrow"></span></a>
+                <ul class="nav nav-second-level collapse">
+                    <li><a href="{{ route('member.rules.allrule') }}">All Rules</a></li>
+                </ul>
+            </li>
+
+            {{-- <li>
+                <a href="#"><i class="fa fa-cogs  "></i><span class="nav-label">Payment</span><span
+                        class="fa arrow"></span></a>
+                <ul class="nav nav-second-level collapse">
+                    <li><a href="{{ route('stripe.pay') }}">Pay Bill</a></li>
+                </ul>
+            </li> --}}
+
+
             @role('committeemember')
 
                 <li class="meeting">
@@ -159,7 +177,7 @@
                 </li>
             @endrole
             <li class="discussion">
-                <a href="{{ route('member.discussion.index') }}"><i class="fa fa-fire-extinguisher"></i><span class="nav-label">Discussion</span></a>
+                <a href="{{ route('member.discussion.index') }}"><i class="fa fa-comments"></i><span class="nav-label">Discussion</span></a>
             </li>
             <li class="emergency">
                 <a href="{{ route('member.send_emergency') }}"><i class="fa fa-fire-extinguisher"></i><span class="nav-label">Emergency Button</span></a>

@@ -21,11 +21,13 @@ member Page
 @endif
 <div class="wrapper wrapper-content">
     <div class="middle-box text-center animated fadeInRightBig">
-        <h3 class="font-bold">member Page</h3>
+        <h3 class="font-bold">Member</h3>
         <div class="error-desc">
-            You can create here any grid layout you want. And any variation layout you imagine:) Check out
-            main dashboard and other site. It use many different layout.
-            <br/><a href="{{ route('Home') }}" class="btn btn-primary m-t">Dashboard</a>
+            A Member of a Society has the following duties:-<br>
+             1. He has the duty to work to fulfill the objectives of the society.<br>
+             2. He has to attend the meetings held in the society regularly.
+
+            <br/><a href="{{ route('Home') }}" class="btn btn-primary m-t">Home</a>
         </div>
     </div>
 </div>

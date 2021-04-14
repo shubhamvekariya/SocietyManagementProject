@@ -19,6 +19,7 @@
         "nexmo/client": "^2.4",
         "pusher/pusher-php-server": "~3.0",
         "spatie/laravel-permission": "^4.0",
+        "stripe/stripe-php": "^7.76",
         "yajra/laravel-datatables-oracle": "^9.15"
     },
     "require-dev": {

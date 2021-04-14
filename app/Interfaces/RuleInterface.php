@@ -9,4 +9,5 @@ interface RuleInterface
     public function deleteRule($id);
     public function editRule($id);
     public function updateRule($request);
+    public function showRuleMem($request);
 }

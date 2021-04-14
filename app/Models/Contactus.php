@@ -6,16 +6,14 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Maintenance extends Model
+class Contactus extends Model
 {
     use HasFactory,SoftDeletes;
+    protected $table = 'contactus';
     protected $fillable = [
-        'bill_date',
-        'charges',
-        'category',
-        'due_dates',
-        'paid_status',
-        'user_id',
-    ];
+        'name',
+        'email',
+        'message',
 
+    ];
 }

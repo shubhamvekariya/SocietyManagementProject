@@ -9,10 +9,10 @@
     <div>
         <div>
 
-            <h1 class="logo-name">AP+</h1>
+            <h1 class="logo-name">ISC+</h1>
 
         </div>
-        <h3>Welcome to AP+</h3>
+        <h3>Welcome to ISC+</h3>
         <h2 class="font-weight-bold">Login in</h2>
         @if ($errors->any())
             <div class="alert alert-danger alert-dismissable">

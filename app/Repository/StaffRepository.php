@@ -204,6 +204,7 @@ class StaffRepository implements StaffInterface
             {
                 $no += 1;
                 array_push($salaries,(Object)['no'=> $no,'salary'=>$staffsalary->salary,'staff_id'=>$staffsalary->staff_id,'leave'=>$staffsalary->leave,'month'=>$month,'year'=>$year,'status'=>0]);
+
             }
             else
             {
@@ -224,14 +225,17 @@ class StaffRepository implements StaffInterface
                         }
                     }
                 }
-                $salary = $staff->salary;
+
+                $salary = $staff->salary*1000;
+
                 $salary = $salary - ($leave *$salary/$total);
                 $salary = round($salary,0);
+
+
                 if($salary != 0)
                 {
                     $no += 1;
                     array_push($salaries,(Object)['no'=> $no,'salary'=>(int)$salary,'staff_id'=>$staff->id,'leave'=>$leave,'month'=>$month,'year'=>$year,'status'=>1]);
-                    // Hello
                 }
             }
         }

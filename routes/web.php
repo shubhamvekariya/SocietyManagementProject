@@ -17,8 +17,11 @@ use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\ExpenseController;
 use App\Http\Controllers\PDFController;
 use App\Http\Controllers\EmergencyController;
+use App\Http\Controllers\StripePaymentController;
+use App\Http\Controllers\ContactusController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Request;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,6 +37,17 @@ use Illuminate\Support\Facades\Storage;
 Route::get('/', function () {
     return view('welcome');
 })->name('Home');
+
+//Contact us
+Route::get('contact', function () {
+    return view('contact_us');
+})->name('contact_us');
+
+Route::post('contact_us', [ContactusController::class, 'store'])->name('contact_us.store');
+//about us
+Route::get('about', function () {
+    return view('about_us');
+})->name('about_us');
 
 Route::group(['middleware' => ['auth:society', 'role:secretary,society']], function () {
     Route::get('/society',  function () {
@@ -58,11 +72,6 @@ Route::group(['middleware' => ['auth:society', 'role:secretary,society']], funct
     Route::get('/edit_rule/{id}', [SecretaryController::class, 'edit_rule'])->name('society.edit_rule');
     Route::put('/update_rule', [SecretaryController::class, 'update_rule'])->name('society.update_rule');
 
-    //Route::get('society/bill', [PDFController::class, 'show_bill'])->name('society.bill');
-    //Route::get('society/view_pdf', [PDFController::class, 'view_pdf'])->name('society.view_pdf');
-    //Route::get('society/download_pdf',[PDFController::class,'download_pdf'])->name('society.download_pdf');
-    //Route::get('society/sendemail_pdf', [PDFController::class, 'sendemail_pdf'])->name('society.sendemail_pdf');
-
     Route::get('/markasreadsociety/{id}',  function ($id) {
         Auth::user()->unreadNotifications->where('id', $id)->markAsRead();
         return redirect()->back();
@@ -72,9 +81,9 @@ Route::group(['middleware' => ['auth:society', 'role:secretary,society']], funct
     Route::post('/update/society', [LoginController::class, 'update_society'])->name('society.update');
 
 
-    Route::resource('meetings',MeetingController::class,['as' => 'society']);
-    Route::resource('notices',NoticeController::class,['as' => 'society']);
-    Route::resource('services',ServiceController::class,['as' => 'society']);
+    Route::resource('meetings', MeetingController::class, ['as' => 'society']);
+    Route::resource('notices', NoticeController::class, ['as' => 'society']);
+    Route::resource('services', ServiceController::class, ['as' => 'society']);
 
 
     Route::resource('meetings', MeetingController::class, ['as' => 'society']);
@@ -114,11 +123,12 @@ Route::group(['middleware' => ['auth', 'role:member']], function () {
         Route::post('/setpassword/member', [MemberController::class, 'setpassword'])->name('member.setpassword');
 
         Route::resource('staffs', StaffController::class, ['as' => 'member']);
-        Route::resource('assets',AssetController::class,['as' => 'member']);
-        Route::resource('complaints',ComplaintController::class,['as' => 'member']);
-        Route::get('/complaints/resolve/{complaint}', [ComplaintController::class,'resolve'])->name('member.complaints.resolve');
+        Route::resource('assets', AssetController::class, ['as' => 'member']);
+        Route::resource('complaints', ComplaintController::class, ['as' => 'member']);
+        Route::get('/complaints/resolve/{complaint}', [ComplaintController::class, 'resolve'])->name('member.complaints.resolve');
 
         Route::get('/allservice', [ServiceController::class,'show_service'])->name('member.services.allservice');
+        Route::get('/allrule', [SecretaryController::class,'show_rule_mem'])->name('member.rules.allrule');
 
         Route::resource('assets', AssetController::class, ['as' => 'member']);
         Route::get('/staffAttendance/{id}', [StaffController::class, 'staffAttendance'])->name('member.staffAttendance');
@@ -131,12 +141,15 @@ Route::group(['middleware' => ['auth', 'role:member']], function () {
         Route::get('/chats/{discussion}',[ChatsController::class,'index'])->name('member.discussion.chats');;
         Route::get('/messages/{discussion}',[ChatsController::class,'fetchMessages'])->name('member.discussion.messages');;
         Route::post('/messages/{discussion}',[ChatsController::class,'sendMessage'])->name('member.discussion.messages');;
+
+        Route::get('/member/send_emergency', [EmergencyController::class, 'send_emergency'])->name('member.send_emergency');
+
         Route::middleware(['role:committeemember'])->group(function () {
             Route::resource('meetings', MeetingController::class, ['as' => 'member']);
             Route::resource('notices', NoticeController::class, ['as' => 'member']);
             Route::resource('expenses', ExpenseController::class, ['as' => 'member']);
 
-            Route::get('/member/send_emergency',[EmergencyController::class,'send_emergency'])->name('member.send_emergency');
+
         });
     });
 });
@@ -194,3 +207,12 @@ Route::get('/country', function () {
     return json_decode($country, true);
 });
 
+//for payment
+Route::get('stripe', function () {
+    return view('stripe');
+})->name('stripe.pay');
+Route::post('stripe', [StripePaymentController::class, 'stripePost'])->name('stripe.post');
+
+
+Route::post('stripesalary', [StaffController::class, 'salarypayment'])->name('stripe.salary');
+Route::post('stripesalarypay', [StaffController::class, 'payStaffSalary'])->name('stripe.paysalary');

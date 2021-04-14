@@ -137,4 +137,12 @@ class SecretaryController extends Controller
             return redirect()->back()->with('error', 'Something went wrong');
         }
     }
+
+    public function show_rule_mem(Request $request)
+    {
+        if ($request->ajax()) {
+            return $this->ruleInterface->showRuleMem($request);
+        }
+        return view('society.all_rule');
+    }
 }
