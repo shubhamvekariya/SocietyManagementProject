@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\AuthRequest;
 use App\Interfaces\ApproveInterface;
 use App\Interfaces\RuleInterface;
 use App\Models\User;
 use App\Interfaces\MemberInterface;
+use App\Interfaces\SocietyInterface;
 use Illuminate\Http\Request;
 
 class SecretaryController extends Controller
@@ -13,11 +15,13 @@ class SecretaryController extends Controller
     protected $approveInterface;
     protected $ruleInterface;
     protected $memberInterface;
-    public function __construct(ApproveInterface $approveInterface, RuleInterface $ruleInterface, MemberInterface $memberInterface)
+    protected $societyInterface;
+    public function __construct(ApproveInterface $approveInterface, RuleInterface $ruleInterface, SocietyInterface $societyInterface, MemberInterface $memberInterface)
     {
         $this->approveInterface = $approveInterface;
         $this->ruleInterface = $ruleInterface;
         $this->memberInterface = $memberInterface;
+        $this->societyInterface = $societyInterface;
     }
     public function approve($user_id)
     {
@@ -26,6 +30,20 @@ class SecretaryController extends Controller
             return redirect()->back()->with('approvesuccess', 'User approved successfully');
         else
             return redirect()->back()->with('approveerror', 'Something went wrong');
+    }
+
+    public function getPassword()
+    {
+        //
+        return view('cmember.setpassword');
+    }
+
+    public function setPassword(AuthRequest $request)
+    {
+        //
+        $request->validated();
+        $status = $this->societyInterface->setPassword($request);
+        return redirect()->route('society.home');
     }
 
     public function reject($user_id)

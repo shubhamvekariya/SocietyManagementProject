@@ -29,7 +29,7 @@
                 <strong>{{ $error }}</strong>
             </div>
         @endif
-        <form class="m-t" role="form" action="{{ route('staff.setpassword') }}" method="POST">
+        <form class="m-t" role="form" action="@if (Request::segment(2) == 'society') {{ route('society.setpassword') }} @elseif (Request::segment(2) == 'member') {{ route('member.setpassword') }} @else {{ route('staff.setpassword') }} @endif" method="POST">
             @csrf
             <div class="form-group">
                 <input type="password" name="password" class="form-control" placeholder="Password" required="">

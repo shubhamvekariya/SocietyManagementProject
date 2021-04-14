@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\AuthRequest;
 use App\Interfaces\ApproveInterface;
 use App\Interfaces\FamilymemInterface;
 use Illuminate\Http\Request;
@@ -136,5 +137,19 @@ class MemberController extends Controller
             return redirect()->route('member.visitors')->with('success', 'Entry of visitor done');
         else
             return redirect()->back();
+    }
+
+    public function getPassword()
+    {
+        //
+        return view('cmember.setpassword');
+    }
+
+    public function setPassword(AuthRequest $request)
+    {
+        //
+        $request->validated();
+        $status = $this->memberInterface->setPassword($request);
+        return redirect()->route('member.home');
     }
 }

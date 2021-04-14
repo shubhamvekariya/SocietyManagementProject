@@ -7,7 +7,10 @@ use App\Models\Apartment;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Yajra\DataTables\Facades\DataTables;
+use Illuminate\Support\Str;
+
 
 /**
  * Class UserRepository
@@ -83,6 +86,28 @@ class MemberRepository implements MemberInterface
 
     public function editMember()
     {
+        return true;
+    }
+
+    public function forgotPassword($member)
+    {
+        $password = Str::random(8);
+        $member->update(['password' => Hash::make($password)]);
+        $member->givePermissionTo('set password');
+        $details = [
+            'title' => 'Mail from ISocietyClub.com',
+            'password' => $password,
+            'link' => route('login.member')
+        ];
+        Mail::to('shubham.v@simformsolutions.com')->send(new \App\Mail\ForgotPassword($details)); //$request->email for emaill
+        return true;
+    }
+
+    public function setPassword($request)
+    {
+        $member = User::findOrFail(Auth::user()->id);
+        $member->revokePermissionTo('set password');
+        $member->update(['password' => Hash::make($request->password)]);
         return true;
     }
 }

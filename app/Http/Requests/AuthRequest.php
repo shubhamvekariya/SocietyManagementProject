@@ -71,6 +71,16 @@ class AuthRequest extends FormRequest
                     'society_id' => 'required',
                 ];
                 break;
+            case 'society.setpassword':
+                $rules = [
+                    'password' => 'required_with:password_confirmation|confirmed|min:8|max:16',
+                ];
+                break;
+            case 'member.setpassword':
+                $rules = [
+                    'password' => 'required_with:password_confirmation|confirmed|min:8|max:16',
+                ];
+                break;
             default:
                 $rules = [];
         }

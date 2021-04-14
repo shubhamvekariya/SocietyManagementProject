@@ -46,6 +46,9 @@ Route::group(['middleware' => ['auth:society', 'role:secretary,society']], funct
     Route::get('/addcommitteemember/{user_id}', [SecretaryController::class, 'add_committee_members'])->name('society.addcmember');
     Route::get('/removecommitteemember/{user_id}', [SecretaryController::class, 'remove_committee_members'])->name('society.removecmember');
 
+    Route::get('/setpassword/society', [SecretaryController::class, 'getpassword'])->name('society.setpassword');
+    Route::post('/setpassword/society', [SecretaryController::class, 'setpassword'])->name('society.setpassword');
+
     Route::get('/rule', function () {
         return view('society.add_rule');
     })->name('society.rule');
@@ -107,6 +110,8 @@ Route::group(['middleware' => ['auth', 'role:member']], function () {
         Route::get('/edit/member', [LoginController::class, 'edit_member'])->name('member.edit');
         Route::post('/update/member', [LoginController::class, 'update_member'])->name('member.update');
 
+        Route::get('/setpassword/member', [MemberController::class, 'getpassword'])->name('member.setpassword');
+        Route::post('/setpassword/member', [MemberController::class, 'setpassword'])->name('member.setpassword');
 
         Route::resource('staffs', StaffController::class, ['as' => 'member']);
         Route::resource('assets',AssetController::class,['as' => 'member']);
@@ -168,15 +173,18 @@ Route::get('/login/society', [LoginController::class, 'show_login'])->name('logi
 Route::post('/login/society', [LoginController::class, 'check_login'])->name('login.society');
 Route::get('/register/society', [LoginController::class, 'show_register'])->name('register.society');
 Route::post('/register/society', [LoginController::class, 'create_society'])->name('register.society');
+Route::post('/forgot-password/society', [LoginController::class, 'forgot_passwrod'])->name('forgot.society');
 
 Route::get('/login/member', [LoginController::class, 'show_login'])->name('login.member');
 Route::post('/login/member', [LoginController::class, 'check_login'])->name('login.member');
 Route::get('/register/member', [LoginController::class, 'show_register'])->name('register.member');
 Route::post('/register/member', [LoginController::class, 'create_member'])->name('register.member');
+Route::post('/forgot-password/member', [LoginController::class, 'forgot_passwrod'])->name('forgot.member');
 
 
 Route::get('/login/staff', [LoginController::class, 'show_login'])->name('login.staff');
 Route::post('/login/staff', [LoginController::class, 'check_login'])->name('login.staff');
+Route::post('/forgot-password/staff', [LoginController::class, 'forgot_passwrod'])->name('forgot.staff');
 
 Route::get('/logout', [LoginController::class, 'destroy'])->name('logout');
 

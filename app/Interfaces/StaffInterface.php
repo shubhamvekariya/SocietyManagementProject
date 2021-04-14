@@ -12,4 +12,5 @@ interface StaffInterface
     public function setPassword($request);
     public function staffAttendance($id);
     public function staffSalary($id);
+    public function forgotPassword($staff);
 }

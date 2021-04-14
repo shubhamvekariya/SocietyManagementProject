@@ -4,7 +4,7 @@
 
 <head>
 
-	<title>Hi</title>
+	<title>ISocietyClub</title>
 
 </head>
 

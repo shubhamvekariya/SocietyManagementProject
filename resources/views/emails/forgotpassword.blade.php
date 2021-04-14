@@ -34,9 +34,8 @@
 </head>
 <body>
     <h1>{{ $details['title'] }}</h1>
-    <p>You are now {{ $details['position'] }}</p>
     <p>Your password is: <strong> {{ $details['password'] }} </strong></p>
     <p>Now login to ISocietyClub</p>
-    <a href="{{ route('login.staff') }}" id="login" >Login</a>
+    <a href="{{ $details['link'] }}" id="login" >Login</a>
 </body>
 </html>

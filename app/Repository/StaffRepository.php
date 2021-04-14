@@ -9,10 +9,12 @@ use App\Models\Staff;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Spatie\Permission\Models\Role;
+use Illuminate\Support\Str;
 use Yajra\DataTables\Facades\DataTables;
 use DateInterval;
 use DatePeriod;
 use DateTime;
+use Illuminate\Support\Facades\Mail;
 
 /**
  * Class UserRepository
@@ -51,12 +53,12 @@ class StaffRepository implements StaffInterface
         if ($staff) {
             if ($request->position == 'security') {
                 $role = Role::findByName('security', 'staff_security');
-                $role->givePermissionTo('set password');
                 $staff->assignRole($role);
+                $staff->givePermissionTo('set password');
             } else {
                 $role = Role::findByName('staff', 'staff_security');
-                $role->givePermissionTo('set password');
                 $staff->assignRole($role);
+                $staff->givePermissionTo('set password');
             }
 
             return true;
@@ -150,15 +152,24 @@ class StaffRepository implements StaffInterface
         return false;
     }
 
+    public function forgotPassword($staff)
+    {
+        $password = Str::random(8);
+        $staff->update(['password' => Hash::make($password)]);
+        $staff->givePermissionTo('set password');
+        $details = [
+            'title' => 'Mail from ISocietyClub.com',
+            'password' => $password,
+            'link' => route('login.staff')
+        ];
+        Mail::to('shubham.v@simformsolutions.com')->send(new \App\Mail\ForgotPassword($details)); //$request->email for emaill
+        return true;
+    }
+
     public function setPassword($request)
     {
-        if (Auth::user()->hasRole('security', 'staff_security'))
-            $role = Role::findByName('security', 'staff_security');
-        else
-            $role = Role::findByName('staff', 'staff_security');
-        $role->revokePermissionTo('set password', 'staff_security');
         $staff = Staff::findOrFail(Auth::user()->id);
-        Auth::user()->assignRole($role);
+        $staff->revokePermissionTo('set password');
         $staff->update(['password' => Hash::make($request->password)]);
         return true;
     }

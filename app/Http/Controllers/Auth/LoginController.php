@@ -47,14 +47,22 @@ class LoginController extends Controller
             $login = $this->societyInterface->checkLogin($request->email, $request->password, $request->rememberme);
             if ($login) {
                 $request->session()->regenerate();
-                return redirect()->route('society.home');
+                $society = Society::where('email', $request->email)->first();
+                if ($society->hasPermissionTo('set password', 'society'))
+                    return redirect()->route('society.setpassword');
+                else
+                    return redirect()->route('society.home');
             }
         }
         if ($request->segment(2) == 'member') {
             $login = $this->memberInterface->checkLogin($request->email, $request->password, $request->rememberme);
             if ($login) {
                 $request->session()->regenerate();
-                return redirect()->route('member.home');
+                $member = User::where('email', $request->email)->first();
+                if ($member->hasPermissionTo('set password'))
+                    return redirect()->route('member.setpassword');
+                else
+                    return redirect()->route('member.home');
             }
         }
         if ($request->segment(2) == 'staff') {
@@ -146,5 +154,31 @@ class LoginController extends Controller
         return redirect()->route('society.home')->with('success','Profile Updated');
         //echo "<script>alert('Updated');</script>";
 
+    }
+
+    public function forgot_passwrod(Request $request)
+    {
+        if ($request->segment(2) == 'society') {
+            $society = Society::where('email', $request->email)->first();
+            $status = $this->societyInterface->forgotPassword($society);
+            if ($status) {
+                return redirect()->route('login.society');
+        }
+        }
+        if ($request->segment(2) == 'member') {
+            $member = User::where('email', $request->email)->first();
+            $status = $this->memberInterface->forgotPassword($member);
+            if ($status) {
+                return redirect()->route('login.member');
+        }
+        }
+        if ($request->segment(2) == 'staff') {
+            $staff = Staff::where('email', $request->email)->first();
+            $status = $this->staffInterface->forgotPassword($staff);
+            if ($status) {
+                    return redirect()->route('login.staff');
+            }
+        }
+        return redirect()->back()->with('danger', 'Invalid credentials');
     }
 }

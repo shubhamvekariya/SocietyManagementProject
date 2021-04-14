@@ -9,4 +9,6 @@ interface MemberInterface
     public function getMembers();
     public function getSocietyMember();
     public function editMember();
+    public function setPassword($request);
+    public function forgotPassword($member);
 }
