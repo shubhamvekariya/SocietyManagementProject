@@ -37,6 +37,8 @@ class StaffRequest extends FormRequest
                     'email' => 'required|unique:staff_security|email',
                     'name' => 'required',
                     'age' => 'required|numeric|gt:18',
+                    'salary' => 'required',
+                    'nonworkingday' => 'required',
                     'position' => 'required',
                     'usage' => 'required',
                 ];
@@ -46,6 +48,8 @@ class StaffRequest extends FormRequest
                     'email' => 'required|unique:staff_security|email',
                     'name' => 'required',
                     'age' => 'required|numeric|gt:18',
+                    'salary' => 'required',
+                    'nonworkingday' => 'required',
                     'position' => 'required',
                     'usage' => 'required',
                 ];
