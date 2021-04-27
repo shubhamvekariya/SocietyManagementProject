@@ -24,6 +24,7 @@ class Society extends Authenticatable
         'email',
         'phoneno',
         'password',
+        'device_token'
     ];
 
     protected $hidden = [

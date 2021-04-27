@@ -182,6 +182,9 @@
             <li class="emergency">
                 <a href="{{ route('member.send_emergency') }}"><i class="fa fa-fire-extinguisher"></i><span class="nav-label">Emergency Button</span></a>
             </li>
+            <li class="push">
+                <a href="" onclick="initFirebaseMessagingRegistration()"><i class="fa fa-fire-extinguisher"></i><span class="nav-label">Allow push notification</span></a>
+            </li>
             @else
 
             @role('security')

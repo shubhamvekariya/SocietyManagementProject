@@ -152,4 +152,10 @@ class MemberController extends Controller
         $status = $this->memberInterface->setPassword($request);
         return redirect()->route('member.home');
     }
+
+    public function saveToken(Request $request)
+    {
+        auth()->user()->update(['device_token' => $request->token]);
+        return response()->json(['token saved successfully.']);
+    }
 }

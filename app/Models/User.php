@@ -25,6 +25,7 @@ class User extends Authenticatable
         'age',
         'phoneno',
         'gender',
+        'device_token'
     ];
 
     /**

@@ -212,7 +212,7 @@ Route::get('stripe', function () {
     return view('stripe');
 })->name('stripe.pay');
 Route::post('stripe', [StripePaymentController::class, 'stripePost'])->name('stripe.post');
-
+Route::post('/save-token', [App\Http\Controllers\MemberController::class, 'saveToken'])->name('save-token');
 
 Route::post('stripesalary', [StaffController::class, 'salarypayment'])->name('stripe.salary');
 Route::post('stripesalarypay', [StaffController::class, 'payStaffSalary'])->name('stripe.paysalary');
