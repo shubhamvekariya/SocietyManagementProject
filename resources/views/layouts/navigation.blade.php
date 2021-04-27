@@ -139,15 +139,6 @@
                 </ul>
             </li>
 
-            {{-- <li>
-                <a href="#"><i class="fa fa-cogs  "></i><span class="nav-label">Payment</span><span
-                        class="fa arrow"></span></a>
-                <ul class="nav nav-second-level collapse">
-                    <li><a href="{{ route('stripe.pay') }}">Pay Bill</a></li>
-                </ul>
-            </li> --}}
-
-
             @role('committeemember')
 
                 <li class="meeting">
@@ -183,11 +174,11 @@
                 <a href="{{ route('member.send_emergency') }}"><i class="fa fa-fire-extinguisher"></i><span class="nav-label">Emergency Button</span></a>
             </li>
             <li class="push">
-                <a href="" onclick="initFirebaseMessagingRegistration()"><i class="fa fa-fire-extinguisher"></i><span class="nav-label">Allow push notification</span></a>
+                <a href="#" onclick="initFirebaseMessagingRegistration()"><i class="fa fa-fire-extinguisher"></i><span class="nav-label">Allow push notification</span></a>
             </li>
-            @else
+        @else
 
-            @role('security')
+        @role('security')
             <li class="visitors">
                 <a href="#"><i class="fa fa-eye"></i><span class="nav-label">Visitors</span><span
                         class="fa arrow"></span></a>

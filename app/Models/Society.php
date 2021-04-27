@@ -23,8 +23,7 @@ class Society extends Authenticatable
         'secretary_name',
         'email',
         'phoneno',
-        'password',
-        'device_token'
+        'password'
     ];
 
     protected $hidden = [

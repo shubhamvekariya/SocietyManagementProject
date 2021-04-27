@@ -16,9 +16,6 @@ class AddColumnDeviceToken extends Migration
         Schema::table('users', function (Blueprint $table) {
             $table->string('device_token')->nullable();
         });
-        Schema::table('societies', function (Blueprint $table) {
-            $table->string('device_token')->nullable();
-        });
     }
 
     /**
