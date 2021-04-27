@@ -77,9 +77,10 @@ class VisitorRepository implements VisitorInterface
                 $data['rejectlink'] = route('member.rejectvisitor', $visitor->id);
                 $pusher->trigger('approve-visitor-channel-' . $member->id, 'approve-visitor-event', $data);
                 $details = [
-                    'body' => 'Visitor '.$visitor->name.' need to approve!<br><form class="text-center" action="'.route('member.needapprovevisitor').'" method="GET"><button type="submit" class="btn btn-primary mb-0">Approve</button></form>',
+                    'body' => 'Visitor '.$visitor->name.' need to approve!<br><form class="text-center" action="'.route('member.approvevisitor',$visitor->id).'" method="GET"><button type="submit" class="btn btn-primary mb-0">Approve</button></form>',
                 ];
                 $member->notify(new \App\Notifications\Approve($details));
+
                 // SMS notification
                 // $basic  = new \Nexmo\Client\Credentials\Basic('8e5576b8', 'harboJXLDKcG7ntT');
                 // $client = new \Nexmo\Client($basic);
@@ -87,8 +88,39 @@ class VisitorRepository implements VisitorInterface
                 // $message = $client->message()->send([
                 //     'to' => '917575800502',
                 //     'from' => 'ISocietyClub',
-                //     'text' => 'Hello '.$member->name.', Request for new visitor '.$visitor->name.'. Approve here http://127.0.0.1:8000/approvevisitor/1'
+                //     'text' => 'Hello '.$member->name.', Request for new visitor '.$visitor->name.'. Approve here http://127.0.0.1:8000/approvevisitor/'.$visitor->id
                 // ]);
+
+                //push notification
+                $firebaseToken = User::where('id',$request->member)->whereNotNull('device_token')->pluck('device_token')->all();
+
+                $SERVER_API_KEY = 'AAAABh_pbJc:APA91bHPSXGUjmirHamSyVU41JwV8OVcxvKKkr8jKN1vMxdktPoePMVCjhFnS3oNx5FlHlMLAMtIbiq6oMqioDcP4pSBpCduXJ_U75ifMgMC9VJ2Cla7R5vQJOFId12-imvVfp0JvHPK';
+
+                $data = [
+                        "registration_ids" => $firebaseToken,
+                        "notification" => [
+                            "title" => 'Hello ' . $member->name,
+                            "body" => 'Request for new visitor ' . $visitor->name . '. Approve here http://127.0.0.1:8000/approvevisitor/'.$visitor->id,
+                        ]
+                    ];
+                $dataString = json_encode($data);
+
+                $headers = [
+                        'Authorization: key=' . $SERVER_API_KEY,
+                        'Content-Type: application/json',
+                    ];
+
+                $ch = curl_init();
+
+                curl_setopt($ch, CURLOPT_URL, 'https://fcm.googleapis.com/fcm/send');
+                curl_setopt($ch, CURLOPT_POST, true);
+                curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+                curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+                curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+                curl_setopt($ch, CURLOPT_POSTFIELDS, $dataString);
+
+                $response = curl_exec($ch);
+                \Log::info("push notification: ".$response);
                 return true;
             }
         }
