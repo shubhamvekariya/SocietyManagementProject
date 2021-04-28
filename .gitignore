@@ -5,3 +5,5 @@
 /resources/fonts
 /resources/img
 /resources/js
+/.env
+/composer.lock
