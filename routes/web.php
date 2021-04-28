@@ -175,6 +175,7 @@ Route::group(['middleware' => ['auth:staff_security', 'role:staff|security,staff
         Route::get('/allstaffs', [StaffController::class, 'allStaffs'])->name('staff.allstaffs');
         Route::get('/checkinstaff/{id}', [StaffController::class, 'checkinStaff'])->name('staff.checkinstaff');
         Route::get('/checkoutstaff/{id}', [StaffController::class, 'checkoutStaff'])->name('staff.checkoutstaff');
+        Route::get('/visitor-export', [App\Http\Controllers\VisitorController::class, 'visitorExport'])->name('staff.visitor.export');
     });
     Route::get('/markasread/{id}',  function ($id) {
         Auth::user()->unreadNotifications->where('id', $id)->markAsRead();

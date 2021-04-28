@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\VisitorExport;
 use App\Http\Requests\VisitorRequest;
 use App\Interfaces\MemberInterface;
 use App\Interfaces\StaffInterface;
@@ -9,6 +10,7 @@ use App\Interfaces\VisitorInterface;
 use App\Models\Visitor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use Maatwebsite\Excel\Facades\Excel;
 
 class VisitorController extends Controller
 {
@@ -132,5 +134,8 @@ class VisitorController extends Controller
         return redirect()->back()->with('success', 'Visitor ' . $visitor->name . ' check out');
     }
 
-
+    public function visitorExport()
+    {
+        return Excel::download(new VisitorExport, 'visitor.xlsx');
+    }
 }

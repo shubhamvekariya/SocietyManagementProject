@@ -31,6 +31,9 @@
         </div>
     @endif
     <div class="wrapper wrapper-content">
+        @role('security')
+        <a href="{{ route('staff.visitor.export') }}" id="vendorExport" class="btn btn-primary float-right mr-4 mb-3" target="_blank"><i class="fa fa-file-excel-o"></i> Export</a>
+        @endrole
         <div class="table-responsive">
             <table class="table table-striped table-bordered table-hover" id="visitorTable">
                 <thead>
