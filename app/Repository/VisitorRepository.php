@@ -89,7 +89,7 @@ class VisitorRepository implements VisitorInterface
                 //push notification
                 $firebaseToken = User::where('id', $request->member)->whereNotNull('device_token')->pluck('device_token')->all();
 
-                $SERVER_API_KEY = 'AAAABh_pbJc:APA91bHPSXGUjmirHamSyVU41JwV8OVcxvKKkr8jKN1vMxdktPoePMVCjhFnS3oNx5FlHlMLAMtIbiq6oMqioDcP4pSBpCduXJ_U75ifMgMC9VJ2Cla7R5vQJOFId12-imvVfp0JvHPK';
+                $SERVER_API_KEY = env('FIREBASE_API_KEY');
 
                 $data = [
                     "registration_ids" => $firebaseToken,
