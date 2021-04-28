@@ -21,7 +21,7 @@ class EmergencyController extends Controller
             $user->notify(new \App\Notifications\Approve($details));
 
             // SMS notification
-            // $basic  = new \Nexmo\Client\Credentials\Basic('8e5576b8', 'harboJXLDKcG7ntT');
+            // $basic  = new \Nexmo\Client\Credentials\Basic(env('VONAGE_APP_KEY'), env('VONAGE_APP_SECRET'));
             // $client = new \Nexmo\Client($basic);
 
             // $message = $client->message()->send([

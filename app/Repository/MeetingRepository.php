@@ -28,13 +28,13 @@ class MeetingRepository implements MeetingInterface
 
             $users = User::select('users.*')->join('apartments', 'users.id', '=', 'apartments.user_id')->where('apartments.society_id', Auth::user()->apartment->society_id)->get();
             foreach ($users as $u) {
-                // $basic  = new \Nexmo\Client\Credentials\Basic('b055a611', 'hsubS9eN82UkNusj');
+                // $basic  = new \Nexmo\Client\Credentials\Basic(env('VONAGE_APP_KEY'), env('VONAGE_APP_SECRET'));
                 // $client = new \Nexmo\Client($basic);
 
                 // $client->message()->send([
-                //     'to' => (string)$u->phoneno,
+                //     'to' => '917575800502', //(string)$u->phoneno
                 //     'from' => 'Meeting Details',
-                //     'text' => 'Meeting Title : '. $meeting->title .'<br>Meeting Description : '.$meeting->description,
+                //     'text' => 'Meeting Title : '. $meeting->title .'    Meeting Description : '.$meeting->description . '    Meeting Place : ' . $meeting->place,
                 // ]);
             }
             return true;
