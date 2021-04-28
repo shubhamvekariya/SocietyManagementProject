@@ -25,13 +25,13 @@ class LoginController extends Controller
     {
         if ($request->segment(2) == 'society') {
             $this->societyInterface = $societyInterface;
-            $this->middleware('guest:society')->except('destroy','edit_member','update_member','edit_society','update_society');
+            $this->middleware('guest:society')->except('destroy', 'edit_member', 'update_member', 'edit_society', 'update_society');
         } elseif ($request->segment(2) == 'member') {
             $this->memberInterface = $memberInterface;
-            $this->middleware('guest')->except('destroy','edit_member','update_member','edit_society','update_society');
+            $this->middleware('guest')->except('destroy', 'edit_member', 'update_member', 'edit_society', 'update_society');
         } elseif ($request->segment(2) == 'staff') {
             $this->staffInterface = $staffInterface;
-            $this->middleware('guest:staff_security')->except('destroy','edit_member','update_member','edit_society','update_society');
+            $this->middleware('guest:staff_security')->except('destroy', 'edit_member', 'update_member', 'edit_society', 'update_society');
         }
     }
 
@@ -122,38 +122,30 @@ class LoginController extends Controller
     public function edit_member()
     {
         $user = Auth::user();
-        return view('auth.editprofile',compact('user'));
+        return view('auth.editprofile', compact('user'));
     }
 
     public function update_member(Request $request)
     {
 
-
         $user = User::find(Auth::user()->id);
         $user->update($request->all());
-
         $apart = Apartment::find(Auth::user()->apartment->id);
         $apart->update($request->all());
-       // dd($apart);
-        return redirect()->route('member.home')->with('success','Profile Updated');
-        //echo "<script>alert('Updated');</script>";
-
+        return redirect()->route('member.home')->with('success', 'Profile Updated');
     }
 
     public function edit_society()
     {
         $secretary = Auth::user();
-        //dd($secretary);
-        return view('auth.editprofile',compact('secretary'));
+        return view('auth.editprofile', compact('secretary'));
     }
     public function update_society(Request $request)
     {
         $secretary = Society::find(Auth::user()->id);
         $secretary->update($request->all());
 
-        return redirect()->route('society.home')->with('success','Profile Updated');
-        //echo "<script>alert('Updated');</script>";
-
+        return redirect()->route('society.home')->with('success', 'Profile Updated');
     }
 
     public function forgot_passwrod(Request $request)
@@ -163,20 +155,20 @@ class LoginController extends Controller
             $status = $this->societyInterface->forgotPassword($society);
             if ($status) {
                 return redirect()->route('login.society');
-        }
+            }
         }
         if ($request->segment(2) == 'member') {
             $member = User::where('email', $request->email)->first();
             $status = $this->memberInterface->forgotPassword($member);
             if ($status) {
                 return redirect()->route('login.member');
-        }
+            }
         }
         if ($request->segment(2) == 'staff') {
             $staff = Staff::where('email', $request->email)->first();
             $status = $this->staffInterface->forgotPassword($staff);
             if ($status) {
-                    return redirect()->route('login.staff');
+                return redirect()->route('login.staff');
             }
         }
         return redirect()->back()->with('danger', 'Invalid credentials');

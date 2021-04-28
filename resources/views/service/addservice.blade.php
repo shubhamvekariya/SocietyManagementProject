@@ -18,15 +18,15 @@
 @endsection
 
 @section('content')
-<div class="wrapper wrapper-content mt-0">
-    <div class="ibox-content w-75 my-5 p-5 mx-auto border">
-        <form action="{{ route('society.services.store') }}" method="POST">
-            @csrf
-            @include('service.formservice')
+    <div class="wrapper wrapper-content mt-0">
+        <div class="ibox-content w-75 my-5 p-5 mx-auto border">
+            <form action="{{ route('society.services.store') }}" method="POST">
+                @csrf
+                @include('service.formservice')
 
-        </form>
+            </form>
+        </div>
     </div>
-</div>
 @endsection
 @push('script')
     <script>
@@ -35,5 +35,6 @@
             $('.service ul').addClass('in');
             $('.service ul li:nth-child(1)').addClass('active');
         });
+
     </script>
 @endpush

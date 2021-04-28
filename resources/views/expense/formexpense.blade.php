@@ -16,7 +16,7 @@
     <label class="col-sm-2 col-form-label">Expense's Title:</label>
 
     <div class="col-sm-10">
-        <input type="text" class="form-control" placeholder="Enter Title" name="title" value="@if(isset($expense->title)){{ $expense['title']}}@endif">
+        <input type="text" class="form-control" placeholder="Enter Title" name="title" value="@if (isset($expense->title)) {{ $expense['title'] }} @endif">
     </div>
 </div>
 
@@ -25,7 +25,8 @@
     <label class="col-sm-2 col-form-label">Description:</label>
 
     <div class="col-lg-10"><textarea rows="3" class="form-control" placeholder="Enter Description"
-            name="description">@if(isset($expense->description)){{ $expense['description']}}@endif</textarea></div>
+            name="description">@if (isset($expense->description)){{ $expense['description'] }}@endif</textarea>
+    </div>
 </div>
 
 <div class="form-group row">
@@ -40,14 +41,14 @@
 <div class="form-group row ">
     <label class="col-sm-2 col-form-label">Money:</label>
     <div class="col-sm-10">
-        <input type="number" class="form-control" placeholder="Enter Money" name="money" value="@if(isset($expense->money)){{ $expense['money']}}@endif">
+        <input type="number" class="form-control" placeholder="Enter Money" name="money" value="@if (isset($expense->money)) {{ $expense['money'] }} @endif">
     </div>
 </div>
 
 <div class="form-group row text-center">
     <div class="col-12">
         <button class="btn btn-primary btn-lg" type="submit">
-            @if(isset($expense['title'])) Edit
+            @if (isset($expense['title'])) Edit
             @else Add
             @endif
         </button>

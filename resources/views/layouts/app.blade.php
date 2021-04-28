@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="author" content="shubhamvekariya">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <link rel="shortcut icon" href="{{ asset('favicon.ico') }}" type="image/x-icon"/>
+    <link rel="shortcut icon" href="{{ asset('favicon.ico') }}" type="image/x-icon" />
     <title>@yield('title')</title>
     <link href="{{ mix('/css/app.css') }}" rel="stylesheet">
     @stack('css')
@@ -135,9 +135,9 @@
         const messaging = firebase.messaging();
 
         function initFirebaseMessagingRegistration() {
-                messaging
+            messaging
                 .requestPermission()
-                .then(function () {
+                .then(function() {
                     return messaging.getToken()
                 })
                 .then(function(token) {
@@ -150,23 +150,23 @@
                     });
 
                     $.ajax({
-                        url: '{{ route("save-token") }}',
+                        url: '{{ route('save-token') }}',
                         type: 'POST',
                         data: {
                             token: token
                         },
                         dataType: 'JSON',
-                        success: function (response) {
+                        success: function(response) {
                             toastr.success('Token saved successfully.');
                         },
-                        error: function (err) {
-                            console.log('User Chat Token Error'+ err);
+                        error: function(err) {
+                            console.log('User Chat Token Error' + err);
                             toastr.error('Token not save. please try agian.');
                         },
                     });
 
-                }).catch(function (err) {
-                    console.log('User Chat Token Error'+ err);
+                }).catch(function(err) {
+                    console.log('User Chat Token Error' + err);
                 });
         }
 

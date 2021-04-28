@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 
 /**
- * Class UserRepository
+ * Class SocietyRepository
  * @package app\Repository
  */
 class SocietyRepository implements SocietyInterface

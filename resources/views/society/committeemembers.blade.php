@@ -1,9 +1,9 @@
 @extends('layouts.app')
 @section('title')
-Committee members
+    Committee members
 @endsection
 @push('css')
-<link href="{{ mix('/css/datatables.min.css') }}" rel="stylesheet">
+    <link href="{{ mix('/css/datatables.min.css') }}" rel="stylesheet">
 @endpush
 
 @section('content')
@@ -19,15 +19,15 @@ Committee members
         <strong>Committee Members</strong>
     </li>
 @endsection
-@if(Session::has('success'))
-<div class="alert alert-success alert-dismissable">
-    <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
-    <strong>{{ Session::get('success') }}</strong>
-</div>
+@if (Session::has('success'))
+    <div class="alert alert-success alert-dismissable">
+        <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+        <strong>{{ Session::get('success') }}</strong>
+    </div>
 @endif
 <div class="wrapper wrapper-content">
     <div class="table-responsive">
-        <table class="table table-striped table-bordered table-hover" id="needapprovetable" >
+        <table class="table table-striped table-bordered table-hover" id="needapprovetable">
             <thead>
                 <tr>
                     <th>No</th>
@@ -45,26 +45,40 @@ Committee members
                 </tr>
             </tfoot>
         </table>
-</div>
+    </div>
 @endsection
 
 @push('script')
     <script src="{{ asset('js/datatables.min.js') }}"></script>
     <script src="{{ asset('js/dataTables.bootstrap4.min.js') }}"></script>
     <script>
-        $(function () {
+        $(function() {
             var table = $('#needapprovetable').DataTable({
                 processing: true,
                 serverSide: true,
                 ajax: "{{ route('society.cmembers') }}",
-                columns: [
-                    {data: 'id', name: 'id'},
-                    {data: 'name', name: 'name'},
-                    {data: 'email', name: 'email'},
-                    {data: 'committeemember', name: 'committeemember', orderable: false, searchable: false},
+                columns: [{
+                        data: 'id',
+                        name: 'id'
+                    },
+                    {
+                        data: 'name',
+                        name: 'name'
+                    },
+                    {
+                        data: 'email',
+                        name: 'email'
+                    },
+                    {
+                        data: 'committeemember',
+                        name: 'committeemember',
+                        orderable: false,
+                        searchable: false
+                    },
                 ]
             });
             $('.committeemember').addClass('active');
         });
+
     </script>
 @endpush

@@ -16,8 +16,6 @@ class MeetingRepository implements MeetingInterface
 
     public function addMeeting($request)
     {
-        //$users = User::all()->except(Auth::id());
-        //dd($users);
         $meeting = Meeting::create([
             'title' =>  $request->title,
             'description' =>  $request->description,

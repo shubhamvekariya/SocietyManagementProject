@@ -13,7 +13,7 @@
     <li class="breadcrumb-item">
         @role('member')
         <a href="{{ route('member.home') }}">Home</a>
-        @else
+    @else
         <a href="{{ route('staff.home') }}">Home</a>
         @endrole
     </li>
@@ -41,13 +41,13 @@
                         <th>Salary</th>
                         @role('member')
                         <th>Action</th>
-                        @else
+                    @else
                         <th style="width:125px;">Status</th>
                         @endrole
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($salaries as $salary)
+                    @foreach ($salaries as $salary)
                         <tr>
                             @role('member')
                             <form action="{{ route('stripe.salary') }}" method="POST">
@@ -58,27 +58,31 @@
                                 <th><input name="leave" value="{{ $salary->leave }}" readonly /></th>
                                 <th><input name="salary" value="{{ $salary->salary }}" readonly /></th>
                                 <th>
-                                    @if($salary->status == 1)
-                                        <input type="hidden" name="staff_id" value="{{ $salary->staff_id }}"/>
-                                        <button type="submit" class="btn btn-primary btn-rounded d-block mx-auto">Pay Salary</button>
+                                    @if ($salary->status == 1)
+                                        <input type="hidden" name="staff_id" value="{{ $salary->staff_id }}" />
+                                        <button type="submit" class="btn btn-primary btn-rounded d-block mx-auto">Pay
+                                            Salary</button>
                                     @else
-                                        <button class="btn btn-success btn-rounded d-block mx-auto text-bold" type="submit" disabled>Paid</button>
+                                        <button class="btn btn-success btn-rounded d-block mx-auto text-bold" type="submit"
+                                            disabled>Paid</button>
                                     @endif
                                 </th>
                             </form>
-                            @else
-                                <th>{{ $salary->no }}</th>
-                                <th>{{ $salary->month }}</th>
-                                <th>{{ $salary->year }}</th>
-                                <th>{{ $salary->leave }}</th>
-                                <th>{{ $salary->salary }}</th>
-                                <th>
-                                    @if($salary->status == 1)
-                                        <button class="btn btn-danger btn-rounded d-block mx-auto disabled" style="width:100px" type="submit">Unpaid</button>
-                                    @else
-                                        <button class="btn btn-success btn-rounded d-block mx-auto" style="width:100px" type="submit" disabled>Paid</button>
-                                    @endif
-                                </th>
+                        @else
+                            <th>{{ $salary->no }}</th>
+                            <th>{{ $salary->month }}</th>
+                            <th>{{ $salary->year }}</th>
+                            <th>{{ $salary->leave }}</th>
+                            <th>{{ $salary->salary }}</th>
+                            <th>
+                                @if ($salary->status == 1)
+                                    <button class="btn btn-danger btn-rounded d-block mx-auto disabled" style="width:100px"
+                                        type="submit">Unpaid</button>
+                                @else
+                                    <button class="btn btn-success btn-rounded d-block mx-auto" style="width:100px"
+                                        type="submit" disabled>Paid</button>
+                                @endif
+                            </th>
                             @endrole
                         </tr>
                     @endforeach
@@ -92,7 +96,7 @@
                         <th>Salary</th>
                         @role('member')
                         <th>Action</th>
-                        @else
+                    @else
                         <th style="width:125px;">Status</th>
                         @endrole
                     </tr>
@@ -108,12 +112,13 @@
             $(function() {
                 var table = $('#salaryTable').DataTable();
                 @role('member')
-                    $('.staffs').addClass('active');
-                    $('.staffs ul').addClass('in');
-                    $('.staffs ul li:nth-child(2)').addClass('active');
-                @else
-                    $('.salary').addClass('active');
+                $('.staffs').addClass('active');
+                $('.staffs ul').addClass('in');
+                $('.staffs ul li:nth-child(2)').addClass('active');
+            @else
+                $('.salary').addClass('active');
                 @endrole
             });
+
         </script>
     @endpush

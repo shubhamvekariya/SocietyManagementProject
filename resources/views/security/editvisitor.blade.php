@@ -5,7 +5,7 @@
 @endsection
 
 @section('breadcrumb-title')
-   Edit visitor details
+    Edit visitor details
 @endsection
 
 @section('breadcrumb-item')
@@ -32,7 +32,7 @@
     @endif
     <div class="wrapper wrapper-content mt-0">
         <div class="ibox-content w-75 my-5 mx-auto border py-5">
-            <form action="{{ route('staff.visitors.update',$visitor->id) }}" method="post">
+            <form action="{{ route('staff.visitors.update', $visitor->id) }}" method="post">
                 @csrf
                 @method('PUT')
                 @include('security.formvisitor')
@@ -46,13 +46,13 @@
         user_id = {!! str_replace("'", "\'", json_encode($visitor->user_id)) !!};
         $('#member').val(user_id);
         parking = {!! str_replace("'", "\'", json_encode($visitor->parking)) !!};
-        if(parking != null)
+        if (parking != null)
             $('#type').val(parking['type']);
         $(function() {
             $('.visitors').addClass('active');
             $('.visitors ul').addClass('in');
             $('.visitors ul li:nth-child(2)').addClass('active');
         });
+
     </script>
 @endpush
-

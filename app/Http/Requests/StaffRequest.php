@@ -45,7 +45,7 @@ class StaffRequest extends FormRequest
                 break;
             case 'member.staffs.update':
                 $rules = [
-                    'email' => 'required|unique:staff_security|email',
+                    'email' => 'required|email',
                     'name' => 'required',
                     'age' => 'required|numeric|gt:18',
                     'salary' => 'required',

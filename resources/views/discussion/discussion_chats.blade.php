@@ -39,5 +39,6 @@
         $(function() {
             $('.discussion').addClass('active');
         });
+
     </script>
 @endpush

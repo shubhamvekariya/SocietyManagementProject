@@ -9,14 +9,14 @@
 <div class="form-group row">
     <label class="col-sm-2 col-form-label">Visitor's Name:</label>
     <div class="col-sm-10">
-        <input type="text" id="name" name="name" class="form-control" placeholder="Enter Full Name" value="@if(isset($visitor->name)){{ $visitor->name }}@endif">
+        <input type="text" id="name" name="name" class="form-control" placeholder="Enter Full Name" value="@if (isset($visitor->name)) {{ $visitor->name }} @endif">
     </div>
 </div>
 <div class="form-group row">
     <label class="col-sm-2 col-form-label">Phone No:</label>
     <div class="col-sm-10">
         <input type="number" id="phoneno" name="phoneno" class="form-control" placeholder="Enter Phone No"
-            value="@if(isset($visitor->phoneno)){{ $visitor->phoneno }}@endif">
+            value="@if (isset($visitor->phoneno)) {{ $visitor->phoneno }} @endif">
 
     </div>
 </div>
@@ -25,7 +25,7 @@
 
     <div class="col-sm-10">
         <textarea cols="50" rows="3" class="form-control" id="address" name="address"
-            placeholder="Enter Address">@if(isset($visitor->address)){{$visitor->address}}@endif</textarea>
+            placeholder="Enter Address">@if (isset($visitor->address)){{ $visitor->address }}@endif</textarea>
 
     </div>
 </div>
@@ -47,10 +47,10 @@
     <label class="col-sm-2 col-form-label">Reason To Meet:</label>
 
     <div class="col-sm-10"><input type="text" id="reason" name="reason" class="form-control" placeholder="Enter Reason"
-            value="@if(isset($visitor->reason_to_meet)){{ $visitor->reason_to_meet }}@endif">
+            value="@if (isset($visitor->reason_to_meet)) {{ $visitor->reason_to_meet }} @endif">
     </div>
 </div>
-@if(!isset($visitor))
+@if (!isset($visitor))
     <div class="form-group row">
         <label class="font-normal col-sm-2 col-form-label">Entry Time:</label>
         <div class="input-group date col-sm-10">
@@ -70,7 +70,7 @@
     <label class="col-sm-2 col-form-label">Vehicle Number:</label>
 
     <div class="col-sm-10">
-        <input type="text" id="vehicle_no" name="vehicle_no" class="form-control" value="@if(isset($visitor->parking->vehicle_no)){{ $visitor->parking->vehicle_no }}@endif"
+        <input type="text" id="vehicle_no" name="vehicle_no" class="form-control" value="@if (isset($visitor->parking->vehicle_no)) {{ $visitor->parking->vehicle_no }} @endif"
         placeholder="Enter vehicle number">
     </div>
 
@@ -91,7 +91,7 @@
 
     <div class="col-sm-10">
         <input type="text" id="spot" name="spot" class="form-control" placeholder="Enter Spot number/name"
-            value="@if(isset($visitor->parking->spot)){{ $visitor->parking->spot }}@endif">
+            value="@if (isset($visitor->parking->spot)) {{ $visitor->parking->spot }} @endif">
     </div>
 </div>
 @endrole
@@ -100,7 +100,7 @@
         @if (!isset($visitor))
             <button class="btn btn-primary btn-lg mx-2" type="submit">@role('member')
                 Pre-approve
-                @else
+            @else
                 Make entry
                 @endrole</button>
         @else

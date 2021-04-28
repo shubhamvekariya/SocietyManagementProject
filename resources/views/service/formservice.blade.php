@@ -27,7 +27,7 @@
     <label class="col-sm-2 col-form-label">Mobile No:</label>
 
     <div class="col-sm-10">
-        <input type="number" class="form-control" placeholder="Enter Mobile No" name="mobile_no" value="@if (isset($service->mobile_no)){{ $service['mobile_no'] }}@endif">
+        <input type="number" class="form-control" placeholder="Enter Mobile No" name="mobile_no" value="@if (isset($service->mobile_no)) {{ $service['mobile_no'] }} @endif">
     </div>
 </div>
 

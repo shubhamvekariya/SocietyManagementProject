@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title')
-Edit Asset/Events
+    Edit Asset/Events
 @endsection
 
 @section('breadcrumb-title')
@@ -18,21 +18,21 @@ Edit Asset/Events
 @endsection
 
 @section('content')
-<div class="wrapper wrapper-content mt-0">
-    <div class="ibox-content w-75 my-5 p-5 mx-auto border">
-        <form  action="{{route('member.assets.update',$asset->id)}}" method="POST">
-            @csrf
-            @method('put')
-            @include('asset.formasset')
+    <div class="wrapper wrapper-content mt-0">
+        <div class="ibox-content w-75 my-5 p-5 mx-auto border">
+            <form action="{{ route('member.assets.update', $asset->id) }}" method="POST">
+                @csrf
+                @method('put')
+                @include('asset.formasset')
 
-        </form>
+            </form>
+        </div>
     </div>
-</div>
 @endsection
 
 @push('script')
     <script type="text/javascript">
-        $(function () {
+        $(function() {
 
             starttime = {!! str_replace("'", "\'", json_encode($asset->start_time)) !!};
             endtime = {!! str_replace("'", "\'", json_encode($asset->end_time)) !!};
@@ -48,5 +48,6 @@ Edit Asset/Events
         });
         assets = {!! str_replace("'", "\'", json_encode($asset->assets)) !!};
         $('#asset').val(assets).trriger();
+
     </script>
 @endpush

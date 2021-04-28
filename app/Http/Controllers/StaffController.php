@@ -191,7 +191,6 @@ class StaffController extends Controller
 
     public function payStaffSalary(Request $request)
     {
-        //dd($request->salary);
         $paystaff = Salary::create([
             'month' => $request->month,
             'year' => $request->year,
@@ -199,12 +198,11 @@ class StaffController extends Controller
             'staff_id' => $request->staff_id,
             'leave' => $request->leave
         ]);
-        //dd($paystaff);
 
-      $user_email = Auth::user()->email;
-      $user_name = Auth::user()->name;
+        $user_email = Auth::user()->email;
+        $user_name = Auth::user()->name;
 
-    Stripe::setApiKey(env('STRIPE_SECRET'));
+        Stripe::setApiKey(env('STRIPE_SECRET'));
         $customer = Customer::create(array(
             'email' =>  $user_email,
             'source'  => $request->stripeToken
@@ -212,49 +210,43 @@ class StaffController extends Controller
 
         $charge = Charge::create(array(
             'customer' => $customer->id,
-            'amount'   => $request->salary*1000,
+            'amount'   => $request->salary,
             'currency' => 'inr',
-            "description" => "Payment Done By ".$user_name,
+            "description" => "Payment Done By " . $user_name,
             "metadata" => [
                 "name" => Auth::user()->name,
                 "email" => Auth::user()->email,
                 "age" => Auth::user()->age,
                 "phoneno" => Auth::user()->phoneno,
                 "gender" => Auth::user()->gender
-             ],
+            ],
         ));
-       // dd('hello');
 
         $details = [
-                     'title' => 'Mail from ISocietyClub.com',
-                     'success' => 'Salary Paid successfully By:'.$user_name,
-                     'amount' => 'Amount:' .$request->salary*10,
-                ];
-                Mail::to('yagnesh.p@simformsolutions.com')
+            'title' => 'Mail from ISocietyClub.com',
+            'success' => 'Salary Paid successfully By:' . $user_name,
+            'amount' => 'Amount:' . $request->salary,
+        ];
+        Mail::to('shubham.v@simformsolutions.com')
             ->send(new \App\Mail\BillMail($details));
 
-        //Session::flash('success', 'Payment successful!');
-
-       return redirect('/staffs')->with('success','Salary Paid');
+        return redirect('/staffs')->with('success', 'Salary Paid');
     }
 
     public function showStaffSalary($id)
     {
         $salaries = $this->staffInterface->staffSalary($id);
-       return view('staff_security.salary',compact('salaries'));
-
+        return view('staff_security.salary', compact('salaries'));
     }
 
     public function showSalary()
     {
         $salaries = $this->staffInterface->staffSalary(Auth::user()->id);
-        return view('staff_security.salary',compact('salaries'));
-
+        return view('staff_security.salary', compact('salaries'));
     }
 
     public function salarypayment(Request $request)
     {
-        //dd($request);
-        return view('stripesalary')->with('request',$request);
+        return view('stripesalary')->with('request', $request);
     }
 }

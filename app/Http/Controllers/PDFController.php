@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use PDF;
-//use Mail;
 use App\Models\Society;
 use App\Models\Bill;
 use Illuminate\Support\Facades\Auth;
@@ -14,8 +13,6 @@ class PDFController extends Controller
 {
     public function download_pdf()
     {
-
-        // $data = ['title' => 'Welcome to ISociety Club'];
         $societies = Society::find(Auth::user()->id);
         $bills = Bill::where('society_id', Auth::user()->id)->get();
 
@@ -27,8 +24,6 @@ class PDFController extends Controller
     {
         $societies = Society::find(Auth::user()->id);
         $bills = Bill::where('society_id', Auth::user()->id)->get();
-        //dd($bills);
-        //dd($societies->all());
         return view('bill.addbill', compact('societies', 'bills'));
     }
     public function view_pdf()
@@ -59,17 +54,4 @@ class PDFController extends Controller
 
         return true;
     }
-    // public function sendemail_pdf(Request $request)
-    // {
-    //     $societies = Society::find(Auth::user()->id);
-    //     $bills = Bill::where('society_id', Auth::user()->id)->get();
-
-    //     $pdf = PDF::loadView('bill.index', compact('societies', 'bills'));
-
-    //     $details = [
-    //         'title' => 'Mail from ISocietyClub.com',
-    //     ];
-    //     dd($pdf->output());
-    //     Mail::to('shubham.v@simformsolutions.com')->send(new \App\Mail\BillMail($details))->attachData($pdf->output(), "bill.pdf"); //$request->email for emaill
-    // }
 }

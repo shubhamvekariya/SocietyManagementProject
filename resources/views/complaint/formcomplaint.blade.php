@@ -16,7 +16,7 @@
     <label class="col-sm-2 col-form-label">Complaint's Title:</label>
 
     <div class="col-sm-10">
-        <input type="text" class="form-control" placeholder="Enter Title" name="title" value="@if(isset($complaint->title)){{ $complaint['title']}}@endif">
+        <input type="text" class="form-control" placeholder="Enter Title" name="title" value="@if (isset($complaint->title)) {{ $complaint['title'] }} @endif">
     </div>
 </div>
 
@@ -25,7 +25,8 @@
     <label class="col-sm-2 col-form-label">Description:</label>
 
     <div class="col-lg-10"><textarea rows="3" class="form-control" placeholder="Enter Description"
-            name="description">@if(isset($complaint->description)){{ $complaint['description']}}@endif</textarea></div>
+            name="description">@if (isset($complaint->description)){{ $complaint['description'] }}@endif</textarea>
+    </div>
 </div>
 
 
@@ -60,14 +61,14 @@
     <label class="col-sm-2 col-form-label">Remarks:</label>
 
     <div class="col-lg-10"><textarea rows="3" class="form-control" placeholder="Enter Remarks"
-            name="remarks">@if(isset($complaint->remarks)){{ $complaint['remarks']}}@endif</textarea></div>
+            name="remarks">@if (isset($complaint->remarks)){{ $complaint['remarks'] }}@endif</textarea></div>
 </div>-->
 
 
 <div class="form-group row text-center">
     <div class="col-12">
         <button class="btn btn-primary btn-lg" type="submit">
-            @if(isset($complaint['title'])) Edit
+            @if (isset($complaint['title'])) Edit
             @else Add
             @endif
         </button>

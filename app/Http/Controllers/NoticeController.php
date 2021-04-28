@@ -25,8 +25,8 @@ class NoticeController extends Controller
 
     public function index()
     {
-        $notices = Notice::where('society_id',Auth::user()->apartment->society_id)->paginate(12);
-        return view('notice.allnotice',['notices' => $notices]);
+        $notices = Notice::where('society_id', Auth::user()->apartment->society_id)->paginate(12);
+        return view('notice.allnotice', ['notices' => $notices]);
     }
 
     /**
@@ -54,7 +54,6 @@ class NoticeController extends Controller
         } else {
             return redirect()->back()->with('error', 'Something went wrong');
         }
-
     }
 
     /**
@@ -105,11 +104,9 @@ class NoticeController extends Controller
      */
     public function destroy(Notice $notice)
     {
-        //dd($notice);
         $status = $this->noticeInterface->deleteNotice($notice);
         if ($status) {
             return redirect()->route('member.notices.index')->with('success', 'Notice Deleted successfully');
-            //echo "<script>alert('deleted');</script>";
         } else {
             return redirect()->back()->with('error', 'Something went wrong');
         }

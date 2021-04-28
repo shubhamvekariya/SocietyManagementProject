@@ -1,11 +1,11 @@
 @extends('layouts.app')
 
 @section('title')
-Edit Notice
+    Edit Notice
 @endsection
 
 @section('breadcrumb-title')
-Edit Notice
+    Edit Notice
 @endsection
 
 @section('breadcrumb-item')
@@ -18,16 +18,16 @@ Edit Notice
 @endsection
 
 @section('content')
-<div class="wrapper wrapper-content mt-0">
-    <div class="ibox-content w-75 my-5 p-5 mx-auto border">
-        <form  action="{{route('member.notices.update',$notice->id)}}" method="POST">
-            @csrf
-            @method('put')
-            @include('notice.formnotice')
+    <div class="wrapper wrapper-content mt-0">
+        <div class="ibox-content w-75 my-5 p-5 mx-auto border">
+            <form action="{{ route('member.notices.update', $notice->id) }}" method="POST">
+                @csrf
+                @method('put')
+                @include('notice.formnotice')
 
-        </form>
+            </form>
+        </div>
     </div>
-</div>
 @endsection
 
 @push('script')
@@ -37,5 +37,6 @@ Edit Notice
             $('.notice ul').addClass('in');
             $('.notice ul li:nth-child(2)').addClass('active');
         });
+
     </script>
 @endpush

@@ -17,7 +17,7 @@ use DateTime;
 use Illuminate\Support\Facades\Mail;
 
 /**
- * Class UserRepository
+ * Class StaffRepository
  * @package app\Repository
  */
 class StaffRepository implements StaffInterface

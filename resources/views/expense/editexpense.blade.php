@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title')
-Edit Expenses
+    Edit Expenses
 @endsection
 
 @section('breadcrumb-title')
@@ -18,21 +18,21 @@ Edit Expenses
 @endsection
 
 @section('content')
-<div class="wrapper wrapper-content mt-0">
-    <div class="ibox-content w-75 my-5 p-5 mx-auto border">
-        <form  action="{{route('member.expenses.update',$expense->id)}}" method="POST">
-            @csrf
-            @method('put')
-            @include('expense.formexpense')
+    <div class="wrapper wrapper-content mt-0">
+        <div class="ibox-content w-75 my-5 p-5 mx-auto border">
+            <form action="{{ route('member.expenses.update', $expense->id) }}" method="POST">
+                @csrf
+                @method('put')
+                @include('expense.formexpense')
 
-        </form>
+            </form>
+        </div>
     </div>
-</div>
 @endsection
 
 @push('script')
     <script type="text/javascript">
-        $(function () {
+        $(function() {
 
             date = {!! str_replace("'", "\'", json_encode($expense->date)) !!};
             $('#datetimepicker1').datetimepicker({
@@ -42,6 +42,7 @@ Edit Expenses
             $('.expenses ul').addClass('in');
             $('.expenses ul li:nth-child(2)').addClass('active');
         });
+
     </script>
 
 @endpush

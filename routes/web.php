@@ -127,8 +127,8 @@ Route::group(['middleware' => ['auth', 'role:member']], function () {
         Route::resource('complaints', ComplaintController::class, ['as' => 'member']);
         Route::get('/complaints/resolve/{complaint}', [ComplaintController::class, 'resolve'])->name('member.complaints.resolve');
 
-        Route::get('/allservice', [ServiceController::class,'show_service'])->name('member.services.allservice');
-        Route::get('/allrule', [SecretaryController::class,'show_rule_mem'])->name('member.rules.allrule');
+        Route::get('/allservice', [ServiceController::class, 'show_service'])->name('member.services.allservice');
+        Route::get('/allrule', [SecretaryController::class, 'show_rule_mem'])->name('member.rules.allrule');
 
         Route::resource('assets', AssetController::class, ['as' => 'member']);
         Route::get('/staffAttendance/{id}', [StaffController::class, 'staffAttendance'])->name('member.staffAttendance');
@@ -138,9 +138,9 @@ Route::group(['middleware' => ['auth', 'role:member']], function () {
         Route::get('/complaints/resolve/{complaint}', [ComplaintController::class, 'resolve'])->name('member.complaints.resolve');
 
         Route::resource('discussion', DiscussionController::class, ['as' => 'member']);
-        Route::get('/chats/{discussion}',[ChatsController::class,'index'])->name('member.discussion.chats');;
-        Route::get('/messages/{discussion}',[ChatsController::class,'fetchMessages'])->name('member.discussion.messages');;
-        Route::post('/messages/{discussion}',[ChatsController::class,'sendMessage'])->name('member.discussion.messages');;
+        Route::get('/chats/{discussion}', [ChatsController::class, 'index'])->name('member.discussion.chats');;
+        Route::get('/messages/{discussion}', [ChatsController::class, 'fetchMessages'])->name('member.discussion.messages');;
+        Route::post('/messages/{discussion}', [ChatsController::class, 'sendMessage'])->name('member.discussion.messages');;
 
         Route::get('/member/send_emergency', [EmergencyController::class, 'send_emergency'])->name('member.send_emergency');
 
@@ -148,8 +148,6 @@ Route::group(['middleware' => ['auth', 'role:member']], function () {
             Route::resource('meetings', MeetingController::class, ['as' => 'member']);
             Route::resource('notices', NoticeController::class, ['as' => 'member']);
             Route::resource('expenses', ExpenseController::class, ['as' => 'member']);
-
-
         });
     });
 });
@@ -208,7 +206,6 @@ Route::get('/country', function () {
     return json_decode($country, true);
 });
 
-//for payment
 Route::get('stripe', function () {
     return view('stripe');
 })->name('stripe.pay');

@@ -4,11 +4,8 @@ namespace App\Repository;
 
 use App\Interfaces\ExpenseInterface;
 use App\Models\Expense;
-use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Yajra\DataTables\DataTables;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\DB;
 
 
 class ExpenseRepository implements ExpenseInterface

@@ -32,7 +32,8 @@
     @endif
     <div class="wrapper wrapper-content">
         @role('security')
-        <a href="{{ route('staff.visitor.export') }}" id="vendorExport" class="btn btn-primary float-right mr-4 mb-3" target="_blank"><i class="fa fa-file-excel-o"></i> Export</a>
+        <a href="{{ route('staff.visitor.export') }}" id="vendorExport" class="btn btn-primary float-right mr-4 mb-3"
+            target="_blank"><i class="fa fa-file-excel-o"></i> Export</a>
         @endrole
         <div class="table-responsive">
             <table class="table table-striped table-bordered table-hover" id="visitorTable">
@@ -84,85 +85,85 @@
         <script src="{{ asset('js/datatables.min.js') }}"></script>
         <script src="{{ asset('js/dataTables.bootstrap4.min.js') }}"></script>
         <script>
-        @role('security')
-        @if (Route::is('staff.visitors.index'))
-            $(function() {
+            @role('security')
+            @if (Route::is('staff.visitors.index'))
+                $(function() {
                 var table = $('#visitorTable').DataTable({
-                    processing: true,
-                    serverSide: true,
-                    ajax: "{{ route('staff.visitors.index') }}",
-                    columns: [{
-                            data: 'id',
-                            name: 'id'
-                        },
-                        {
-                            data: 'name',
-                            name: 'name'
-                        },
-                        {
-                            data: 'phoneno',
-                            name: 'phoneno'
-                        },
-                        {
-                            data: 'entry_time',
-                            name: 'entry_time'
-                        },
-                        {
-                            data: 'memberdetails',
-                            name: 'memberdetails'
-                        },
-                        {
-                            data: 'action',
-                            name: 'action',
-                            orderable: false,
-                            searchable: false
-                        },
-                    ],
-                    order: [3,'asc']
+                processing: true,
+                serverSide: true,
+                ajax: "{{ route('staff.visitors.index') }}",
+                columns: [{
+                data: 'id',
+                name: 'id'
+                },
+                {
+                data: 'name',
+                name: 'name'
+                },
+                {
+                data: 'phoneno',
+                name: 'phoneno'
+                },
+                {
+                data: 'entry_time',
+                name: 'entry_time'
+                },
+                {
+                data: 'memberdetails',
+                name: 'memberdetails'
+                },
+                {
+                data: 'action',
+                name: 'action',
+                orderable: false,
+                searchable: false
+                },
+                ],
+                order: [3,'asc']
                 });
                 $('.visitors').addClass('active');
                 $('.visitors ul').addClass('in');
                 $('.visitors ul li:nth-child(2)').addClass('active');
-            });
-        @elseif(Route::is('staff.visitors.allvisitors'))
-            $(function() {
+                });
+            @elseif(Route::is('staff.visitors.allvisitors'))
+                $(function() {
                 var table = $('#visitorTable').DataTable({
-                    processing: true,
-                    serverSide: true,
-                    ajax: "{{ route('staff.visitors.allvisitors') }}",
-                    columns: [{
-                            data: 'id',
-                            name: 'id'
-                        },
-                        {
-                            data: 'name',
-                            name: 'name'
-                        },
-                        {
-                            data: 'phoneno',
-                            name: 'phoneno'
-                        },
-                        {
-                            data: 'entry_time',
-                            name: 'entry_time'
-                        },
-                        {
-                            data: 'exit_time',
-                            name: 'exit_time'
-                        },
-                        {
-                            data: 'memberdetails',
-                            name: 'memberdetails'
-                        }
-                    ]
+                processing: true,
+                serverSide: true,
+                ajax: "{{ route('staff.visitors.allvisitors') }}",
+                columns: [{
+                data: 'id',
+                name: 'id'
+                },
+                {
+                data: 'name',
+                name: 'name'
+                },
+                {
+                data: 'phoneno',
+                name: 'phoneno'
+                },
+                {
+                data: 'entry_time',
+                name: 'entry_time'
+                },
+                {
+                data: 'exit_time',
+                name: 'exit_time'
+                },
+                {
+                data: 'memberdetails',
+                name: 'memberdetails'
+                }
+                ]
                 });
                 $('.visitors').addClass('active');
                 $('.visitors ul').addClass('in');
                 $('.visitors ul li:nth-child(3)').addClass('active');
-            });
-        @endif
-        @endrole
-        @role('member')
+                });
+            @endif
+            @endrole
+            @role('member')
             $(function() {
                 var table = $('#visitorTable').DataTable({
                     processing: true,
@@ -197,7 +198,7 @@
                 $('.approvevisitor ul').addClass('in');
                 $('.approvevisitor ul li:nth-child(3)').addClass('active');
             });
-        @endrole
+            @endrole
 
-    </script>
+        </script>
     @endpush

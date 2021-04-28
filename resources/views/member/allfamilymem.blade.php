@@ -1,10 +1,10 @@
 @extends('layouts.app')
 @section('title')
-All Family Members
+    All Family Members
 @endsection
 
 @push('css')
-<link href="{{ mix('/css/datatables.min.css') }}" rel="stylesheet">
+    <link href="{{ mix('/css/datatables.min.css') }}" rel="stylesheet">
 @endpush
 
 @section('content')
@@ -21,23 +21,23 @@ All Family Members
     </li>
 @endsection
 
-@if(session()->has('success'))
-<div class="alert alert-success alert-dismissable">
-    <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+@if (session()->has('success'))
+    <div class="alert alert-success alert-dismissable">
+        <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
         <strong>{{ session()->get('success') }}</strong>
     </div>
 @endif
 
-@if(session()->has('error'))
-<div class="alert alert-danger alert-dismissable">
-    <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+@if (session()->has('error'))
+    <div class="alert alert-danger alert-dismissable">
+        <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
         <strong>{{ session()->get('error') }}</strong>
     </div>
 @endif
 
 <div class="wrapper wrapper-content">
     <div class="table-responsive">
-        <table class="table table-striped table-bordered table-hover" id="allfamilymem" >
+        <table class="table table-striped table-bordered table-hover" id="allfamilymem">
             <thead>
                 <tr>
                     <th>No</th>
@@ -61,7 +61,7 @@ All Family Members
                 </tr>
             </tfoot>
         </table>
-</div>
+    </div>
 @endsection
 
 
@@ -69,24 +69,47 @@ All Family Members
     <script src="{{ asset('js/datatables.min.js') }}"></script>
     <script src="{{ asset('js/dataTables.bootstrap4.min.js') }}"></script>
     <script>
-        $(function () {
+        $(function() {
             var table = $('#allfamilymem').DataTable({
                 processing: true,
                 serverSide: true,
                 ajax: "{{ route('member.allfamilymem') }}",
-                columns: [
-                    {data: 'id', name: 'id'},
-                    {data: 'name', name: 'name'},
-                    {data: 'age', name: 'age'},
-                    {data: 'contact_no', name: 'contact_no'},
-                    {data: 'email', name: 'email'},
-                    {data: 'gender', name: 'gender'},
-                    {data: 'action', name: 'action', orderable: false, searchable: false},
+                columns: [{
+                        data: 'id',
+                        name: 'id'
+                    },
+                    {
+                        data: 'name',
+                        name: 'name'
+                    },
+                    {
+                        data: 'age',
+                        name: 'age'
+                    },
+                    {
+                        data: 'contact_no',
+                        name: 'contact_no'
+                    },
+                    {
+                        data: 'email',
+                        name: 'email'
+                    },
+                    {
+                        data: 'gender',
+                        name: 'gender'
+                    },
+                    {
+                        data: 'action',
+                        name: 'action',
+                        orderable: false,
+                        searchable: false
+                    },
                 ]
             });
             $('.familymember').addClass('active');
             $('.familymember ul').addClass('in');
             $('.familymember ul li:nth-child(2)').addClass('active');
         });
+
     </script>
 @endpush

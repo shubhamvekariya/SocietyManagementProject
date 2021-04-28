@@ -19,8 +19,8 @@ Broadcast::channel('App.Models.User.{id}', function ($user, $id) {
     return (int) $user->id === (int) $id;
 });
 $discussion = Discussion::all();
-foreach($discussion as $dis) {
-    Broadcast::channel('chat'.$dis->id, function ($user) {
+foreach ($discussion as $dis) {
+    Broadcast::channel('chat' . $dis->id, function ($user) {
         return $user;
     });
 }

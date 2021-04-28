@@ -3,7 +3,6 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
-use Vonage\Message\Shortcode\Alert;
 use Illuminate\Support\Facades\DB;
 use App\Models\Society;
 use App\Models\User;
@@ -12,23 +11,22 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 use PDF;
 use Exception;
-use Vonage\Numbers\Number;
 
-class DemoCron extends Command
+class SendBill extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'demo:cron';
+    protected $signature = 'send:bill';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Command description';
+    protected $description = 'Send bills to members';
 
     /**
      * Create a new command instance.
@@ -95,10 +93,9 @@ class DemoCron extends Command
                 }
             }
 
-            Log::info('running');
+            Log::info('Bill sent succussfully');
         } catch (Exception $e) {
             Log::info($e);
         }
-        $this->info('Demo:Cron Command Run successfully!');
     }
 }

@@ -110,24 +110,24 @@
             date1 = new Date(d1);
             var d2 = document.getElementById('datetimepicker2').value;
             date2 = new Date(d2);
-            var days = days_between(date1.getTime(),date2.getTime());
+            var days = days_between(date1.getTime(), date2.getTime());
             //alert(days);
 
             //alert(x);
             if (x == "Gym") {
-                var gym=20;
+                var gym = 20;
                 $('#func_details').hide();
-                document.getElementById("charges").value = parseInt(gym*days);
+                document.getElementById("charges").value = parseInt(gym * days);
             } else if (x == "Swimming Pool") {
-                var swi_pool=100;
+                var swi_pool = 100;
                 $('#func_details').hide();
-                document.getElementById("charges").value = parseInt(swi_pool*days);
+                document.getElementById("charges").value = parseInt(swi_pool * days);
             } else if (x == "Event") {
-                var event=1000;
+                var event = 1000;
                 $('#func_details').show();
-                document.getElementById("charges").value = parseInt(event*days);
+                document.getElementById("charges").value = parseInt(event * days);
             } else {
-                document.getElementById("charges").value = parseInt(0*days);
+                document.getElementById("charges").value = parseInt(0 * days);
 
             }
         }

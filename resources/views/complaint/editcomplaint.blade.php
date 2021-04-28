@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title')
-Edit Complaint
+    Edit Complaint
 @endsection
 
 @section('breadcrumb-title')
@@ -18,21 +18,21 @@ Edit Complaint
 @endsection
 
 @section('content')
-<div class="wrapper wrapper-content mt-0">
-    <div class="ibox-content w-75 my-5 p-5 mx-auto border">
-        <form  action="{{route('member.complaints.update',$complaint->id)}}" method="POST">
-            @csrf
-            @method('put')
-            @include('complaint.formcomplaint')
+    <div class="wrapper wrapper-content mt-0">
+        <div class="ibox-content w-75 my-5 p-5 mx-auto border">
+            <form action="{{ route('member.complaints.update', $complaint->id) }}" method="POST">
+                @csrf
+                @method('put')
+                @include('complaint.formcomplaint')
 
-        </form>
+            </form>
+        </div>
     </div>
-</div>
 @endsection
 
 @push('script')
     <script type="text/javascript">
-        $(function () {
+        $(function() {
 
             regdate = {!! str_replace("'", "\'", json_encode($complaint->reg_date)) !!};
             $('#datetimepicker1').datetimepicker({
@@ -44,5 +44,6 @@ Edit Complaint
         });
         complaints = {!! str_replace("'", "\'", json_encode($complaint->category)) !!};
         $('#category').val(complaints).trriger();
+
     </script>
 @endpush

@@ -1,10 +1,10 @@
 @extends('layouts.app')
 @section('title')
-All Expenses
+    All Expenses
 @endsection
 
 @push('css')
-<link href="{{ mix('/css/datatables.min.css') }}" rel="stylesheet">
+    <link href="{{ mix('/css/datatables.min.css') }}" rel="stylesheet">
 @endpush
 
 @section('content')
@@ -21,23 +21,23 @@ All Expenses
     </li>
 @endsection
 
-@if(session()->has('success'))
-<div class="alert alert-success alert-dismissable">
-    <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+@if (session()->has('success'))
+    <div class="alert alert-success alert-dismissable">
+        <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
         <strong>{{ session()->get('success') }}</strong>
     </div>
 @endif
 
-@if(session()->has('error'))
-<div class="alert alert-danger alert-dismissable">
-    <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+@if (session()->has('error'))
+    <div class="alert alert-danger alert-dismissable">
+        <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
         <strong>{{ session()->get('error') }}</strong>
     </div>
 @endif
 
 <div class="wrapper wrapper-content">
     <div class="table-responsive">
-        <table class="table table-striped table-bordered table-hover" id="all_expense" >
+        <table class="table table-striped table-bordered table-hover" id="all_expense">
             <thead>
                 <tr>
                     <th>No</th>
@@ -59,7 +59,7 @@ All Expenses
                 </tr>
             </tfoot>
         </table>
-</div>
+    </div>
 @endsection
 
 
@@ -67,18 +67,37 @@ All Expenses
     <script src="{{ asset('js/datatables.min.js') }}"></script>
     <script src="{{ asset('js/dataTables.bootstrap4.min.js') }}"></script>
     <script>
-        $(function () {
+        $(function() {
             var table = $('#all_expense').DataTable({
                 processing: true,
                 serverSide: true,
                 ajax: "{{ route('member.expenses.index') }}",
-                columns: [
-                    {data: 'id', name: 'id'},
-                    {data: 'title', name: 'title'},
-                    {data: 'description', name: 'description'},
-                    {data: 'date', name: 'date'},
-                    {data: 'money', name: 'money'},
-                    {data: 'action', name: 'action', orderable: false, searchable: false},
+                columns: [{
+                        data: 'id',
+                        name: 'id'
+                    },
+                    {
+                        data: 'title',
+                        name: 'title'
+                    },
+                    {
+                        data: 'description',
+                        name: 'description'
+                    },
+                    {
+                        data: 'date',
+                        name: 'date'
+                    },
+                    {
+                        data: 'money',
+                        name: 'money'
+                    },
+                    {
+                        data: 'action',
+                        name: 'action',
+                        orderable: false,
+                        searchable: false
+                    },
                 ]
             });
             $('.expenses').addClass('active');
@@ -88,4 +107,3 @@ All Expenses
 
     </script>
 @endpush
-

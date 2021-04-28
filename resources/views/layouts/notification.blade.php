@@ -23,33 +23,34 @@ function secondsToWords($seconds)
             <div id="tab" class="tab-pane active">
                 <div class="sidebar-title" style="background-color:#2f4050;color:#a7b1c2;">
                     <h3> <i class="fa fa-comments-o"></i> Latest Notification</h3>
-                    <small><i class="fa fa-tim"></i> You have {{ Auth::user()->unreadNotifications->count() }} new message.</small>
+                    <small><i class="fa fa-tim"></i> You have {{ Auth::user()->unreadNotifications->count() }} new
+                        message.</small>
                 </div>
                 <div>
                     @foreach (Auth::user()->unreadNotifications as $notification)
                         <div class="sidebar-message font-weight-bold">
                             @role('security')
-                                <a href="{{ route('staff.markasread', $notification->id) }}">
+                            <a href="{{ route('staff.markasread', $notification->id) }}">
                             @else
-                            @role('member')
+                                @role('member')
                                 <a href="{{ route('member.markasread', $notification->id) }}">
-                            @else
-                            @role('secretary')
-                                <a href="{{ route('society.markasread', $notification->id) }}">
-                            @endrole
-                            @endrole
-                            @endrole
-                                <div class="media-body">
-                                    {!! $notification->data['data'] !!}
-                                    <br>
-                                    @php
-                                        $created = strtotime($notification['created_at']);
-                                        $seconds = time() - $created;
-                                        $timeinword = secondsToWords($seconds);
-                                    @endphp
-                                    <small class="text-muted">{{ $timeinword }} ago</small>
-                                </div>
-                            </a>
+                                @else
+                                    @role('secretary')
+                                    <a href="{{ route('society.markasread', $notification->id) }}">
+                                        @endrole
+                                        @endrole
+                                        @endrole
+                                        <div class="media-body">
+                                            {!! $notification->data['data'] !!}
+                                            <br>
+                                            @php
+                                                $created = strtotime($notification['created_at']);
+                                                $seconds = time() - $created;
+                                                $timeinword = secondsToWords($seconds);
+                                            @endphp
+                                            <small class="text-muted">{{ $timeinword }} ago</small>
+                                        </div>
+                                    </a>
                         </div>
                     @endforeach
                 </div>

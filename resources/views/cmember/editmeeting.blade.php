@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title')
-Edit Meeting
+    Edit Meeting
 @endsection
 
 @section('breadcrumb-title')
@@ -18,21 +18,21 @@ Edit Meeting
 @endsection
 
 @section('content')
-<div class="wrapper wrapper-content mt-0">
-    <div class="ibox-content w-75 my-5 p-5 mx-auto border">
-        <form  action="{{route('member.meetings.update',$meeting->id)}}" method="POST">
-            @csrf
-            @method('put')
-            @include('cmember.formmeeting')
+    <div class="wrapper wrapper-content mt-0">
+        <div class="ibox-content w-75 my-5 p-5 mx-auto border">
+            <form action="{{ route('member.meetings.update', $meeting->id) }}" method="POST">
+                @csrf
+                @method('put')
+                @include('cmember.formmeeting')
 
-        </form>
+            </form>
+        </div>
     </div>
-</div>
 @endsection
 
 @push('script')
     <script type="text/javascript">
-        $(function () {
+        $(function() {
 
             starttime = {!! str_replace("'", "\'", json_encode($meeting->start_time)) !!};
             endtime = {!! str_replace("'", "\'", json_encode($meeting->end_time)) !!};
@@ -48,5 +48,6 @@ Edit Meeting
         });
         place = {!! str_replace("'", "\'", json_encode($meeting->place)) !!};
         $('#place').val(place).trriger();
+
     </script>
 @endpush

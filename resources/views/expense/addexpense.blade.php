@@ -1,11 +1,11 @@
 @extends('layouts.app')
 
 @section('title')
-Add Expenses
+    Add Expenses
 @endsection
 
 @section('breadcrumb-title')
-Add Expenses
+    Add Expenses
 @endsection
 
 @section('breadcrumb-item')
@@ -18,24 +18,25 @@ Add Expenses
 @endsection
 
 @section('content')
-<div class="wrapper wrapper-content mt-0">
-<div class="ibox-content w-75 my-5 p-5 mx-auto border">
-    <form  action="{{route('member.expenses.store')}}" method="POST">
-        @csrf
-        @include('expense.formexpense')
-    </form>
-</div>
-</div>
+    <div class="wrapper wrapper-content mt-0">
+        <div class="ibox-content w-75 my-5 p-5 mx-auto border">
+            <form action="{{ route('member.expenses.store') }}" method="POST">
+                @csrf
+                @include('expense.formexpense')
+            </form>
+        </div>
+    </div>
 @endsection
 
 
 @push('script')
     <script type="text/javascript">
-        $(function () {
+        $(function() {
             $('#datetimepicker1').datetimepicker();
             $('.expenses').addClass('active');
             $('.expenses ul').addClass('in');
             $('.expenses ul li:nth-child(1)').addClass('active');
         });
+
     </script>
 @endpush

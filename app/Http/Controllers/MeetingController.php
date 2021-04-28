@@ -87,8 +87,6 @@ class MeetingController extends Controller
      */
     public function update(Request $request, Meeting $meeting)
     {
-
-        //$meeting->update($request->all());
         $status = $this->meetingInterface->updateMeeting($request, $meeting);
         if ($status) {
             return redirect()->route('member.meetings.index')->with('success', 'Meeting Edited successfully');
@@ -106,7 +104,6 @@ class MeetingController extends Controller
     public function destroy(Meeting $meeting)
     {
 
-        //$meeting->delete();
         $status = $this->meetingInterface->deleteMeeting($meeting);
         if ($status) {
             return redirect()->back()->with('success', 'Meeting Deleted successfully');

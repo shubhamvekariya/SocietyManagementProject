@@ -1,10 +1,10 @@
 @extends('layouts.app')
 @section('title')
-All Services
+    All Services
 @endsection
 
 @push('css')
-<link href="{{ mix('/css/datatables.min.css') }}" rel="stylesheet">
+    <link href="{{ mix('/css/datatables.min.css') }}" rel="stylesheet">
 @endpush
 
 @section('content')
@@ -16,7 +16,7 @@ All Services
     <li class="breadcrumb-item">
         @role('member')
         <a href="{{ route('member.home') }}">Home</a>
-        @else
+    @else
         <a href="{{ route('society.home') }}">Home</a>
         @endrole
     </li>
@@ -25,23 +25,23 @@ All Services
     </li>
 @endsection
 
-@if(session()->has('success'))
-<div class="alert alert-success alert-dismissable">
-    <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+@if (session()->has('success'))
+    <div class="alert alert-success alert-dismissable">
+        <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
         <strong>{{ session()->get('success') }}</strong>
     </div>
 @endif
 
-@if(session()->has('error'))
-<div class="alert alert-danger alert-dismissable">
-    <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+@if (session()->has('error'))
+    <div class="alert alert-danger alert-dismissable">
+        <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
         <strong>{{ session()->get('error') }}</strong>
     </div>
 @endif
 
 <div class="wrapper wrapper-content">
     <div class="table-responsive">
-        <table class="table table-striped table-bordered table-hover" id="all_service" >
+        <table class="table table-striped table-bordered table-hover" id="all_service">
             <thead>
                 <tr>
                     <th>No</th>
@@ -67,7 +67,7 @@ All Services
                 </tr>
             </tfoot>
         </table>
-</div>
+    </div>
 @endsection
 
 
@@ -78,44 +78,54 @@ All Services
         @role('secretary')
         @if (Route::is('society.services.index'))
             $(function () {
-                var table = $('#all_service').DataTable({
-                    processing: true,
-                    serverSide: true,
-                    ajax: "{{ route('society.services.index') }}",
-                    columns: [
-                        {data: 'id', name: 'id'},
-                        {data: 'name', name: 'name'},
-                        {data: 'position', name: 'position'},
-                        {data: 'mobile_no', name: 'mobile_no'},
-                        {data: 'action', name: 'action', orderable: false, searchable: false},
-                    ]
-                });
-                $('.service').addClass('active');
-                $('.service ul').addClass('in');
-                $('.service ul li:nth-child(2)').addClass('active');
+            var table = $('#all_service').DataTable({
+            processing: true,
+            serverSide: true,
+            ajax: "{{ route('society.services.index') }}",
+            columns: [
+            {data: 'id', name: 'id'},
+            {data: 'name', name: 'name'},
+            {data: 'position', name: 'position'},
+            {data: 'mobile_no', name: 'mobile_no'},
+            {data: 'action', name: 'action', orderable: false, searchable: false},
+            ]
+            });
+            $('.service').addClass('active');
+            $('.service ul').addClass('in');
+            $('.service ul li:nth-child(2)').addClass('active');
             });
         @endif
         @endrole
 
         @role('member')
-            $(function () {
-                var table = $('#all_service').DataTable({
-                    processing: true,
-                    serverSide: true,
-                    ajax: "{{ route('member.services.allservice') }}",
-                    columns: [
-                        {data: 'id', name: 'id'},
-                        {data: 'name', name: 'name'},
-                        {data: 'position', name: 'position'},
-                        {data: 'mobile_no', name: 'mobile_no'},
-                    ]
-                });
-                $('.servicemember').addClass('active');
-                $('.servicemember ul').addClass('in');
-                $('.servicemember ul li:nth-child(1)').addClass('active');
+        $(function() {
+            var table = $('#all_service').DataTable({
+                processing: true,
+                serverSide: true,
+                ajax: "{{ route('member.services.allservice') }}",
+                columns: [{
+                        data: 'id',
+                        name: 'id'
+                    },
+                    {
+                        data: 'name',
+                        name: 'name'
+                    },
+                    {
+                        data: 'position',
+                        name: 'position'
+                    },
+                    {
+                        data: 'mobile_no',
+                        name: 'mobile_no'
+                    },
+                ]
             });
+            $('.servicemember').addClass('active');
+            $('.servicemember ul').addClass('in');
+            $('.servicemember ul li:nth-child(1)').addClass('active');
+        });
         @endrole
 
     </script>
 @endpush
-

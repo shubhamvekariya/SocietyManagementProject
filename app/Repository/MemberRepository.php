@@ -13,7 +13,7 @@ use Illuminate\Support\Str;
 
 
 /**
- * Class UserRepository
+ * Class MemberRepository
  * @package app\Repository
  */
 class MemberRepository implements MemberInterface

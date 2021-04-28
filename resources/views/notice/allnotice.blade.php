@@ -104,5 +104,6 @@
             $('.notice ul').addClass('in');
             $('.notice ul li:nth-child(2)').addClass('active');
         });
+
     </script>
 @endpush

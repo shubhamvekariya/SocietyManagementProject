@@ -23,13 +23,13 @@ class ApproveRepository implements ApproveInterface
     public function approval()
     {
         $options = array(
-            'cluster' => 'ap2',
+            'cluster' => env('PUSHER_APP_CLUSTER'),
             'encrypted' => true
         );
         $pusher = new Pusher(
-            '6b723375502146131d40',
-            '958aa14555a4cafd0847',
-            '1164693',
+            env('PUSHER_APP_KEY'),
+            env('PUSHER_APP_SECRET'),
+            env('PUSHER_APP_ID'),
             $options
         );
         $member = Auth::user();
@@ -37,7 +37,7 @@ class ApproveRepository implements ApproveInterface
         $data['approvelink'] = route('society.approvemember', $member->id);
         $data['rejectlink'] = route('society.rejectmember', $member->id);
         $details = [
-            'body' => 'Member '.$member->name.' need to approve!<br><form class="text-center" action="'.route('society.needapprove').'" method="GET"><button type="submit" class="btn btn-primary mb-0">Approve</button></form>',
+            'body' => 'Member ' . $member->name . ' need to approve!<br><form class="text-center" action="' . route('society.needapprove') . '" method="GET"><button type="submit" class="btn btn-primary mb-0">Approve</button></form>',
         ];
         $member->apartment->society->notify(new \App\Notifications\Approve($details));
         $pusher->trigger('approve-channel-' . $member->apartment->society->id, 'approve-event', $data);
@@ -83,11 +83,11 @@ class ApproveRepository implements ApproveInterface
         $visitor = Visitor::findOrFail($visitor_id);
         $visitor->approved_at = now();
         $society_id = Auth::user()->apartment->society_id;
-        $users = Staff::where('society_id',$society_id)->get();
+        $users = Staff::where('society_id', $society_id)->get();
         $details = [
-                'body' => 'Visitor '.$visitor->name.' approved',
+            'body' => 'Visitor ' . $visitor->name . ' approved',
         ];
-        foreach($users as $user)
+        foreach ($users as $user)
             $user->notify(new \App\Notifications\Approve($details));
         $visitor->save();
         if ($visitor->wasChanged())

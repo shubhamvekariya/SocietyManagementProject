@@ -12,7 +12,7 @@
                         </span>
                         <span class="text-muted text-xs block text-uppercase">
                             @if (Auth::guard('society')->check())
-                                {{ Auth::guard('society')->user()->secretary_name }}
+                                {{ Auth::guard( 'society')->user()->secretary_name }}
                             @endif
                             @if (Auth::check())
                                 {{ Auth::user()->name }}
@@ -22,10 +22,10 @@
                     </a>
                     <ul class="dropdown-menu animated fadeInRight m-t-xs">
                         @role('secretary','society')
-                            <li><a class="dropdown-item" href="{{route('society.edit')}}">Edit Profile</a></li>
+                        <li><a class="dropdown-item" href="{{ route('society.edit') }}">Edit Profile</a></li>
                         @endrole
                         @role('member')
-                            <li><a class="dropdown-item" href="{{route('member.edit')}}">Edit Profile</a></li>
+                        <li><a class="dropdown-item" href="{{ route('member.edit') }}">Edit Profile</a></li>
                         @endrole
                         <li class="dropdown-divider"></li>
                         <li><a class="dropdown-item" href="{{ route('logout') }}">Logout</a></li>
@@ -36,7 +36,7 @@
                 </div>
             </li>
             <li class="dashboard">
-                <a  href="
+                <a href="
                 @role('secretary','society')
                     {{ route('society.home') }}
                 @endrole
@@ -51,7 +51,7 @@
                 @endrole
                 "><i class="fa fa-home"></i> <span class="nav-label">Dashboard</span></a>
             </li>
-        @role('secretary','society')
+            @role('secretary','society')
             <li class="approvemember">
                 <a href="#"><i class="fa fa-users"></i><span class="nav-label">Member</span><span
                         class="fa arrow"></span></a>
@@ -82,7 +82,7 @@
             </li>
 
         @else
-        @role('member')
+            @role('member')
             <li class="familymember">
                 <a href="#"><i class="fa fa-users"></i><span class="nav-label">Family Member</span><span
                         class="fa arrow"></span></a>
@@ -109,17 +109,19 @@
                 </ul>
             </li>
             <li class="assets">
-                <a href="#"><i class="fa fa-calendar"></i><span class="nav-label">Event/Assets</span><span class="fa arrow"></span></a>
+                <a href="#"><i class="fa fa-calendar"></i><span class="nav-label">Event/Assets</span><span
+                        class="fa arrow"></span></a>
                 <ul class="nav nav-second-level collapse">
-                    <li><a href="{{route('member.assets.create')}}">Book Assets</a></li>
-                    <li><a href="{{route('member.assets.index')}}">View Assets</a></li>
+                    <li><a href="{{ route('member.assets.create') }}">Book Assets</a></li>
+                    <li><a href="{{ route('member.assets.index') }}">View Assets</a></li>
                 </ul>
             </li>
             <li class="complaints">
-                <a href="#"><i class="fa fa-book"></i><span class="nav-label">Complaints</span><span class="fa arrow"></span></a>
+                <a href="#"><i class="fa fa-book"></i><span class="nav-label">Complaints</span><span
+                        class="fa arrow"></span></a>
                 <ul class="nav nav-second-level collapse">
-                    <li><a href="{{route('member.complaints.create')}}">Register Complaints</a></li>
-                    <li><a href="{{route('member.complaints.index')}}">All Complaints</a></li>
+                    <li><a href="{{ route('member.complaints.create') }}">Register Complaints</a></li>
+                    <li><a href="{{ route('member.complaints.index') }}">All Complaints</a></li>
                 </ul>
             </li>
 
@@ -141,44 +143,50 @@
 
             @role('committeemember')
 
-                <li class="meeting">
-                    <a href="#"><i class="fa fa-user-circle-o"></i><span class="nav-label">Meeting</span><span class="fa arrow"></span></a>
-                    <ul class="nav nav-second-level collapse">
-                        <li><a href="{{route('member.meetings.create')}}">Add Meeting</a></li>
-                        <li><a href="{{route('member.meetings.index')}}">Manage Meeting</a></li>
+            <li class="meeting">
+                <a href="#"><i class="fa fa-user-circle-o"></i><span class="nav-label">Meeting</span><span
+                        class="fa arrow"></span></a>
+                <ul class="nav nav-second-level collapse">
+                    <li><a href="{{ route('member.meetings.create') }}">Add Meeting</a></li>
+                    <li><a href="{{ route('member.meetings.index') }}">Manage Meeting</a></li>
 
-                    </ul>
-                </li>
-                <li class="notice">
-                    <a href="#"><i class="fa fa-sticky-note"></i><span class="nav-label">Notice</span><span class="fa arrow"></span></a>
-                    <ul class="nav nav-second-level collapse">
-                        <li><a href="{{route('member.notices.create')}}">Add Notice</a></li>
-                        <li><a href="{{route('member.notices.index')}}">All Notice</a></li>
+                </ul>
+            </li>
+            <li class="notice">
+                <a href="#"><i class="fa fa-sticky-note"></i><span class="nav-label">Notice</span><span
+                        class="fa arrow"></span></a>
+                <ul class="nav nav-second-level collapse">
+                    <li><a href="{{ route('member.notices.create') }}">Add Notice</a></li>
+                    <li><a href="{{ route('member.notices.index') }}">All Notice</a></li>
 
-                    </ul>
-                </li>
+                </ul>
+            </li>
 
-                <li class="expenses">
-                    <a href="#"><i class="fa  fa-table"></i><span class="nav-label">Expenses</span><span class="fa arrow"></span></a>
-                    <ul class="nav nav-second-level collapse">
-                        <li><a href="{{route('member.expenses.create')}}">Add Expenses</a></li>
-                        <li><a href="{{route('member.expenses.index')}}">Manage Expenses</a></li>
+            <li class="expenses">
+                <a href="#"><i class="fa  fa-table"></i><span class="nav-label">Expenses</span><span
+                        class="fa arrow"></span></a>
+                <ul class="nav nav-second-level collapse">
+                    <li><a href="{{ route('member.expenses.create') }}">Add Expenses</a></li>
+                    <li><a href="{{ route('member.expenses.index') }}">Manage Expenses</a></li>
 
-                    </ul>
-                </li>
+                </ul>
+            </li>
             @endrole
             <li class="discussion">
-                <a href="{{ route('member.discussion.index') }}"><i class="fa fa-comments"></i><span class="nav-label">Discussion</span></a>
+                <a href="{{ route('member.discussion.index') }}"><i class="fa fa-comments"></i><span
+                        class="nav-label">Discussion</span></a>
             </li>
             <li class="emergency">
-                <a href="{{ route('member.send_emergency') }}"><i class="fa fa-fire-extinguisher"></i><span class="nav-label">Emergency Button</span></a>
+                <a href="{{ route('member.send_emergency') }}"><i class="fa fa-fire-extinguisher"></i><span
+                        class="nav-label">Emergency Button</span></a>
             </li>
             <li class="push">
-                <a href="#" onclick="initFirebaseMessagingRegistration()"><i class="fa fa-fire-extinguisher"></i><span class="nav-label">Allow push notification</span></a>
+                <a href="#" onclick="initFirebaseMessagingRegistration()"><i class="fa fa-fire-extinguisher"></i><span
+                        class="nav-label">Allow push notification</span></a>
             </li>
         @else
 
-        @role('security')
+            @role('security')
             <li class="visitors">
                 <a href="#"><i class="fa fa-eye"></i><span class="nav-label">Visitors</span><span
                         class="fa arrow"></span></a>
@@ -196,27 +204,32 @@
                 </ul>
             </li>
             <li class="staffentry">
-                <a href="{{ route('staff.allstaffs') }}"><i class="fa fa-eye"></i><span class="nav-label">Staff</span></a>
+                <a href="{{ route('staff.allstaffs') }}"><i class="fa fa-eye"></i><span
+                        class="nav-label">Staff</span></a>
             </li>
             <li class="attendance">
-                <a href="{{ route('staff.attendance') }}"><i class="fa fa-eye"></i><span class="nav-label">Attendance</span></a>
+                <a href="{{ route('staff.attendance') }}"><i class="fa fa-eye"></i><span
+                        class="nav-label">Attendance</span></a>
             </li>
             <li class="salary">
-                <a href="{{ route('staff.showSalary') }}"><i class="fa fa-eye"></i><span class="nav-label">Salary</span></a>
+                <a href="{{ route('staff.showSalary') }}"><i class="fa fa-eye"></i><span
+                        class="nav-label">Salary</span></a>
             </li>
         @else
-        @role('staff')
+            @role('staff')
             <li class="attendance">
-                <a href="{{ route('staff.attendance') }}"><i class="fa fa-eye"></i><span class="nav-label">Attendance</span></a>
+                <a href="{{ route('staff.attendance') }}"><i class="fa fa-eye"></i><span
+                        class="nav-label">Attendance</span></a>
             </li>
 
             <li class="salary">
-                <a href="{{ route('staff.showSalary') }}"><i class="fa fa-eye"></i><span class="nav-label">Salary</span></a>
+                <a href="{{ route('staff.showSalary') }}"><i class="fa fa-eye"></i><span
+                        class="nav-label">Salary</span></a>
             </li>
-        @endrole
-        @endrole
-        @endrole
-        @endrole
+            @endrole
+            @endrole
+            @endrole
+            @endrole
         </ul>
     </div>
 </nav>

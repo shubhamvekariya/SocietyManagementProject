@@ -1,11 +1,11 @@
 @extends('layouts.app')
 
 @section('title')
-Add Complaint
+    Add Complaint
 @endsection
 
 @section('breadcrumb-title')
-Add Complaint
+    Add Complaint
 @endsection
 
 @section('breadcrumb-item')
@@ -18,25 +18,26 @@ Add Complaint
 @endsection
 
 @section('content')
-<div class="wrapper wrapper-content mt-0">
-    <div class="ibox-content w-75 my-5 p-5 mx-auto border">
-        <form  action="{{route('member.complaints.store')}}" method="POST">
-            @csrf
-            @include('complaint.formcomplaint')
+    <div class="wrapper wrapper-content mt-0">
+        <div class="ibox-content w-75 my-5 p-5 mx-auto border">
+            <form action="{{ route('member.complaints.store') }}" method="POST">
+                @csrf
+                @include('complaint.formcomplaint')
 
-        </form>
+            </form>
+        </div>
     </div>
-</div>
 @endsection
 
 
 @push('script')
     <script type="text/javascript">
-        $(function () {
+        $(function() {
             $('#datetimepicker1').datetimepicker();
             $('.complaints').addClass('active');
             $('.complaints ul').addClass('in');
             $('.complaints ul li:nth-child(1)').addClass('active');
         });
+
     </script>
 @endpush

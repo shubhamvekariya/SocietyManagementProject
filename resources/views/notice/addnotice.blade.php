@@ -1,11 +1,11 @@
 @extends('layouts.app')
 
 @section('title')
-Add Notice
+    Add Notice
 @endsection
 
 @section('breadcrumb-title')
-Add Notice
+    Add Notice
 @endsection
 
 @section('breadcrumb-item')
@@ -18,15 +18,15 @@ Add Notice
 @endsection
 
 @section('content')
-<div class="wrapper wrapper-content mt-0">
-<div class="ibox-content w-75 my-5 p-5 mx-auto border">
-    <form  action="{{route('member.notices.store')}}" method="POST">
-        @csrf
-        @include('notice.formnotice')
+    <div class="wrapper wrapper-content mt-0">
+        <div class="ibox-content w-75 my-5 p-5 mx-auto border">
+            <form action="{{ route('member.notices.store') }}" method="POST">
+                @csrf
+                @include('notice.formnotice')
 
-    </form>
-</div>
-</div>
+            </form>
+        </div>
+    </div>
 @endsection
 
 
@@ -37,5 +37,6 @@ Add Notice
             $('.notice ul').addClass('in');
             $('.notice ul li:nth-child(1)').addClass('active');
         });
+
     </script>
 @endpush

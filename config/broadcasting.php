@@ -31,10 +31,10 @@ return [
     'connections' => [
 
         'pusher' => [
-            'driver' => 'pusher',
-            'key' => '6b723375502146131d40',
-            'secret' => '958aa14555a4cafd0847',
-            'app_id' => '1164693',
+            'driver' => env('BROADCAST_DRIVER'),
+            'key' => env('PUSHER_APP_KEY'),
+            'secret' => env('PUSHER_APP_SECRET'),
+            'app_id' => env('PUSHER_APP_ID'),
             'options' => [
                 'cluster' => env('PUSHER_APP_CLUSTER'),
                 'encrypted' => true,

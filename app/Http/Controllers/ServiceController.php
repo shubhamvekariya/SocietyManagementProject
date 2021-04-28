@@ -48,9 +48,9 @@ class ServiceController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-           'name' => 'required',
-           'position' => 'required',
-           'mobile_no' => 'required'
+            'name' => 'required',
+            'position' => 'required',
+            'mobile_no' => 'required'
         ]);
         $status = $this->serviceInterface->addService($request);
         if ($status) {
@@ -95,7 +95,7 @@ class ServiceController extends Controller
             'name' => 'required',
             'position' => 'required',
             'mobile_no' => 'required'
-         ]);
+        ]);
         $status = $this->serviceInterface->updateService($request, $service);
         if ($status) {
             return redirect()->route('society.services.index')->with('success', 'Service Edited successfully');

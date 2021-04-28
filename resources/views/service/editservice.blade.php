@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title')
-Edit Services
+    Edit Services
 @endsection
 
 @section('breadcrumb-title')
@@ -18,16 +18,16 @@ Edit Services
 @endsection
 
 @section('content')
-<div class="wrapper wrapper-content mt-0">
-    <div class="ibox-content w-75 my-5 p-5 mx-auto border">
-        <form  action="{{route('society.services.update',$service->id)}}" method="POST">
-            @csrf
-            @method('put')
-            @include('service.formservice')
+    <div class="wrapper wrapper-content mt-0">
+        <div class="ibox-content w-75 my-5 p-5 mx-auto border">
+            <form action="{{ route('society.services.update', $service->id) }}" method="POST">
+                @csrf
+                @method('put')
+                @include('service.formservice')
 
-        </form>
+            </form>
+        </div>
     </div>
-</div>
 @endsection
 
 @push('script')
@@ -37,5 +37,6 @@ Edit Services
             $('.service ul').addClass('in');
             $('.service ul li:nth-child(2)').addClass('active');
         });
+
     </script>
 @endpush

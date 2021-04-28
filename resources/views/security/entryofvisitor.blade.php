@@ -3,7 +3,7 @@
 @section('title')
     @role('member')
     Pre-approve visitor
-    @else
+@else
     Make entry of visitor
     @endrole
 @endsection
@@ -11,7 +11,7 @@
 @section('breadcrumb-title')
     @role('member')
     Pre-approve visitor
-    @else
+@else
     Make entry of visitor
     @endrole
 @endsection
@@ -19,18 +19,18 @@
 @section('breadcrumb-item')
     <li class="breadcrumb-item">
         <a href="
-        @role('member')
-        {{ route('member.home') }}
+            @role('member')
+            {{ route('member.home') }}
         @else
-        {{ route('staff.home') }}
-        @endrole
-        ">Home</a>
+            {{ route('staff.home') }}
+            @endrole
+            ">Home</a>
     </li>
     <li class="breadcrumb-item active">
         <strong>
             @role('member')
             Pre-approve visitor
-            @else
+        @else
             Make entry of visitor
             @endrole
         </strong>
@@ -53,14 +53,14 @@
     <div class="wrapper wrapper-content mt-0">
         <div class="ibox-content w-75 my-5 mx-auto border py-5">
             @role('security')
-                <form action="{{ route('staff.visitors.store') }}" method="post">
-            @endrole
-            @role('member')
+            <form action="{{ route('staff.visitors.store') }}" method="post">
+                @endrole
+                @role('member')
                 <form action="{{ route('member.preregistervisitor') }}" method="post">
-            @endrole
-                @csrf
-                @include('security.formvisitor')
-            </form>
+                    @endrole
+                    @csrf
+                    @include('security.formvisitor')
+                </form>
         </div>
     </div>
 @endsection
@@ -84,17 +84,18 @@
             });
         });
         @role('member')
-            $(function() {
-                $('.approvevisitor').addClass('active');
-                $('.approvevisitor ul').addClass('in');
-                $('.approvevisitor ul li:nth-child(2)').addClass('active');
-            });
-        @else
-            $(function() {
-                $('.visitors').addClass('active');
-                $('.visitors ul').addClass('in');
-                $('.visitors ul li:nth-child(1)').addClass('active');
-            });
+        $(function() {
+            $('.approvevisitor').addClass('active');
+            $('.approvevisitor ul').addClass('in');
+            $('.approvevisitor ul li:nth-child(2)').addClass('active');
+        });
+    @else
+        $(function() {
+            $('.visitors').addClass('active');
+            $('.visitors ul').addClass('in');
+            $('.visitors ul li:nth-child(1)').addClass('active');
+        });
         @endrole
+
     </script>
 @endpush

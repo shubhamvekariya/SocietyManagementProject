@@ -22,14 +22,14 @@
             <strong>Error!</strong>
             <ul class="text-left">
                 @foreach ($errors->all() as $error)
-                    <li>{{$error}}</li>
+                    <li>{{ $error }}</li>
                 @endforeach
             </ul>
         </div>
     @endif
-    @if(session()->has('success'))
+    @if (session()->has('success'))
         <div class="alert alert-success alert-dismissable">
-        <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+            <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
             <strong>{{ session()->get('success') }}</strong>
         </div>
     @endif
@@ -61,14 +61,15 @@
 
                         <h3>General subjects</h3>
                     </div>
-                    @foreach ($discussion  as $diss)
+                    @foreach ($discussion as $diss)
                         <div class="forum-item">
                             <div class="row">
                                 <div class="col-md-9">
                                     <div class="forum-icon">
                                         <i class="fa fa-shield"></i>
                                     </div>
-                                    <a href="{{ route('member.discussion.chats',$diss->id) }}" class="forum-item-title">{{ $diss->title }}</a>
+                                    <a href="{{ route('member.discussion.chats', $diss->id) }}"
+                                        class="forum-item-title">{{ $diss->title }}</a>
                                     <div class="forum-sub-title">{{ $diss->description }}</div>
                                 </div>
                                 <div class="col-md-1 offset-md-2 forum-info">
@@ -102,9 +103,9 @@
                     <h4 class="modal-title">Add Discussion Topic</h4>
 
                 </div>
-                <form action="{{route('member.discussion.store')}}" method="POST">
+                <form action="{{ route('member.discussion.store') }}" method="POST">
                     @csrf
-                <div class="modal-body">
+                    <div class="modal-body">
                         <div class="form-group row">
                             <label class="font-normal col-sm-4 col-form-label">Title:</label>
                             <div class="col-sm-8">
@@ -138,5 +139,6 @@
         $(function() {
             $('.discussion').addClass('active');
         });
+
     </script>
 @endpush

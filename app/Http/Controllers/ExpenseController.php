@@ -6,8 +6,6 @@ namespace App\Http\Controllers;
 use App\Models\Expense;
 use App\Interfaces\ExpenseInterface;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 use App\Http\Requests\ExpenseValidation;
 
 class ExpenseController extends Controller
@@ -52,15 +50,10 @@ class ExpenseController extends Controller
     public function store(ExpenseValidation $request)
     {
         $status = $this->expenseInterface->addExpense($request);
-        if($status)
-        {
-        return redirect()->route('member.expenses.index')->with('success','Expense Added successfully');
-        //echo "<script>alert('done');</script>";
-
-        }
-        else
-        {
-            return redirect()->back()->with('error','Something went wrong');
+        if ($status) {
+            return redirect()->route('member.expenses.index')->with('success', 'Expense Added successfully');
+        } else {
+            return redirect()->back()->with('error', 'Something went wrong');
         }
     }
 
@@ -113,20 +106,11 @@ class ExpenseController extends Controller
     public function destroy(Expense $expense)
     {
         $status = $this->expenseInterface->deleteExpense($expense);
-        if($status)
-        {
-        return redirect()->back()->with('success','Expense Deleted successfully');
-        }
-        else
-        {
-            return redirect()->back()->with('error','Something went wrong');
+        if ($status) {
+            return redirect()->back()->with('success', 'Expense Deleted successfully');
+        } else {
+            return redirect()->back()->with('error', 'Something went wrong');
         }
     }
-
-    // public function cal_sum(Expense $expense)
-    // {
-    //     $sum = DB::table('expenses')->sum('money');
-    //     return $sum;
-    // }
 
 }

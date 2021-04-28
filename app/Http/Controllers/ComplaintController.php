@@ -25,8 +25,7 @@ class ComplaintController extends Controller
     }
     public function index(Request $request)
     {
-        if($request->ajax())
-        {
+        if ($request->ajax()) {
             return $this->complaintInterface->showComplaint($request);
         }
         return view('complaint.allcomplaint');
@@ -51,30 +50,21 @@ class ComplaintController extends Controller
     public function store(ComplaintValidation $request)
     {
         $status = $this->complaintInterface->addComplaint($request);
-        if($status)
-        {
+        if ($status) {
             $apartments = Auth::user()->apartment->society->apartment;
             $details = [
                 'body' => 'Complaint Registered',
             ];
-            foreach($apartments as $apartment)
-            {
+            foreach ($apartments as $apartment) {
                 $user = $apartment->user;
-                //dd($user);
-                if($user->hasRole('committeemember'))
-                {
+                if ($user->hasRole('committeemember')) {
                     $user->notify(new \App\Notifications\Approve($details));
                 }
             }
-        return redirect()->route('member.complaints.index')->with('success','Complaint Added successfully');
+            return redirect()->route('member.complaints.index')->with('success', 'Complaint Added successfully');
+        } else {
+            return redirect()->back()->with('error', 'Something went wrong');
         }
-        else
-        {
-            return redirect()->back()->with('error','Something went wrong');
-        }
-
-
-        //echo "<script>alert('done');</script>";
 
     }
 
@@ -97,7 +87,7 @@ class ComplaintController extends Controller
      */
     public function edit(Complaint $complaint)
     {
-        return view('complaint.editcomplaint',compact('complaint'));
+        return view('complaint.editcomplaint', compact('complaint'));
     }
 
     /**
@@ -107,16 +97,13 @@ class ComplaintController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request,Complaint $complaint)
+    public function update(Request $request, Complaint $complaint)
     {
-        $status = $this->complaintInterface->updateComplaint($request,$complaint);
-        if($status)
-        {
-            return redirect()->route('member.complaints.index')->with('success','Complaint Edited successfully');
-        }
-        else
-        {
-            return redirect()->back()->with('error','Something went wrong');
+        $status = $this->complaintInterface->updateComplaint($request, $complaint);
+        if ($status) {
+            return redirect()->route('member.complaints.index')->with('success', 'Complaint Edited successfully');
+        } else {
+            return redirect()->back()->with('error', 'Something went wrong');
         }
     }
 
@@ -129,41 +116,24 @@ class ComplaintController extends Controller
     public function destroy(Complaint $complaint)
     {
         $status = $this->complaintInterface->deleteComplaint($complaint);
-        if($status)
-        {
-        return redirect()->back()->with('success','Complaint Deleted successfully');
-        }
-        else
-        {
-            return redirect()->back()->with('error','Something went wrong');
+        if ($status) {
+            return redirect()->back()->with('success', 'Complaint Deleted successfully');
+        } else {
+            return redirect()->back()->with('error', 'Something went wrong');
         }
     }
-    public function resolve(Request $request,Complaint $complaint)
+    public function resolve(Request $request, Complaint $complaint)
     {
-        $status = $this->complaintInterface->resolveComplaint($request,$complaint);
-        if($status)
-        {
+        $status = $this->complaintInterface->resolveComplaint($request, $complaint);
+        if ($status) {
             $details = [
                 'body' => 'Complaint Resolved',
             ];
             $complaint->user->notify(new \App\Notifications\Approve($details));
-            return redirect()->back()->with('success','Complaint Resolved successfully');
+            return redirect()->back()->with('success', 'Complaint Resolved successfully');
+        } else {
+            return redirect()->back()->with('error', 'Something went wrong');
         }
-        else
-        {
-            return redirect()->back()->with('error','Something went wrong');
-        }
-
     }
 
-    /*public function resolveComplaintList(Request $request)
-    {
-
-        if($request->ajax())
-        {
-            return $this->complaintInterface->resolveComplaintList($request);
-        }
-        return view('complaint.allcomplaint');
-
-    }*/
 }
