@@ -5,5 +5,7 @@
 /resources/fonts
 /resources/img
 /resources/js
-/.env
-/composer.lock
+.env
+public/.htaccess
+storage
+composer.lock
