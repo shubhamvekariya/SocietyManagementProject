@@ -18,12 +18,12 @@ use Illuminate\Support\Facades\Broadcast;
 Broadcast::channel('App.Models.User.{id}', function ($user, $id) {
     return (int) $user->id === (int) $id;
 });
-$discussion = Discussion::all();
-foreach ($discussion as $dis) {
-    Broadcast::channel('chat' . $dis->id, function ($user) {
-        return $user;
-    });
-}
+// $discussion = Discussion::all();
+// foreach ($discussion as $dis) {
+//     Broadcast::channel('chat' . $dis->id, function ($user) {
+//         return $user;
+//     });
+// }
 Broadcast::channel('user.{userId}', function ($user, $userId) {
     $user = User::find($userId);
     return $user->id == $user->user_id;
