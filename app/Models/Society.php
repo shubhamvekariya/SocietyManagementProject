@@ -55,4 +55,8 @@ class Society extends Authenticatable
     {
         return $this->hasMany(Discussion::class);
     }
+    public function virtualSession()
+    {
+        return $this->hasMany(VirtualSession::class);
+    }
 }

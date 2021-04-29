@@ -80,6 +80,10 @@
                     <li><a href="{{ route('society.services.index') }}">All Services</a></li>
                 </ul>
             </li>
+            <li class="session">
+                <a href="{{ route('society.sessions') }}"><i class="fa fa-video-camera"></i><span
+                        class="nav-label">Sessions</span></a>
+            </li>
 
         @else
             @role('member')
@@ -175,6 +179,10 @@
             <li class="discussion">
                 <a href="{{ route('member.discussion.index') }}"><i class="fa fa-comments"></i><span
                         class="nav-label">Discussion</span></a>
+            </li>
+            <li class="session">
+                <a href="{{ route('member.sessions') }}"><i class="fa fa-video-camera"></i><span
+                        class="nav-label">Sessions</span></a>
             </li>
             <li class="emergency">
                 <a href="{{ route('member.send_emergency') }}"><i class="fa fa-fire-extinguisher"></i><span

@@ -19,6 +19,7 @@ use App\Http\Controllers\PDFController;
 use App\Http\Controllers\EmergencyController;
 use App\Http\Controllers\StripePaymentController;
 use App\Http\Controllers\ContactusController;
+use App\Http\Controllers\SessionsController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Request;
@@ -88,6 +89,10 @@ Route::group(['middleware' => ['auth:society', 'role:secretary,society']], funct
 
     Route::resource('meetings', MeetingController::class, ['as' => 'society']);
     Route::resource('notices', NoticeController::class, ['as' => 'society']);
+
+    Route::get("/societysessions", [SessionsController::class, 'sessions'])->name('society.sessions');
+    Route::post("/create_session", [SessionsController::class, 'createSession'])->name('society.createSession');
+    Route::get("/societysessionroom/{id}", [SessionsController::class, 'showSessionRoom'])->where('id', '[0-9]+')->name('society.sessionroom');
 });
 
 Route::group(['middleware' => ['auth', 'role:member']], function () {
@@ -143,6 +148,9 @@ Route::group(['middleware' => ['auth', 'role:member']], function () {
         Route::post('/messages/{discussion}', [ChatsController::class, 'sendMessage'])->name('member.discussion.messages');;
 
         Route::get('/member/send_emergency', [EmergencyController::class, 'send_emergency'])->name('member.send_emergency');
+
+        Route::get("/membersessions", [SessionsController::class, 'sessions'])->name('member.sessions');
+        Route::get("/membersessionroom/{id}", [SessionsController::class, 'showSessionRoom'])->where('id', '[0-9]+')->name('member.sessionroom');
 
         Route::middleware(['role:committeemember'])->group(function () {
             Route::resource('meetings', MeetingController::class, ['as' => 'member']);
