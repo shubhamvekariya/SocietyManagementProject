@@ -51,11 +51,12 @@
                         <h2>Welcome to ISocietyClub</h2>
                         <span>Feel free to join any session.</span>
 
-
-                        <button type="button" class="btn btn-primary float-right" data-toggle="modal"
-                            data-target="#sessionmodel">
-                            Add Sessions
-                        </button>
+                        @role('secretary')
+                            <button type="button" class="btn btn-primary float-right" data-toggle="modal"
+                                data-target="#sessionmodel">
+                                Add Sessions
+                            </button>
+                        @endrole
                     </div>
                 </div>
 
